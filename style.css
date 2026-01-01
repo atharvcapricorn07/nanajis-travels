@@ -1,0 +1,604 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: radial-gradient(#0b0f29, #000);
+  font-family: 'Inter', sans-serif;
+  color: white;
+  overflow: hidden;
+}
+
+/* Header/Nav Bar */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 5vw;
+  background: transparent;
+  font-size: 1rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 4px;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #5db3ff;
+}
+
+.enroll-btn {
+  padding: 8px 20px;
+  background: #ffffff1a;
+  border: 1px solid #ffffff44;
+  border-radius: 20px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.enroll-btn:hover {
+  background: #5db3ff;
+  color: black;
+}
+
+/* Main Section */
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: calc(100vh - 100px);
+  padding: 0 5vw;
+  gap: 60px;
+}
+
+.left {
+  flex: 1;
+  max-width: 500px;
+  z-index: 2;
+}
+
+.left h3 {
+  color: #5db3ff;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.left h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 6rem;
+  font-weight: 900;
+  margin: 0;
+  line-height: 1.1;
+  letter-spacing: 1px;
+  color: white;
+}
+
+.left p {
+  margin: 24px 0 36px;
+  font-size: 1.1rem;
+  color: #d0d4e0;
+  line-height: 1.8;
+  max-width: 480px;
+}
+
+/* Button Row */
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.learn-more {
+  padding: 12px 26px;
+  border: none;
+  background: #5db3ff;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 16px rgba(93, 179, 255, 0.3);
+}
+
+.learn-more:hover {
+  background: #0077ff;
+}
+
+.play {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #ffffff1a;
+  color: white;
+  border: 1px solid #ffffff33;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.play:hover {
+  background: #5db3ff;
+  color: black;
+}
+
+/* Canvas (Globe) */
+canvas {
+  flex: 1;
+  width: 600px;
+  height: 600px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  canvas {
+    transform: translateY(-40px);
+    width: 90vw !important;
+    height: 90vw !important;
+  }
+
+  .left {
+    max-width: 100%;
+  }
+}
+
+#popup {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 20, 0.9);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  font-family: sans-serif;
+  max-width: 300px;
+  text-align: center;
+  z-index: 10;
+}
+
+#popup.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Kesari Tours Page */
+.kesari-section {
+  padding: 80px 5vw;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.kesari-intro h3 {
+  color: #5db3ff;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.kesari-intro h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.5rem;
+  font-weight: 900;
+  color: white;
+  margin-bottom: 24px;
+}
+
+.kesari-intro p {
+  color: #d0d4e0;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  max-width: 700px;
+  margin-bottom: 30px;
+}
+
+.tour-highlights {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.highlight-card {
+  flex: 1;
+  min-width: 280px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.highlight-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #5db3ff;
+}
+
+.highlight-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.highlight-card li {
+  font-size: 1.05rem;
+  margin-bottom: 12px;
+  color: #e0e3ed;
+  position: relative;
+  padding-left: 20px;
+}
+
+.highlight-card li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #5db3ff;
+  font-size: 1.2rem;
+  top: -1px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .kesari-intro h1 {
+    font-size: 3rem;
+  }
+
+  .tour-highlights {
+    flex-direction: column;
+  }
+}
+
+/* Learn More Layout */
+.learn-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  padding: 80px 5vw;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  height: auto;
+  overflow-y: auto;
+}
+
+.learn-text {
+  flex: 0 0 40%;
+  max-width: 500px;
+  overflow-y: auto;
+  padding-right: 20px;
+}
+
+.learn-text h3 {
+  color: #5db3ff;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.learn-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: white;
+  margin-bottom: 24px;
+}
+
+.learn-text h2 {
+  font-size: 1.75rem;
+  color: #5db3ff;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.learn-text p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #d0d4e0;
+}
+
+.learn-text ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.learn-text li {
+  font-size: 1.1rem;
+  color: #e0e3ed;
+  margin-bottom: 12px;
+}
+/* ================= Polaroid Layout ================= */
+
+/* Container grid for Polaroids */
+.polaroid-grid {
+  column-count: 3;
+  column-gap: 20px;
+  padding: 40px;
+  width: 100%;
+  height: auto;
+}
+
+/* Responsive column adjustment */
+@media (max-width: 768px) {
+  .polaroid-grid {
+    column-count: 2;
+  }
+}
+@media (max-width: 480px) {
+  .polaroid-grid {
+    column-count: 1;
+  }
+}
+
+/* Individual Polaroid frame */
+.polaroid-frame {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 20px;
+  border: 6px solid white;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* Image inside Polaroid */
+.polaroid-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.4s ease;
+}
+
+/* Hover zoom effect */
+.polaroid-frame:hover img {
+  transform: scale(1.08);
+}
+
+/* Optional caption styling (if added) */
+.polaroid-caption {
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+  color: #333;
+}
+
+/* Canvas for additional renderings or layering */
+#polaroidCanvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+}
+.learn-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap; /* Allows responsiveness */
+  padding: 40px;
+}
+
+/* Keep text section readable */
+.learn-text {
+  flex: 1 1 40%;
+  max-width: 500px;
+}
+
+/* Make the polaroid section take remaining space */
+#polaroidCanvas {
+  flex: 1 1 55%;
+}
+.learn-section {
+  padding: 60px 0;
+  overflow: visible; /* allow content to grow */
+}
+#polaroidCanvas {
+  position: relative;
+  top: -115px;
+}
+.polaroid-grid {
+  padding-bottom: 180px; /* Give space for the last row to fully render */
+}
+/* Make sure the grid can extend fully downward */
+.polaroid-grid {
+  margin-bottom: 200px; /* Extra space for last row images */
+}
+
+/* Ensure no parent container is cutting it off */
+.learn-section,
+.learn-wrapper,
+#polaroidCanvas {
+  overflow: visible !important;
+}
+.polaroid-grid {
+  overflow: visible !important;
+}
+body {
+  background: radial-gradient(#0b0f29, #000);
+  font-family: 'Inter', sans-serif;
+  color: white;
+  overflow-x: hidden; /* <-- Fix: allow vertical overflow */
+}
+html, body {
+  height: auto !important;
+  overflow-y: auto !important;
+}
+.kesari-section {
+  height: 100vh; /* <-- REMOVE or override */
+}
+.kesari-section {
+  height: auto !important;
+  overflow-y: visible !important;
+}
+#polaroidCanvas {
+  position: relative;
+  top: -100px; /* raised slightly less */
+  max-height: 85vh; /* shrink slightly */
+}
+html, body {
+  height: 100vh;
+  overflow: hidden;
+}
+.kesari-section,
+.learn-wrapper,
+.polaroid-grid {
+  height: auto !important;
+  overflow: visible !important;
+}
+#polaroidCanvas {
+  position: relative;
+  top: -100px;
+  max-height: 80vh;
+}
+body {
+  background: radial-gradient(#0b0f29, #000);
+  font-family: 'Inter', sans-serif;
+  color: white;
+  overflow: hidden; /* ✅ Prevents all scrolling */
+  height: 100vh;     /* ✅ Locks the page to full screen */
+}
+#polaroidCanvas {
+  position: relative;
+  top: -100px;
+  height: 72vh; /* ✅ Adjust until bottom image fully shows */
+  max-height: 72vh;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.learn-section, .polaroid-grid {
+  overflow: visible !important;
+  height: auto !important;
+}
+.polaroid-grid {
+  transform: scale(0.91);         /* Slightly shrink everything */
+  transform-origin: top center;   /* Keep position aligned */
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+#polaroidCanvas {
+  height: auto;
+  max-height: none;
+  position: relative;
+  top: -80px;                     /* Raised slightly less */
+}
+
+html, body {
+  overflow: hidden;
+  height: 100vh;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.learn-section, .learn-wrapper, .polaroid-grid {
+  height: 100vh;
+  overflow: hidden;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden; /* Prevent vertical scrolling */
+  height: 100vh; /* Fit exactly one screen */
+}
+.right-panel {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+#polaroidCanvas {
+  max-height: 100vh;       /* Don't exceed viewport height */
+  overflow-y: auto;        /* Allow internal scrolling if needed */
+}
+body {
+  overflow-y: hidden;      /* Prevent page scroll */
+}
+
+#polaroidCanvas {
+  overflow-y: auto;        /* Let image container scroll if too tall */
+  height: 100vh;           /* Optional: make it match the screen height */
+}
+#polaroidCanvas {
+  height: calc(100vh - [header height]); /* Fit within remaining space */
+  overflow: hidden;
+  flex-wrap: wrap; /* if you're using flex */
+  gap: 1rem;       /* control spacing to prevent clipping */
+}
+html, body {
+  overflow: hidden; /* This removes ALL scrollbars (vertical and horizontal) */
+  height: 100vh;    /* Forces the body to be exactly the height of the screen */
+  margin: 0;
+  padding: 0;
+}
+#polaroidCanvas {
+  overflow: hidden;
+}
+/* ===== Scroll Lock for Learn More Page ===== */
+
+.learn-more-page {
+  height: 100vh;
+  overflow: hidden;
+}
+
+.learn-more-page #polaroidCanvas {
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.learn-more-page .polaroid-grid {
+  transform: scale(0.92);       /* Optional: fits better */
+  transform-origin: top center;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
