@@ -8,8 +8,7 @@ export function initGlobe() {
   const camera = new THREE.PerspectiveCamera(75, 800 / 800, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
   renderer.setSize(800, 800);
-  renderer.outputEncoding = THREE.sRGBEncoding;
-
+renderer.outputColorSpace = THREE.SRGBColorSpace;
   const loader = new THREE.TextureLoader();
   const earthDayMap = loader.load('https://raw.githubusercontent.com/turban/webgl-earth/master/images/2_no_clouds_4k.jpg');
   const nightMap = loader.load('./assets/textures/earth_night.jpg');

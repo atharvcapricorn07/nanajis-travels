@@ -1,3 +1,5 @@
-export default {
-  base: './', // This ensures paths work correctly on GitHub Pages
-}
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  base: '/nanajis-travels/', 
+})
