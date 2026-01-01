@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <title>Destinations - Nanaji's Travels</title>
+  <style>
+    :root {
+      --ocean-blue: #0077be;
+      --dark-navy: #0a192f;
+      --light-text: #e6f1ff;
+    }
+
+    body {
+      background-color: var(--dark-navy);
+      color: var(--light-text);
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 100px auto;
+      padding: 20px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      border-bottom: 2px solid var(--ocean-blue);
+      margin-bottom: 40px;
+      padding-bottom: 10px;
+    }
+
+    .category-header {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--ocean-blue);
+      margin-top: 60px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .destinations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .destination-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 25px;
+      border: 1px solid rgba(0, 119, 190, 0.3);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .destination-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--ocean-blue);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .location-name {
+      color: var(--ocean-blue);
+      font-weight: 700;
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .description {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      color: #ccd6f6;
+    }
+
+    .read-more {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: transparent;
+      border: 1px solid var(--ocean-blue);
+      color: var(--ocean-blue);
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+    }
+
+    .read-more:hover {
+      background-color: var(--ocean-blue);
+      color: white;
+    }
+  </style>
+  <link rel="stylesheet" crossorigin href="/nanajis-travels/assets/style-CvekeUyi.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">NANAJI'S TRAVELS</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="html/destinations.html">Destinations</a>
+      <a href="html/about.html">About</a>
+      <a href="html/kesaritours.html">Kesari Tours</a>
+      <a href="html/learnmore.html">Learn More</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1 class="section-title">The Travel Map</h1>
+
+    <h2 class="category-header">Regional: India</h2>
+    <div class="destinations-grid">
+      <div class="destination-card">
+        <div class="location-name">MUMBAI, MAHARASHTRA</div>
+        <p class="description">Known as the City of Dreams. Explore the Gateway of India, the bustling Colaba Causeway, and the serene Marine Drive at sunset.</p>
+        <a href="/html/locations/mumbai.html" class="read-more">Read More</a>
+      </div>
+
+      <div class="destination-card">
+        <div class="location-name">JAIPUR, RAJASTHAN</div>
+        <p class="description">The Pink City. Home to the magnificent Amer Fort, Hawa Mahal, and vibrant local bazaars filled with tradition.</p>
+        <a href="#" class="read-more">Read More</a>
+      </div>
+
+      <div class="destination-card">
+        <div class="location-name">LOCATION #3 GOES HERE</div>
+        <p class="description">DESCRIPTION #3 GOES HERE: A placeholder for another beautiful Indian destination Nanaji and Nani have explored.</p>
+        <a href="#" class="read-more">Read More</a>
+      </div>
+    </div>
+
+    <h2 class="category-header">International</h2>
+    <div class="destinations-grid">
+      <div class="destination-card">
+        <div class="location-name">PARIS, FRANCE</div>
+        <p class="description">The City of Light. Beyond the Eiffel Tower, explore the art galleries of Montmartre and the historic banks of the Seine.</p>
+        <a href="#" class="read-more">Read More</a>
+      </div>
+
+      <div class="destination-card">
+        <div class="location-name">KYOTO, JAPAN</div>
+        <p class="description">A blend of ancient temples and modern culture. Best known for its cherry blossom gardens and the Fushimi Inari Shrine.</p>
+        <a href="#" class="read-more">Read More</a>
+      </div>
+
+      <div class="destination-card">
+        <div class="location-name">LOCATION #6 GOES HERE</div>
+        <p class="description">DESCRIPTION #6 GOES HERE: A placeholder for a remote international getaway or a famous global landmark.</p>
+        <a href="#" class="read-more">Read More</a>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
