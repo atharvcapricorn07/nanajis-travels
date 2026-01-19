@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>China Tour 2016 | Nanaji's Travels</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --imperial-red: #AA381E;
+            --gold: #D4AF37;
+            --silk: #FCF9F2;
+            --ink: #1C1C1C;
+            --jade: #00A86B;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #F0EAD6;
+            color: var(--ink);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        .journal-container {
+            max-width: 850px;
+            margin: 40px auto;
+            background-color: var(--silk);
+            padding: 60px;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.2);
+            border-radius: 2px;
+            border-left: 15px solid var(--imperial-red);
+            overflow: hidden;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 3px double var(--gold);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 3rem;
+            margin: 0;
+            color: var(--imperial-red);
+            text-transform: uppercase;
+        }
+
+        .trip-dates {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-top: 10px;
+        }
+
+        .city-divider {
+            background: var(--imperial-red);
+            color: white;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.8rem;
+            padding: 10px 40px;
+            margin: 40px -60px 20px -60px;
+            display: block;
+            clear: both;
+            width: fit-content;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .date-stamp {
+            display: block;
+            color: var(--imperial-red);
+            font-weight: 600;
+            border: 1px solid var(--imperial-red);
+            padding: 4px 12px;
+            width: fit-content;
+            margin-bottom: 20px;
+            background: white;
+            clear: both;
+        }
+
+        .wisdom-box {
+            background: #fff;
+            border-left: 5px solid var(--jade);
+            padding: 25px;
+            margin: 30px 0;
+            font-style: italic;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
+            clear: both;
+        }
+
+        h2 {
+            font-family: 'Noto Serif SC', serif;
+            color: var(--imperial-red);
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 5px;
+            margin-top: 30px;
+            clear: both;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+            white-space: pre-line;
+        }
+
+        /* 3x3 Photo Styling */
+        .photo-wrap {
+            width: 3in;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .photo-wrap img {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            /* NEW: Cursor and transition for clickability */
+            cursor: zoom-in;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /* NEW: Hover effect */
+        .photo-wrap img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+        }
+
+        .float-right {
+            float: right;
+            margin-left: 25px;
+        }
+
+        .float-left {
+            float: left;
+            margin-right: 25px;
+        }
+
+        .photo-caption {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            color: var(--imperial-red);
+            line-height: 1.3;
+        }
+
+        /* --- LIGHTBOX (MODAL) STYLES --- */
+        .lightbox {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(28, 28, 28, 0.9); /* Dark overlay using --ink color */
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+            border: 4px solid white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.7);
+            border-radius: 2px;
+            animation: zoomIn 0.3s;
+        }
+
+        /* Close Button */
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--gold);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @keyframes zoomIn {
+            from {transform:scale(0.8); opacity: 0;}
+            to {transform:scale(1); opacity: 1;}
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px;
+            background: var(--imperial-red);
+            color: white;
+            font-family: 'Playfair Display', serif;
+            clear: both;
+        }
+
+        @media (max-width: 600px) {
+            .journal-container { padding: 30px; margin: 0; border-left: 8px solid var(--imperial-red); }
+            .float-left, .float-right {
+                float: none;
+                margin: 20px auto;
+                display: block;
+                width: 100%;
+                max-width: 3in;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="lightbox-modal" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" src="">
+</div>
+
+<article class="journal-container">
+    <header>
+        <h1>CHINA TOUR</h1>
+        <div class="trip-dates">25th May 2016 to 03rd June 2016</div>
+    </header>
+
+    <p>We visited China through Kesari. It was a nine days trip. To obtain visa, personal appearance at the consulate is not required. e – visa facility is available. We submitted passport and Xerox copies of other relevant documents to Kesari and they arranged Visa.
+    
+    The pickup point was Chatrapati Shivaji International Airport, Mumbai – Terminal T 2, Gate no 5. This point is kesari’s usual meeting point for international tours. We booked reservation in Shevaneri Borivali bus and left Pune on 25th evening around 17 00 hrs. We got down at the nearest stop to International Airport at Andheri. From there we took an Auto and reached the airport around 21 hrs.
+    
+    We could meet Mr Vishal, the tour manager of Kesari there and collected our passport, air tickets and lots of eatables. Our air tickets were booked in Cathay Airlines to Beijing via Hongkong. We completed the formalities like booking check in luggage, obtaining boarding pass, immigration, security check etc and boarded the flight.</p>
+
+    <div class="wisdom-box">
+        "Hong Kong airport is a big one. For going to the other terminal we went by train. We boarded the flight to Beijing around noon. We reached Beijing around 15 hrs. Beijing airport is also quite big. After completing the immigration we had to go by bus to collect our luggage."
+    </div>
+
+    <div class="photo-wrap float-right">
+        <img src="\src\content\international\photos\china1.jpg" alt="Sherey">
+        <p class="photo-caption">Sherey</p>
+    </div>
+    <p>At Beijing airport local guide of Kesari was waiting for us. Her name is <strong>Sherey</strong>. Her real name is different and she preferred to call her by this name. Her accent was quite good and every word she utters we understood. 
+
+    We boarded the AC bus and proceeded to Indian restaurant ‘Ganges’. They served a typical delicious Indian food. After completing the dinner we proceeded to our hotel. Hotel name is Qianmen Hotel. It was quite good and room was spacious. 
+    Free wi fi facility was there at the room and we could keep constant touch with our family members through our mobiles.</p>
+
+    <div class="city-divider">About China</div>
+    
+    <p>We visited four important cities of China : <strong>Beijing, Xian, Guilin and Shanghai</strong>. They were very clean like Singapore. We did not see any garbage heaps or waste plastics. 
+
+    Roads are very broad. We could see many flyovers to avoid signals. Traffic is very orderly. Bumper to bumper driving is not there. Over takings and haphazard drivings were not seen. Also they seldom use horns. Lane discipline is strictly adhered. 
+
+    Chinese are fair, tall and slim. Their nose is flat! (on the contrary they ridicule Indians by calling them as ‘big nose people’) They are friendly. Language is a big problem in China. English is not common. Because of this the local guides are frequently warning us to be with them like sticky rice. 
+
+    Here the fear about losing purse, valuables or passport is not there. Beggars are not seen. We do saw some poor people collecting empty plastic bottles from us in common places or at parking places. Chinese Government does not allow any individual to have any land property. All lands belong to the Government. Lands are given on lease for 70 years to individual or private sectors by the Government.</p>
+
+    <div class="city-divider">Beijing</div>
+    <span class="date-stamp">27/05/2016</span>
+
+    <div class="photo-wrap float-left">
+        <img src="\src\content\international\photos\china2.jpg" alt="Forbidden City">
+        <p class="photo-caption">Forbidden City</p>
+    </div>
+    <p>On 26th after we reached Beijing we went to <strong>Ganges restaurant</strong> and had delicious dinner of Indian style and then reached <strong>Qianmen Hotel</strong>. We were so tired and had a sound sleep. Next day around 6 am we were ready to move out for visiting places. 
+
+    We went to hotel dining hall for breakfast. Chinese seems to take heavy breakfast. We saw lots of dishes mostly non vegetarian. Of course we could find bread, butter, jam, juices, corn flakes, oats, variety of fruits etc. After finishing the breakfast we left the hotel around 8 am. The first place we visited was <strong>Tiananmen Square</strong>.</p>
+
+    <h2>Forbidden City & Temple of Heaven</h2>
+
+    <div class="photo-wrap float-right">
+        <img src="\src\content\international\photos\china3.jpg" alt="Temple of Heaven">
+        <p class="photo-caption">Temple of Heaven</p>
+    </div>
+    <p>Tiananmen Square is the entrance place for the <strong>Forbidden City</strong>. The Palaces of this place were built during 15th century by Ming emperors. Now UNESCO declared these palaces as one of the world heritages.
+    
+    After the visit of Forbidden city we went to a Mall where varieties of Tea were sold. Also a live demonstration was there over the preparation of Tea. Though China is producing large quantity of tea for the world, we could never get tea to drink in any restaurant or stall or even in Indian hotels. 
+    
+    We then visited the <strong>Temple of Heaven</strong>. This also declared by UNESCO as one of world heritages. Surprisingly we saw in the garden of the temple large amount of people were only gambling and smoking.</p>
+
+    <span class="date-stamp">28/05/2016</span>
+
+    <div class="photo-wrap float-left">
+        <img src="\src\content\international\photos\china4.jpg" alt="Jade Factory">
+        <p class="photo-caption">Jade Factory</p>
+    </div>
+    <p>After we took our breakfast we left the hotel around 8 am. First we visited <strong>Jade Factory</strong>. Ladies of China are not using gold much for their jewelry. They use Jade more for this purpose. Chinese believes that such show pieces made out Jade brings luck. Also numerology is very much believed. Number four, fourteen, forty etc are considered most inauspicious. </p>
+
+    <h2>Great Wall of China</h2>
+
+    <div class="photo-wrap float-right">
+        <img src="\src\content\international\photos\china5.jpg" alt="Great Wall of China">
+        <p class="photo-caption">Great Wall of China</p>
+    </div>
+    <p>About this I read in my school days. I never thought that one day I would be walking over this wall. The <strong>great wall of China</strong> is about 6000 km long and belongs to 15th century. This wall was earlier in several parts and during Ming dynasty they joined together and a made a long one. 
+
+    We went to the base of this wall by our bus and by rope car we reached the wall and walked for a while and returned back to the base through the cable car. We then visited the Imperial Garden and palace and the Olympic Village.</p>
+
+    <div class="city-divider">Xian</div>
+    <span class="date-stamp">29/05/2016</span>
+
+    <div class="photo-wrap float-left">
+        <img src="\src\content\international\photos\china6.jpg" alt="Terracotta warriors museum">
+        <p class="photo-caption">Terracotta warriors museum</p>
+    </div>
+    <p>From the airport we went to Terracotta warriors workshop. Then we visited the <strong>Terracotta warriors museum</strong>. The first emperor of China Qin Shi Huang believed that after his demise, he would be ruling the other world. As per his order, sculptures depicted armies and buried them along with the King’s body. In that army there were 8000 soldiers, 500 horses and 130 chariots were there. After the museum, we went to Pagoda temple where beautiful statues of Buddha's are kept.</p>
+
+    <div class="city-divider">Guilin</div>
+    <span class="date-stamp">30/05/2016</span>
+
+    <p>We reached Guilin by 1 pm. Guilin is a beauiful city with full of greenery. We visited Reed Flute caves. Colour lights are making the rock to glitter. After that we had Foot massage by Chinese people in a parlor. 
+
+    <span class="date-stamp">01/06/2016</span>
+    <h2>Cruise on River Li & Bamboo Products</h2>
+    <p>Next day morning we left hotel after breakfast for a cruise trip. The cruise was about 3 hours. From there we went to Bamboo emporium. From bamboo, fabrics are made and charcoal products are produced.</p>
+
+    <div class="city-divider">Shanghai</div>
+    <span class="date-stamp">02/06/2016</span>
+
+    <div class="photo-wrap float-right">
+        <img src="\src\content\international\photos\china7.jpg" alt="Shanghai">
+        <p class="photo-caption">Shanghai</p>
+    </div>
+    <p>Around 10 am we reached <strong>Shanghai</strong>. Shanghai is a beautiful city. It looks like Singapore. First we visited the Jin Mao Tower. It is having 88 floors. Due to cloudy weather we missed the spectacular view of Shanghai from the top floor. 
+
+    We boarded the Maglev Train reaching maximum speed of 430 km per hour. We also visited the Bund water front, a pearl factory, and took a Cruise on Huangpu river at night. All buildings were glittering with colorful lights. 
+
+    Finally, we went to the Fake market of Shanghai. Here bargaining is intense. After the Fake market, we had our dinner and returned back to our hotel.
+
+    <div class="city-divider">The Return Journey</div>
+    <span class="date-stamp">03/06/2016</span>
+
+    <p>We left the hotel around 11 am and reached Shanghai Airport. Take off was very funny—lots of planes were waiting one after the other for take off! Subsequently, we took another flight from Hong Kong and reached Mumbai mid night of 4th June. We took a cab from the airport and reached home early morning safely with all luggage and passports.
+
+    Overall the trip was enjoyable.</p>
+
+    <footer>
+        <p>"From the ancient stones of the Great Wall to the 430km/hr flight of the Maglev, 
+            we saw a China that respects its emperors and races toward the future."</p>
+        <p>&&&&&&&&&&&&&&&&&&&</p>
+    </footer>
+</article>
+
+<script>
+    // Get the lightbox elements
+    const modal = document.getElementById("lightbox-modal");
+    const modalImg = document.getElementById("lightbox-img");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    
+    // Select all images inside the 'photo-wrap' divs
+    const images = document.querySelectorAll(".photo-wrap img");
+
+    // Loop through images and add click event
+    images.forEach(img => {
+        img.onclick = function(){
+            modal.classList.add("show");
+            modalImg.src = this.src;
+        }
+    });
+
+    // Close when clicking the "x"
+    closeBtn.onclick = function() {
+        modal.classList.remove("show");
+        setTimeout(() => { modalImg.src = ""; }, 300); // clear src after animation
+    }
+
+    // Close when clicking outside the image
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            modal.classList.remove("show");
+            setTimeout(() => { modalImg.src = ""; }, 300);
+        }
+    }
+</script>
+
+</body>
+</html>
