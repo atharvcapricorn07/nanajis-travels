@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.E. Asia Odyssey | Nanaji's Travels</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --paper: #ffffff;
+            --ink: #1a2f23; /* Dark Forest Green-Black */
+            --accent: #058c42; /* Emerald Green */
+            --accent-light: #e8f5e9; /* Light Mint */
+            --border: #c8d6ca;
+            --tropical: #2d6a4f; /* Deep Leaf Green */
+        }
+
+        body {
+            background-color: #f1f7f3; /* Soft Mint Gray background */
+            color: var(--ink);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .journal-container {
+            max-width: 850px;
+            margin: 40px auto;
+            background-color: var(--paper);
+            padding: 60px;
+            box-shadow: 0 10px 40px rgba(5, 140, 66, 0.1);
+            border: 1px solid var(--border);
+            position: relative;
+            border-top: 8px solid var(--tropical);
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--accent-light);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin: 0;
+            color: var(--tropical);
+            letter-spacing: -0.5px;
+        }
+
+        .trip-dates {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-top: 10px;
+        }
+
+        .wisdom-box {
+            background: var(--accent-light);
+            border-left: 5px solid var(--accent);
+            padding: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            color: var(--tropical);
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.02);
+            clear: both;
+        }
+
+        .country-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 60px 0 30px 0;
+            color: var(--tropical);
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 1.2rem;
+            clear: both;
+        }
+
+        .country-divider::before, .country-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 2px solid var(--accent-light);
+        }
+
+        .country-divider:not(:empty)::before { margin-right: 1em; }
+        .country-divider:not(:empty)::after { margin-left: 1em; }
+
+        .date-entry {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-top: 40px;
+            display: inline-block;
+            border-bottom: 3px solid var(--accent-light);
+            padding-bottom: 2px;
+        }
+
+        p {
+            margin-bottom: 22px;
+            text-align: justify;
+        }
+
+        strong {
+            color: var(--tropical);
+        }
+
+        .passport-tip {
+            background-color: #fff9db; /* Keep this yellow for a 'warning' feel */
+            padding: 18px;
+            border-radius: 4px;
+            border-left: 5px solid #f59e0b;
+            margin: 25px 0;
+            font-size: 0.95rem;
+            clear: both;
+        }
+
+        /* --- PHOTO STYLES --- */
+        .journal-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 12px rgba(5, 140, 66, 0.2);
+            margin-bottom: 10px;
+            cursor: zoom-in;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .journal-photo:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(5, 140, 66, 0.3);
+        }
+
+        .float-right {
+            float: right;
+            margin-left: 25px;
+            margin-top: 5px;
+        }
+
+        .float-left {
+            float: left;
+            margin-right: 25px;
+            margin-top: 5px;
+        }
+
+        /* --- LIGHTBOX (MODAL) STYLES --- */
+        .lightbox {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(26, 47, 35, 0.9); /* Dark Forest Green overlay */
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+            border: 4px solid #fff;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            border-radius: 2px;
+            animation: zoomIn 0.3s;
+        }
+
+        /* Close Button */
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--accent);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @keyframes zoomIn {
+            from {transform:scale(0.8); opacity: 0;}
+            to {transform:scale(1); opacity: 1;}
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 80px;
+            padding: 40px 20px;
+            background-color: var(--accent-light);
+            color: var(--tropical);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            border-radius: 4px;
+            clear: both;
+        }
+
+        @media (max-width: 600px) {
+            .journal-container { padding: 30px 20px; margin: 0; }
+            h1 { font-size: 2.2rem; }
+            .country-divider { letter-spacing: 2px; }
+
+            .journal-photo {
+                float: none;
+                display: block;
+                margin: 20px auto;
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="lightbox-modal" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" src="">
+</div>
+
+<article class="journal-container">
+    <header>
+        <h1>Singapore, Malaysia & Thailand</h1>
+        <div class="trip-dates">23rd November 2012 – 1st December 2012</div>
+    </header>
+
+    <section id="introduction">
+        <p>We visited these countries through <strong>Kesari Travels</strong>. The arrangements were seamless; from tourist visas to the accompanying Tour Manager from Mumbai airport, every detail was handled for us. Local guides joined us at each airport to ensure we were never alone.</p>
+        <p>Accommodation, breakfast, lunch and dinner are arranged by the travels. Tickets for shows / entry pass etc are also taken care by them. We need not worry about it.</p>
+        
+        <div class="wisdom-box">
+            "The trip was not tiresome. There was no night travel. We usually returned to the hotel before 10 PM and started our mornings comfortably between 8 and 9 AM."
+        </div>
+
+        <div class="passport-tip">
+            <strong>A Note on Safety:</strong> Passport is the most important document. If lost, getting another is not an easy thing. Consider the passport as one of your body parts!
+        </div>
+    </section>
+
+    <div class="country-divider">Singapore</div>
+    
+
+    <section class="day">
+        <span class="date-entry">23rd November 2012</span>
+        <p>Our journey began in Pune at 2 PM, heading to Mumbai airport via the Volvo Shivneri bus. After a brief transit in Bangkok, we landed at Singapore's beautiful "Swarna Bumi" (Changi) Airport at 11 AM. <strong>The airport was full of flower plants and looks very beautiful.</strong></p>
+        
+        <p>The city was alive with Christmas decorations. We stayed at the Grand Chancellor Hotel, perfectly located for an evening stroll through the clean, dust-free streets and the bustling Mustafa Shopping Centre.</p>
+        
+        <span class="date-entry">25th November 2012</span>
+        <p>A day of wonders. We soared 165 meters high on the <strong>Singapore Flyer</strong>, a giant wheel with many glass cubicles moving slowly. Later, a boat ride on the Singapore River showcased the Fountain of Wealth and towering skyscrapers.</p>
+
+        <img src="\src\content\international\photos\singapore1.jpg" alt="Sentosa Island" class="journal-photo float-right">
+
+        <p>We explored the lush <strong>Botanical Gardens</strong> before heading to Sentosa Island via a magnificent cable car ride. The highlights included the Underwater World and the spectacular "Songs of the Sea" fountain show at sunset.</p>
+        <p>Another thing we noticed, Singapore is very famous for levying fines. Sign boards warn that if food is wasted they are liable to be fined.</p> 
+    </section>
+
+    <div class="country-divider">Malaysia</div>
+    
+
+    <section class="day">
+        <span class="date-entry">26th November 2012</span>
+
+        <img src="\src\content\international\photos\singapore3.jpg" alt="Genting Highlands" class="journal-photo float-left">
+
+        <p>We crossed into Malaysia by bus, passing through endless <strong>plantations of palm trees</strong>. Our destination: Genting Highlands, sitting 4,000 feet above sea level. We stayed at the massive First World Hotel—a place with 6,000 rooms!</p>
+        
+        <p>The Casino was a surprise; it was very decent and orderly. I saw notice boards that these people can seek the help from the casinos to get out of their addictions. This shows a very responsible side of the management.</p>
+        
+        <span class="date-entry">27th November 2012</span>
+
+        <img src="\src\content\international\photos\singapore2.jpg" alt="Petronas Twin Towers" class="journal-photo float-right">
+
+        <p>After breakfast where 'Dosa' had the longest queue, we explored the outdoor sports area before heading to Kuala Lumpur. The <strong>Twin Towers</strong> were a magnificent sight, glittering like diamonds in the night sky.</p>
+    </section>
+
+    <div class="country-divider">Thailand</div>
+    
+
+    <section class="day">
+        <span class="date-entry">28th November 2012</span>
+        <p>A short flight took us to Bangkok, followed by a 140km drive to <strong>Pattaya City</strong>. We stayed on the famous Beach Road and attended the Alcazar dance show—a colorful display of Thai culture and music.</p>
+        
+        <span class="date-entry">29th November 2012</span>
+        <p>Today was for adventure. We took a motor boat 15km out to a floating base for <strong>Para-sailing</strong>. Flying high above the sea was a thrilling experience for both Lakshmi and myself. Later, we visited Coral Island and the massive 600-acre <strong>Noongnatch Park</strong>, where we enjoyed an amusing elephant show.</p>
+
+        <span class="date-entry">30th November 2012</span>
+        <p>Returning to Bangkok, we visited the majestic <strong>Golden Buddha</strong> and the massive <strong>Reclining Buddha</strong>. This one is very huge and posing like Sri Ranganatha at Srirangam! The day ended with some shopping for electronics in the bustling market areas.</p>
+
+        <span class="date-entry">1st December 2012</span>
+        <p>Our final day was spent at the <strong>Safari Park</strong>. Seeing animals roaming freely in a natural zoo was a delight, followed by a world-famous dolphin show. We caught our evening flight home, reaching Mumbai by 10 PM.</p>
+    </section>
+
+    <footer>
+        <p>"From the glittering heights of the Twin Towers to the golden serenity of the Buddha, 
+            we found that though the borders change, the warmth of the East remains the same."</p>
+      </footer>
+</article>
+
+<script>
+    // Get the lightbox elements
+    const modal = document.getElementById("lightbox-modal");
+    const modalImg = document.getElementById("lightbox-img");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    const images = document.querySelectorAll(".journal-photo");
+
+    // Loop through images and add click event
+    images.forEach(img => {
+        img.onclick = function(){
+            modal.classList.add("show");
+            modalImg.src = this.src;
+        }
+    });
+
+    // Close when clicking the "x"
+    closeBtn.onclick = function() {
+        modal.classList.remove("show");
+        setTimeout(() => { modalImg.src = ""; }, 300);
+    }
+
+    // Close when clicking outside the image
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            modal.classList.remove("show");
+            setTimeout(() => { modalImg.src = ""; }, 300);
+        }
+    }
+</script>
+
+</body>
+</html>

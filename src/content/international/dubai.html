@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAE Travelogue | Nanaji's Travels</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* COLORS: Darkened for a richer, more visible theme */
+            --sand: #E0D2B4;       /* Deeper, more visible sand tone */
+            --gold: #C79100;       /* Darker, richer gold */
+            --deep-gold: #8F6600;  /* Dark text accent */
+            --white: #FCFCFC;
+            --charcoal: #232528;
+            --wisdom-bg: #F5EED5;  /* Slightly darker background for quote box */
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--sand);
+            color: var(--charcoal);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        .journal-container {
+            max-width: 850px;
+            margin: 40px auto;
+            background-color: var(--white);
+            padding: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            position: relative;
+            border-top: 10px solid var(--gold);
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--sand);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin: 0;
+            color: var(--charcoal);
+        }
+
+        .trip-dates {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-top: 10px;
+        }
+
+        .wisdom-box {
+            background: var(--wisdom-bg); 
+            border-left: 5px solid var(--gold);
+            padding: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            clear: both;
+        }
+
+        .section-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 50px 0 30px 0;
+            color: var(--deep-gold);
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            clear: both;
+        }
+
+        .section-divider::before, .section-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 2px solid var(--sand);
+        }
+
+        .section-divider:not(:empty)::before { margin-right: 1em; }
+        .section-divider:not(:empty)::after { margin-left: 1em; }
+
+        p {
+            margin-bottom: 22px;
+            text-align: justify;
+            white-space: pre-line;
+        }
+
+        strong {
+            color: var(--deep-gold);
+        }
+
+        /* --- PHOTO STYLES --- */
+        .journal-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            margin-bottom: 10px;
+            cursor: zoom-in;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        /* Utility class for rotation */
+        .rotate-90-cw {
+            transform: rotate(90deg);
+        }
+
+        .journal-photo:hover {
+            /* Note: if the image is already rotated, this scale might look slightly skewed depending on browser implementation, 
+               but generally works okay for simple hover effect */
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        /* Ensure rotated image hovers correctly by combining transforms */
+        .journal-photo.rotate-90-cw:hover {
+             transform: rotate(90deg) scale(1.02);
+        }
+
+
+        .float-left {
+            float: left;
+            margin-right: 25px;
+            margin-top: 5px;
+        }
+
+        .float-right {
+            float: right;
+            margin-left: 25px;
+            margin-top: 5px;
+        }
+
+        /* --- LIGHTBOX (MODAL) STYLES --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            /* Adjusted max sizes to accommodate potential rotation without overflowing viewport too much */
+            max-width: 85%;
+            max-height: 85vh;
+            border: 4px solid #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            border-radius: 2px;
+            animation: zoomIn 0.3s;
+            transition: transform 0.3s ease; /* Smooth rotation in lightbox */
+        }
+        
+        /* Ensure rotated image in lightbox fits decently */
+        .lightbox-content.rotate-90-cw {
+             /* When rotated 90deg, height becomes width and vice versa. 
+                We adjust max constraints to prevent it going offscreen. */
+             max-height: 85vw; 
+             max-width: 85vh;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--gold);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @keyframes zoomIn {
+            from {transform:scale(0.8); opacity: 0;}
+            to {transform:scale(1); opacity: 1;}
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px 20px;
+            background-color: var(--wisdom-bg);
+            color: var(--charcoal);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            border-radius: 4px;
+            clear: both;
+        }
+
+        @media (max-width: 600px) {
+            .journal-container { padding: 30px 20px; margin: 0; }
+            h1 { font-size: 2rem; }
+            
+            .journal-photo {
+                float: none;
+                display: block;
+                margin: 20px auto;
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="lightbox-modal" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" src="">
+</div>
+
+<article class="journal-container">
+    <header>
+        <h1>Dubai, Sharjah and Ajman</h1>
+        <div class="trip-dates">18/09/2014 – 22/09/2014</div>
+    </header>
+
+    <p>We visited the three cities Dubai, Sharjah and Ajman of United Arab Emirates. The tour was for 5 days. Kesari Tours charged around Rs 60,000/- per head. The charge includes visa fee, flight charges from Mumbai, Hotel charges, meals, water etc. From Hotel to move to various places AC bus facility was arranged. Safari desert travel through four wheel driven car Land Cruiser, Cruise travel with dinner and tickets for visiting 124th floor of Burj Khalifa, Museums etc. were done by Kesari. If we don’t make any personal purchase, even we need not carry our wallet.</p>
+
+    <div class="section-divider">The Seven Provinces</div>
+    
+    <p>The Seven Provinces—Dubai, Sharjah, Ajman, Abu Dhabi, Fujairah, Ras al Khaimah and Umm al Quwain—together form the United Arab Emirates. Before that, these Emirates were ruled independently by respective kings. Later they joined together to form UAE.
+
+    Since the flight was on 18th morning, we left 17th night to Mumbai by MSRTC bus and got down at Andheri. From there we took an Auto and reached international airport. We reached airport at midnight of 17th and were waiting for Kesari rep. Mr. Kiran, tour manager, came to the airport around 5 in the morning of 18th. We collected our passports, visas and air tickets. Also he gave snackpacks.
+
+    After the airport formalities, we boarded the flight around 8 am and the flight left for Dubai. The travel time to Dubai is around 3 hrs and 30 minutes. We reached Dubai by 10.30 am (Dubai’s time). There it took an hour to complete the immigration. From airport by AC bus we went to Dubai Grand Hotel.</p>
+
+    <div class="section-divider">Observations on Society</div>
+
+    <img src="\src\content\international\photos\dubai1.jpg" alt="Dubai Metro" class="journal-photo float-right">
+
+    <p>Here roads are very broad. Cars and buses are moving at high speeds. Road signals are strictly followed. Because of very heavy fines, every one strictly adheres the traffic rules. Obtaining driving license is also very difficult here. Who applies for driving license, must attend classes for traffic regulations and pass the exams and then they learn under a trainer and after the vigorous driving test license will be awarded.
+
+    Metros and buses are there as public transports. Buses and metros are fully air conditioned. Even bus stop glass cubicles are air conditioned.</p>
+
+    <div class="wisdom-box">
+        "Main resources of Dubai were petrol and natural pearls. Now petrol is almost drained out and after the invention of pearls making from pebbles, that industry is also diminished. Now Dubai is a big business center and efforts are being made to make Dubai as Singapore to attract tourists. Petrol is cheaper. <strong>Petrol Price is lesser than water price.</strong>"
+    </div>
+
+    <p>Also in Dubai people say, crime rate is zero percent. Cases in the court cannot be dragged endlessly. They have stipulated time frame. Most of the cases settled in seven days. If the guilt is proved, the individual will be punished. If he is outsider, after the punishment he will be sent out of Dubai and his crime is endorsed in his passport and he never can come back to Dubai.
+
+    Dubai is not having any bindings with Interpol. So no other country can send on any one who stays in Dubai any arrest warrant. That is why all international criminals prefer to stay in Dubai. If they venture any crime within Dubai they are liable to face trials.
+
+    Here emirates, the natives of UAE is only 20%. Outsiders like Indians, Pakistanis, Chinese are 80%. We found lot of malayalees here. We reached Hotel around 1 pm and took lunch there and collected our room keys and reached our room. The hotel was good. All rooms are air conditioned. It was quite chill and comfortable. After a good lunch, we felt asleep and slept for some time.</p>
+
+    <div class="section-divider">Tradition and Adventure</div>
+
+    <p>Our first agenda was to travel by a decorated cruise and have dinner in that boat. It was not a big ship, a traditional wooden sailing vessel. From the sea, a deep channel close to markets is made and this channel is utilized for transporting the goods from the big ships through boats. Our cruise was moving around in this manmade channel. A dance programe called ‘thanura dance’ was performed in the vessel. After this programe we returned back to hotel around 10 pm.
+
+    Every day breakfast was arranged in the hotel where we stayed. All the days a variety of dishes like <strong>idli, dosa, upma, sambar, chatni, pudi, subji, cutlet, toasted bread, butter, jam, oats, cornflex, fruits, fruit juices, coffee, tea etc</strong> were kept.</p>
+
+    <img src="\src\content\international\photos\dubai2.jpg" alt="Desert Safari" class="journal-photo float-left">
+
+    <p>Second day agenda was to experience Desert safari in a four wheel drive car. These cars are very powerful and can be driven in desert. We went by land cruiser car. They say this car costs around 35 L. From hotel this desert is an hour drive. Then the car started moving into the desert. It was a thrilling experience. The car was crossing heaps of sands. While moving fast, the whole area was camouflaged with sand dust. It was something like a movie. In the mid of the desert he stopped the vehicle for photographs. We climbed over the sand heaps and took photos. We could see the beautiful sun set also.
+
+    Then we have been taken to desert camp. There free camel ride and two wheeler ride were there. Ofcourse we did not ride any! Some dance programe was there and dinner was arranged in the camp. We returned back to hotel around 10 pm.</p>
+
+    <div class="section-divider">Dubai Orientation</div>
+
+    <img src="\src\content\international\photos\dubai3.jpg" alt="Burj Al Arab" class="journal-photo float-right rotate-90-cw">
+
+    <p>Third day was the orientation tour of Dubai. We were taken to various parts of city Dubai. We first visited Jumeriah Beach. Here only the world famous Burj Al Arab hotel is situated. The building is very unique. Kesari arranged group photograph also here.
+
+    In UAE except Dubai in other emirates people are very conservatives. No bars or clubs are there. Generally people dress properly. Ladies don’t wear jeans or half pants. To enter into mosque, dress code is there. In casual dress they wont allow inside. In beaches ladies are not allowed to swim.
+
+    After Jumeriah beach we went to Palm islands. It is a new developing area in Dubai. This area is called free zone. Here outsiders can buy property. Here actor Shahrukh Khan is having a bungalow.
+
+    We had lunch and returned back to Hotel and took some time rest. </p>
+    
+    <img src="\src\content\international\photos\dubai4.jpg" alt="Burj Khalifa" class="journal-photo float-left">
+
+    <p>In the evening we proceeded to see the famous tallest building Burj Khalifa. They claim this is the tallest building in the world. It is having 124 floors. Bottom few floors are allotted for Dubai Mall. This was constructed during 2004. While making this structure, from various parts of the world eminent engineers were brought to this place. I could see some south Indian names in the list of these eminent engineers.
+
+    Public are allowed to go to the top floor. Tickets are there and these tickets are to be booked in advance. Kesari arranged tickets for our group. While booking ticket time slot is allotted. A vigorous security check is there. All our hand bags are scanned thoroughly.
+
+    Lift travel was a great surprise. The lift took only 54 seconds to reach the top floor! The digital floor indicator moves so fast like a digital counter. The top floor is fenced with complete glass. We could see the entire Dubai. We visited the place around 9 pm. The view from the top floor is spectacular. We spent about half an hour here and took photographs. Some fellows rushed to the toilet there to take the pride that they did it on the 124th floor!
+
+    Before climbing to the 124th floor, we visited an underwater zoo and the aquarium. The aquarium is not as big as at Singapore. But still it is good. Variety of fishes, colourful lights are wonderful.
+
+    Also we visited Dubai Mall. This is the second biggest Mall in the world. Everything we get here. Electronic goods are cheaper here. Here one can buy without any fear. Only genuine quality goods are sold here. After these visits we returned back to our hotel.</p>
+
+    <div class="section-divider">Sharjah and Ajman</div>
+
+    <p>Next day visit was orientation tour to the neighbouring cities Sharjah and Ajman. We left the hotel by 9 am. Sharjah is around 60 km away and travel time is around an hour. By car it may take less time.
+
+    Cost of living like rent etc is less in Sharjah in comparison with Dubai. So, many who work in Dubai prefer to stay in Sharjah.
+
+    In Sharjah we saw American University, Beach and the famous cricket stadium. In UAE Sharjah is the best place for pursuing studies. Many educational institutions are here. Also we made a hasty visit to gold souk market. Every gold shop are having huge stock of gold ornaments.
+
+    Then we were taken to a typical Maharashtraian hotel. We had a delicious lunch here. After the lunch we were taken to Ajman and here we visited a museum. It was a small one still well maintained.</p>
+
+    <div class="section-divider">The Gold Souk & The Limousine</div>
+
+    <p>After the museum we returned back to Dubai and took rest for some time. In the evening we went to Dubai gold souk market. Here we saw hundreds of gold shops. Show cases of these shops were full of glittering gold ornaments. As per Indian custom regulation we are not supposed to bring any gold ornaments. If we bring from here we should pay custom duty. But generally custom official are particular only those who are bringing gold bars and huge quantity of gold jewelery. If we buy 10 or 20g of gold and if we are wearing those, customs will not probe much. So many who came with us brought gold ornaments and they did not face any problem also at Mumbai airport. The price difference for the 22cr gold for 10g is around Rs 6000/-. We before leaving to Dubai decided not buy anything. Hence we did not buy any gold.
+
+    Then we went to a five star hotel where our dinner was arranged.
+
+    After dinner, an option was given to travel in limousine car. This car is famous in US. Presidents of US are using only this car. The car costs few crores! In Dubai this is also one of the entertainments for the tourists. About 10 people can travel in this car. They collect a fare around Rs 1000/ per head and the drive is for an hour. They provide cool drinks and snackpacks also. But it turned to be a dreadful experience to us.
+
+    Since around 20 people opted this venture the tour guide arranged through local agent two such cars. We also boarded the car. We were driven for around 10 minutes and they stopped the car for taking photographs.
+
+    The drivers seem to be locals. When we were busy in taking photos, these drivers picked up a quarrel and suddenly they started hitting each other. We terribly scared! One among them even started bleeding and he dialed to police from his mobile. Within a few minutes one by one three police jeeps came. Then the police contacted the Limousine owner and he came to the spot with two additional drivers. The two drivers who were fighting, were handcuffed and taken by the police.
+
+    At last we came back to hotel. We had a pleasant surprise to see Kousal and Lakshmi waiting in the lobby to see us. They brought lot of presents also. We were so happy to see their affinity on us. They came all the way from Sharjah, travelling some 60 kms just to see us. We were there for half an hour and they left in their big black car.</p>
+
+    <div class="section-divider">The Return Journey</div>
+
+    <img src="\src\content\international\photos\dubai5.jpg" alt="Abu Dhabi Reference" class="journal-photo float-right">
+
+    <p>Next day, the last day of our visit, was almost free. Our flight was also only in the evening. We wanted to visit Abu Dhabi. The tour guide also tried to arrange. But many in our group only wanted to do shopping again on the next day. We did not want to go alone and dropped the idea of going to Abu Dhabi.
+
+    Our flight schedule time was 8.30 pm and we were supposed to be in the airport by 5.30pm.
+
+    We left the hotel around 12 noon. We took lunch in a good Indian hotel. We were taken to Deira Mall for shopping. It is a huge shopping center. All sort of goods are there. We purchased a good suitcase of cabin bag size made out of poly carbon. After shopping we reached the Dubai airport.
+
+    The flight was at right time. We reached Mumbai on 23rd early morning around 2. Before we leave to Dubai we booked a cab in KK travels on sharing basis. KK travels vehicle was also waiting for us. Along with us only one passenger was there. We reached home around 4 am.
+
+    We reached back safely with all our belongings. Overall the trip was enjoyable.</p>
+
+    <footer>
+        <p>"From the silent shifting sands of the desert to the lightning-fast lifts of the glass towers, 
+            we saw a land where ancient discipline meets the heights of modern ambition."</p>
+        <p>&&&&&&&&&&&&&</p>
+    </footer>
+</article>
+
+<script>
+    // Get the lightbox elements
+    const modal = document.getElementById("lightbox-modal");
+    const modalImg = document.getElementById("lightbox-img");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    const images = document.querySelectorAll(".journal-photo");
+
+    // Loop through images and add click event
+    images.forEach(img => {
+        img.onclick = function(){
+            modal.classList.add("show");
+            modalImg.src = this.src;
+
+            // Check if the thumbnail has the rotation class, and pass it to the lightbox image if so
+            if (this.classList.contains('rotate-90-cw')) {
+                modalImg.classList.add('rotate-90-cw');
+            } else {
+                modalImg.classList.remove('rotate-90-cw');
+            }
+        }
+    });
+
+    // Function to close modal
+    function closeModal() {
+        modal.classList.remove("show");
+        // Wait for fade out animation to finish before cleaning up
+        setTimeout(() => {
+             modalImg.classList.remove('rotate-90-cw');
+             modalImg.src = ""; 
+        }, 300);
+    }
+
+    // Close when clicking the "x"
+    closeBtn.onclick = closeModal;
+
+    // Close when clicking outside the image
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    }
+</script>
+
+</body>
+</html>

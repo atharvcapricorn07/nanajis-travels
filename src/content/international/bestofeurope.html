@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grand Europe Tour| A Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* European Union Flag Palette */
+            --eu-blue: #003399; 
+            --eu-gold: #FFCC00; 
+            --paper: #f9f7f1;   /* Parchment tone */
+            --text: #2c3e50;    /* Dark Slate for readability */
+            --accent: #c0392b;  /* Deep Red for emphasis */
+            --border: #dcdcdc;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: #eef2f3;
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        .journal-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: var(--paper);
+            padding: 70px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-top: 15px solid var(--eu-blue);
+            border-bottom: 15px solid var(--eu-blue);
+            position: relative;
+        }
+
+        /* Decorative Stars (EU Vibe) */
+        .journal-container::before, .journal-container::after {
+            content: "★";
+            color: var(--eu-gold);
+            font-size: 2rem;
+            position: absolute;
+            top: 20px;
+        }
+        .journal-container::before { left: 20px; }
+        .journal-container::after { right: 20px; }
+
+        header {
+            text-align: center;
+            border-bottom: 2px solid var(--eu-blue);
+            padding-bottom: 40px;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            margin: 0;
+            color: var(--eu-blue);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .trip-dates {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-top: 15px;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--eu-blue);
+            border-bottom: 1px solid var(--eu-gold);
+            padding-bottom: 10px;
+            margin-top: 50px;
+            clear: both;
+        }
+
+        p {
+            margin-bottom: 22px;
+            text-align: justify;
+            font-size: 1.05rem;
+        }
+
+        .intro-box {
+            background-color: #fff;
+            border: 1px solid var(--eu-blue);
+            padding: 25px;
+            margin-bottom: 40px;
+            border-radius: 4px;
+            border-left: 10px solid var(--eu-gold);
+        }
+
+        .summary-box {
+            background-color: #fff;
+            border: 2px solid var(--eu-blue);
+            border-left: 10px solid var(--eu-gold);
+            padding: 25px;
+            margin-top: 50px;
+            border-radius: 4px;
+            font-style: italic;
+            clear: both;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* --- PHOTO STYLES --- */
+        .photo-frame {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+            cursor: zoom-in;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .photo-frame:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Rotation Utilities */
+        .rotate-90 {
+            transform: rotate(90deg);
+        }
+        
+        /* NEW: Anti-clockwise rotation */
+        .rotate-n90 {
+            transform: rotate(-90deg);
+        }
+        
+        /* Ensure hover doesn't reset rotation */
+        .photo-frame.rotate-90:hover {
+            transform: rotate(90deg) scale(1.02);
+        }
+        
+        /* NEW: Ensure hover doesn't reset anti-clockwise rotation */
+        .photo-frame.rotate-n90:hover {
+            transform: rotate(-90deg) scale(1.02);
+        }
+
+
+        .float-right {
+            float: right;
+            margin-left: 25px;
+            margin-top: 5px;
+        }
+
+        .float-left {
+            float: left;
+            margin-right: 25px;
+            margin-top: 5px;
+        }
+
+        /* --- LIGHTBOX STYLES --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 51, 153, 0.9); /* EU Blue Overlay */
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+            border: 5px solid white;
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+            border-radius: 2px;
+            animation: zoomIn 0.3s;
+            transition: transform 0.3s ease;
+        }
+
+        /* Adjust max sizes for rotated images in lightbox to prevent overflow */
+        .lightbox-content.rotate-90,
+        .lightbox-content.rotate-n90 {
+             max-height: 85vw; 
+             max-width: 85vh;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--eu-gold);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @keyframes zoomIn {
+            from {transform:scale(0.8); opacity: 0;}
+            to {transform:scale(1); opacity: 1;}
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            color: var(--text);
+            font-style: italic;
+            clear: both;
+        }
+
+        @media (max-width: 700px) {
+            .journal-container { padding: 30px; margin: 0; }
+            h1 { font-size: 2.2rem; }
+            
+            .photo-frame {
+                float: none;
+                display: block;
+                margin: 20px auto;
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="lightbox-modal" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" src="">
+</div>
+
+<article class="journal-container">
+    <header>
+        <h1>The Grand Europe Tour</h1>
+        <div class="trip-dates">14th June 2015 – 28th June 2015</div>
+    </header>
+
+    <div class="intro-box">
+        <p><strong>Brief:</strong> We visited Europe through Kesari Travels. As per their itinerary, in 14 days ten countries and 24 cities were to be visited. We left Mumbai on 13th June and returned on 28th June 2015.</p>
+        <p>The ten countries are United Kingdom, France, Belgium, Holland, Germany, Austria, Liechtenstein, Switzerland, Italy and Vatican. This tour is called "Best of Europe".</p>
+    </div>
+
+    <p>To visit the UK, a separate visa is required. With a common visa called Schengen visa, the other nine countries can be visited. For the UK visa, we have to visit the UK consulate to give fingerprints and photographs, while the Schengen visa is made online.</p>
+    
+    <p>The cost for this tour is around 2.6 Lakhs per head. This includes visa charges, flight charges, accommodation, food, local transport, and tickets for visiting various entertainment places.</p>
+
+    <p>On the 13th, we engaged a cab and reached Mumbai international airport in the evening. The Kesari rep came around 9 pm and gave our passports, tickets, and packs of eatables. Also, he gave one electric water kettle for preparing tea or coffee in hotels. (Most of the hotels provided kettle, milk, tea/coffee pouches, and sugar. A few hotels did not give this facility. He provided enough coffee and tea pouches.)</p>
+    
+    <p>In Europe, like India, the electricity supply is 230V. But we need an adapter to use our appliances like chargers.</p>
+
+    <p>In Mumbai airport, there was a long queue for immigration. After completing all the formalities, we boarded the Swiss flight on the midnight of the 13th. London is around 6000 km away; we went via Zurich and reached London by 6 am (London’s time). There also we had to stand in a long queue for immigration.</p>
+
+    <h2>London & The Eurostar</h2>
+    
+    <p>We arrived at London airport at 7:45 am on 14th June. Immigration and collection of luggage took around 2 hrs. We were not taken to the hotel from the airport. After freshening up at the airport, we were ready to go for the orientation tour. We went by a Volvo bus and made a merry round of the city.</p>
+    
+    <p>We saw the Thames River, London Eye, London Bridge, Tower Bridge, London streets, etc. London roads are not broad. Also, many crossroads are there. So every few meters we have to pass through a signal. But the traffic is very orderly. No jumping of signals or rash driving or haphazard driving.</p>
+    
+    <p>After a round, we were taken to Bangalore Gust hotel. They served typical Indian food viz dal, rotti, subji, and all. The food was good. Then we went to visit the <strong>London Eye</strong>. It is a giant wheel with lots of glass cubicles. It moves slowly. For a complete round, it takes around 30 minutes. When we were on the top, we could see the whole of London. We had a spectacular view of London. The London Eye is situated on the bank of the <strong>Thames River</strong>. We took lots of photos.</p>
+    
+    <p>Before getting into this we were shown a 4D movie: Spider-Man! It was amusing. The place was indeed very nice and the chill weather made us feel good. We did some time passing there! After finishing dinner in the same restaurant, we went to Hotel Holiday Inn. The room was good. After the hectic day, we had a good sleep.</p>
+
+    <p>On 15th June, after breakfast, we left the hotel around 8:30 for seeing other things. Because of heavy traffic, we could reach the <strong>London Museum</strong> around 10 am. The very first attraction was a free washroom! In this museum, the most important thing to see is the ‘Crown Jewels’. What a big irony! We Indians purchased tickets and stood in the queue to see the famous <strong>Indian Kohinoor Diamond</strong>. Now that diamond is decorating the crown of Queen Elizabeth. The looted booty from India is exhibited proudly in London. The Kohinoor diamond reminds us of the audacities, atrocities, and cruelties done to Indians by the British. Andaman cellular jail still remains as a mute witness.</p>
+    
+    <img src="\src\content\international\photos\europe1.jpg" alt="London Tower Bridge" class="photo-frame float-right">
+
+    <p>After the visit to the museum, we went around that place. We had a close look at <strong>London Tower Bridge</strong> over the Thames River. This place is very beautiful. After that, we had been to an Indian restaurant for lunch. After lunch, we saw the famous wax museum (Madame Tussauds). Wax statues of eminent Indian personalities like Mahatma Gandhi, Indira Gandhi, Sachin Tendulkar, Amitabh Bachchan, etc., were also found. After seeing this famous museum, we proceeded to watch the Changing Guard ceremony at <strong>Buckingham Palace</strong>. The ceremony was colourful.</p>
+    
+    <p>On 16th June early morning at 5:30, we left the hotel and reached St. Pancras station. The <strong>Eurostar</strong> train leaves from this station. In the railway station, our passport was endorsed that we are leaving the United Kingdom by UK consulate people, and French people checked our visa status.</p>
+    
+    <p>We boarded the train. The journey was a new experience. Around 10 am we reached Paris. A Volvo bus was waiting for us. In this bus only we travelled throughout Europe, till the last date 27th July.</p>
+
+    <h2>Paris</h2>
+
+    <p>After reaching Paris, we went for an orientation tour. We could see Trams also on the road. After the city tour, we were taken to an Indian restaurant and finished our lunch. After lunch, we proceeded to the <strong>Eiffel Tower</strong>. We were cautioned by the local guides about pickpockets.</p>
+    
+    <img src="\src\content\international\photos\europe2.jpg" alt="Eiffel Tower" class="photo-frame float-left">
+
+    <p>The local guide arranged tickets to go to the top. There are three stages to reach the top. We went by a sliding car and changed to the next one and reached the second stage. The panoramic views of the whole city were super. We took lots of photographs. Unfortunately, we could not go to the top level due to technical problems on the third-stage lift. We spent some time in the middle stage and came back to the ground. The Eiffel Tower is situated on the river bank of Seine. After the Eiffel Tower, we went on a cruise through the river <strong>Seine</strong>. We spent boating for about an hour.</p>
+    
+    <p>On 17th morning we left around 8:30 after breakfast to <strong>Disneyland</strong>. Paris Disneyland was quite entertaining. It was huge and in a day seeing all the pavilions is not possible. The most attractive entertainment was “It is a small world”. The stall was quite big. In a boat, we sat and it was moving through. Lots of dolls decorated nicely and performing various acts like dancing, singing, playing musical instruments in groups. It was quite amusing.</p>
+    
+    <p>Unknowingly we stood in a queue and later we realized that was an adventurous train ride. Fortunately, my wife and the other lady backed out. Myself and my friend took that ride. The ride was for about 2-3 minutes. It was horrible. It was moving at terrific speed ups and downs. Fortunately, nothing happened to me. Then I was very careful not to take any such adventurous ride.</p>
+    
+    <p>After reaching the city we went to watch the famous Paradise Latin Cabaret show in a theatre. The ticket was inclusive of dinner. Before the dance program, they served a bowl of vegetable salad followed by a typical Indian thali. The most attractive part of the dinner for many was the unlimited wine served.</p>
+
+    <h2>Brussels & Rotterdam</h2>
+    <p>On 18th June after breakfast around 8:30, we left Paris and proceeded to Belgium. Our plan was to visit Brussels. Distance from Paris to Brussels is around 350 Km. The bus was going around at 100 km/hr speed. Both sides of the highways are agricultural lands and the greenery was pleasant.</p>
+    
+    <img src="\src\content\international\photos\europe3.jpg" alt="Brussels" class="photo-frame float-right rotate-90">
+
+    <p>We took lunch at an Indian hotel. Then we went to Grand Place. It is a place where a few churches and monuments are there. Here only the famous <strong>Manneken Pis</strong> statue is there. About this statue, legends are narrating different stories. One thing is certain, that the people of this place have immense attachment with this statue. From the roadside shops, we purchased souvenirs, T-shirts, etc. After spending an hour we moved to see Atomium. This was created in this country during the Trade Fair.</p>
+
+    <p>From Brussels, Rotterdam is around 200 km. We left Brussels around 5:30 pm and reached Rotterdam around 7 pm. On 19th morning we left to see Amsterdam. Holland is very famous for Tulip flower gardens. But the flowering season ends in mid-May. So we could not visit Tulip flower gardens.</p>
+    
+    <img src="\src\content\international\photos\europe4.jpg" alt="Amsterdam" class="photo-frame float-left">
+
+    <p>Amsterdam city is below sea level. Here people are quite tall. People of this country use cycles more than four-wheelers. All roads have separate lanes for cyclists. In Amsterdam, we visited <strong>Madurodam</strong>. It is a war memorial created in 1952. A miniature city is created in this. It looks so beautiful. We found miniature buildings, trains, bridges, rivers, etc. Then we went for a city tour. We boarded a cruise to have an Amsterdam city tour.</p>
+
+    <h2>Germany & The Cuckoo Clocks</h2>
+    <p>We left Amsterdam around 4 pm. The city of Cologne is around 270 Km away. We reached <strong>Cologne</strong> around 7:30 pm. We saw the famous Cathedral. The Cathedral was very old, still intact. During the Second World War, all the neighbouring countries were bombarding Germany. Even during that time, this church was not damaged. It was not due to any religious sentiments. This massive church helped the enemies as an excellent landmark to aim at other targets.
+    After seeing the church we went to an Indian hotel for dinner. We stayed for a night at the Express Holiday Inn Hotel.</p>
+    
+    <img src="\src\content\international\photos\europe5.jpg" alt="Cuckoo Clock" class="photo-frame float-right">
+
+    <p>On 20th June we left Cologne in the morning around 6:30. Our plan was to reach Switzerland before night. From Cologne, we went to Titisee. Here a <strong>Cuckoo Clock Factory</strong> is there. They are making clocks from Pine wood. Also beautiful dolls and glass showpieces are sold here. We bought a cuckoo clock. Cuckoo clocks from the price range 50 Euros to 1000 Euros are sold here.</p>
+
+    <h2>Switzerland: Alps & Waterfalls</h2>
+
+    <p>We were going to Rhine Waterfalls. The way was excellent. We went through the black dense forest. Also, we crossed many long tunnels of Alps mountains. One side we saw the beautiful Alps mountains covered with ice and glittering by bright sunlight. The other side was a deep valley. Pine trees are grown all over the mountain. The natural beauty is spectacular.</p>
+    
+    <img src="\src\content\international\photos\europe6.jpg" alt="Rhine Waterfalls" class="photo-frame float-left">
+
+    <p>We reached the <strong>Rhine Waterfalls</strong> around 4 pm. This is the biggest waterfall in Europe. Also, there is a hill close to the waterfalls. We reach the base of the hill through a boat. It is a thrilling ride! We reached the base of the hill and climbed to the top through steps. From this point, we can have a spectacular view of the waterfalls.</p>
+    
+    <p>Then we proceeded to Engelberg. We reached Engelberg at around 7:30 pm. Our stay was at Hotel Edelweiss. This hotel is on a hill. To reach, through a tunnel we walked and through a lift we reached the hill top and reached the hotel base!</p>
+    
+    <img src="\src\content\international\photos\europe7.jpg" alt="Mount Titlis" class="photo-frame float-right">
+
+    <p>On 21st June morning, we walked to the base for going to <strong>Mount Titlis</strong>. This is one of the peaks of Alps. Altitude is 10,000 ft. To reach the top we have to move in three levels. The third one is a revolving car. While going in the rope car of the first stage, we saw in the valley healthy cows were grazing and a bell was tied over the neck of each cow. The ringing sound of the bell we could hear from the rope car.</p>
+    
+    <p>We reached the top level. Temperature was around -7°C. Moreover, there was continuous snowfall also. I felt a mild headache and felt scared to go for ice skating. I just wandered on the ice and returned back to shelter. It is a unique experience.</p>
+    
+    <img src="\src\content\international\photos\europe8.jpg" alt="Lucerne Lion Monument" class="photo-frame float-left">
+
+    <p>After seeing Mount Titlis, we went to city <strong>Lucerne</strong>. We saw the statue of the Lion Monument. This monument was for the Swiss soldiers who sacrificed their life during the French Revolution. The lion is wounded and the pain expression is exhibited on the face of the lion brilliantly.</p>
+
+    <img src="\src\content\international\photos\europe9.jpg" alt="Trummelbach Glacial Waterfalls" class="photo-frame float-right">
+
+    <p>On 22nd morning we left the hotel early. On the way to station we visited <strong>Trummelbach Glacial waterfalls</strong>. This waterfall is inside a tunnel. We reached the base of the mountain and went to the tunnel through a sliding cabin on rails. We saw the waterfalls and proceeded to Lauterbrunnen station to board the train.</p>
+
+    <img src="\src\content\international\photos\europe10.jpg" alt="Jungfraujoch" class="photo-frame float-left">
+
+    <p>That day's main visit was to go to <strong>Jungfraujoch</strong>, the highest peak point of Europe. Altitude of this place is 13,300 ft. Temperature was around -10°C. Fortunately when we visited, there was no snowfall. Bright sun was there. Here also they issue a certificate that we visited this peak! We were proud while standing on the peak point of Europe. It was a wonderful moment!</p>
+
+    <h2>Vaduz, Swarovski & Innsbruck</h2>
+    
+    <img src="\src\content\international\photos\europe11.jpg" alt="Vaduz" class="photo-frame float-right">
+
+    <p>23rd morning we left Switzerland and proceeded to Liechtenstein. This is a very small country in Europe. Main business is making wine. <strong>Vaduz</strong> is the capital of this country. Through a toy train, we went through this city. From Vaduz, we proceeded to Austria.</p>
+    
+    <img src="\src\content\international\photos\europe12.jpg" alt="Swarovski Crystal Museum" class="photo-frame float-left">
+
+    <p>Innsbruck is around 150 Km away. Before Innsbruck, we stopped at Wattens to visit the world-famous <strong>Swarovski Crystal Museum</strong>. This is a museum plus showroom. Many crystal massive showpieces are in the museum.</p>
+    
+    <img src="\src\content\international\photos\europe13.jpg" alt="Maria Theresien Street" class="photo-frame float-right rotate-90">
+
+    <p>After the museum, we went to City Innsbruck. Inns is the name of the river. Being the city is on the river bank the city is named as Innsbruck. Here we went to <strong>Maria Theresien</strong> to see the Golden Roof.
+    Then we had a nice indian dinner at Hotel Olympia.</p>
+
+    <h2>Italy & The Vatican</h2>
+
+    <img src="\src\content\international\photos\europe14.jpg" alt="Venice" class="photo-frame float-left">
+
+    <p>On 24th June morning, we left Innsbruck and proceeded to Italy. The first city in Italy we visited is <strong>Venice</strong>. Venice is a small island and listed as a world heritage city. To reach this city we have to move in a cruise. Four-wheelers and two-wheelers are prohibited in this city. The city is full of backwater canals. People are moving from one place to other only by boats.</p>
+    
+    <p>First, we visited a glass factory. Beautiful showpieces made out of glass were sold here. In the main street, we saw many old monuments and churches. Then we travelled in a small boat (Gondola) to move around the city.</p>
+    
+    <img src="\src\content\international\photos\europe15.jpg" alt="Ferrari Museum" class="photo-frame float-right">
+
+    <p>On 25th June morning, we left Padova and proceeded to visit the <strong>Ferrari Car Museum</strong>. Also on payment, a joy ride on a Ferrari car facility was there. But no one went!</p>
+
+    <img src="\src\content\international\photos\europe16.jpg" alt="Leaning Tower of Pisa" class="photo-frame float-left rotate-n90">
+
+    <p>After the car museum, we proceeded to the famous place <strong>Pisa</strong> to see the <strong>Leaning Tower</strong>. The City Pisa is 300 km away from Padova. This tower was not made deliberately in a slanting way. Due to some miscalculation, the tower was slanting initially. Mussolini did a brilliant work to arrest further tilting. He drilled on the base and filled it with a huge amount of concrete and he saved the monument. It is very nicely maintained. The leaning tower was useful for Newton to conduct his experiments to determine the value of ‘g’.</p>
+
+    <img src="\src\content\international\photos\europe17.jpg" alt="David Statue" class="photo-frame float-right rotate-90">
+
+    <p>From the city of Pisa, we proceeded to <strong>Florence</strong>. Here we went to Michelangelo point where the <strong>David Statue</strong> is erected.</p>
+
+    <img src="\src\content\international\photos\europe18.jpg" alt="Rome Forts" class="photo-frame float-left">
+
+    <p>On 26th morning we reached <strong>Rome</strong>. In the bus, we were moving around Rome, the ancient city of Italy. We saw the damaged Forts of Rome where once upon a time the brave kings of Rome were ruling.</p>
+    
+    <img src="\src\content\international\photos\europe19.jpg" alt="Vatican Museum" class="photo-frame float-right">
+
+    <p>After lunch, we went to <strong>Vatican City</strong>. We went to see the famous Vatican Museum. This place was very much crowded. We followed the local guide and an electronic gadget with earphone was given to us. In the museum, Michelangelo’s paintings are carefully preserved. This zone of the museum is the silent zone and photography is strictly prohibited. The paintings are superb.</p>
+    
+    <img src="\src\content\international\photos\europe20.jpg" alt="Trevi Fountain" class="photo-frame float-left">
+
+    <p>After Vatican, we visited <strong>Trevi Fountain</strong>. People believe that if coins are put in this fountain their wishes would be fulfilled.</p>
+
+    <h2>Return Journey</h2>
+    <p>On 27th June early morning at 5:00, we left the hotel to the airport to catch our Lufthansa flight to Munich, Germany and subsequently another flight of Lufthansa to Mumbai. The flight was at the right time and we reached Mumbai midnight of 27th. We took a cab to Pune and reached home on 28th early morning safely.</p>
+    
+    <div class="summary-box">
+        <p>"In two weeks we saw ten countries and crossed 24 big cities of Europe. They have different culture, they speak different languages, lifestyle is different. But one common feature is cleanliness. Cities, rivers, highways of Europe are clean and well maintained. If we can learn this culture and keep India clean, our country may be the most beautiful one."</p>
+    </div>
+
+</article>
+
+<script>
+    // Lightbox Logic
+    const modal = document.getElementById("lightbox-modal");
+    const modalImg = document.getElementById("lightbox-img");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    const images = document.querySelectorAll(".photo-frame");
+
+    images.forEach(img => {
+        img.onclick = function(){
+            modal.classList.add("show");
+            modalImg.src = this.src;
+            
+            // Reset any previous rotation classes on the modal image
+            modalImg.classList.remove('rotate-90', 'rotate-n90');
+
+            // Check for rotation classes on clicked thumbnail and apply to modal image
+            if (this.classList.contains('rotate-90')) {
+                modalImg.classList.add('rotate-90');
+            } else if (this.classList.contains('rotate-n90')) {
+                modalImg.classList.add('rotate-n90');
+            }
+        }
+    });
+
+    // Close Modal Function
+    function closeModal() {
+        modal.classList.remove("show");
+        // Clear src and classes after delay
+        setTimeout(() => { 
+            modalImg.src = ""; 
+            modalImg.classList.remove('rotate-90', 'rotate-n90');
+        }, 300);
+    }
+
+    closeBtn.onclick = closeModal;
+
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    }
+</script>
+
+</body>
+</html>
