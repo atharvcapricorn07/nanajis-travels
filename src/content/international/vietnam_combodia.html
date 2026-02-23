@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelogue: Vietnam & Cambodia 2024</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.5;
+            color: #2d2d2d;
+            background-color: #f4f1ea;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 850px;
+            margin: auto;
+            background: #ffffff;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            border-left: 10px solid #4a6741;
+        }
+        header {
+            text-align: center;
+            border-bottom: 2px solid #d4a373;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+        h1 {
+            color: #8b4513;
+            margin: 0;
+            font-size: 2.2em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        h2 { color: #4a6741; font-size: 1.2em; margin-top: 5px; }
+        .date-range { font-style: italic; color: #666; margin-bottom: 30px; display: block; }
+        .entry { margin-bottom: 25px; border-bottom: 1px dashed #ccc; padding-bottom: 15px; overflow: auto; }
+        .date-header { font-weight: bold; color: #bc6c25; font-size: 1.1em; display: block; margin-bottom: 8px; }
+        .location-tag { display: inline-block; background: #e9edc9; padding: 2px 8px; border-radius: 4px; font-size: 0.9em; margin-bottom: 10px; font-weight: bold; }
+        p { margin: 0 0 12px 0; text-align: justify; }
+        .highlight { color: #4a6741; font-weight: 600; }
+        
+        /* Photo Styling */
+        .travel-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            cursor: pointer;
+            border: 5px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            margin: 10px;
+        }
+        .photo-left { float: left; margin-right: 20px; }
+        .photo-right { float: right; margin-left: 20px; }
+        
+        /* Clockwise Rotation */
+        .clock-90 { transform: rotate(90deg); }
+
+        /* Summary Box */
+        .summary-box {
+            background-color: #4a6741;
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 10px solid #bc6c25;
+        }
+        .summary-box h3 { margin-top: 0; color: #f4f1ea; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; }
+
+        /* Lightbox Modal */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        #lightbox-img { max-width: 80%; max-height: 80%; border: 10px solid white; transition: transform 0.3s ease; }
+        
+        /* Close Button */
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .close-btn:hover { color: #bc6c25; }
+
+        footer { text-align: center; font-size: 0.8em; color: #999; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Vietnam & Cambodia</h1>
+        <h2>Hanoi, Da Nang, Ho Chi Minh & Siem Reap</h2>
+        <span class="date-range">10/10/2024 to 19/10/2024</span>
+    </header>
+
+    <div class="entry">
+        <span class="date-header">09/10/24</span>
+        <p>We left home after lunch and reached Mumbai airport Terminal 2 around 7:30 pm. Since Veena World sent the tickets and visas by mail, we checked in. All airport formalities were done without any problem.</p>
+    </div>
+
+    <div class="entry">
+        <span class="date-header">10/10/24</span>
+        <div class="location-tag">Arrival in Hanoi & Da Nang</div>
+        <p>From Mumbai, we reached Hanoi, the capital city of Vietnam. Travel time is around 7 hours. Vietnam time is one hour and 30 minutes ahead of Indian time. The currency is the Vietnam Dong (VND). One US dollar is equal to 24,845 Vietnamese Dong. Handling currency in this country is confusing because of the large numbers. 5 lakh VND, 2 lakh VND, and 1 lakh VND notes are in circulation. Generally, prices of things are expressed in 'k', like 200k VND.</p>
+        <p>We reached Hanoi around 7 am local time. After Immigration, we collected our luggage and proceeded to the domestic airport. We boarded the flight for Da Nang. It is an hour's journey.</p>
+        <p>We reached Da Nang around 11:30 am. After collecting the baggage, we had lunch at an Indian hotel called Indian Kitchen. Then we went to our booked hotel, the New Orient Hotel. The hotel was too good, located in a nice place close to a river, perfect for a long walk. The city was very clean like any other European city.</p>
+    </div>
+
+    <div class="entry">
+        <span class="date-header">11/10/24</span>
+        <div class="location-tag">Bana Hills & Dragon Bridge</div>
+        <img src="\src\content\international\photos\vietnam1.jpg" class="travel-photo photo-right" onclick="zoomPhoto(this, false)">
+        <p>After a continental breakfast, we left the hotel by bus to <span class="highlight">Ba Na Hills</span>. It is an hour's travel. To reach the top, we go by the longest cable car in Asia. The journey was about 45 minutes and was spectacular.</p>
+        <p>After reaching the top, we first visited the Golden Bridge. This bridge is designed as if one pair of hands is holding the entire bridge. On that day, the weather was very cloudy and drizzling, so we could not take many photos. At the end of the bridge, we saw a beautiful garden and a few statues.</p>
+        <img src="\src\content\international\photos\vietnam2.jpg" class="travel-photo photo-left clock-90" onclick="zoomPhoto(this, true)">
+        <p>Next was the food court. They adopted a buffet system with a separate food table for Jain food. After lunch, we went around the wax museum and the French village. Around 4:30 pm, we proceeded to Monkey Hill. Here there is a Buddhist temple with a beautiful garden and many bonsai plants. A beautiful <span class="highlight">Buddha statue</span> of large size is seen in the middle of the garden.</p>
+        <img src="\src\content\international\photos\vietnam3.jpg" class="travel-photo photo-right" onclick="zoomPhoto(this, false)">
+        <p>Every night at 9 o'clock, a show is conducted at the <span class="highlight">Dragon Bridge</span>. The dragon starts throwing flames through its mouth, followed by jetting out water. After this show, we returned to the hotel.</p>
+    </div>
+
+    <div class="entry">
+        <span class="date-header">12/10/24</span>
+        <div class="location-tag">Marble Caves & Coconut Village</div>
+        <img src="\src\content\international\photos\vietnam4.jpg" class="travel-photo photo-left clock-90" onclick="zoomPhoto(this, true)">
+        <p>Our first visit was the <span class="highlight">Marble Caves</span>. We saw marble Hindu deities and Buddha in marble. Then we proceeded to the Coconut Village. Here, a <span class="highlight">boat ride</span> was arranged in circular bamboo vessels. Only two persons are allowed per boat.</p>
+        <img src="\src\content\international\photos\vietnam5.jpg" class="travel-photo photo-right" onclick="zoomPhoto(this, false)">
+        <p>The ride was for an hour, and we enjoyed sweet coconut water beforehand. Afterward, we walked for a village tour and saw a very old house, about 200 years old.</p>
+        <img src="\src\content\international\photos\vietnam6.jpg" class="travel-photo photo-left" onclick="zoomPhoto(this, false)">
+        <p>We also visited a <span class="highlight">Chinese temple</span> and did some street shopping. Our last program was to float lanterns in the river at Hoi An. We went in a boat and dropped the lantern gently to float.</p>
+        <img src="\src\content\international\photos\vietnam7.jpg" class="travel-photo photo-right" onclick="zoomPhoto(this, false)">
+        <p>Afterward, we took a buggy to the bus and went for dinner.</p>
+    </div>
+
+    <div class="entry">
+        <span class="date-header">13/10/24</span>
+        <div class="location-tag">Hanoi: History & Puppetry</div>
+        <img src="\src\content\international\photos\vietnam8.jpg" class="travel-photo photo-left" onclick="zoomPhoto(this, false)">
+        <p>We flew from Da Nang to Hanoi. We visited the <span class="highlight">first university of Vietnam</span>, which dates back to the 11th century. Later, we saw the Water Puppet Show where puppets float and dance in water. We checked into the West Lake 254 D hotel, which provided Airbnb-style facilities.</p>
+    </div>
+
+    <div class="entry">
+        <span class="date-header">14/10/24 - 15/10/24</span>
+        <div class="location-tag">Halong Bay & Cat Ba Island</div>
+        <img src="\src\content\international\photos\vietnam9.jpg" class="travel-photo photo-right clock-90" onclick="zoomPhoto(this, true)">
+        <p>We visited the <span class="highlight">One Pillar Pagoda</span>, erected over a single pillar in a pond full of lotus flowers. Then we proceeded to Halong Bay to board the <span class="highlight">Peony Cruise</span>.</p>
+        <img src="\src\content\international\photos\vietnam10.jpg" class="travel-photo photo-left" onclick="zoomPhoto(this, false)">
+        <p>The cruise had an open upper deck with a swimming pool. On the 15th, we reached Cat Ba Island and visited the <span class="highlight">Trung Trang Cave</span>. We had to climb 140 steps to the entrance.</p>
+        <img src="\src\content\international\photos\vietnam11.jpg" class="travel-photo photo-right clock-90" onclick="zoomPhoto(this, true)">
+        <p>Inside, some places were very narrow where we had to bend and bow our heads. After the visit, we took a 3-hour bus ride back to Hanoi for our flight to Siem Reap, Cambodia.</p>
+        <img src="\src\content\international\photos\vietnam12.jpg" class="travel-photo photo-left" onclick="zoomPhoto(this, false)">
+    </div>
+
+    <div class="entry">
+        <span class="date-header">16/10/24</span>
+        <div class="location-tag">Siem Reap: Angkor Wat</div>
+        <img src="\src\content\international\photos\vietnam13.jpg" class="travel-photo photo-right clock-90" onclick="zoomPhoto(this, true)">
+        <p>We visited the <span class="highlight">Angkor Wat</span> heritage site. These temples were constructed in the 10th century by King Surya Varman. Originally dedicated to Lord Vishnu, they were later changed to Buddhist temples.</p>
+        <img src="\src\content\international\photos\vietnam14.jpg" class="travel-photo photo-left clock-90" onclick="zoomPhoto(this, true)">
+        <p>We saw carvings depicting stories from the Mahabharata and Ramayana. In the evening, we saw the Apsara classical dance and had a Cambodian dinner of sticky rice, soup, and salad.</p>
+    </div>
+
+    <div class="entry">
+        <span class="date-header">17/10/24 - 18/10/24</span>
+        <div class="location-tag">Ho Chi Minh City & Mekong Delta</div>
+        <p>On the 18th, we went to the Mekong Delta. We traveled by ferry and then transferred to small boats through narrow channels lined with coconut trees. We reached <span class="highlight">Unicorn Island</span>.</p>
+        <img src="\src\content\international\photos\vietnam15.jpg" class="travel-photo photo-right" onclick="zoomPhoto(this, false)">
+        <p>In the afternoon, we visited the <span class="highlight">War Remnants Museum</span> in Ho Chi Minh City. It was a sobering experience seeing the history of the Vietnam War and the effects of chemical warfare (Agent Orange) on generations of children.</p>
+        <img src="\src\content\international\photos\vietnam16.jpg" class="travel-photo photo-left" onclick="zoomPhoto(this, false)">
+        <p>The photos of the victims showing the cruelty done to the human race were very moving. After the museum, we had dinner at Hotel Banaras.</p>
+        <img src="\src\content\international\photos\vietnam17.jpg" class="travel-photo photo-right" onclick="zoomPhoto(this, false)">
+    </div>
+
+    <div class="entry">
+        <span class="date-header">19/10/24</span>
+        <div class="location-tag">Journey Home</div>
+        <p>On our last day, we visited the City Post Office and the <span class="highlight">Cu Chi Tunnels</span>, where we saw the guerrilla tactics used by the Vietnamese. We reached Ho Chi Minh airport at 4 pm and returned home to Mumbai at midnight.</p>
+    </div>
+
+    <div class="summary-box">
+        <h3>Spiritual Temples & Resilient Hearts: Final Thoughts</h3>
+        <p>The 10-day tour through Vietnam and Cambodia was an eye-opening blend of ancient spirituality and resilient modern history. From the breathtaking heights of Ba Na Hills and the intricate carvings of Angkor Wat to the somber reflections at the War Remnants Museum, every day offered something unique. The cleanliness of the cities, the hospitality of the local people, and the vibrant flavors of Southeast Asia made this a trip to remember forever.</p>
+    </div>
+
+</div>
+
+<div id="lightbox">
+    <span class="close-btn" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img">
+</div>
+
+<script>
+    function zoomPhoto(element, isClock) {
+        var lightbox = document.getElementById('lightbox');
+        var img = document.getElementById('lightbox-img');
+        img.src = element.src;
+        
+        // Apply rotation to the zoomed image if needed
+        if (isClock) {
+            img.style.transform = "rotate(90deg)";
+        } else {
+            img.style.transform = "none";
+        }
+        
+        lightbox.style.display = "flex";
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').style.display = "none";
+    }
+</script>
+
+</body>
+</html>

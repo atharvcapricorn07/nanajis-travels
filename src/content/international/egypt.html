@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egypt Tour Travelogue | 2020</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --egypt-blue: #004d80;
+            --gold: #b8860b;
+            --sand-bg: #f4e4bc;
+            --papyrus: #fcf5e5;
+            --text-dark: #232528;
+            --city-highlight: #d35400;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--sand-bg);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+        }
+
+        .journal-container {
+            max-width: 850px;
+            margin: 40px auto;
+            background-color: var(--papyrus);
+            padding: 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-radius: 4px;
+            border-top: 10px solid var(--egypt-blue);
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 2px solid #e0d2b4;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin: 0;
+            color: #1a1a1a; /* Darkened for readability */
+            letter-spacing: 2px;
+        }
+
+        .trip-dates {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--gold);
+        }
+
+        .section-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 40px 0 25px 0;
+            color: var(--egypt-blue);
+            font-family: 'Playfair Display', serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            clear: both;
+        }
+
+        .section-divider::before, .section-divider::after {
+            content: '';
+            flex: 1;
+            border-bottom: 2px solid #e0d2b4;
+        }
+
+        .section-divider:not(:empty)::before { margin-right: 1em; }
+        .section-divider:not(:empty)::after { margin-left: 1em; }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .city-name {
+            color: var(--city-highlight);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* --- PHOTO STYLES --- */
+        .journal-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            cursor: zoom-in;
+            transition: transform 0.2s ease;
+        }
+
+        .journal-photo:hover { transform: scale(1.03); }
+
+        .float-left { float: left; margin: 5px 25px 15px 0; }
+        .float-right { float: right; margin: 5px 0 15px 25px; }
+
+        /* --- MODAL STYLES --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center; align-items: center;
+        }
+
+        .lightbox-content {
+            max-width: 85%; max-height: 85vh;
+            border: 5px solid white;
+        }
+
+        /* --- SUMMARY BOX --- */
+        .summary-box {
+            background: var(--egypt-blue);
+            color: white;
+            padding: 30px;
+            margin-top: 50px;
+            border-left: 8px solid var(--gold);
+            clear: both;
+        }
+
+        .summary-box h2 {
+            font-family: 'Playfair Display', serif;
+            margin-top: 0;
+            color: var(--sand-bg);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .journal-container { padding: 25px; }
+            .journal-photo { width: 100%; float: none; margin: 10px 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="lightbox" class="lightbox" onclick="this.style.display='none'">
+    <img class="lightbox-content" id="lightbox-img">
+</div>
+
+<div class="journal-container">
+    <header>
+        <h1>EGYPT</h1>
+        <div class="trip-dates">05/02/20 – 15/02/20</div>
+    </header>
+
+    <p>We visited Egypt through Kesari, our 23rd country since 2011. Egypt sits at the crossroads of Africa and Asia, bordered by the Mediterranean and Red Seas. The history here is staggering, with monuments spanning 3,000 to 5,000 years. The Nile, the world's longest river, serves as the lifeblood of the nation, turning the Sahara desert into fertile land for cotton, dates, and sugarcane.</p>
+
+    <div class="section-divider">Alexandria & Ancient Echoes</div>
+
+    <p><strong>05/02/20</strong> — <span class="city-name">Alexandria</span></p>
+    <p>After a smooth Egyptair flight, we headed for Alexandria. The roads are broad and modern, yet the city carries a dusty, ancient charm. We explored the Catacombs, multi-floored tombs designed for mummies and the afterlife.</p>
+    
+    <img src="\src\content\international\photos\egypt1.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Roman Amphitheater">
+    <p>The <strong>Roman Amphitheater</strong>, dating to the 4th century, remains a remarkable ruin despite centuries of invasion. Nearby, we visited the <strong>Library of Alexandria</strong>.</p>
+    
+    <img src="\src\content\international\photos\egypt2.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Library of Alexandria">
+    <p>The library, once the greatest in the world, has been renovated and continues to serve as a beacon of knowledge. We rested at Hotel Cherry Maryski, feeling the weight of the history around us.</p>
+
+    <div class="section-divider">The Giza Plateau</div>
+
+    <p><strong>06/02/20</strong> — <span class="city-name">Cairo</span></p>
+    <img src="\src\content\international\photos\egypt3.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Giza Pyramids">
+    <p>The <strong>Giza Pyramids</strong> are a site to behold. At 4,600 years old, they represent the peak of ancient engineering. The Great Sphinx stands watch over the royal tombs of kings, sons, and grandsons.</p>
+    
+    <img src="\src\content\international\photos\egypt4.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Papyrus Institute">
+    <p>At the <strong>Papyrus Institute</strong>, we witnessed the fascinating process of creating paper from river reeds. The resulting artwork is as durable as it is beautiful.</p>
+
+    <div class="section-divider">Upper Egypt & The Nile</div>
+
+    <p><strong>07/02/20 – 08/02/20</strong> — <span class="city-name">Abu Simbel & Aswan</span></p>
+    <img src="\src\content\international\photos\egypt5.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Abu Simbel">
+    <p>The <strong>Temples of Abu Simbel</strong> are carved directly into the mountainside. King Ramses II built these with four gargantuan statues at the entrance. Following this, we saw the <strong>High Dam</strong> in Aswan.</p>
+    
+    <img src="\src\content\international\photos\egypt6.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="High Dam">
+    <p>This Russian-assisted project controls the Nile's floods. We then boarded our Nile Cruise, enjoying the view from our cabin as we sailed toward the <strong>Kom Ombo Temple</strong>.</p>
+    
+    <img src="\src\content\international\photos\egypt7.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Kom Ombo">
+    <p>Kom Ombo is unique, dedicated to the crocodile god. The nearby museum hosts ancient crocodile mummies, preserved with incredible care.</p>
+
+    <div class="section-divider">Temples of the Nile</div>
+
+    <p><strong>09/02/20 – 10/02/20</strong> — <span class="city-name">Edfu & Luxor</span></p>
+    <img src="\src\content\international\photos\egypt8.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Edfu">
+    <p>We took a horse carriage to <strong>Edfu Temple</strong>, the best-preserved temple in Egypt. Later, we reached the <strong>Luxor Temple</strong>, which glows spectacularly at night.</p>
+    
+    <img src="\src\content\international\photos\egypt9.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Luxor Temple">
+    <p>The journey continued to the <strong>Valley of the Kings</strong>, a silent canyon hiding 69 royal tombs. The paintings inside look as if they were finished yesterday.</p>
+    
+    <img src="\src\content\international\photos\egypt10.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Valley of Kings">
+    <p>Finally, we visited the <strong>Karnak Temple</strong>, the largest religious building ever constructed. We celebrated the day with a rare and delicious Indian meal at AraCan Hotel.</p>
+    
+    <img src="\src\content\international\photos\egypt11.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Karnak">
+
+    <div class="section-divider">Red Sea Relaxation</div>
+
+    <p><strong>11/02/20 – 13/02/20</strong> — <span class="city-name">Hurghada</span></p>
+    <img src="\src\content\international\photos\egypt12.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Swiss Inn">
+    <p>We drove through the Sahara to reach the <strong>Swiss Inn Resort</strong> in Hurghada. The Red Sea air was a refreshing change from the desert dust.</p>
+    
+    <img src="\src\content\international\photos\egypt13.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Mini Egypt">
+    <p>We spent time at <strong>Mini Egypt Park</strong>, viewing replicas of the landmarks we had just visited, and enjoyed a <strong>Dolphin Show</strong> at the aquarium.</p>
+    
+    <img src="\src\content\international\photos\egypt14.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Dolphin Show">
+
+    <div class="section-divider">The Final Bazaar</div>
+
+    <p><strong>14/02/20</strong> — <span class="city-name">Cairo</span></p>
+    <img src="\src\content\international\photos\egypt15.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Khan Market">
+    <p>Back in Cairo, we braved the <strong>Khan el-Khalili</strong> market. The bargaining is fierce but friendly. We ended our trip with the <strong>Sound and Light Show</strong> at the Pyramids.</p>
+    
+    <img src="\src\content\international\photos\egypt16.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Sound and Light Show">
+    <p>The pyramids were bathed in colorful lights as we heard the story of 4,000 years of civilization—a fitting end to our journey.</p>
+
+    <div class="summary-box">
+        <h2>Reflections from the Nile</h2>
+        <p>Egypt was a journey through the cradle of civilization. From the towering Pyramids of Giza to the tranquil waters of the Nile, every day offered a glimpse into a world 5,000 years in the making. Traveling as a senior, I found the Egyptian people to be incredibly respectful and warm—especially toward Indian visitors.</p>
+        <p><strong>Final Note:</strong> We reached Mumbai safely just as the first global whispers of the pandemic began. The world began to change slowly, making these memories even more precious.</p>
+    </div>
+
+</div>
+
+<script>
+    function zoom(src) {
+        document.getElementById('lightbox').style.display = 'flex';
+        document.getElementById('lightbox-img').src = src;
+    }
+</script>
+
+</body>
+</html>

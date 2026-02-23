@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Lanka & Maldives Travelogue | Nanaji's Travels</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Palette: Emerald Green (Sri Lanka) -> Turquoise (Maldives) -> Sand */
+            --sri-lanka-green: #2E8B57;
+            --maldives-blue: #40E0D0;
+            --ocean-dark: #006994;
+            --sand: #fdfbf7;
+            --text-dark: #333;
+            --text-light: #555;
+            --gold-accent: #DAA520;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            background-color: #f4f4f4;
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: var(--sand);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden; /* For header border radius */
+            border-radius: 8px;
+        }
+
+        /* --- Header Section --- */
+        header {
+            background: linear-gradient(135deg, var(--sri-lanka-green), var(--ocean-dark));
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.8rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .trip-dates {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            color: #e0f7fa;
+            font-weight: 300;
+        }
+
+        /* --- Content Layout --- */
+        .content {
+            padding: 50px;
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--ocean-dark);
+            border-bottom: 2px solid var(--maldives-blue);
+            padding-bottom: 10px;
+            margin-top: 40px;
+            clear: both;
+        }
+
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--sri-lanka-green);
+            margin-top: 30px;
+            font-size: 1.3rem;
+            clear: both;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+            text-align: justify;
+        }
+
+        /* --- Special Boxes --- */
+        .intro-box {
+            background-color: #e8f5e9; /* Light green tint */
+            border-left: 5px solid var(--sri-lanka-green);
+            padding: 25px;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .maldives-box {
+            background-color: #e0f7fa; /* Light blue tint */
+            border-left: 5px solid var(--maldives-blue);
+            padding: 25px;
+            margin-top: 40px;
+        }
+        
+        .summary-box {
+            background-color: #fffde7; /* Light yellow/sand tint */
+            border: 2px solid var(--gold-accent);
+            border-left: 10px solid var(--ocean-dark);
+            padding: 25px;
+            margin-top: 50px;
+            border-radius: 4px;
+            font-style: italic;
+            clear: both;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .highlight {
+            color: var(--sri-lanka-green);
+            font-weight: bold;
+        }
+
+        /* --- PHOTO STYLES --- */
+        .journal-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+            cursor: zoom-in;
+            transition: transform 0.2s ease;
+        }
+
+        .journal-photo:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        .float-right {
+            float: right;
+            margin-left: 25px;
+            margin-top: 5px;
+        }
+
+        .float-left {
+            float: left;
+            margin-right: 25px;
+            margin-top: 5px;
+        }
+
+        /* --- LIGHTBOX (MODAL) STYLES --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.show {
+            display: flex;
+        }
+
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+            border: 4px solid #fff;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            animation: zoomIn 0.3s;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--maldives-blue);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @keyframes zoomIn {
+            from {transform:scale(0.8); opacity: 0;}
+            to {transform:scale(1); opacity: 1;}
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            clear: both;
+        }
+
+        @media (max-width: 600px) {
+            .content { padding: 25px; }
+            h1 { font-size: 2rem; }
+            .journal-photo {
+                float: none;
+                display: block;
+                margin: 20px auto;
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="lightbox-modal" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" src="">
+</div>
+
+<div class="container">
+    <header>
+        <h1>Sri Lanka & Maldives</h1>
+        <div class="trip-dates">9th March 2018 – 18th March 2018</div>
+    </header>
+
+    <div class="content">
+        
+        <div class="intro-box">
+            <p>We visited Sri Lanka and Maldives through Kesari Travels. We paid Rs 2,25,000/- in January 2018 for the March trip for two persons, including the visa fee. While making the payments, we handed over the passports for the visa. It is only an e-visa, so we need not run around to any consulate.</p>
+            <p>We visited Colombo, Pinnawala, Dambulla, Kandy, and Nuwara Eliya. This country resembles India in many aspects. The natural scenery is very similar to Kerala: lots of ponds, coconut trees, banana trees, etc. Highways are not very broad, and buses go at a moderate speed.</p>
+            <p>People mainly follow Buddhism. Many Buddhist temples are there. We could see lots of Chinese tourists, so most of the hotels here provide mainly non-veg food. In this country, a three-language formula is adopted: Sinhalese, Tamil, and English.</p>
+            <p>We could interact with a few Tamilians. Apparently, it looks from their talk that their life became worse after the Tamil Eelam activities. In one of the hotels, we could speak with a few Tamil bearers. They were so kind and showed lots of affinity since we are Tamilians. It is difficult for them to come to India and start their livelihood, and at the same time, they find it difficult to lead a normal life there. It looks like there is some discrimination in public places, which obviously humiliates them.</p>
+        </div>
+
+        <h2>The Journey Begins</h2>
+        <p><strong>9th March 2018:</strong> Mrs. Bhoomi, the Tour Manager from Kesari, escorted our group throughout from Mumbai airport. On that day, I received a call from her; she introduced herself and also made a WhatsApp group which helped us to keep in touch with everyone in this group throughout.</p>
+        <p>Our flight to Colombo from Mumbai was in the early morning of 10th March. We left Pune around 6:30 pm on the 9th and went to Mumbai by Volvo bus. We got down at Andheri and took an auto from there to the International Airport. After reaching the airport, we ate our packed dinner. By that time, Kesari representatives came and handed over our passports, tickets, and eatable packs.</p>
+        <p>It was a Sri Lankan flight. The flight took off at 4 am on 10th March. Colombo from Mumbai is around a 2-hour journey. Sri Lanka and India timings are the same, so it was needless to set our wristwatches. Around 6 am on 10th March, we landed at Colombo airport.</p>
+
+        <h2>Arrival in Sri Lanka: Pinnawala & Dambulla</h2>
+        <p><strong>10th March 2018:</strong> After landing, immigration was done, and we collected our check-in baggage. In the airport, all signboards are written in three languages: Sinhalese, Tamil, and English. Their Tamil is quite different from our Tamil.</p> 
+        <p>From the airport, we boarded an AC bus. The local guide was there to receive us. He welcomed us with their phrase <strong>‘Ayubowan’</strong>. The meaning of ‘Ayubowan’ is "live long years." Irrespective of age, this phrase is used by all to welcome anyone (in our place, it is generally used by an elder to bless a younger one). Close to the airport, he took us to a restaurant for breakfast. The breakfast was not in the usual Kesari style; it was just okay.</p>
+
+        <h3>Pinnawala Elephant Orphanage</h3>
+        
+        <img src="\src\content\international\photos\srilanka1.jpg" alt="Pinnawala Elephant Orphanage" class="journal-photo float-right">
+
+        <p>After breakfast, we proceeded to a city called Pinnawala. It is about a 3-hour journey. The road was narrow. Both sides were full of greenery, mostly coconut trees. The weather was quite good. At Pinnawala, we visited the elephant orphanage. Here, about 100 elephants are taken care of. Many baby elephants are also there. Every day they are fed with milk and other nutritious food.</p>
+        <p>Every day these elephants are taken to the nearby <strong>Maha Oya river</strong> where they spend an hour in the river and come back to the orphanage. This orphanage was created in 1975 mainly to protect baby orphan elephants. This orphanage is the biggest one in Asia. We saw the spectacular sight of them going together to the river Maha Oya, playing for an hour, and returning back to the orphanage.</p>
+        
+        <p>After the visit to the Elephant Orphanage, we had our lunch in a hotel and proceeded to the city called <strong>Dambulla</strong>. It is about a four-hour journey. On the way, we had a break for 30 minutes and had tea. Here also the road was narrow, so the Volvo bus was going at a moderate speed of 40-50 km per hour.</p>
+        <p>We reached resort Paradise around 5:30 pm. This resort is really beautiful. That night's stay was comfortable.</p>
+
+        <h2>Sigiriya & The Golden Temple</h2>
+        <p><strong>11th March 2018:</strong> After breakfast, we proceeded to the fortress <strong>Sigiriya</strong> located close to the city Dambulla. The name of this place is derived from this structure — <em>Sīhāgiri</em>, the Lion Rock. This rock is very steep and about 200 meters high. According to ancient Sri Lankan legend, this site was selected by King Kasyapa (477 – 495 AD). Sigiriya today is a UNESCO-listed World Heritage site.</p>
+        
+        <img src="\src\content\international\photos\srilanka2.jpg" alt="Sigiriya Rock" class="journal-photo float-left">
+
+        <p>Steps are made to reach the top of the rock where the fortress is. Though some of our people went to the top, considering our upcoming US trip, we decided not to take any adventurous activity, so we did not climb up the hill. Instead, the Kesari guide arranged an auto-rickshaw to go around Sigiriya Rock to see beautiful viewpoints. We saw about 10 viewpoints, and in all spots, we could see the Sigiriya rock.</p>
+
+        <img src="\src\content\international\photos\srilanka3.jpg" alt="View of Sigiriya" class="journal-photo float-right">
+
+        <h3>Dambulla Cave Temple</h3>
+        
+        <img src="\src\content\international\photos\srilanka4.jpg" alt="Dambulla Cave Temple" class="journal-photo float-left">
+
+        <p>The Dambulla Cave temple complex is also called the Golden Temple of Sri Lanka. This is also one among the UNESCO heritages of Sri Lanka. In this complex, there are five caves; one was made, and the remaining four are natural. Inside the caves, Buddha statues are there in different postures. Also, we can see many beautiful paintings of Buddha inside. In this cave complex, one Hindu temple is also there (Murugan temple).</p>
+        
+        <p>After the visit to the Dambulla cave temple, we proceeded to <strong>Kandy</strong>. From this place, it is some 75 km away. As usual, the road was narrow, and both sides of the road with fertile paddy and banana fields looked pretty beautiful. After this long travel, we reached Grand Kandyan Hotel in the evening. This hotel is also quite good and our stay was enjoyable.</p>
+
+        <h2>Kandy: The Cultural Capital</h2>
+        <p><strong>12th March 2018:</strong> In Grand Kandyan Hotel, we had a typical South Indian breakfast like dosa, idli, upma, etc. After a heavy breakfast, we proceeded to the <strong>Temple of the Tooth</strong>, a popular Buddhist temple.</p>
+        <p>The Temple of the Sacred Tooth Relic is located in the royal palace complex which houses the Relic of the tooth of Buddha. Since ancient times, the relic has played an important role in local politics because it is believed that whoever holds the relic holds the governance of the country. Kandy was the last capital of the Sri Lankan kings and is a World Heritage Site mainly due to the temple.</p>
+        <p>A very big crowd was there to have darshan. Fortunately, a good queue system was followed, and unlike Indian temples, there was no mad rush or any haphazard stampede. Rituals are performed three times daily: at dawn, at noon, and in the evenings. On Wednesdays, there is a symbolic bathing of the relic with an herbal preparation made from scented water and fragrant flowers called <em>Nanumura Mangallaya</em>. This holy water is believed to contain healing powers and is distributed among those present.</p>
+
+        <p>Close to this temple, Kandy Lake is situated. After seeing the lake, we had our lunch and visited the <strong>Gem Museum of Kandy</strong>. There was a short film on the gem collection. After the film, in their showroom, a few people made purchases.</p>
+        <p>After the Gem show, we were taken to a dance program in a theatre hall. Various typical Sri Lankan dance programs were performed. After the dance program, adjacent to the hall in open ground, they performed <strong>fire walking</strong>. They spread charcoal, sprinkled kerosene, ignited it, and walked through the flames.</p>
+
+        <h3>Peradeniya Botanical Garden</h3>
+        <p>After the dance program, we were taken to Peradeniya Botanical Garden. It is a huge garden. Motor vehicles are there to go around the garden. Though we tried, we did not get any such vehicle. So we walked around some portions of the garden and returned back. Some glass houses are there with various kinds of beautiful flower plants. After the visit, we returned back to Grand Kandyan Hotel.</p>
+
+        <h2>Nuwara Eliya: Little England</h2>
+        
+        <img src="\src\content\international\photos\srilanka5.jpg" alt="Nuwara Eliya" class="journal-photo float-right">
+
+        <p><strong>13th March 2018:</strong> After our breakfast at Grand Kandyan Hotel, we proceeded to the next city called <strong>Nuwara Eliya</strong>. This city is at an altitude of 6000 ft above sea level. This city was developed in the 19th century by the British. When this country was under the British, this city was developed mainly for their entertainment, like playing golf, hunting, etc. Also, they developed many tea estates in this region. During this development, they brought many Indian workers for developing the tea estates.</p>
+        <p>In this city, even today we can see some British architectural buildings like Queen’s Cottage, Grand Hill Club, St. Andrew’s Hotel, and the Town Post Office. While going to Nuwara Eliya, we visited a tea estate. The estate got its own tea factory. We saw the process. A sale counter also was there, and apart from various kinds of tea like green tea, black tea, lemon tea, etc., they were selling almonds, pistachios, etc.</p>
+
+        <h3>Hanuman Temple & Sita Mandir</h3>
+        
+        <img src="\src\content\international\photos\srilanka6.jpg" alt="Hanuman Temple" class="journal-photo float-left">
+
+        <p>After the visit to the tea factory, we proceeded to one <strong>Hanuman Temple</strong>. The Hanuman murthy in this temple is of large size. After Hanuman darshan, adjacent to the temple in a mess, we took food. The food was typical homemade food. It was very tasty.</p>
+        
+        <img src="\src\content\international\photos\srilanka7.jpg" alt="Sita Amman Temple" class="journal-photo float-right">
+
+        <p>After Hanuman Mandir, we proceeded to <strong>Sita Mandir (Seetha Amman Temple)</strong>. It is a beautiful temple adjacent to a river. Close to the temple, we see footprints over a stone. According to legend, this footprint is Hanuman’s foot; when he came to Sri Lanka, he stepped down first only in this place.</p>
+        
+        <img src="\src\content\international\photos\srilanka8.jpg" alt="Ashok Vatika" class="journal-photo float-left">
+
+        <p>After this temple, we visited <strong>Ashok Vatika</strong>. Now this has been made into a beautiful garden. After Ashok Vatika, we went to Nuwara Eliya Lake. It was just like Ooty Lake. We had boat riding for an hour. After the lake’s visit, we proceeded to Hotel Araliya Green Hills. Being at an altitude of 6000 ft above sea level, the weather was quite chill. Hotel rooms were equipped with room heaters.</p>
+
+        <h2>Colombo: The Capital</h2>
+        <p><strong>14th March 2018:</strong> After the South Indian breakfast at Hotel Araliya Green Hills, we proceeded to Colombo, the last city of our tour. It is around an 8-hour journey from Nuwara Eliya. On the way, we had a break at Susantha Spice and Herbal Garden. The guide of that garden explained various ayurvedic medicines and medicinal oils. They were selling them also.</p>
+        <p>In the evening we reached Colombo. Colombo is also like Indian cities. Because of traffic jams and lots of signals, it took a long time to reach our Hotel, Jetwing.</p>
+
+        <p><strong>15th March 2018:</strong> We left Jetwing Hotel around 9 am after our breakfast. We visited Vibhishana Temple. In the same premises, we then went to <strong>Kelaniya Raja Maha Viharaya</strong> Buddha temple, which was built in the third century.</p>
+        
+        <img src="\src\content\international\photos\srilanka9.jpg" alt="Kelaniya Raja Maha Viharaya" class="journal-photo float-right">
+
+        <p>In this temple, we can see lots of Buddha statues in different postures. Also, we can see beautiful paintings over the walls and ceilings. In the outer premises, we can see statues of Hindu Gods.</p>
+        <p>After the visit to this temple, we had our lunch and went through the city of Colombo. We saw the Parliament Building, Indian Embassy, Twin Towers of Sri Lanka, Victoria Garden, etc.</p> 
+        
+        <img src="\src\content\international\photos\srilanka10.jpg" alt="Parliament Building" class="journal-photo float-left">
+
+        <p>The last spot was the Fashion Mall, where people did some shopping. Then we returned back to the hotel.</p>
+
+        <div class="maldives-box">
+            <h2>The Maldives Adventure</h2>
+            <p><strong>16th March 2018:</strong> We left Hotel Jetwing of Colombo around 9:30 am. Colombo international airport is an hour's drive from the hotel. In the airport, checking was done at three or four places. After these formalities, we got our boarding pass to Maldives. For free internet, we had to scan our boarding pass to get a password, and after entering the password in our mobile, Wi-Fi got connected.</p>
+            <p>At last, we boarded the Sri Lankan flight to Maldives in the noon. From Colombo, it is an hour and 30 minutes flight. Around 3 pm we reached Maldives. Maldives is a group of many islands. The weather was very hot.</p>
+            
+            <img src="\src\content\international\photos\srilanka11.jpg" alt="Maldives View 1" class="journal-photo float-right">
+
+            <p>After collecting our luggage, we came out of the airport. From there we had to go to a different island by a <strong>speed boat</strong>. It was about 45 minutes of travel. The blue color sea looked beautiful.</p>
+            
+            <p>After reaching the hotel, we collected our cottage key. The cottage was quite far off from the main reception room. We walked through the seashore. The cottage was pretty good.</p>
+            <p>Whenever we go on tour, we used to get good friends. This time from the first day of the tour, we moved with a family from Bangalore—a daughter and her mother—all the time. Even after the tour, we maintained contact through WhatsApp. Since they insisted, when we went to Bangalore we visited them. They are very nice people, soft-spoken and very cordial. Luckily their allotted cottage was adjacent to ours.</p>
+
+            <p><strong>17th March 2018:</strong> Only two nights stay was there at Maldives. Kesari did not arrange any specific tour in Maldives. The hotel arranges many water activities like <strong>scuba diving</strong>, submarine travel, etc., on a payment basis. We and the Bangalore people decided to move around the island. So after breakfast, we walked in different parts of the island along the seashore.</p>
+            
+            <img src="\src\content\international\photos\srilanka12.jpg" alt="Maldives View 2" class="journal-photo float-left">
+
+            <img src="\src\content\international\photos\srilanka13.jpg" alt="Maldives View 3" class="journal-photo float-right">
+
+            <p><strong>18th March 2018:</strong> After lunch, we left Maldives and reached the main Island where the airport is. We were taken around for a city orientation tour of Male. After the city tour, we came back to the airport to take a flight to Colombo and then subsequently to Mumbai from there. We reached the early morning of 19th March and took a cab to Pune and reached home safely.</p>
+        </div>
+        
+        <div class="summary-box">
+            <p>"From the green tea gardens of Nuwara Eliya to the stunning blue waters of the Maldives, this journey was a perfect blend of culture and relaxation. Sri Lanka felt like a second home with its familiar landscapes, while the Maldives offered a glimpse of paradise on earth."</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    // Get the lightbox elements
+    const modal = document.getElementById("lightbox-modal");
+    const modalImg = document.getElementById("lightbox-img");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    const images = document.querySelectorAll(".journal-photo");
+
+    // Loop through images and add click event
+    images.forEach(img => {
+        img.onclick = function(){
+            modal.classList.add("show");
+            modalImg.src = this.src;
+        }
+    });
+
+    // Close when clicking the "x"
+    closeBtn.onclick = function() {
+        modal.classList.remove("show");
+        // Clear src after fade out
+        setTimeout(() => { modalImg.src = ""; }, 300);
+    }
+
+    // Close when clicking outside the image
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            modal.classList.remove("show");
+            setTimeout(() => { modalImg.src = ""; }, 300);
+        }
+    }
+</script>
+
+</body>
+</html>

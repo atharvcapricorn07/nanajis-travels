@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhutan: The Land of Happiness | Travelogue</title>
+    <style>
+        /* --- BHUTAN VIBE COLOR PALETTE --- */
+        :root {
+            --bhutan-red: #7c2e2e;   /* Deep red found in Dzongs */
+            --bhutan-gold: #e6ae25;  /* Saffron yellow/gold */
+            --paper-bg: #fdfcf0;     /* Warm parchment background */
+            --text-color: #2c2c2c;   /* Dark grey for readability */
+            --border-color: #dcdcdc;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: #f4f4f4;
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- LAYOUT --- */
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: var(--paper-bg);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 40px;
+            border-top: 10px solid var(--bhutan-red);
+            border-bottom: 10px solid var(--bhutan-gold);
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1 {
+            color: var(--bhutan-red);
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            border-bottom: 2px solid var(--bhutan-gold);
+            padding-bottom: 15px;
+        }
+
+        .dates {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: var(--bhutan-red);
+            border-left: 5px solid var(--bhutan-gold);
+            padding-left: 15px;
+            margin-top: 40px;
+            font-size: 1.8em;
+            clear: both; /* Ensures headings don't wrap around photos strangely */
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 25px;
+            font-size: 1.4em;
+            clear: both;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* --- SPECIAL SECTIONS --- */
+        .intro-box {
+            background-color: #fff8e1; /* Light gold tint */
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--bhutan-gold);
+            margin-bottom: 30px;
+        }
+
+        .summary-box {
+            background-color: #fff8e1; /* Matching the intro box */
+            border: 2px solid var(--bhutan-red);
+            border-left: 10px solid var(--bhutan-gold);
+            padding: 25px;
+            margin-top: 50px;
+            border-radius: 4px;
+            font-style: italic;
+            clear: both;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        /* --- PHOTO STYLES --- */
+        .journal-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            border: 5px solid #fff; /* White border for photo look */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 10px;
+            cursor: zoom-in;
+            transition: transform 0.2s ease;
+        }
+
+        .journal-photo:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        .float-right {
+            float: right;
+            margin-left: 25px;
+            margin-top: 5px;
+        }
+
+        .float-left {
+            float: left;
+            margin-right: 25px;
+            margin-top: 5px;
+        }
+
+        /* --- LIGHTBOX (MODAL) STYLES --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.show {
+            display: flex;
+        }
+
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+            border: 4px solid #fff;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            animation: zoomIn 0.3s;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--bhutan-gold);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @keyframes zoomIn {
+            from {transform:scale(0.8); opacity: 0;}
+            to {transform:scale(1); opacity: 1;}
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9em;
+            color: #888;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            clear: both;
+        }
+
+        @media (max-width: 700px) {
+            .container { padding: 20px; margin: 0; }
+            .journal-photo {
+                float: none;
+                display: block;
+                margin: 20px auto;
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="lightbox-modal" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" src="">
+</div>
+
+<div class="container">
+    <h1>Bhutan Tour</h1>
+    <div class="dates">22/04/2017 to 28/04/2017</div>
+
+    <div class="intro-box">
+        <p><strong>Bhutan is called the happiest country in the world.</strong></p>
+        <p>It is a beautiful country. The weather is pretty good. This country is full of mountains and valleys, so we hardly find any plain places. Roads are also up and down. It is a totally different country. We won’t find any big factories, business centers, multi-story buildings, or shopping complexes. Most of the houses are made out of wood. To enjoy natural beauty and trekking, one can choose this place for vacation. This country is totally free from pollution.</p>
+        
+        <p>On the roads also, we won't find much traffic. We see very little car movement. Mostly they are Indian cars. For this country, India helps a lot. Most of the things they get only from India. They cultivate potatoes, carrots, etc. Even food grains mostly they get from India. The Indian army helps them to protect their border. So you can find lots of Indian army movements in Bhutan.</p>
+        
+        <p>For Indians to visit this country, a visa is not required. For identity and to provide a visiting permit, they need a passport or election card. They do not consider PAN card or Aadhaar card or any other documents like a driving license, etc. The election card also should be perfect. Damaged or duplicate cards (if we apply for updating the card, the Govt of India issues a new card with an endorsement of 'duplicate') are not considered by the Bhutan Govt for issuing a permit to visit.</p>
+
+        <p>Bhutan has many rivers, being close to the Himalayan mountains. One of the hydraulic power stations is operated by the Indian Govt, and the max share of the power is utilized by India, as Bhutan is close to West Bengal. In Bhutan, there is only one international airport. Here also, only their airlines are allowed to operate.</p>
+
+        <p>Ladies and gents of Bhutan wear only their traditional dress. I don’t know whether it is compulsory. I seldom saw Bhutanese wearing pants, shirts, jeans, salwars, sarees, etc. there. Gents wear something like an overcoat which covers up to their knee. Under this cover, I don’t know what sort of clothes they wear. From the King of Bhutan to the ordinary citizen, all are in the same costume.</p>
+
+        <p>Gents and women are healthy. I didn't find any obesity. Being a hilly area, they walk a lot. I also did not see cycles. Gents of Bhutan also follow a strict hairstyle. No long hair! Close cut like army soldiers. During my travel, I saw some Kendriya Vidyalaya (India) schools. We also came across a few convent schools.</p>
+        
+        <p>In the food, they use potatoes all the time. For all eight days, all three times, we found a potato dish in our meals.</p>
+    </div>
+
+    <h2>21/04/17: The Journey Begins</h2>
+    <p>We did not have big baggage. So we wanted to go by bus to Mumbai International Airport. We left home after lunch and reached the bus stop around 1 O’clock. We got a sharing cab to Mumbai International Airport. We reached around 5 pm. Our flight to Delhi was at around 9 pm.</p>
+    <p>The Kesari representative came and distributed eatables for the trip. He distributed air tickets also. After distributing the tickets to all, he realized that Kesari had not booked his ticket. So we had to travel to Delhi without a tour guide. All he requested was for us to remain in the same place at Delhi where we landed. We reached Delhi airport at midnight. Of course, the Kesari representative also arrived by taking some different flight.</p>
+
+    <h2>22/04/17: Arrival in Paro & Punakha</h2>
+    <p>Till 4 O’clock in the morning, we were taking rest at the Delhi airport. Around 4 O’ clock immigration started. We filled out a form and waited in the queue. A large number of Indian soldiers were also waiting for immigration. Only one counter was marked for the public and the remaining counters were earmarked for army people. So we had to stand for a longer time.</p>
+    
+    <img src="\src\content\international\photos\bhutan1.jpg" alt="Druk Airlines" class="journal-photo float-right">
+
+    <p>Then we stood in the queue of Druk Airlines for obtaining a boarding pass. There also they checked our ID proof. Though I was very reluctant to carry our passports (because of a valuable US visa), at the eleventh hour, I carried our passports. Of course, though my election ID card is pretty old, they did not raise any objection. But one of our group families faced trouble. Their Election ID cards were not accepted. They had to stay back at Delhi, get their passport from their home in Ratnagiri, and board a flight the next day.</p>
+    
+    <p>The flight duration from Delhi to Paro is some 2 hours. We reached Paro around 7:30 am. The moment we came out of the aircraft, we felt the chillness. It was pretty cool. The Paro Airport Building is in Bhutanese architecture unlike other airports.</p>
+    
+    <p>After collecting the luggage, we stood in the queue to get a permit to visit Bhutan. Again they checked the election ID card/Passport. Here one form is also to be filled. After this formality, they issued a printed letter of permission to visit this country. Our guide requested us to keep this letter safely and stated that this letter is to be submitted back to authorities while leaving this country. One stupid thing which I did was, I did not check that letter at that time. I kept that letter very safely.</p>
+    
+    <p>Then we came out of the airport and boarded the minibus arranged by Kesari. The local guide was also present at that time. From the airport, we were taken to Mandala Resort. It is about 3-4 kilometers away from the airport. We took our breakfast and proceeded to Punakha.</p>
+    
+    <p>The weather was cloudy and quite chill. We had to wear woolen clothes. The distance between Paro and Punakha is about 130 Km. It is a hilly way. We crossed some hairpin bends. It is a highway, but roads are not very broad. On these roads, only cars and minibusses can go. Travel time is about 4 hours. After a travel of some two hours, we had a break for taking tea. We took tea with some snacks. That place is beautiful and we took photographs.</p>
+    
+    <img src="\src\content\international\photos\bhutan2.jpg" alt="Meri Puensum Resort" class="journal-photo float-left">
+
+    <p>After the tea, we proceeded to Meri Puensum Resort, Punakha. The resort was excellent. We reached there around 2 pm. We had our lunch and took rest.</p>
+
+    <h2>23/04/2017: Punakha Dzong & Thimphu</h2>
+    <h3>Punakha Dzong</h3>
+
+    <img src="\src\content\international\photos\bhutan3.jpg" alt="Punakha Dzong" class="journal-photo float-right">
+
+    <p>This is the second oldest and second biggest Dzong. It is at the merging point of rivers Pochu and Mochu. These two rivers combine together to form a single river Sankosh which flows down to India and merges with the Brahmaputra. Earlier Punakha was the capital of Bhutan.</p>
+    <p>In this Dzong, there are two rows of buildings. One is occupied by Government officials to carry out administrative works and the other wing is used to accommodate monks. Monks used to come to this Dzong from different places of Bhutan every September to discuss religious issues.</p>
+
+    <img src="\src\content\international\photos\bhutan4.jpg" alt="Kisa Hotel" class="journal-photo float-left">
+
+    <p>After lunch, we proceeded to Thimphu. Thimphu is the capital city of Bhutan. The distance from Punakha is about 85 Km and it takes about 3 hours. We landed at Kisa Hotel.</p>
+
+    <h2>24/04/2017: Exploring Thimphu</h2>
+    <h3>Memorial Stupa, Thimphu</h3>
+
+    <img src="\src\content\international\photos\bhutan5.jpg" alt="Memorial Stupa" class="journal-photo float-right">
+
+    <p>This is also called Thimphu Chorten. It is located close to the Indian Military Hospital. This Stupa was built in 1974 in honor of the third Druk (1928 – 1972). The Third Druk is considered the father of modern Bhutan. The present King is the fourth Druk.</p>
+
+    <h3>Buddha Dordenma Statue</h3>
+
+    <img src="\src\content\international\photos\bhutan6.jpg" alt="Buddha Dordenma Statue" class="journal-photo float-left">
+
+    <p>It is a gigantic statue of Buddha over a mountain. This was built in view of the 60th Anniversary of the fourth king (present King) of Bhutan. The construction started during 2006 and the work is still in progress. This is one of the largest Buddha statues in the world; the height is 168 feet and it is made out of brass. The statue is so beautiful. The Buddha statue was made at a cost of 46 million US$ in China. One hundred thousand smaller Buddha statues are around the main statue. Since it is over a hill and no buildings are in the near vicinity, against the background of the sky this statue looks marvelous.</p>
+
+    <h3>Changangkha Lhakhang (God of Compassion) Temple</h3>
+
+    <img src="\src\content\international\photos\bhutan7.jpg" alt="Changangkha Lhakhang" class="journal-photo float-right">
+
+    <p>Then we visited this temple. This one is a 12th-century temple. It is the oldest temple in Thimphu. It has an idol of Avalokiteshvara, the God of Compassion. Couples bring their young ones to get the blessings of the deity, especially during ill health. The newborns are brought here for naming. Also, it is believed that whoever comes here and prays for fulfilling his/her wishes, they get fulfilled. Also, people donate liberally to this temple. I saw large currencies at the feet of the deity.</p>
+
+    <h3>Handicrafts and Museum School</h3>
+
+    <img src="\src\content\international\photos\bhutan8.jpg" alt="Handicrafts and Museum School" class="journal-photo float-left">
+
+    <p>It is a museum run fully by the youth and supported by the Bhutan Youth Development Fund. The museum gives a glimpse of traditional Bhutanese life. There is a small collection of typical household objects and tools.</p>
+
+    <h3>Art & Craft, Paintings, and Library</h3>
+
+    <img src="\src\content\international\photos\bhutan9.jpg" alt="Art & Craft" class="journal-photo float-right">
+
+    <p>Then we went to an art gallery where paintings and sculptures were being made by artists. These things are being sold also. We also visited one library.</p>
+    
+    <p>After this, we went back to the hotel and took our lunch. After a brief rest, we proceeded to see a paper-making factory.</p>
+
+    <h3>Handmade Paper Factory</h3>
+
+    <img src="\src\content\international\photos\bhutan10.jpg" alt="Paper Factory" class="journal-photo float-left">
+
+    <p>A kind of dried plant is used to make handmade paper. These dried plants are put in water and manually tore into thin strings. Then by machines, they make pulp. Then the pulp is squeezed and made into thin sheets by rollers and spread into a mesh. By keeping it in a warm place, these are dried up and the paper is removed from the mesh and cut into proper size.</p>
+    <p>In these handmade papers, paintings are also made. These papers are durable and remain for years together.</p>
+
+    <p>After the factory, we were taken for shopping. People who came with us started buying showpieces, woolen clothes, etc. But we did not find anything interesting to buy. So we were roaming around the street. At last, we returned back to the hotel.</p>
+    
+    <p>Just before dinner, incidentally, I saw the permit issued to me at the airport. I was shocked to see the departure date mentioned in that was 27th April, instead of 28th April. I checked my Mrs.'s permit and I found that the date was written correctly. Then I told the tour guide and fortunately, the local guide was also with us. He assured me that he would take me to the concerned office to correct it on the very next day.</p>
+
+    <h2>25/04/17: Thimphu View Point & The Zoo</h2>
+    <p>After breakfast, we left Thimphu. Our local guide took me to the embarkation office which was on the way to the BBS viewpoint. Luckily in the embarkation office, they corrected my permit paper and it hardly took a few minutes. I was relieved from my tension.</p>
+
+    <h3>BBS View Point</h3>
+
+    <img src="\src\content\international\photos\bhutan11.jpg" alt="BBS View Point" class="journal-photo float-right">
+
+    <p>The Bhutan Broadcasting Service tower is located over a mountain of height around 2600 mts. From the hilltop, we can see the valley of Thimphu.</p>
+
+    <h3>Motithang Takin National Zoo, Thimphu</h3>
+
+    <img src="\src\content\international\photos\bhutan12.jpg" alt="Takin National Zoo" class="journal-photo float-left">
+
+    <p>The Takin is the national animal of Bhutan. It stays over the mountains of Bhutan.</p>
+
+    <p>After seeing the zoo we started moving to Paro. It is about 50 Km away from Thimphu. It takes about 1 hour and 30 minutes. We were accommodated in Mandala Resort, Paro. After taking lunch we took rest and we went for shopping in the evening. At night we had a gathering and spent some time playing some different games.</p>
+
+    <h2>26/04/17: Paro Sightseeing</h2>
+    <h3>Drukgyal Dzong, Paro</h3>
+
+    <img src="\src\content\international\photos\bhutan13.jpg" alt="Drukgyal Dzong" class="journal-photo float-right">
+
+    <p>Drukgyal Dzong was a fortress and Buddhist monastery. It was built in 1649. But in 1950 it was totally destroyed by a major fire accident. Again it was rebuilt. We could not visit this, as it was being renovated when we visited. We saw it from a distance only.</p>
+    
+    <p>On the way back we saw Tiger’s Nest from the distance.</p>
+
+    <h3>Tiger’s Nest, Paro</h3>
+
+    <img src="\src\content\international\photos\bhutan14.jpg" alt="Tiger's Nest Base" class="journal-photo float-left">
+
+    <p>The Palphug Monastery, called Tiger’s Nest, is a prominent Buddhist sacred place in the Himalayan mountains. It is on the cliffside of Paro Valley. It is above 3000 feet from Paro Valley. We went to the base area of the Tiger’s Nest.</p>
+    
+    <img src="\src\content\international\photos\bhutan15.jpg" alt="Tiger's Nest View" class="journal-photo float-right">
+
+    <p>We walked some distance, but we understood, it is very steep. Walking to the top is not an easy thing. Many youngsters are coming to Bhutan for doing trekking to this sacred place. On the way, we saw some girls returning from halfway complaining that they found it difficult to breathe and also it is quite steep. After hearing this we abruptly decided to turn back.</p>
+
+    <h3>Ta Dzong Museum, Paro</h3>
+    <p>After Tiger's Nest, we proceeded to Ta Dzong Museum. It is located above the Paro Rinpung Dzong. It is a cultural museum. Actually, 'Ta Dzong' means watchtower as it was used to serve as a watchtower and fortress to protect the Paro Rinpung Dzong.</p>
+
+    <h3>Paro Dzong</h3>
+
+    <img src="\src\content\international\photos\bhutan16.jpg" alt="Paro Dzong" class="journal-photo float-left">
+
+    <p>It is the biggest Dzong of Bhutan. The massive walls are nicely beautified by paintings. Paro Dzong ranks as the high point of Bhutanese architecture. The structure is so big that it is visible throughout the valley of Paro. Also, nice lighting arrangements are made on the outer structure. During the night this can be seen from the Mandala restaurant.</p>
+
+    <p>Kesari arranged a local dance program on that evening.</p>
+
+    <h2>27/04/2017: Chele La Pass</h2>
+
+    <img src="\src\content\international\photos\bhutan17.jpg" alt="Chele La Pass" class="journal-photo float-right">
+
+    <p>Chele La Pass is one of the highest motorable roads (3988m above MSL) in Bhutan. From Paro, it is about a 2-hour drive through dense forest. While going through this path one can enjoy the natural beauty. It is one of the Himalayan glaciers. We can see beautiful flowers also. Also, this peak is considered one of the sacred places of Bhutan. Bhutanese put different coloured flags on this peak.</p>
+
+    <p>The moment we got down from the bus, it was so windy and very chill. This is the most beautiful place in Bhutan. We spent some time on this peak and returned back to the hotel.</p>
+    <p>After lunch, some people went for local shopping. That day evening it was raining also.</p>
+
+    <h2>28/04/2017: Return Journey</h2>
+    <p>In the morning we left our hotel Mandala around 7 O’clock. The airport was close by. After immigration formalities, we boarded the flight. When we were on board, the Pilot of the flight was kind enough to show Everest when our plane was crossing the peak. We reached Delhi around noon.</p>
+    <p>After the immigration formalities were over we were waiting for the Mumbai flight. We got the flight in the evening and we reached Mumbai late in the evening and took a cab to Pune. On the 28th night, safely we arrived back in Pune and started the preparation for the US trip.</p>
+
+    <div class="summary-box">
+        <p>"From the silent mountains where the Takin roams to the massive walls of the Punakha Dzong, Bhutan is a land unlike any other. It is a place where traffic is scarce, the air is pure, and happiness is a national treasure. Memories from the Land of the Thunder Dragon will remain with us forever."</p>
+    </div>
+
+</div>
+
+<script>
+    // Get the lightbox elements
+    const modal = document.getElementById("lightbox-modal");
+    const modalImg = document.getElementById("lightbox-img");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    const images = document.querySelectorAll(".journal-photo");
+
+    // Loop through images and add click event
+    images.forEach(img => {
+        img.onclick = function(){
+            modal.classList.add("show");
+            modalImg.src = this.src;
+        }
+    });
+
+    // Close when clicking the "x"
+    closeBtn.onclick = function() {
+        modal.classList.remove("show");
+        // Clear src after fade out
+        setTimeout(() => { modalImg.src = ""; }, 300);
+    }
+
+    // Close when clicking outside the image
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            modal.classList.remove("show");
+            setTimeout(() => { modalImg.src = ""; }, 300);
+        }
+    }
+</script>
+
+</body>
+</html>

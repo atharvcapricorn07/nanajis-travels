@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal Diaries | A Spiritual Journey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Karma:wght@400;600;700&family=Martel+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- NEPAL VIBE PALETTE --- */
+        :root {
+            --himalaya-white: #f8f9fa;  /* Snow white background */
+            --prayer-blue: #005b96;     /* Deep sky blue from flags */
+            --temple-gold: #d4af37;     /* Marigold/Gold from temples */
+            --monk-red: #8b0000;        /* Deep red from robes/flags */
+            --text-dark: #2d2d2d;       /* Charcoal for readability */
+            --text-light: #555;
+        }
+
+        body {
+            font-family: 'Martel Sans', sans-serif;
+            background-color: var(--himalaya-white);
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 900px;
+            /* Reduced top margin to minimize blank space */
+            margin: 10px auto 40px auto; 
+            background-color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-top: 8px solid var(--monk-red);
+            border-bottom: 8px solid var(--prayer-blue);
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--himalaya-white);
+            /* Reduced padding to minimize blank space */
+            padding: 30px 40px; 
+            text-align: center;
+            background-image: linear-gradient(to bottom, #e3f2fd, #fff);
+        }
+
+        h1 {
+            font-family: 'Karma', serif;
+            font-size: 3.5rem;
+            color: var(--prayer-blue);
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .trip-dates {
+            font-family: 'Karma', serif;
+            font-size: 1.3rem;
+            color: var(--monk-red);
+            margin-top: 10px;
+            font-weight: 600;
+        }
+
+        /* --- CONTENT --- */
+        .content {
+            padding: 30px 60px 50px 60px;
+        }
+
+        h2 {
+            font-family: 'Karma', serif;
+            color: var(--monk-red);
+            border-bottom: 2px solid var(--temple-gold);
+            padding-bottom: 10px;
+            margin-top: 40px;
+            font-size: 2rem;
+            clear: both;
+        }
+
+        h3 {
+            font-family: 'Karma', serif;
+            color: var(--prayer-blue);
+            margin-top: 25px;
+            font-size: 1.5rem;
+            clear: both;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: var(--text-light);
+            text-align: justify;
+        }
+
+        /* --- SPECIAL SECTIONS --- */
+        .intro-box {
+            background-color: #fff8e1; /* Light temple gold tint */
+            border-left: 5px solid var(--temple-gold);
+            padding: 25px;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .highlight-box {
+            background-color: #e3f2fd; /* Light prayer blue tint */
+            border-left: 5px solid var(--prayer-blue);
+            padding: 20px;
+            margin: 30px 0;
+            font-style: italic;
+        }
+
+        /* --- SUMMARY BOX (UPDATED COLOR) --- */
+        .summary-box {
+            background-color: #fff4d1; /* Warm marigold tint */
+            border: 2px solid var(--temple-gold);
+            border-left: 10px solid var(--monk-red); /* Red accent for contrast */
+            padding: 25px;
+            margin-top: 50px;
+            border-radius: 4px;
+            font-style: italic;
+            clear: both;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            color: #4a3c1b; /* Slightly darker text for contrast on gold */
+        }
+
+        /* --- PHOTO STYLES --- */
+        .journal-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+            cursor: zoom-in;
+            transition: transform 0.2s ease;
+        }
+
+        .journal-photo:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        .float-right {
+            float: right;
+            margin-left: 25px;
+            margin-top: 5px;
+        }
+
+        .float-left {
+            float: left;
+            margin-right: 25px;
+            margin-top: 5px;
+        }
+
+        /* --- LIGHTBOX (MODAL) STYLES --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.show {
+            display: flex;
+        }
+
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+            border: 4px solid #fff;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            animation: zoomIn 0.3s;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--temple-gold);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @keyframes zoomIn {
+            from {transform:scale(0.8); opacity: 0;}
+            to {transform:scale(1); opacity: 1;}
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-family: 'Karma', serif;
+            font-size: 1rem;
+            clear: both;
+        }
+
+        @media (max-width: 768px) {
+            .content { padding: 25px; }
+            h1 { font-size: 2.5rem; }
+            .journal-photo {
+                float: none;
+                display: block;
+                margin: 20px auto;
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="lightbox-modal" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" src="">
+</div>
+
+<div class="container">
+    <header>
+        <h1>Nepal</h1>
+        <div class="trip-dates">25th January 2019 – 2nd February 2019</div>
+    </header>
+
+    <div class="content">
+        
+        <div class="intro-box">
+            <h3>Introduction</h3>
+            <p>We booked the Nepal tour through Kesari. It is a 10-day tour. The tour cost per person is Rs 62,000/- including hotel charges, flight fares, etc. The pickup point was Mumbai Domestic Airport.</p>
+            <p>Nepal is a small country located between India and China. It is still considered quite backward, lacking major industries. Their main resources are cultivation and tourism. This country has many natural resources, like abundant water, fertile lands, and mountain peaks with lots of wind flow, but still fails to make full use of them, perhaps due to a lack of qualified people. Some hydraulic power projects are there, done by other countries.</p>
+            <p>This country is a democratic nation and the only Asian country declared as a Hindu nation. The majority of people are Hindus (about 80%). The next major religion is Buddhism. Christians and Muslims are far fewer. Here Saturday is a weekly holiday. People work on the remaining six days.</p>
+            <p>Roads are narrow and bad. Cities are not well connected. Woolen things seem to be cheaper here. Also, Rudraksha is famous. Religious people buy 'Shaligram' here and perform regular pooja. This Shaligram is a black stone with a smooth surface, mostly oval-shaped, found in the sacred river Gandaki.</p>
+            <p>While shopping, we have to ascertain whether the cost is in Indian rupees or Nepalese. One hundred Indian rupees is equal to one hundred and sixty Nepalese rupees. Also, bargaining is rampant here. If they say Rs 100/-, you can bargain for Rs 40/- also. India and Nepal have a 15-minute time difference; Nepal time is 15 minutes ahead of Indian time.</p>
+            
+            <img src="\src\content\international\photos\nepal1.jpg" alt="Nepal Flag" class="journal-photo float-right">
+
+            <p>This country’s national flag is very different. It is neither square nor rectangle but two right triangles joined together. Their national language is Nepali, and the script is Devanagari. People here speak English and Hindi also. Dussehra is their main festival. Other Hindu festivals like Diwali, Maha Shivaratri, etc., are also celebrated.</p>
+        </div>
+
+        <h2>24/01/19: The Journey Begins</h2>
+        <p>Since the flight was on the 25th early morning, we had to come to Mumbai on the 24th night. We left home after dinner around 8:30 pm. We came to the bus stop by auto and took a Volvo bus to Sion and from there we took an auto and reached Mumbai Domestic Airport almost at midnight.</p>
+        <p>The weather was pretty chill. Unlike the international airport, in this airport, there was no proper place to wait for 4-5 hours. Since we didn’t have tickets, we had to wait till 4:30 am for the Kesari representative. So that waiting time at the airport was pretty horrible.</p>
+
+        <h2>25/01/19: Patna to Janakpur</h2>
+        <p>The Kesari representative came around 4:30 am, and we collected our tickets and some eatables. Then we boarded the flight for Patna. The flight journey was unusually jerky. We landed at Jayaprakash International Airport around 7 am. Probably Patna Airport is the dirtiest one. Toilets were so dirty and unhygienic.</p>
+        <p>This is my first visit to Patna. I never imagined Patna would be so unclean and dirty! Even we did not get a moderately decent hotel for breakfast. We ate a few idlis (quality was poor, but the cost was at par with international airports) at a hotel close to the airport and continued our trip in a bus.</p>
+        
+        <p>The weather was pretty chill. According to our itinerary, we had to visit <strong>Janakpur, Nepal</strong> first, where King Janaka ruled and brought up Sita. Janakpur is about 200 Km from Patna. We left Patna around 10 am and reached Janakpur around 8 pm! The road was horrible, and even the AC bus was in pretty bad shape.</p>
+        <p>Fortunately, the guide located a good hotel for lunch. Lunch was good. Throughout this 200 km journey, we could only see heaps of garbage, open drainages, poor houses, and almost all houses were incomplete constructions – no plastering or coloring.</p>
+        
+        <p>When we crossed the border, I thought we had to fulfill certain formalities, but nobody asked us to show even our ID. Only the guide went to their cabin and perhaps handed over the list of people traveling to Nepal on the tour. Of course, we were carrying our passports, photos, and a few Xerox copies of the passport.</p>
+        <p>After a very long and tiresome journey, we reached Janakpur around 7:30 pm. We reached Hotel Welcome. Fortunately, this hotel was not bad. It was quite clean. We had dinner here around 9 pm. It was good. In Nepal generally, only vegetarian food is served in all hotels.</p>
+
+        <h2>26/01/19: Janakpur to Kathmandu</h2>
+        <p><strong>Happy Republic Day!</strong> Last night we could sleep peacefully. Morning 6:30 there was a wakeup call. We got ready by 6:30. For breakfast, paratha and bread were there. After breakfast, we went to <strong>Sita Mandir (Janaki Mandir)</strong>. This temple was close to the hotel, so we walked there.</p>
+        
+        <img src="\src\content\international\photos\nepal2.jpg" alt="Janaki Mandir - 9 Lakh Temple" class="journal-photo float-left">
+
+        <p>This temple was constructed by a Nepal Queen in 1901. The total construction cost was around 9 Lakhs. So this temple is also called the "Nau Lakha Mandir". It is a spacious temple and looks beautiful. Mostly Mughal people were employed to construct this temple. Though it is a Hindu temple, the architecture is of the Mughal type.</p>
+
+        <p>A museum is also there within the temple premises depicting Janaka and Sita's associations. After the temple visit, we proceeded to Janakpur airport. It was so small and resembles a small railway station. There was no X-ray scanner here; we had to open our suitcases for them to check before boarding.</p>
+
+        <img src="\src\content\international\photos\nepal3.jpg" alt="Small Plane at Janakpur" class="journal-photo float-right">
+
+        <p>The airplane was like a toy plane. The traveling time from Janakpur to Kathmandu is about 25 minutes. We left Janakpur around 12:30 and reached Kathmandu around 1 pm.</p>
+        <p>After that, we came to a government office to take permission to go to <strong>Muktinath</strong>. We submitted Xerox copies of our passports and photographs. The fee was Rs 1000/- (Nepalese currency). After completing the formalities for going to Muktinath, we proceeded to Hotel Himalaya.</p>
+        <p>Our lunch was arranged in this hotel. After lunch, we got our booked room. The room in this hotel was nice, spacious with necessary amenities.</p>
+        
+        <img src="\src\content\international\photos\nepal4.jpg" alt="Sleeping Vishnu Temple" class="journal-photo float-left">
+
+        <p>Around 4 pm we went to the <strong>Budhanilkantha Temple (Vishnu Temple)</strong>. In this temple, Vishnu is in a sleeping posture. This temple was nice, and after worship, we returned to the room.</p>
+
+        <h2>27/01/19: Manakamana & Pokhara</h2>
+        <p>We got up around 6 am. After finishing the routine, we took breakfast. For breakfast, bread and some fruits were there. Then we left Kathmandu and proceeded to <strong>Pokhara</strong>. This is another city in Nepal. It is around 3000m above sea level.</p>
+        <p>On the way, about 100 km away from Kathmandu, a famous temple called <strong>Manakamana Temple</strong> is situated. It is over a mountain peak. A ropeway car is provided. The entire setup of the ropeway was done by Austria. The ropeway is beautiful. The scenery of the river Trishuli and the mountains is spectacular.</p>
+
+        <p>The ropeway is about a 20-minute travel. We reached the temple around 12:30. We had to stand in the queue. The queue was moving at a snail's speed. We stood for around an hour. Then we reached the sanctum and worshipped. It is a Devi temple. It is considered one of the 51 Shakti Peethas. Here people make a vow (Mannat) and after the desire is fulfilled, they give ‘Balidan’ to Devi. In front of the temple, goats are slaughtered and blood splashes. It was very cruel and horrible to see, that too in a sacred place.</p>
+
+        <p>After the temple visit, we had our lunch around 3 pm. Then we proceeded to Pokhara. From this temple, it is around a 3-hour journey. Around 7 pm we reached Hotel De Yatra Courtyard. The hotel was good and the room was quite spacious with all amenities. We stayed in this on the 27th night.</p>
+
+        <h2>28/01/19: Attempt 1 to Jomsom & Pokhara Sightseeing</h2>
+        <p>We got up around 4:30 am. After coffee and bath, we wore all special woolen clothes to travel to Muktinath. We left the hotel and reached the airport. After all the formalities we got the boarding pass for going to Jomsom. Initially, they announced that the flight was delayed due to bad weather at the destination. After an hour they announced that the flight was cancelled.</p>
+        
+        <p>Then we left the airport and came to <strong>Fewa Lake</strong>. It is a huge lake. We went boating. In that lake, in the middle, there is a patch of land and a temple is there. This temple is called Tal Barahi Temple. We visited this temple. While boating we could see the mountain range of Annapurna.</p>
+
+        <img src="\src\content\international\photos\nepal5.jpg" alt="Annapurna Mountain Range" class="journal-photo float-right">
+
+        <p>Then we returned to the hotel. We did some shopping also. Around 12 we had our lunch. Lunch was very delicious. For lunch, we had Puri, bitter gourd deep fry, Paneer matar gravy, Mango pulp, and dal.</p>
+        <p>After lunch, we took rest till 3 pm and went to see <strong>Devi’s Falls</strong>. Then we roamed around the city and went to a temple called <strong>Bindhyabasini</strong>. We had to climb some 50 steps. In this temple, Devi, Shiva, Lakshmi Narayan, and Lord Ganesh all are there. From this temple, we saw the Annapurna mountain chain partly covered with ice. Because of bright sunlight, ice-covered peaks were glittering like silver.</p>
+
+        <h2>29/01/19: Jomsom & The Muktinath Challenge</h2>
+        <p>On the 29th we made the second attempt to go to Muktinath. We got up around 4:30 am and left the hotel around 6 after taking breakfast. Our flight was at 7:30 am from Pokhara. Till 8 am we were just waiting without any certainty. At last, the flight was ready to take off.</p>
+        <p>It is a small plane, a 15-seater. We cannot carry suitcases. Only small handbags can be carried. The plane took off and went in between two big mountain ranges of the Himalayas. Since the sun was bright and there were no clouds, we could see the peaks of these mountains. All were covered completely with ice. It was a beautiful scene. The travel was some 20 minutes. We reached Jomsom airport safely.</p>
+        <p>From there we went to our hotel and checked in. This hotel is very moderate with minimum basic requirements. In this place, there was no network. So our mobiles could not be used.</p>
+        <p>From Jomsom airport, Muktinath is about 20 km by road. We took a bus and started moving to Muktinath. After traveling 10 km, the bus could not go further due to heavy snow.</p>
+        <p>Some youngsters attempted to walk but returned after half a km. It was very chill and slippery.</p>
+
+        <img src="\src\content\international\photos\nepal6.jpg" alt="Muktinath / Jomsom" class="journal-photo float-left">
+
+        <p>In that place, a kilometer away just close to the Gandaki river, one more Narayanan temple is there. About 10 people from our group went and I was also one among them. After worshipping and seeing the river, we returned to the hotel by bus.</p>
+        <p>At night we had a simple dinner and went to bed early. The altitude of this place is 12,000 feet. Oxygen is less. Even some people struggled to breathe. Fortunately, we did not face any such problem. Because of the extreme chill, we didn’t have proper sleep though.</p>
+
+        <h2>30/01/19: The Jomsom Ordeal</h2>
+        <p>The previous night the temperature was very low. The hotel room was not provided with any room heater. Also, it is a low-oxygen region. It was almost a sleepless night. Most of the time, we had to ascertain whether the counterpart was breathing! Haha!</p>
+        <p>Around 6 am we got up. Water was almost in a frozen condition. We just rinsed our mouths, went to the dining hall, and had coffee. We left the hotel and walked to the airport with our handbags.</p>
+        <p>Jomsom was totally disconnected from all other places. No electricity, and no network. Airport people could not find out at what time the flight would arrive. In that pretty cold weather, we were sitting keeping our fingers crossed. The situation was very scary. All wanted to get out of that place to a safer place by any means. At 10 am, airport people announced that the flight to Pokhara was cancelled. So we didn't have any other alternative except to return to Pokhara by bus. Kesari arranged a bus.</p>
+        
+        <p>Actually, from Jomsom to Pokhara there is no road. It is something like the ground is leveled with stones. The bus can go at a speed of 10 – 15 km per hour with lots of jerks. The distance is around 200 Km. That was really the most horrible bus travel in my life. At last around 8 pm, we reached Pokhara, same hotel De Yatra.</p>
+        <p>We checked in and took a bath in hot water. By that time dinner was ready. For dinner, they made chapati, some subji, Khichdi, and kadhi. The dinner was really superb. We had a sound sleep, perhaps due to the good and safe environment.</p>
+
+        <h2>31/01/19: Chitwan National Park</h2>
+        <p>Morning around 6 we got up and got ready to proceed to Chitwan, some 5 hours journey. The road was not bad. Also on both sides, there was beautiful scenery. Also, river Narayani close to the highway made the travel more pleasant. We reached Chitwan around 1 pm. We checked in at Paradise Resort. The hotel is very moderate. The room is not at all in good shape. Even basic essentials are not provided in the room.</p>
+        
+        <img src="\src\content\international\photos\nepal7.jpg" alt="Chitwan National Park" class="journal-photo float-right">
+
+        <p>We paid Rs 3000 per head and went for a safari. It is about a 2-hour drive in the forest, called <strong>Chitwan National Park</strong>. We saw sambar, deer, peacocks, and rhinoceroses and returned to the hotel.</p>
+
+        <p>Also, we were taken to a cultural program, Tharu cultural dance. Tharu is a community settled in Nepal, who came from India. It was an hour dance program. After the program, we returned to the hotel.</p>
+
+        <h2>01/02/19: Return to Kathmandu & Stupas</h2>
+        <p>We had to get up early around 5:30 am. The night was quite chill. Since this hotel didn't have even basic necessities, we could not even take a proper bath. After breakfast, we left for Kathmandu. It is a 5-hour journey. The road was not bad. The weather was chill. On the way, we stopped for about 15 minutes for coffee. We reached Kathmandu around 12:30 pm. Before coming to Hotel Le Himalaya, we went to visit <strong>Swayambhunath Stupa</strong>.</p>
+
+        <p>This is considered one of the glorious Stupas. For this, we have to climb about 150 steps. This is really nice to watch. Then we came to the Hotel and had lunch. Around 3 pm we left to visit Boudha Stupa. It is in the city only. We did Parikrama to the stupa and went to the famous <strong>Pashupatinath Temple</strong>.</p>
+
+        <p>This is one of the most important temples for Hindus. This is a Shiva temple. But in place of Linga, the deity is Pashupatinath with five faces. Four entrances are there and from any one entrance, we can see the deity. We waited there for evening Aarti. After Aarti, we stood in the queue, and closely we could see the deity. After the visit to this temple, some people did some shopping also. Then we returned to the hotel and had dinner.</p>
+
+        <h2>02/02/19: Patan & Bhaktapur</h2>
+        <p>On 2nd February we got up leisurely around 6:30 am. We had our breakfast around 8 am. We left the hotel by 10 to see <strong>Patan Durbar Square</strong>.</p>
+
+        <img src="\src\content\international\photos\nepal8.jpg" alt="Patan Durbar Square" class="journal-photo float-left">
+
+        <p>Here lots of temples are there. First, we visited a Living God (Kumari). A girl child of 6 years old is believed to be a living God. In her horoscope, some special features are seen, and so the child is being worshipped here. Then we saw some groups of temples with lots of architectural beauty. These temples are very old and considered one of the world Heritages and come under UNESCO. One Krishna temple is also here. Another one is a Golden temple. This visit was about 2 hours and we returned to the hotel for lunch.</p>
+        <p>Around 3 pm again we started to visit <strong>Bhaktapur Durbar Square</strong>. This place is also full of old beautiful temples with lots of wooden carvings. Here also one golden gate is there. These groups of temples are also one among the world heritages. After this visit, we returned to the hotel.</p>
+
+        <h2>03/02/19: Final Blessings & Departure</h2>
+        <p>Last day of the tour. Morning around 8 am we left for Pashupatinath Temple. We booked for Abhishekam by paying Rs 690/-. A small queue was there and for each couple, they did Abhishekam to Pashupatinath and offered Prasadam. One Rudraksha mala was also offered to each family.</p>
+        <p>After the visit to the temple, we returned to the Hotel. By 11:45 we left for Kathmandu airport to take the flight to Mumbai. The flight was at 3 pm.</p>
+        
+        <div class="highlight-box">
+            <p><strong>A Visa Lesson:</strong> After obtaining the boarding pass, we proceeded for immigration. Few of our group showed their Election card for ID proof and went for boarding. In our turn, we showed the passport and the officer searched for an entry endorsement. When we entered Nepal by road, our bus was stopped at the check post but no one asked for our ID proof or made any endorsement. This was explained to airport officials of Kathmandu, but they insisted that we should have got the endorsement on the passport. We had to pay $2 each as a one-day visa fee. We paid the amount and then we were allowed to board the flight. So it is wise to show only the Election ID card everywhere, instead of the Passport.</p>
+        </div>
+
+        <p>From Kathmandu to Mumbai it is around 3 hours journey. We landed in Mumbai around 6 pm. Fortunately, immigration counters were not crowded. So we could get the arrival stamp on our passport and then collected our baggage and came out of the airport and took a cab to Pune. Again we were lucky, there was no heavy traffic and we reached Pune by 9:30 pm.</p>
+
+        <div class="summary-box">
+            <p>"From the ancient temples of Janakpur to the snowy challenges of Jomsom, this journey through Nepal was a test of faith and endurance. We witnessed the grandeur of the Himalayas, the devotion at Pashupatinath, and the architectural marvels of Patan and Bhaktapur. Despite the cold, the rugged roads, and the travel hurdles, the spiritual vibrations of this beautiful land left us with memories that will last a lifetime."</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    // Lightbox Logic
+    const modal = document.getElementById("lightbox-modal");
+    const modalImg = document.getElementById("lightbox-img");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    const images = document.querySelectorAll(".journal-photo");
+
+    // Loop through images and add click event
+    images.forEach(img => {
+        img.onclick = function(){
+            modal.classList.add("show");
+            modalImg.src = this.src;
+        }
+    });
+
+    // Close when clicking the "x"
+    closeBtn.onclick = function() {
+        modal.classList.remove("show");
+        // Clear src after fade out
+        setTimeout(() => { modalImg.src = ""; }, 300);
+    }
+
+    // Close when clicking outside the image
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            modal.classList.remove("show");
+            setTimeout(() => { modalImg.src = ""; }, 300);
+        }
+    }
+</script>
+
+</body>
+</html>
