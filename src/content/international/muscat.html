@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muscat Diaries | A Family Visit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- MUSCAT VIBE PALETTE --- */
+        :root {
+            --muscat-sand: #fdf5e6;   /* Warm desert sand */
+            --muscat-white: #ffffff;  /* The pristine white of Omani buildings */
+            --palm-green: #556b2f;    /* Olive/Date Palm green */
+            --ocean-blue: #0077be;    /* Deep Arabian Sea blue */
+            --text-dark: #333333;
+            --accent-gold: #daa520;   /* Subtle gold for elegance */
+        }
+
+        body {
+            font-family: 'Crimson Text', serif;
+            background-color: var(--muscat-sand);
+            color: var(--text-dark);
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            background-color: var(--muscat-white);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--ocean-blue);
+            color: var(--muscat-white);
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--accent-gold);
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .dates {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            font-weight: 400;
+            color: #e0f7fa;
+        }
+
+        /* --- CONTENT --- */
+        .content {
+            padding: 50px 60px;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--palm-green);
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 10px;
+            margin-top: 50px;
+            font-size: 1.8rem;
+            clear: both; /* Ensures headings clear floated images */
+        }
+
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--ocean-blue);
+            margin-top: 30px;
+            font-size: 1.4rem;
+            clear: both;
+        }
+
+        p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* --- HIGHLIGHT BOXES --- */
+        .highlight-box {
+            background-color: #f9fbe7; /* Very light green */
+            border-left: 5px solid var(--palm-green);
+            padding: 20px;
+            margin: 30px 0;
+            font-style: italic;
+            border-radius: 4px;
+        }
+
+        /* --- FAMILY NOTE BOX (NEW) --- */
+        .family-note {
+            background-color: #fff8e1; /* Warm light gold/sand */
+            border: 2px solid var(--accent-gold);
+            padding: 25px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        /* --- SUMMARY BOX (NEW) --- */
+        .summary-box {
+            background-color: #e3f2fd; /* Light blue tint */
+            border: 2px solid var(--ocean-blue);
+            border-left: 10px solid var(--accent-gold);
+            padding: 25px;
+            margin-top: 50px;
+            border-radius: 4px;
+            font-style: italic;
+            clear: both;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        /* --- PHOTO STYLES --- */
+        .journal-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+            cursor: zoom-in;
+            transition: transform 0.2s ease;
+        }
+
+        .journal-photo:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        .float-right {
+            float: right;
+            margin-left: 25px;
+            margin-top: 5px;
+        }
+
+        .float-left {
+            float: left;
+            margin-right: 25px;
+            margin-top: 5px;
+        }
+
+        /* --- LIGHTBOX (MODAL) STYLES --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.show {
+            display: flex;
+        }
+
+        .lightbox-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+            border: 4px solid #fff;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+            animation: zoomIn 0.3s;
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: var(--accent-gold);
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @keyframes zoomIn {
+            from {transform:scale(0.8); opacity: 0;}
+            to {transform:scale(1); opacity: 1;}
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--muscat-white);
+            text-align: center;
+            padding: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            clear: both;
+        }
+
+        @media (max-width: 768px) {
+            .content { padding: 30px; }
+            h1 { font-size: 2.2rem; }
+            .journal-photo {
+                float: none;
+                display: block;
+                margin: 20px auto;
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+                aspect-ratio: 1 / 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="lightbox-modal" class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" src="">
+</div>
+
+<div class="container">
+    <header>
+        <h1>Muscat</h1>
+        <div class="dates">24th December 2023 – 8th January 2024</div>
+    </header>
+
+    <div class="content">
+        
+        <div class="family-note">
+            <p style="margin: 0; font-size: 1.1em;">
+                <strong>✨ A Special Family Gathering ✨</strong><br>
+                Unlike our other travels, this trip to Muscat was not via a tour company. It was a huge, heartwarming family gathering hosted at Akila's home. The entire experience was incredibly enjoyable and comfortable, mainly due to Akila's gracious hospitality and meticulous care.
+            </p>
+        </div>
+
+        <h2>24/12/23: The Journey Begins</h2>
+        <p>We engaged a cab to reach Mumbai airport from Pune. We wanted to leave around 2 pm. But after hearing about the traffic jam on the expressway, we left around 11 am and there was no such blockage, though there was heavy traffic because of the long weekend. We reached Mumbai International Airport by 3 pm. We had taken packed lunch and finished it while traveling in the car.</p>
+        <p>Ramamurthy and others reached the airport by 5:45 pm. They were also supposed to reach around 5 pm, but because of heavy traffic, they took more travel time than normal. Since he booked wheelchair facilities for all the ladies, we could complete all formalities like obtaining boarding passes, immigration etc., in a short time by skipping the long queues.</p>
+
+        <p>Tickets were booked in Vistara Airlines. We were allowed to carry 30 kg as check-in baggage and 10 kg as cabin luggage. For check-in bags, more than one suitcase was allowed on this airline.</p>
+        <p>The plane was parked somewhere in the corner of the airport. Actually, we could see the airport premises compound wall. Through a bus, we reached the boarding spot and it was big trouble for Uma and Jula Akka to climb over the footsteps and get into the flight. The flight was at the right time. The travel time was 2 hours and 10 minutes to Muscat. In the flight, they served Jain food for us and the food was good. We reached Muscat Airport around 10:15 pm (local time).</p>
+
+        <h3>Welcome to Muscat</h3>
+        <p>After completing the immigration formalities we collected our luggage and reached the airport entrance area. Akila with a smiling face and great enthusiasm was waiting at the airport with Mr. RaguRam. Throughout our stay, we could see Akila in the same pleasant posture. Not on a single occasion did she get irritated or annoyed. My mother used to tell me frequently about this amazing quality of Akila.</p>
+        
+        <p>With all our bags in two cars, we traveled to her home. Her house is a spacious one. They stay in a rented house on the ground floor. One big hall, dining hall, 3 bedrooms, and a big kitchen are there. In the front yard, there is a garden. In the garden, flowering plants and vegetable plants are there. Apart from these plants, a drumstick tree and a 'kadipatta' (curry leaf) tree are there.</p>
+        <p>The first floor is also very similar to the ground floor and at present, it is vacant. Akila managed to get permission from the owner to utilize that temporarily. Kavita & Kalpana were using that floor for studying. Also myself, Ramamurthy, and Umashankar used to sleep there during the night. Before our arrival, they made bedding arrangements for all of us. Because of Akila’s meticulous arrangements like bedding, cosmetics, toiletries etc., our stay was very comfortable throughout.</p>
+        <p>Weather was pleasant and probably because of continuous travel throughout the day, the moment I lay down I slept immediately.</p>
+
+        <h2>25/12/23: Settling In & City Lights</h2>
+        <p>After getting up and freshening up, we all went to the ground floor. Ramamurthy prepared coffee for us. He took the responsibility of making coffee for everyone in the morning and tea in the evening during our entire stay there. He did it with great care and not even on one occasion did the milk spill out from the stove while boiling or while transferring the tea or coffee to cups. Doing things with perfection is his inborn quality. I did the everyday watering of plants. I love that job.</p>
+        <p>Akila prepared breakfast. She made idli. Side dishes were chutney, milagai podi, and kadipatta podi.</p>
+        
+        <p>Though night and early morning the weather was pleasant, after 10 am it was quite hot here. Walking outside was almost impossible after 10 am till around 5 pm. We were all chit-chatting till lunchtime. Akila prepared lunch. For lunch, she made rice, avaraikai poriyal, and mor kuzhambu.</p>
+        
+        <p>The moment we landed here, Kavita, Kalpana, and Shradha enabled our mobiles to use their Wi-Fi. All were so much addicted to Tamil serials, except eating and sleeping time, all were glued to their mobile or iPad to see their favorite serials all the time.</p>
+
+        <h3>Evening City Tour</h3>
+        <p>In the evening in two cars, we went around the city. Muscat is a newly created city. Basically, it is a desert having very little rain and there are no rivers or lakes. This city is surrounded by rocks and they are mostly heaps of sands without any greenery. Oil and gas are abundantly available and the country Oman depends on these. For water, seawater is converted into drinking water. Day-to-day commodities like vegetables, milk products, groceries etc., are imported from European countries and Asian countries.</p>
+        <p>In the city roads are broad and traffic rules are adhered to and cars are moving at terrific speed. Pedestrians seem to be very few. I didn't see many multistoried buildings. Buildings are of Mughal architecture. They are all uniformly painted in half-white color. Electricity is generated by thermal power stations using gas. The city is glittering at night with bright colorful lights. Car horns were seldom used.</p>
+        
+        <img src="\src\content\international\photos\muscat1.jpg" alt="Mosque at Night" class="journal-photo float-right">
+
+        <p>Manikkam and Akila in two different cars took us to roam around the city. The Grand Mosque was looking beautiful with colorful lights. They parked their cars and we saw the beautiful Grand Mosque from outside. After the Grand Mosque, we visited the <strong>Sultan’s Palace</strong>. With colorful lights, the palace gave a magnificent look.</p>
+        
+        <p>About two hours we were roaming around the city. The city looks beautiful. For dinner, they took us to a South Indian hotel called Gokul, a typical South Indian vegetarian hotel. We ordered different dishes of their choice. The food was good.</p>
+        <div class="highlight-box">
+            <p><strong>Note:</strong> Oman currency is Omani Rial. One Omani Rial is equal to Rs 216/-. The cost of dosa, idli, vada varies from 0.8 Rial to 0.4 Rial.</p>
+        </div>
+        <p>After dinner around 9:30 pm, we returned back home and slept in our respective places.</p>
+
+        <h2>26/12/23: The Grand Mosque</h2>
+        <p>After coffee, Ramamurthy, Umashankar, and myself went for a long walk. We left home around 6 am and returned back by 7 am. It was a long walk. Being a hill area, we found slopes downwards and upwards. Morning weather was pleasant but after 7, it will be difficult to walk.</p>
+        <p>By 8:30 am, Ramamurthy, Uma, Umashankar, and I left home with Akila. First, she took us to an Indian hotel called Sunder. We took breakfast there. Idli, vada, and Pongal were ordered.</p>
+
+        <h3>Sultan Qaboos Grand Mosque</h3>
+        <p>After breakfast, she took us to the Grand Mosque of Muscat. A dress code is stipulated to visit this Mosque. For gents, any normal dress, half shirt or T-shirt is acceptable. Only for ladies, their hands should be fully covered. Hair should not be visible and should be covered. Sarees are not acceptable since the stomach portion is visible.</p>
+        
+        <img src="\src\content\international\photos\muscat2.jpg" alt="Grand Mosque Exterior" class="journal-photo float-left">
+
+        <p>This Mosque's praying spot is facing Mecca. This Grand Mosque is built using only marble. Inside, the Quran is embedded on the wall. Also, some countries donated colorful marbles with engraved paintings. With footwear, people are not allowed to enter. Beautiful lighting arrangements are made and this Mosque glitters during the night and it is a spectacular sight to look at from a distance.</p>
+
+        <img src="\src\content\international\photos\muscat3.jpg" alt="Grand Mosque Interior" class="journal-photo float-right">
+
+        <p>We spent an hour here and returned home. From home, it is about a 45-minute drive. Akila’s car driving is scary. Invariably she drives in the extreme right lane of the highway and overtakes most of the cars moving in the other lane. Anu also pointed out the same when I was chatting with her.</p>
+        <p>While returning home, Akila wanted to take an account statement from her bank. She left us in the car and went. It took nearly an hour. Here apparently people look lethargic. Even in the airport, they took a long time for the immigration process.</p>
+        <p>Shradha lost her Residence card of Muscat. She went to a police station to file an FIR. It took nearly 3 hrs. She had to sit there leaving her studies. In the evening Anu took us to a Mall. It was a big one looking like any other Mall in the US. She purchased a pair of shoes for her parents. While coming back she stopped at an Indian store close to home to buy vegetables. All Indian vegetables are available here.</p>
+        <p>Here Omanis do not take household jobs, like driver, gardener, etc. These jobs are done by immigrants. Looks like many illegal immigrants are also here from Pakistan and Bangladesh.</p>
+        <p>For dinner, Lakshmi made upma for all of us. After dinner, we all went to our places to sleep.</p>
+
+        <h2>27/12/23: Thiruvathirai Celebrations</h2>
+        <p>Lakshmi and Geetha also joined our morning walk. We all five went on our usual route. About an hour we walked but just covered 5000 steps. In Muscat, most of the houses in the front yard had drumstick trees. Also neem trees and imli (tamarind) trees were common.</p>
+        
+        <img src="\src\content\international\photos\muscat4.jpg" alt="Thiruvathirai Celebration" class="journal-photo float-left">
+
+        <p>Being today is <strong>Thiruvathirai</strong>, Ramamurthy's star birthday, we all wished him. Akila made Thiruvathirai Kali and special Kootu using seven vegetables. We ate that in the morning around 10.</p>
+
+        <p>With Akila, we went to Salman Store. Small shopping stores mainly kitchen utilities are sold here. I bought a steel vessel with a strong base to boil milk. After coming home we had our lunch. Akila was planning meticulously for the next day's whole-day trip. For the next day's trip, she packed all essentials – water, food, juices, paper plates, napkins, lots of eatables, etc.</p>
+
+        <h2>28/12/23: The Big Day Trip</h2>
+        <p>As usual in the morning, Ramamurthy prepared coffee for everyone. In addition, he prepared about 15 cups of tea and filled a flask for travel. Akila got up early and prepared idli, imli rice, and curd rice for our trip. I helped her in packing those items. Also, she packed pickles, Vadam, Thepla, lemon juice, and mixed fruit juice for the trip.</p>
+        
+        <img src="\src\content\international\photos\muscat5.jpg" alt="Day Trip Start" class="journal-photo float-right">
+
+        <p>Morning around 8:30 we all left in 2 cars; one was driven by RaguRam and the other one was a hired one.</p>
+
+        <h3>Wadi Dayqah Dam</h3>
+        <p>Our first destination was Wadi Dayqah Dam. It is nearly 100 km away from home. This highway was quite broad, being it was a working day, there was not much traffic. Both drove the car at a speed of 120km/hr. At times, they crossed 130 km/hr also. We reached our first destination around 10 am.</p>
+        <p>This dam is not across a river. It is a deep valley and the dam prevents the rain water from merging with the sea. They collect every drop of rainwater and it is used for domestic purposes. Around the dam, a beautiful garden is maintained.</p>
+
+        <p>After going around this spot, we finished our breakfast and continued our journey. On the way, we saw a single <strong>Bukur tree</strong>. In Tamil, it is called <em>Sambrani</em>. Sambrani is processed from the gum of this tree; when we put it in burning coal, it produces smoke with a pleasant smell. We could smell the gum of this tree.</p>
+
+        <h3>Bimmah Sinkhole</h3>
+        
+        <img src="\src\content\international\photos\muscat6.jpg" alt="Bimmah Sinkhole View 1" class="journal-photo float-left">
+
+        <p>The next interesting spot was the Sinkhole. This spot was close to the beach of the Arabian Sea. It was an hour's travel from the Dam. It is a natural deep pond. To reach the pond we have to go down 85 steps. Along cement steps, railing was provided. So getting down was not very difficult.</p>
+        
+        <img src="\src\content\international\photos\muscat7.jpg" alt="Bimmah Sinkhole View 2" class="journal-photo float-right">
+
+        <p>We both went down to have a close look and took many photos. Akila and Manikkam were also with us. This spot was very nice.</p>
+
+        <p>After seeing the sinkhole we took our lunch. We were quite hungry and the food was delicious. Then we proceeded to see the Beach. The beach and rocks combination was a spectacular sight.</p>
+
+        <h3>The Beaches & Sur</h3>
+        
+        <img src="\src\content\international\photos\muscat8.jpg" alt="Pebble Beach" class="journal-photo float-left">
+
+        <p>Then we proceeded to another Beach called <strong>Pebble Beach</strong>. This seashore was full of pebbles of different sizes and colors. After wandering around the Beach for some time we located a tea shop and took tea. And went to one more Beach called <strong>Wadi Shab Beach</strong>.</p>
+        <p>Then we went to Wadi Tiwi, a village. Here roads are very narrow and the lands are fertile. We could see lots of banana trees. After leaving Wadi Tiwi, we could reach the main road and proceeded to the lighthouse.</p>
+        
+        <img src="\src\content\international\photos\muscat9.jpg" alt="Sur Sultan's Boat" class="journal-photo float-right">
+
+        <p>On the way, we saw Sur Sultan's boat kept as his memory. The present Sultan's grandfather used this boat. In his memory, this is kept for public view.</p>
+
+        <img src="\src\content\international\photos\muscat10.jpg" alt="Sur Lighthouse" class="journal-photo float-left">
+
+        <p>Our last visiting spot was <strong>Sur Lighthouse</strong>. To reach this spot, we crossed a hanging Bridge. This bridge was decorated colorfully with lights of blue, red, and white.</p>
+
+        <p>We stopped at this point and spent some time. During this break, we ate thepla and drank juices. From this point, home was 220 km away. We started our return journey around 6:15. I thought we would be reaching home after 10. But both Manikkam and the driver covered this distance in about 2 hours. On the way, Manikkam stopped his car for refueling and it took some 10 minutes. By 8:30 we reached home and Akila prepared a simple dinner.</p>
+
+        <h2>29/12/23: Kalbuh Park & Ravi's Cooking</h2>
+        <p>As usual after the morning coffee, we four went for a morning walk for about an hour. Akila and Manikkam had to visit school to attend a parents' meeting. So cooking was done by multiple people. I made mint thogayal. After coming from the meeting Anu made palak dal kootu and rasam plus Arachu Kalaki. Lunch was good. After lunch, we had an hour nap.</p>
+        
+        <img src="\src\content\international\photos\muscat11.jpg" alt="Kalbuh Park" class="journal-photo float-right">
+
+        <p>Evening we all went to <strong>Kalbuh Park</strong>, a nice walking place. Luckily Akila managed to get a parking place to park her car. We walked along the beach. Colorful flowers, beautiful statues making the walking path more attractive. Also, the Frankincense cup is looking colorful.</p>
+
+        <p>In the evening Ravi came to make Pongal and vada. At least he must have made hundreds of vadas that day. Because each took around 7 to 8 vadas and the very next day we had Dahi vada as breakfast. Apart from the normal vada, he also made vada with onion as directed by Umashankar ji.</p>
+        <div class="highlight-box">
+            <p><strong>Who is this Ravi?</strong> Ravi joined as a car driver after Akila’s marriage to Murthy mama’s family. When Akila & Manikkam shifted to Muscat he also came here with a proper visa, then he managed to get a job also in this country. As and when he is free, he used to come to Akila's home and help them with household things. Also, he is a good cook. Ravi is almost one of the family members of Murthy mama’s family.</p>
+        </div>
+
+        <h2>30/12/23: Muttrah Corniche & Krishna Temple</h2>
+        <p>Morning around 8 am with Akila, myself, Lakshmi, Ramamurthy, and Geetha went again to the Corniche area for a Morning walk. Weather was pleasant. We walked along the seashore for about an hour and took more photos. Photos of Sultan Cruise, some beautiful statues erected on the shore, Fort, and Mosque were taken. Before returning we had <em>Karak tea</em> (strong tea) from a roadside stall. It was tasty.</p>
+        <p>After coming home, with the leftover vada, Akila prepared dahi vada. Along with dahi, she added some masala and the combination was delicious. Akila prepared lunch and left to attend her friends' gathering. The special item was karela fry. Deep-fried karela added some masala and kismis.</p>
+        <p>After lunch, all the people were fully engrossed with their Tamil serials. Till Ravi came about 5 pm, no one lifted their eyes from their mobiles. He came and prepared tea for everyone. By that time Akila returned back and planned to visit the nearby Krishna temple. Myself, Ramamurthy, and Geetha preferred to walk. People with leg problems came with Akila in her car.</p>
+        <p>Krishna temple is a fairly big temple. During our visit, we could see lots of people. After the temple's visit, we went to a photo studio for a photoshoot. Akila stipulated a dress code also. We gents wore colorful kurta pajamas and all ladies wore Mysore silk sarees.</p>
+
+        <img src="\src\content\international\photos\muscat12.jpg" alt="Family Photo Session" class="journal-photo float-left">
+
+        <p>The photographer edited the photo in such a way that all the old people look at least 15 years younger. After the photo session, we all went to Sree Saravana for dinner. Each preferred different dishes. Most of us took dosa of different types, Mysore masala dosa, rava onion masala etc. Dinner was ended with strong coffee.</p>
+
+        <h2>31/12/23: Dolphin Watching & New Year's Eve</h2>
+        <p>Akila planned to take us for Dolphin watching. Earlier day she booked tickets for seven people. Myself, Lakshmi, Ramamurthy, Geetha, Uma, and Jula Akka. She booked for the 8 O'clock slot. The harbor was some 30 minutes drive. We reached there around 7:40. We just left home after taking coffee, not even we took a bath.</p>
+        <p>It was a small motorboat. Apart from us, another 10 people were there in the boat. Getting into the boat was a bit troublesome for us. But it was not risky or difficult. But the boat speed was scary. It started moving at a tremendous speed. After some 30 minutes drive in one particular place, he almost stopped the boat.</p>
+        
+        <img src="\src\content\international\photos\muscat13.jpg" alt="Dolphin Watching 1" class="journal-photo float-right">
+
+        <p>In that area, we could see Dolphins moving around in groups. They used to appear on the surface of the Sea, but before I could click they disappeared under the sea. We were watching their movements. Though we have seen Dolphin shows earlier, for the first time we saw these many Dolphins in groups over the sea so closely. After some time, the boat started to return. Return journey also at the same high speed.</p>
+        
+        <img src="\src\content\international\photos\muscat14.jpg" alt="Dolphin Watching 2" class="journal-photo float-left">
+
+        <p>While coming back, he took some different route, the boat was moving between rocks, and in one place the boat entered a small tunnel. We took lots of photos.</p>
+
+        <p>At last, we reached the shore around 9 am. From there we went to a Sunder hotel and took breakfast. After reaching home only we took a bath and almost at 3 pm we had our lunch.</p>
+        
+        <div class="highlight-box">
+            <p><strong>Culture Note:</strong> In Oman, gents cover their whole body from neck to foot. This white dress is called <em>Dishdasha</em>. Also, they wear a round cap called <em>Kumma</em>. Ladies cover from head to toe with a black gown called <em>Abaya</em>. Wearing a dhoti in Oman is not acceptable. Dhoti is considered a sort of undergarment, even some Tamilians paid a fine for that. So if someone wants to go to a temple with the traditional dress dhoti, he should not get down from the car till he reaches the temple premises.</p>
+        </div>
+
+        <p>Here in every shop or hotel, they display the present Sultan and his Predecessor. Even in small shops like Laundry or coffee shops, their photos are displayed. People respect the Sultan’s portrait. In front of the portrait, sitting in an inappropriate manner or any disrespectful acts are not acceptable.</p>
+        
+        <p>In the evening we were told to be ready for watching the sunset. I thought it would be like Kanyakumari. We went to a beach and boarded a boat. Getting into the boat for Uma and Jula Akka was a nightmare. Somehow they managed and others also got into the boat. Ramamurthy was upset since this arrangement was not by any organized or recognized agency. It was just arranged by the driver through a local boat. He was worried about the safety aspects of the elderly people.</p>
+        <p>I was wondering about the idea of seeing the sunset from the boat since the sea was on the east side and the west was covered by Land and Rocks. We were the great intellectuals to see the sunset from the sea while the sunset was taking place on the land. The boat was moving around the rocks, which were on the sea. The scene was amazing, but the safety aspects and also no other boat was seen in the vicinity, created a scary feeling and we all desperately wanted to return to shore. Of course, at last, the boat reached safely close to the shore and all carefully disembarked from the boat and walked to the shore. After reaching home Akila made a simple dinner. Children went for a New Year party with their friends.</p>
+
+        <h2>01/01/24: New Year's Day</h2>
+        <p>New Year's Day. Morning we four went for a long walk. Kavita and Kalpana presented a New Year gift to all of us. They are really lovely children. Actually, we didn’t have any specific sightseeing program. So the whole day we were just chit-chatting.</p>
+        <p>In the evening Jula Akka and Uma wanted to buy silver jewelry. Akila took them to the shopping center. Around 8 pm myself, Ramamurthy, and Umashankar went to the same place with Manikkam. We roamed around the local shops. Also lots of gold and silver jewelry were seen. Gold and silver seem to be cheaper.</p>
+
+        <h2>02/01/24: Farewell to Jula Akka</h2>
+        <p>After coffee, as usual, we went for a walk. Since Jula Akka was returning back to Mumbai, no sightseeing program was kept. Jula Akka left around 6 pm. Akila, Manikkam, and BR went to the airport to leave her. The flight was at the right time and she reached Mumbai also safely.</p>
+        <p>After coming back home, Akila made dinner. After dinner, Akila prepared for the next day's whole-day trip. She arranged a hired cab for the next day's trip. Actually, she planned to take us to a cave, a natural beauty spot. Considering the long walk through steps, Uma and Uma Shankar preferred to remain at home.</p>
+
+        <h2>03/01/24: Nizwa & Al Hoota Cave</h2>
+        
+        <img src="\src\content\international\photos\muscat15.jpg" alt="Day Trip" class="journal-photo float-right">
+
+        <p>After coffee and breakfast, we four—myself, Lakshmi, Ramamurthy, and Geetha—with Akila left home around 9 am. We took packed imli rice, dahi rice, and thepla for lunch. We proceeded to <strong>Nizwa Fort</strong>. It was about two hours drive from home. We reached the Fort around 11 am. We didn't enter into the Fort and just drove around the Fort. Lots of window shops we saw, and mostly they were selling all sorts of decoration pieces, mostly handmade things.</p>
+
+        <p>Before reaching the Fort, we had a break to take tea. In Muscat, we found lots of coffee shops on the roadside. They sell masala tea, coffee, and Indian stuff like paratha, Samosa, Dabeli etc. These stalls are invariably managed by Indians.</p>
+        
+        <img src="\src\content\international\photos\muscat16.jpg" alt="Cave Train" class="journal-photo float-left">
+
+        <p>Then we proceeded to <strong>Al Hoota Cave</strong>. From the Fort, this place is some 45 minutes drive. We reached around 12 pm. Being a working day this spot was not crowded. After parking the car all we went inside. Tickets are there to enter the caves. From the entrance to the cave, a special train is there. Of course, on that day the train service was suspended due to maintenance. This distance is about 1 km. Weather was pleasant, we walked this distance without any difficulty.</p>
+
+        <p>Inside the cave steps are there. This path is not level. Ups and downs are there. The entire cave is well-lit. Steps are with railings. So even aged people can walk. Total 230 steps are there. Rocks are in different shapes and looks. In two places, water flows through rocks and forms a pond. Similar caves we saw in China, but they are in different colors and looking like crystal. We felt the Al Hoota cave visit is a wonderful experience. It took an hour to complete it. We took hundreds of photos inside the cave.</p>
+
+        <p>After we came out of the cave, in the reception area we found a comfortable place to have our lunch. We all were very hungry and had imli rice and curd rice.</p>
+        <p>Then proceeded to <strong>Misfat Al Abriyeen</strong> village. This place was very fertile. We could see banana trees, Mango trees, and lime trees. Also, water was flowing around through a small canal. Some old houses, we could see. They say it is 300 years old. Roads were very narrow. Most of the places, only one car moves in a direction. When a car came in the opposite direction, somehow they managed to cross each other.</p>
+        <p>Here generally driving persons have immense patience. They never use the horn. They respect pedestrians and while driving they maintain a safe distance from the car which is moving in front of them. Bumper-to-bumper driving is not permitted.</p>
+        
+        <img src="\src\content\international\photos\muscat17.jpg" alt="Nizwa Fort" class="journal-photo float-right">
+
+        <p>After this village, we went to one more village called Al Hamra. After this village, we started our return journey. While returning again we stopped at Nizwa Fort. This time we hired a local buggy and went around the Fort. This Omani driver was describing the Fort with the help of his iPad.</p>
+
+        <p>Then we continued our return journey. On the way again we took a break and had kadak tea. We reached home by 7:30 pm.</p>
+
+        <h2>04/01/24: Relaxed Day</h2>
+        <p>We three, myself, Lakshmi, and Ramamurthy went for a walk as usual. With Akila, myself, Ramamurthy, and Umashankar went for shopping. We did some small shopping like USB cables, knives, USB ports, iPhone cables, etc. They are all seem to be cheaper.</p>
+        
+        <img src="\src\content\international\photos\muscat18.jpg" alt="Sabudana Vada Snack" class="journal-photo float-left">
+
+        <p>For lunch, Akila prepared Pav Bhaji. For eleven people she had to make a large quantity. It was delicious. Evening Ravi came and made his special item Sabudana Vada and groundnut Chutney. He makes always in hundreds. He was serving hot sabudana vadas with chutney and we were eating the crispy vada with chutney countlessly. No sightseeing was planned that day.</p>
+
+        <h2>05/01/24: Breakfast at Annapurna</h2>
+        <p>Morning Akila took all of us to the waterfront in her car for a Morning walk. We left home after we took coffee around 7 am. It is a beach and a wonderful place for walking. We spent an hour on the beach. Then Akila took us to an Indian hotel called Annapurna.</p>
+        <p>Here many Indian restaurants are there. Whenever we go to a hotel all the time it is crowded only. So for Indians, it is a roaring business. We all enjoyed the delicious breakfast. This time for a change I opted for Puri masala instead of rava dosa.</p>
+        <p>Here Omani Government doesn't allow any immigrant to start a business independently. Outsiders are permitted to start a business here provided they have an Omani business partner. This country provides a lot of business opportunities to Indians. Many small-scale business persons like owners of tea shops, laundries, AC repairing shops, mixer/grinder repairers etc earn a lot, and send money to their families in India for their children's education and useful investments.</p>
+
+        <h2>06/01/24: The Wave</h2>
+        
+        <img src="\src\content\international\photos\muscat19.jpg" alt="The Wave / Al Mouj" class="journal-photo float-right">
+
+        <p>Akila took us to a place called <strong>Al Mouj (The Wave)</strong>, where her own apartment is there. Her apartment community looks pretty good. It is close to the seashore. This government allots specific places for buying property for immigrants. The Wave is one among the places where immigrants are permitted to buy property.</p>
+
+        <p>We saw her apartment from outside. Since a tenant is now occupying it, we didn’t enter into the apartment to have a close look. This apartment is close to the airport.</p>
+
+        <h2>07/01/24: Last Day</h2>
+        <p>After a walk, I had nothing great to do. Since lots of drumstick trees are around the house, I plucked lots of leaves and brought them to India. After coming here I made powder of those leaves and now we are using that. Moringa leaves powder is full of essential vitamins and is sold by many stores.</p>
+
+        <h2>08/01/24: Departure</h2>
+        <p>The last day of our stay has come. When we booked tickets, we thought it would be a very long stay. But on the last day, we felt that we would have stayed still more days. We started packing things. Akila was busy with packing for Shradha, since she was also leaving for the Netherlands after her vacation.</p>
+        <p>Just before we left, Kavita and Kalpana sang a few songs. Both are talented singers. Manikkam, Akila, and Ramamurthy came to the airport to drop us. There was a big queue for immigration. So Manikkam spoke to some people and arranged a wheelchair for Lakshmi and we could skip the long queue and reached the boarding point.</p>
+        <p>The flight was at the right time and reached Mumbai the next day early morning around 4. After immigration, we collected our luggage, and fortunately, we were allowed to skip the customs check. We came out of the airport and took a local Taxi and came to Dadar and the Pune bus was ready to leave. MSRTC people helped to put the suitcases in the dickey. Being senior citizens, the ticket fare for both of us was only Rs 490/-. Around 9 am we reached Aundh and took an Auto to home.</p>
+        
+        <div class="summary-box">
+            <p>"The Muscat trip was really memorable, not just for the beautiful sights but for the warmth of family. We wish to visit again with Ramamurthy and Geetha to create more such wonderful memories."</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    // Get the lightbox elements
+    const modal = document.getElementById("lightbox-modal");
+    const modalImg = document.getElementById("lightbox-img");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    const images = document.querySelectorAll(".journal-photo");
+
+    // Loop through images and add click event
+    images.forEach(img => {
+        img.onclick = function(){
+            modal.classList.add("show");
+            modalImg.src = this.src;
+        }
+    });
+
+    // Close when clicking the "x"
+    closeBtn.onclick = function() {
+        modal.classList.remove("show");
+        // Clear src after fade out
+        setTimeout(() => { modalImg.src = ""; }, 300);
+    }
+
+    // Close when clicking outside the image
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            modal.classList.remove("show");
+            setTimeout(() => { modalImg.src = ""; }, 300);
+        }
+    }
+</script>
+
+</body>
+</html>

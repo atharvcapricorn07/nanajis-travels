@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelogue: Jaipur & Agra 2024</title>
+    <style>
+        :root {
+            --jaipur-pink: #ef98aa;
+            --agra-white: #f4f4f4;
+            --royal-gold: #d4af37;
+            --deep-maroon: #800000;
+            --fort-red: #a52a2a;
+        }
+        
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--agra-white);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-top: 15px solid var(--jaipur-pink);
+            border-bottom: 15px solid var(--fort-red);
+            position: relative;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #fff5f7;
+            border-bottom: 2px double var(--royal-gold);
+        }
+
+        h1 {
+            color: var(--fort-red);
+            font-size: 2.5em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .subtitle {
+            font-style: italic;
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        .travellers {
+            color: var(--deep-maroon);
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .date-section {
+            margin-bottom: 35px;
+            border-left: 4px solid var(--jaipur-pink);
+            padding-left: 20px;
+            overflow: hidden; /* Clears floats */
+        }
+
+        .date-header {
+            font-size: 1.3em;
+            color: var(--fort-red);
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: block;
+            border-bottom: 1px solid #eee;
+        }
+
+        p {
+            margin-bottom: 18px;
+            text-align: justify;
+        }
+
+        .highlight-text {
+            color: var(--deep-maroon);
+            font-weight: 600;
+        }
+
+        .summary-box {
+            background-color: var(--fort-red);
+            color: white;
+            padding: 30px;
+            margin: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 2px solid var(--royal-gold);
+        }
+
+        .summary-box h2 {
+            margin-top: 0;
+            color: var(--royal-gold);
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        /* Photo Styles */
+        .travel-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            cursor: pointer;
+            border: 5px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: transform 0.2s;
+            margin: 10px;
+        }
+        
+        .photo-left { float: left; margin-right: 20px; }
+        .photo-right { float: right; margin-left: 20px; }
+
+        /* Lightbox/Zoom Overlay */
+        #photo-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        #zoomed-img { max-width: 90%; max-height: 90%; border: 4px solid white; }
+        #close-btn {
+            position: absolute;
+            top: 20px; right: 30px;
+            color: white; font-size: 50px; font-weight: bold;
+            cursor: pointer; line-height: 1;
+        }
+
+        @media (max-width: 600px) {
+            .content { padding: 20px; }
+            h1 { font-size: 1.8em; }
+            .travel-photo { 
+                float: none; 
+                display: block; 
+                margin: 10px auto;
+                width: 90%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="photo-overlay">
+    <span id="close-btn">&times;</span>
+    <img id="zoomed-img" src="" alt="Zoomed view">
+</div>
+
+<div class="container">
+    <header>
+        <h1>Jaipur & Agra</h1>
+        <div class="travellers">(With Shashi, Uma, Tanvi, and Atharv)</div>
+        <div class="subtitle">19 December 2024 to 24 December 2024</div>
+    </header>
+
+    <div class="content">
+        
+        <div class="date-section">
+            <span class="date-header">19/12/2024</span>
+            <p>Sekar Kale, Anu, and Anvi reached home around 7 am from their place, Shegaon. They came by bus. They got down at Khadki, took an Uber, and reached home without any difficulty. After a bath, we all went to the Upsouth hotel and had our breakfast.</p>
+            <img src="\src\content\india\photos\jaipur1.jpg" class="travel-photo photo-right" alt="Pune Airport Reference">
+            <p>By 11:30, we all left for Pune airport in two cabs. Shashi booked our air tickets to Jaipur on Air India. We reached the airport around 12:30, and the new building of Pune Airport looks pretty good. On the first floor, paintings of Shivaji Maharaj attracted every passenger.</p>
+            <p>The flight was supposed to depart by 2:45, but it was late by half an hour. Travel time to Jaipur was about an hour and 30 minutes. We reached Jaipur around 5 pm. We collected our baggage, took a bigger cab, and all five proceeded to <span class="highlight-text">Leela Palace</span> from the airport. The drive was an hour.</p>
+            <img src="\src\content\india\photos\jaipur2.jpg" class="travel-photo photo-left" alt="Leela Palace Welcome">
+            <p>The welcome procedure in the hotel was overwhelming. While we entered the main gate, a group of people started playing drums and pipe. One girl in Rajasthani costume was dancing to the music tune. With that music party and dance performer, we reached the main entrance. There, another girl performed aarthi and put a thilak on our foreheads, and we reached the reception lobby. There, they served lemon tea.</p>
+            <p>Uma and Shashi booked four rooms in this Leela Palace. It is a 5-star hotel; the rooms are luxurious and more spacious with large glass windows. From the glass windows, we could see the swimming pool, garden, mountains, tombs of this palace, marble carvings, etc. After some rest, we had our dinner and took rest.</p>
+            <img src="\src\content\india\photos\jaipur3.jpg" class="travel-photo photo-right" alt="End of Day 1">
+        </div>
+
+        <div class="date-section">
+            <span class="date-header">20/12/2024</span>
+            <p>I got up around 5:30. I made coffee, and after coffee, I went down and found a nice place for a walk. For about 45 minutes, I walked around and returned to the room. After a bath, we all went to the dining hall. We found a variety of foodstuff there: South Indian dishes like idli, vada, dosa, pakkoda, pav bhaji, beetroot halva, etc.</p>
+            <p>After eating an elaborate breakfast, we had filter coffee. Then we left for sightseeing. Since we were 9 people, Shashi booked a van. First, we went to <span class="highlight-text">Jal Mahal</span>.</p>
+            <img src="\src\content\india\photos\jaipur4.jpg" class="travel-photo photo-left" alt="Jal Mahal">
+            <p>This Mahal is in the middle of a lake. Right now, we can only see the Mahal from the outside. From the guide, we understand that after the formation of the BJP government, it has been given for lease to a private party, and the Mahal is being renovated for commercial use.</p>
+            <p>Uma and Anuradha took photos in Rajasthan dress costumes. After this, we proceeded to the <span class="highlight-text">Jaipur Palace</span>. We spent some two hours in this palace. We saw the gigantic silver vessel which was used by Maharaj Sawai Madho Singh to bring Ganges water. He used only Ganges water for bathing and drinking. Also, we saw Mubarak Mahal, the weapons museum, textile museum, etc.</p>
+            <img src="\src\content\india\photos\jaipur5.jpg" class="travel-photo photo-right" alt="Jaipur Palace">
+            <p>Then we proceeded to <span class="highlight-text">Jantar Mantar</span>. It is a UNESCO heritage site. Jantar Mantar features various astronomical devices built by Sawai Jai Singh in the 17th century.</p>
+            <img src="\src\content\india\photos\jaipur6.jpg" class="travel-photo photo-left" alt="Jantar Mantar">
+            <p>After that, we halted at the famous Ravat Kachori hotel. Here, we tasted onion and dal kachori. After that, we did some shopping, mainly purchasing dress materials.</p>
+        </div>
+
+        <div class="date-section">
+            <span class="date-header">21/12/2024</span>
+            <p>Today also I got up before 6 am and, after coffee, I walked around the premises of this hotel. Leela Palace made a nice footpath around the hotel to walk around. Walking on this footpath is pleasurable. A beautiful garden, few fountains, and marble carvings are all there along this footpath. So it was enjoyable.</p>
+            <img src="\src\content\india\photos\jaipur7.jpeg" class="travel-photo photo-right" alt="Breakfast at Leela">
+            <p>After the walk and bath, we all together went to the dining place of the hotel to have breakfast. From the buffet table, I picked up dosa, dal vada, puri, and subji. After that, I ate poha with kadi. The breakfast session ended with a filter coffee.</p>
+            <p>Around 11, we all left the hotel to visit <span class="highlight-text">Amer Fort</span>. It is a prime tourist attraction in Jaipur. This fort is over a hill. To reach the fort from the bottom of the hill, we have to hire a jeep. Alternatively, we can travel via elephant.</p>
+            <img src="\src\content\india\photos\jaipur8.jpg" class="travel-photo photo-left" alt="Amer Fort">
+            <p>Near this fort, there is a village called Elephant Village. Here, more elephants are looked after by the villagers for their survival. They use these <span class="highlight-text">elephants</span> for taking the tourists to the fort. Many tourists, especially tourists from other countries, enjoy this elephant ride.</p>
+            <img src="\src\content\india\photos\jaipur9.jpg" class="travel-photo photo-right" alt="Elephant Ride">
+            <p>For elephants, a separate path is made to reach the fort. This elephant service is available only up to 11 am, as elephants do not prefer to walk in the hot weather. We reached the bottom of the hill by our usual van and from there we hired a jeep and a guide. Because of the large number of tourist vehicles, it took more than an hour to reach the palace. This palace was built by the King <span class="highlight-text">Man Singh</span> in 1592.</p>
+            <img src="\src\content\india\photos\jaipur10.jpg" class="travel-photo photo-left" alt="King Man Singh Reference">
+            <p>Still, some portion of this palace is occupied by the king’s dynasty people. At the entrance, there is a temple, and the deity is Sheela Devi. This palace is constructed using red stone and marble. The palace has four floors. The architecture of this palace is a combination of Mughal and Rajput styles. In this palace, the Hall for Public Audience, <span class="highlight-text">Sheesh Mahal</span>, and Sukh Nivas are all located.</p>
+            <img src="\src\content\india\photos\jaipur11.jpg" class="travel-photo photo-right" alt="Sheesh Mahal">
+            <p>Sukh Nivas is the part of the palace where the queens stayed. To keep it cool, a water flow arrangement is seen in this room. Sheesh Mahal is the most attractive place of this palace. A large number of mirrors are embedded all over the roof and walls. All these mirrors were brought from Belgium during that time.</p>
+            <p>We spent about two hours in this palace and took a late lunch at a hotel called Rajwad. Then we returned to the hotel. From 6 pm to 7 pm in the hotel, there was a cultural program. We attended the program, and after that, we had our dinner and then went to our room to sleep.</p>
+        </div>
+
+        <div class="date-section">
+            <span class="date-header">22/12/2024</span>
+            <img src="\src\content\india\photos\jaipur12.jpg" class="travel-photo photo-left" alt="Start of Day 4">
+            <p>The 22nd of December was almost a rest day. We got up leisurely and had our great breakfast without any hurry. Around 12, we left Leela Palace. In the van, we went and were dropped at <span class="highlight-text">Hawa Mahal</span>.</p>
+            <img src="\src\content\india\photos\jaipur13.jpg" class="travel-photo photo-right" alt="Hawa Mahal">
+            <p>Johari Bazaar starts from this point. There are about 350 shops there, on both sides of the road. They sell garments, sarees, jewelry, leather items, ladies' bags, etc. While doing shopping, we tasted samosa, kachori, and lassi. Athu was getting irritated walking in that dusty environment. From there, we went to the <span class="highlight-text">Birla Temple</span>. It is a beautiful marble temple.</p>
+            <img src="\src\content\india\photos\jaipur14.jpg" class="travel-photo photo-left" alt="Birla Temple">
+            <p>After the Birla Temple visit, we returned back to the hotel.</p>
+        </div>
+
+        <div class="date-section">
+            <span class="date-header">23/12/2024</span>
+            <p>After a heavy breakfast, we checked out from Leela Palace and proceeded to Agra. We left around 9 am. Our plan was to visit Fatehpur Sikri first and then visit the Taj Mahal. The distance is only around 250 km from Jaipur to Agra. Because of poor roads and traffic congestion, it was very much delayed.</p>
+            <p>To visit the <span class="highlight-text">Taj Mahal</span>, visiting time closes by 4:30 pm. Only up to 4:30 pm will they allow entry to the premises. Shashi booked rooms in the Courtyard Marriott. This is also a 5-star hotel. We reached the hotel by 3:30 pm only. After checking in, we hurriedly changed our dress (Uma wanted everyone to wear white dress) and rushed to the <span class="highlight-text">Taj Mahal</span>.</p>
+            <img src="\src\content\india\photos\jaipur15.jpg" class="travel-photo photo-right" alt="Taj Mahal 1">
+            <p>The tour guide arranged by Shashi was waiting at the hotel entrance. The tour guide even arranged entrance tickets for the Taj Mahal. Luckily, we could reach the entrance gate of the Taj Mahal before 4:30. Shashi arranged a photographer also.</p>
+            <img src="\src\content\india\photos\jaipur16.jpg" class="travel-photo photo-left" alt="Taj Mahal 2">
+            <p>I had been to the Taj when I was a kid with my parents. Then, about 30 years back, myself and Lakshmi visited with Uma and Jinu. It was a great pleasure to visit again with my grandchildren. By 6:30, visiting time ends, and they close the gate. We were the last group to get out of the gate. Then the guide took us to a good shop and we purchased a marble memento. Since the hotel was close by, we reached soon and took dinner there.</p>
+        </div>
+
+        <div class="date-section">
+            <span class="date-header">24/12/2024</span>
+            <img src="\src\content\india\photos\jaipur17.jpg" class="travel-photo photo-right" alt="Start of Last Day">
+            <p>The last day of our tour. We all got up very early and assembled at the dining place by 6:30. By 7:30 am, we left the hotel and proceeded to Delhi. Delhi is 230 km away from Agra. Uma and Shashi wanted to visit at least one Krishna temple in Mathura, as it is on the way to Delhi. The driver suggested the Vrindavan Banki Bihari Temple.</p>
+            <img src="\src\content\india\photos\jaipur18.jpg" class="travel-photo photo-left" alt="Trip Conclusion">
+            <p>After reaching Vrindavan, he parked at a parking place and suggested going to the temple by rickshaw. We hired two rickshaws and thought we would be dropped at the entrance of the temple. He dropped us at a place after which vehicles can't go. From that point, we started walking through narrow streets. The streets were narrow and crowded. Somehow we reached the entrance of the temple, removed our footwear, left them under the custody of a shopkeeper, and went inside the temple.</p>
+            <p>The temple was crowded. All eleven of us entered together and, because of the crowd, we got separated. One group split into three groups. Tanvi and Athu were with Shashi. Shashi's elder brother Narendra, his son Ninad, myself, Uma, and Lakshmi were together. Anu, Sekar and their daughter were together. Fortunately, we had mobiles and were in touch. We entered through one gate of the temple and exited through another gate.</p>
+            <p>All three groups were moving around the temple but couldn't locate the shop where we left our footwear. At last, Shashi's group found the shop. He sent the location map and with that we all reached that spot, took an auto rickshaw again, and then boarded our van. Atharv took an assurance from Shashi and Uma that there would be no more temple visits until they leave India!</p>
+            <p>We wanted to return by 10 am and proceed to the airport, but we could only board the bus by 11 am. From Vrindavan, Delhi airport is about 180 km. To take the Pune flight, we should have reached the airport by at least 2 pm. We decided to skip lunch and proceed. However, I received a message from SpiceJet that the flight was late by 2 hours. So we stopped at a restaurant and had our lunch. We reached the airport around 3 pm.</p>
+            <p>Our Pune flight departed around 6 pm and reached Pune by 8 pm. From there, we took an Uber and reached home safely.</p>
+        </div>
+    </div>
+
+    <div class="summary-box">
+        <h2>Travel Summary: Memory Notes</h2>
+        <p>This journey through the royal heart of Rajasthan and the timeless beauty of Agra was a special chapter in our family history. From the overwhelming welcome at Leela Palace to the majestic sights of the Amer Fort and the serenity of the Taj Mahal, every moment was enriched by the company of Shashi, Uma, and my grandchildren. Revisiting the Taj Mahal after thirty years, this time seeing it through the eyes of the younger generation, was a highlight I will cherish. Despite the narrow, bustling streets of Vrindavan and the long road travels, reaching home safely with these memories made for a perfect end to our 2024 winter tour.</p>
+    </div>
+</div>
+
+<script>
+    const overlay = document.getElementById('photo-overlay');
+    const zoomedImg = document.getElementById('zoomed-img');
+    const closeBtn = document.getElementById('close-btn');
+    const photos = document.querySelectorAll('.travel-photo');
+
+    photos.forEach(photo => {
+        photo.addEventListener('click', () => {
+            overlay.style.display = 'flex';
+            zoomedImg.src = photo.src;
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        overlay.style.display = 'none';
+    });
+
+    // Close on clicking the dark area outside the image
+    overlay.addEventListener('click', (e) => {
+        if (e.target !== zoomedImg) {
+            overlay.style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indonesia & Bali Travelogue | 2025</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f7f2;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #2d5a27;
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 8px solid #d4a373;
+        }
+        h1 { margin: 0; font-size: 2.5em; letter-spacing: 2px; }
+        
+        .container {
+            max-width: 950px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .date-section {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px dotted #ccc;
+            overflow: hidden; 
+        }
+        .date-header {
+            font-weight: bold;
+            color: #2d5a27;
+            font-size: 1.2em;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .location-tag {
+            font-style: italic;
+            color: #888;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* --- PHOTO STYLING --- */
+        .img-placeholder {
+            width: 35%; /* Flexible size to prevent empty gaps */
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            cursor: pointer;
+            border: 5px solid #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin: 15px;
+        }
+        .float-left { float: left; margin-left: 0; margin-right: 20px; }
+        .float-right { float: right; margin-right: 0; margin-left: 20px; }
+        
+        /* Permanent Rotation Fix */
+        .fixed-rotation { transform: rotate(90deg); }
+
+        /* --- LIGHTBOX STYLING --- */
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+        }
+        #lightbox img {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 85%;
+            max-height: 85%;
+            border: 3px solid white;
+        }
+        #lightbox img.fixed-rotation {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+        #close-btn {
+            position: absolute;
+            top: 20px; right: 30px;
+            color: white;
+            font-size: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 40px;
+            background-color: #fff;
+        }
+        th { background-color: #2d5a27; color: white; text-align: left; padding: 12px; }
+        td { padding: 10px; border: 1px solid #ddd; font-size: 0.9em; }
+        tr:nth-child(even) { background-color: #f9f4ef; }
+        
+        .highlight { color: #a0522d; font-weight: bold; }
+        .summary-box {
+            background-color: #fdf2e9;
+            border-left: 6px solid #a0522d;
+            padding: 25px;
+            margin: 40px 0;
+            font-style: italic;
+            text-align: center;
+            font-size: 1.2em;
+            color: #2d5a27;
+            clear: both;
+        }
+        .footer { text-align: center; padding: 30px; font-style: italic; color: #555; background: #e9edc9; }
+
+        @media (max-width: 600px) {
+            .img-placeholder { width: 100%; float: none; margin: 10px 0; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>INDONESIA & BALI</h1>
+    <p>(Jakarta, Bandung, Yogyakarta & Bali)</p>
+    <p><strong>May 23, 2025 – May 31, 2025</strong></p>
+</header>
+
+<div class="container">
+
+    <div class="date-section">
+        <span class="date-header">23/05/2025</span>
+        <p>We left home around 2 pm after we finished lunch. We booked a cab to Mumbai International Airport because of intermittent rains. We reached the airport around 6 pm. The airport was very crowded, mostly Islamic pilgrims going to Mecca.</p>
+        <p>Around 7:30 pm, the Kesari representative Mr. Rajesh came, and we collected our air tickets and some snack packs. Airport formalities were completed without any hassle and we reached the respective gate. Tickets were booked with Malaysian Airways. The first flight was to Kuala Lumpur and then from there to Jakarta by another flight.</p>
+        <p>Mumbai to Kuala Lumpur is about 3700 km, a 5-hour travel. The time difference is 2 hours and 30 minutes later. If in India the time is 5 am, in Malaysia it is 7:30 am. From Mumbai, the flight moved towards the south, crossed Chennai, then the Bay of Bengal and the Indian Ocean, and touched Kuala Lumpur airport. The flight was on time.</p>
+    </div>
+
+    <div class="date-section">
+        <span class="date-header">24/05/2025</span>
+        <span class="location-tag">Jakarta</span>
+        <img src="\src\content\international\photos\indonesia1.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
+        <p>The MH 195 flight was on time. We reached Kuala Lumpur at 7:30 am. After we landed at Kuala Lumpur, we completed the security check and got ready to take the onward flight to Jakarta. From here to Jakarta, the flight duration is about 2 hours.</p>
+        <p>The Malaysian Airlines flight to Jakarta from Kuala Lumpur departed on time. During travel, they served a vegetarian breakfast: vermicelli upma with dal sambar, sliced fruits, and juice.</p>
+        <p>The flight landed in Jakarta, the capital city of Indonesia, on time. For Indians, they provide a visa on arrival. Without any tedious procedures, we got the visa. We didn't even stand in the queue; the Kesari rep collected all our passports and got the visa for everyone.</p>
+        <img src="\src\content\international\photos\indonesia2.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
+        <p>After baggage collection and security checks were over, we proceeded to an Indian Restaurant called <span class="highlight">Ganesha</span> for lunch. Food was good. Then we went to see the National Monument of Indonesia. Indonesia got freedom from the Dutch, and this monument was constructed to pay respect to the freedom fighters.</p>
+        <p>A few old buildings which were constructed by the Dutch and used as their offices before Indonesia got freedom are still maintained. That place is called Merdeka Square. After the visit, we reached Hotel Mercure where our accommodation was arranged. The hotel was okay. For dinner, we went to Queens of Tandoori. Food was good.</p>
+        <p>Eighty percent of the people in this country are Muslims. But in some provinces, the majority of people are Hindus. In Bali, one among the 38 provinces, 80% are Hindus. Even though it is a Muslim-dominated country, the Hindus of this country are respected. In every nook and corner of the city, we can see statues of Hindu Gods.</p>
+        <p>Indonesia is also not a very safe place for outsiders. Pickpocketing, grabbing mobile phones, and snatching handbags are all common. Today we traveled a lot around Jakarta city by bus. The city is very clean; no garbage heaps on roadsides. But roads are narrow, and buses and cars move at a snail’s speed. We didn’t see much public transport. Most people here use two-wheelers.</p>
+    </div>
+
+<div class="date-section">
+        <span class="date-header">25/05/2025</span>
+        <span class="location-tag">Bandung</span>
+        <img src="\src\content\international\photos\indonesia3.jpg" class="img-placeholder float-right fixed-rotation" onclick="openZoom(this)">
+        <p>After breakfast, we left from Hotel Mercure and proceeded to Bandung by bus. Bandung is about 150 km away from Jakarta. We left the hotel at 7 am. After we traveled 100 km, we had a break for coffee. After some 15 minutes, we continued our travel.</p>
+        <p>The climate was too good. It was pretty cool, around 20°C. The bus in which we were traveling had air suspension and the road was good, so bus travel was very comfortable. The highway was excellent; there was no heavy traffic. Both sides of the road have excellent natural scenery. We crossed a few tea estates also. Banana trees and pineapple bushes are abundantly grown. Also, we saw pineapples being sold on the roadsides.</p>
+        
+        <img src="\src\content\international\photos\indonesia4.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
+        
+        <p>We reached Bandung around 11 am. Our bus was parked in an allocated place and from there we took a minibus to watch <span class="highlight">Hot Springs</span>. In this place, there are a few active volcanoes and a few springs. This spring water is quite hot. Spring water is collected in pools and people are allowed to swim or stroll in the water. This water is sulfur-contaminated, so pregnant ladies and asthma patients are advised to stay away.</p>
+        <p>After watching the hot springs, we had our lunch in a local restaurant where Indonesian food was served: garlic bread, plain rice mixed with butter, tomato sauce, fruits, and noodles.</p>
+        <img src="\src\content\international\photos\indonesia5.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
+        <p>After lunch, we proceeded to <span class="highlight">Tangkuban</span> to watch the erupted volcano. This place is at an elevated altitude, about 5000 ft above sea level. The weather was very cloudy and most of the time drizzling. We can climb hills around this erupted volcano and take photos. After an hour, we reached Bandung city. Our accommodation was arranged in the Best Western hotel. We had our dinner at an Indonesian hotel called Warung Dulukala. For vegetarians, only sticky rice and boiled vegetables were there.</p>
+    </div>
+
+    <div class="date-section">
+        <span class="date-header">26/05/2025</span>
+        <span class="location-tag">Bandung to Yogyakarta</span>
+        <img src="\src\content\international\photos\indonesia6.jpg" class="img-placeholder float-left fixed-rotation" onclick="openZoom(this)">
+        <p>Morning we got up at 4 o'clock. We got ready by 4:45 am and left the Best Western, Bandung and proceeded to the railway station. Our next destination is Yogyakarta. The distance between these two cities is about 500 km. Travel time is about 6 hours. The train route is similar to Kerala, full of paddy fields and banana plants. The train reached Yogyakarta station right on time at 1:15 pm.</p>
+        <p>Our tour bus was waiting outside. Our accommodation was booked in Hotel Santika. In the evening, we proceeded to Hotel Ganesha, an Indian luxury hotel. The hotel was posh and the food was good.</p>
+    </div>
+
+    <div class="date-section">
+        <span class="date-header">27/05/2025</span>
+        <span class="location-tag">Yogyakarta</span>
+        <img src="\src\content\international\photos\indonesia7.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
+        <p>We proceeded to visit <span class="highlight">Borobudur Temple</span>. It is a Buddhist temple. During the first century, kings of this place adored Hinduism, but during the third century, Buddhism spread from Sri Lanka. Actually, Buddha never came to this country. This temple complex is very vast and beautifully maintained; it is also a UNESCO heritage site.</p>
+        <p>The original temple was damaged by an earthquake and renovated without altering the original structure. The temple has ten stages and a total of 140 steep steps. Currently, people are only allowed to see up to three stages, requiring us to climb around seventy steps. Along with the entry ticket, they provide new chappals which we must wear to go inside.</p>
+        <img src="\src\content\international\photos\indonesia8.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
+        <p>The irony is, such big Buddhist temples are seen in China, Malaysia, Nepal, and Cambodia, but not in India where the religion originated. People believe the strong philosophy of the Geetha and the vocabulary of Hindu saints like Adi Shankaracharya, who preached from Kanyakumari to Srinagar, kept the followers of Hinduism strong in India.</p>
+        <p>After the Buddhist temple, we had lunch at Ganesha, a posh Indian restaurant, where they served brinjal bharta, chapati, black chana dal, paneer subji, and jeera rice, ending with kulfi. From there, we proceeded to the <span class="highlight">Prambanan Hindu Temple Complex</span>.</p>
+        <img src="\src\content\international\photos\indonesia9.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
+        <p>It is a big Hindu temple complex featuring three major temples. The first is dedicated to <span class="highlight">Lord Brahma</span>, with a small temple for the <span class="highlight">Swan</span> opposite it. In the middle is a large temple for <span class="highlight">Lord Shiva</span>, with a small temple for <span class="highlight">Nandi</span> opposite. On the right extreme is a temple for <span class="highlight">Lord Vishnu</span>, with a small temple for <span class="highlight">Garuda</span> opposite.</p>
+        <img src="\src\content\international\photos\indonesia10.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
+        <p>The architecture is quite different, and these temples look marvelous against the greenery and the sky background. We purchased a few fridge magnets of the Prambanan temples. Here, the conversion to Indonesian Rupiah is very funny. 1 US Dollar is equal to 15,800 IDR. The price of one simple roadside T-shirt is 1 lakh IDR, and a cup of coffee is 50,000 IDR!</p>
+    </div>
+
+    <div class="date-section">
+        <span class="date-header">28/05/2025</span>
+        <span class="location-tag">Travel to Bali</span>
+        <img src="\src\content\international\photos\indonesia11.jpg" class="img-placeholder float-right fixed-rotation" onclick="openZoom(this)">
+        <p>Morning leisurely we got up, since only we had to move to Bali and there was no other schedule. We took breakfast and left for the airport. It was about an hour and 30 minutes travel. Our flight was supposed to depart from Yogyakarta Domestic airport at 2 pm. But it was late by 2 hrs.</p>
+        <p>The plane landed at <span class="highlight">Ngurah Rai International Airport</span>, Bali at 8 pm (Bali time). Bali Airport is very beautiful. We had our dinner at <span class="highlight">Royal Kitchen</span> on the way to our hotel. Our accommodation was arranged at Hotel Harper. Hotel room was ok.</p>
+    </div>
+
+    <div class="date-section">
+        <span class="date-header">29/05/2025</span>
+        <span class="location-tag">Bali</span>
+        <img src="\src\content\international\photos\indonesia12.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
+        <p>Bali is an island and one among the 38 provinces of Indonesia. Weather is very humid and hot. Roads are very narrow so most of the roads in the city are one way. Bali got only one airport, Ngurah Rai International Airport. We didn't see any multi-storied buildings. Maximum they allow to construct only 4 story buildings. Local Govt is particular that no building should be taller than the temple.</p>
+        <img src="\src\content\international\photos\indonesia13.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
+        <p><span class="highlight">Tirta Empul Temple:</span> This one is one of the famous temples in Bali. Main deity is Brahma. In this temple a pond is there and through springs water is continuously flowing. It is believed that God Indra created this spring and that water cures all sort of illness. Basically people believe and come here who suffer from some kind of illness to have a dip in this sacred pond for getting cured.</p>
+        <img src="\src\content\international\photos\indonesia14.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
+        <p>Also main deity is kept in a secluded place, and people are allowed to do pooja and offering sacred food items. All visitors are not allowed to these premises.</p>
+        <img src="\src\content\international\photos\indonesia15.jpg" class="img-placeholder float-right fixed-rotation" onclick="openZoom(this)">
+        <p><span class="highlight">Abuan Desa Rice Terrace, Tegallalang Pakudui:</span> Then we visited here. The main attraction is giant swings (Julias) and zip liner. Big valleys are there. Across the valley this zip liner is arranged.</p>
+        <img src="\src\content\international\photos\indonesia16.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
+        <p><span class="highlight">Taman Ayun Temple:</span> It is about 2 hours journey from the main city. This temple was built in 16th century by the king Mengwi to pay respect to his ancestors. It is a kind of family temple. In Bali, every family got a temple called a family temple and every village has a temple called a village temple.</p>
+        <img src="\src\content\international\photos\indonesia17.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
+        <p>Bali is a small island of length about 150 km and width of 90 km. Within this island thousands of temples are there. Taman Ayun temple got a beautiful lotus pond around the temple. This is not a very big temple, but the natural beauty is superb. This temple faced many times natural calamity and subsequent renovations.</p>
+        <img src="\src\content\international\photos\indonesia18.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
+        <p><span class="highlight">Tanah Lot Temple:</span> This is a temple situated on the sea shore. Only part of the temple is there. This shore is a black soil sea shore. Here also water springs are there and the water is considered as a holy one. A pandit was sprinkling this holy water over the devotees. Also from here we can see the beautiful sunset.</p>
+    </div>
+
+    <div class="date-section">
+        <span class="date-header">30/05/2025</span>
+        <span class="location-tag">Bali</span>
+        <img src="\src\content\international\photos\indonesia19.jpg" class="img-placeholder float-right fixed-rotation" onclick="openZoom(this)">
+        <p>After breakfast we went to <span class="highlight">Tanjung Benoa Beach</span>. It is a white sand beach. Beach activities like parasailing, banana boat ride, jet ski are available. In our tour package these three rides were included. But we preferred to do only the banana boat ride. That we did and remaining time we were roaming around the beach.</p>
+        <p>Kesari arranged lunch from Royal Kitchen. They came to the beach and served pani puri, pav bhaji, masala dosa, vegetable biryani and raitha. Also before the lunch they served tender coconut water. This tender coconut was quite big. Around 2 pm we left the beach and after an hour travel, we reached Krishna Mall. It is a big mall mostly selling dresses and souvenirs. Last we went to Royal Orchid massage center. It was an hour session. Whole body massage they do. They are trained professionals. For couples in a room they do. They apply oil on the body and do. After the massage we can take bath. After completion we went to an Indian restaurant and had our dinner.</p>
+    </div>
+
+    <div class="date-section">
+        <span class="date-header">31/05/2025</span>
+        <span class="location-tag">Return Journey</span>
+        <p>The last day of the trip. We reached the airport by 10 am. The airport is well decorated with paintings and carvings. Our flight MH 714 reached Kuala Lumpur, and the connecting flight MH 194 reached Mumbai at 10 pm. We reached home after midnight, happy and proud that we reached back safely without any health issues.</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr><th>Date</th><th>City/Province</th><th>Places Visited</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>24/05/2025</td><td>Jakarta</td><td>Merdeka Square, National Monument</td></tr>
+            <tr><td>25/05/2025</td><td>Bandung</td><td>Hot Springs, Erupted Volcano</td></tr>
+            <tr><td>26/05/2025</td><td>Travel</td><td>Train travel: Bandung to Yogyakarta</td></tr>
+            <tr><td>27/05/2025</td><td>Yogyakarta</td><td>Borobudur Temple, Prambanan Temple Complex</td></tr>
+            <tr><td>28/05/2025</td><td>Travel</td><td>Flight to Bali</td></tr>
+            <tr><td>29/05/2025</td><td>Bali</td><td>Tirta Empul, Rice Terraces, Taman Ayun, Tanah Lot</td></tr>
+            <tr><td>30/05/2025</td><td>Bali</td><td>Tanjung Benoa Beach, Krishna Mall, Massage Center</td></tr>
+            <tr><td>31/05/2025</td><td>Travel</td><td>Return to Mumbai</td></tr>
+        </tbody>
+    </table>
+
+    <div class="summary-box">
+        "From the mist-covered peaks of ancient volcanoes to the sacred springs of 
+        hidden temples, we witnessed a land where deep-rooted faith 
+        and the gentle warmth of the islands flow together like a timeless tide."
+    </div>
+
+</div>
+
+<div id="lightbox">
+    <span id="close-btn" onclick="closeZoom()">&times;</span>
+    <img id="zoom-img" src="">
+</div>
+
+<div class="footer">
+    <p>Captured with pride. Safe travels, always.</p>
+</div>
+
+<script>
+    function openZoom(imgElement) {
+        const lightbox = document.getElementById('lightbox');
+        const zoomImg = document.getElementById('zoom-img');
+        zoomImg.src = imgElement.src;
+        if (imgElement.classList.contains('fixed-rotation')) {
+            zoomImg.classList.add('fixed-rotation');
+        } else {
+            zoomImg.classList.remove('fixed-rotation');
+        }
+        lightbox.style.display = 'block';
+    }
+    function closeZoom() {
+        document.getElementById('lightbox').style.display = 'none';
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === "Escape") closeZoom();
+    });
+</script>
+
+</body>
+</html>
