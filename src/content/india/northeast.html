@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>North East India Travelogue - 2023</title>
+    <style>
+        :root {
+            --ne-green: #2D5A27; /* Deep Tea Garden Green */
+            --ne-bamboo: #D4AF37; /* Bamboo Gold */
+            --ne-rhino: #4A4A4A; /* Stone Grey */
+            --ne-mist: #F0F4F0; /* Soft Mountain Mist */
+            --ne-terracotta: #B35C44; /* Tribal Earth Red */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.5;
+            color: #333;
+            background-color: var(--ne-mist);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-left: 8px solid var(--ne-green);
+            border-right: 8px solid var(--ne-green);
+            position: relative;
+        }
+
+        header {
+            background-color: var(--ne-green);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--ne-bamboo);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            font-weight: 300;
+        }
+
+        .header-dates {
+            margin-top: 10px;
+            display: block;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 25px 40px;
+        }
+
+        .day-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--ne-bamboo);
+            overflow: hidden; /* Clear floats */
+        }
+
+        .date {
+            font-weight: bold;
+            color: var(--ne-terracotta);
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+            text-align: justify;
+        }
+
+        /* Photo Styles */
+        .travel-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            cursor: pointer;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            margin: 10px;
+        }
+        
+        .photo-right { float: right; margin-left: 20px; }
+        .photo-left { float: left; margin-right: 20px; }
+
+        /* Lightbox Overlay */
+        #lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        #lightbox-img { max-width: 90%; max-height: 90%; border: 4px solid white; }
+        #close-btn {
+            position: absolute;
+            top: 20px; right: 30px;
+            color: white; font-size: 50px; font-weight: bold;
+            cursor: pointer; background: none; border: none;
+            line-height: 1;
+        }
+
+        .location-tag {
+            background-color: var(--ne-bamboo);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .summary-box {
+            background-color: var(--ne-green);
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 8px;
+            border: 2px solid var(--ne-bamboo);
+            clear: both;
+        }
+
+        .summary-box h3 {
+            margin-top: 0;
+            color: var(--ne-bamboo);
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.8rem;
+            color: #666;
+            clear: both;
+        }
+
+        @media (max-width: 600px) {
+            .content { padding: 15px 20px; }
+            .container { border: none; }
+            .travel-photo { width: 100%; height: auto; float: none; margin: 10px 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="lightbox-overlay">
+    <button id="close-btn" aria-label="Close photo">&times;</button>
+    <img id="lightbox-img" src="" alt="Zoomed view">
+</div>
+
+<div class="container">
+    <header>
+        <h1>Enchanted North East</h1>
+        <h2>Mizoram | Tripura | Nagaland | Assam</h2>
+        <span class="header-dates">29th April 2023 – 10th May 2023</span>
+    </header>
+
+    <div class="content">
+
+        <div class="day-block">
+            <span class="date">29/04/23</span>
+            <p>This tour was booked through Kesari. It was a trip of 10 days. We were to visit Mizoram, Tripura, Manipur, Nagaland, and Assam. But due to unexpected student agitations in Manipur, the Manipur trip was cancelled. Since the trip began in Mumbai early morning on 30th April, we had to leave Pune on the 29th night after dinner via a cab.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">30/04/23</span>
+            <img src="\src\content\india\photos\northeast1.jpg" class="travel-photo photo-right" alt="Aizawl Arrival">
+            <p>The IndiGo flight left Mumbai at 6:10 am and reached Guwahati at 8:30 am. After a halt of 30 minutes, we proceeded to <span class="location-tag">Aizawl</span>, the capital of Mizoram State. From Guwahati to Aizawl is a 40-minute air travel. We reached Aizawl at 10:20 am. The airport name is Lengpui.</p>
+            <p>In this state, visitors are required to apply for an inner line permit to enter. At the airport, they gave us a form, and after it was duly filled and signed, a copy with the official signature and seal was given back to us.</p>
+            <p>From the airport, we came to the hotel in cabs arranged by Kesari. The hotel name is Floria, located about 20 km away from the airport. Aizawl is a hilly place with an altitude of 4000 ft. The hotel room was good. We had our lunch, and after a brief rest, we went to Lalsavunga Park.</p>
+            <p>The attractive item of the garden is the <span class="highlight">hanging bridge</span>. 
+            <img src="\src\content\india\photos\northeast2.jpg" class="travel-photo photo-left" alt="Hanging Bridge">
+            In this state, people speak a local language called Mizo and English. All display boards are in English; Hindi is not very popular. Roads are very narrow. For the Mizo language, the English script is used. Bamboo plants are grown abundantly. After the visit, we returned to the hotel. The hotel was in the city, and we roamed around the streets, but found nothing new to buy. Dinner was simple, with chapati, Rajma, and gulab jamun, and was quite good.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">01/05/23</span>
+            <p>Morning breakfast was good; puri and sabji were available, along with bread, oats, and fruits. After a heavy breakfast, we proceeded to the <span class="location-tag">Zoological Park of Aizawl</span>. 
+            <img src="\src\content\india\photos\northeast3.jpg" class="travel-photo photo-right" alt="Zoological Park 1">
+            <img src="\src\content\india\photos\northeast4.jpg" class="travel-photo photo-left" alt="Zoological Park 2">
+            It was about 20 km from the hotel. Being Monday morning, traffic was heavy. In this state, people have a lot of traffic sense. Motorists and bikers adhere to traffic rules. Unnecessary overtaking, rash driving, and driving on the footpath were not seen. Pedestrians are respected.</p>
+            <p>We reached the park around 10 am and walked around for about 3 km. In the park, we saw different birds, a tiger, snakes, etc. We took tea. This park was almost like a forest, full of trees and bushes; walking was enjoyable. We spent around 2 hours in this park.</p>
+            <p>Then we proceeded to the famous <span class="location-tag">Solomon's Temple</span>. 
+            <img src="\src\content\india\photos\northeast5.jpg" class="travel-photo photo-right" alt="Solomon's Temple">
+            It is a beautiful church in the valley called Kidron. Construction of this temple started in Dec 1996 and took nearly 20 years to complete. A nice garden is maintained around this beautiful church.</p>
+            <p>After the church, we went to the Mizoram State Museum. It is not a big one; a few textile items, tribal weapons, and photographs of late leaders of Mizoram were kept. After the museum, we returned to the hotel and had lunch—dal, chapati, mixed vegetable sabji, and ice cream were served. The corn soup was good. In the evening, we went around the street market called Bara Bazaar, but we didn't see anything great and didn't buy anything.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">02/05/23</span>
+            <p>After breakfast, we left Hotel Floria for the airport, an hour's travel. Our next destination was Agartala. It was not a direct flight; we took a flight from Aizawl to Kolkata, reaching there around 1 pm. We had veg pizza at the airport for lunch. The flight to <span class="location-tag">Agartala</span> was on time, and we reached around 4:30 pm. The airport name is Maharaja Bir Bikram Airport. Kesari arranged cars for the group. On the way to the hotel, we took coffee.</p>
+            <p>While traveling from the airport to the hotel, I observed that the city is clean. I didn't see heaps of plastic waste or garbage accumulations. Also, motorcyclists and car drivers meticulously observe traffic rules; I never saw any overtaking or signal breaking. Our stay was arranged at Hotel Polo Towers, about a 30-minute drive from the airport. The hotel was too good. The room was very spacious with rich furniture, centralized air conditioning, powerful Wi-Fi, and luxurious overall. Dinner was served between 7:30 to 10 pm and was rich with a variety of dishes. Pani puri was the special item; rasgulla and many more sweets were kept for dinner.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">03/05/23</span>
+            <p>Breakfast at this hotel was rich, featuring South Indian dishes like idli, vada, masala dosa, and uthappam, alongside different types of cakes, bread, cornflakes, and oats. After breakfast, we traveled some 50 km to <span class="location-tag">Udaipur</span> and visited the <span class="highlight">Tripura Sundari Temple</span>. 
+            <img src="\src\content\india\photos\northeast6.jpg" class="travel-photo photo-left" alt="Tripura Sundari Temple">
+            This is one among the 51 Shakti Peethas. The temple was not very crowded, and there is a big lake in front of it.</p>
+            <p>After the temple visit, we traveled around 30 km to see <span class="location-tag">Neermahal</span>. 
+            <img src="\src\content\india\photos\northeast7.jpg" class="travel-photo photo-right" alt="Neer Mahal">
+            The Mahal is beautiful. It was a palace built by Bir Bikram Kishore Manikya, constructed by the British company Martin and Burns. Construction started in 1930 and was completed by 1938 at a cost of 10 lakhs. This palace has 24 rooms and amazingly still looks pretty new. There are gardens around it and white marble flooring. The palace is in the middle of a lake, and we took a 30-minute boat ride to reach it.</p>
+            <p>Then we proceeded to the Agartala State Museum, where photography is strictly prohibited. This museum mostly exhibits the culture of the tribes of the North East states. As this state borders Bangladesh, the exhibition also describes the 1971 Indo-Pak war and the refugees who came to Tripura. After the museum, we went to the Ujjayanta Palace. A few people went to Agartala Bazaar afterward, but we skipped the shopping and returned to the hotel.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">04/05/23</span>
+            <p>The most important program was the visit to the <span class="location-tag">Unakoti Rock Carvings</span>. 
+            <img src="\src\content\india\photos\northeast8.jpg" class="travel-photo photo-left" alt="Unakoti Carvings 1">
+            <img src="\src\content\india\photos\northeast9.jpg" class="travel-photo photo-right" alt="Unakoti Carvings 2">
+            <img src="\src\content\india\photos\northeast10.jpg" class="travel-photo photo-left" alt="Unakoti Carvings 3">
+            People come from all over the world to see these, as they are considered the largest in Asia. Unakoti is about 50 km from Agartala. We left the hotel at 6 am with packed breakfasts. After an hour's drive, we had tea at a roadside stall. Unlike other states, there are very few tea or coffee shops here, and even those use milk powder. We never got a good tea or coffee in the whole North East. The weather was good—not very hot and drizzling slightly.</p>
+            <p>In some places, the road was very bad due to rain; in some diversions, the mud road became so slurry that cars moved with great difficulty. Somehow, without any bad adventures, we reached Unakoti. Unakoti means "one less than a crore," and it is believed there are 9,999,999 carvings here. It took nearly 3 hours to see them completely. Cameras are not allowed, only mobile photos. The carvings of Lord Ganesh, Lord Shiva, and Lord Vishnu are famous. After seeing the carvings, we had lunch at a roadside hotel and took a different route back, reaching the hotel around 6 pm.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">05/05/23</span>
+            <p>Because of the unrest and curfew at Imphal, our Manipur visit was cancelled. Consequently, we stayed one more day in Agartala and visited the <span class="location-tag">Bamboo Village</span>. 
+            <img src="\src\content\india\photos\northeast11.jpg" class="travel-photo photo-right" alt="Bamboo Village">
+            It is about an hour from the main city near the India-Bangladesh border. It is a large bamboo farm with many interesting things made entirely of bamboo: bridges, cane furniture, swings, watchtowers, and a cottage. They also sell bamboo articles like baskets and trays.</p>
+            <p>Next, we visited the Durgabari Tea Factory. They showed us the complete process of how tea dust is made from freshly plucked leaves. We bought some freshly processed tea dust. We returned to the hotel for lunch, and after a rest, left at 3:30 pm for the <span class="location-tag">India-Bangladesh Border Checkpost</span>. 
+            <img src="\src\content\india\photos\northeast12.jpg" class="travel-photo photo-left" alt="Agartala Border">
+            People with valid visas can cross here. Flag hoisting ceremonies take place on Saturdays and Sundays. We took photos there.</p>
+            <p>Finally, we visited <span class="highlight">Heritage Park</span>. 
+            <img src="\src\content\india\photos\northeast13.jpg" class="travel-photo photo-right" alt="Heritage Park">
+            This park exhibits all the important places of Tripura state in miniature form. It was very interesting.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">06/05/23</span>
+            <p>With the Manipur visit cancelled, Kesari modified the plan to fly to Guwahati and then to Dimapur. We flew Akasa Air from Agartala to <span class="location-tag">Guwahati</span>. We left the hotel after breakfast at 10 am, collected packed lunches, and reached the airport by 1 pm. Due to technical snags, the flight was 3 hours late. Akasa Air provided free snacks and tea. We eventually boarded at 6:30 pm and reached Lokpriya Gopinath Bordoloi International Airport.</p>
+            <p>We reached Hotel Oriental Grand in a 20-seater van after an hour's travel. It was a posh hotel with spacious rooms and a wide variety of dinner dishes. Though our stay was less than 12 hours, it was memorable, especially the live music during dinner.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">07/05/23</span>
+            <p>We woke up early and had breakfast at 7 am before leaving for the <span class="location-tag">Kamakhya Temple</span>. 
+            <img src="\src\content\india\photos\northeast14.jpg" class="travel-photo photo-left" alt="Kamakhya Temple">
+            This temple is the first among the 51 Shakti Peethas. There were nice arrangements, and we had a good darshan. After the visit, we reached the airport at 10:30 am for our flight to Dimapur. Again, the flight was late, leaving at 1:45 pm instead of 12:20 pm. The travel time was 40 minutes.</p>
+            <p>We reached Dimapur by 2:45 pm and proceeded to <span class="location-tag">Kohima</span> in five Innova cars. It is 60 km from Dimapur airport. We had lunch at an ordinary but good hotel on the way and reached Kohima around 7 pm. We stayed at Hotel De Oriental Grand, which was good.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">08/05/23</span>
+            <p>After breakfast, we left the hotel to visit the <span class="location-tag">Nagaland Heritage Village</span> (Kisama). 
+            <img src="\src\content\india\photos\northeast15.jpg" class="travel-photo photo-right" alt="Nagaland Heritage Village">
+            Many tribal communities stay in Nagaland, each with a different culture, and this exhibition depicts them. We spent an hour there and then left for the Kohima Cathedral Church, a very large church built by Father Abraham from Kerala. Afterward, we visited the <span class="highlight">War Cemetery</span>. 
+            <img src="\src\content\india\photos\northeast16.jpg" class="travel-photo photo-left" alt="War Cemetery">
+            This cemetery was created by the British to honor soldiers who died during WWII. I found many graves of young soldiers aged 19 to 23, both British and Indian.</p>
+            <p>In Kohima, roads are narrow and people park their cars on the road, yet they have great patience and traffic sense. Overtaking or breaking the queue is rare. Movement was slow, and it took a long time to reach the Assam border. We had lunch at a roadside hotel before entering Assam. From Kohima to <span class="location-tag">Jorhat</span> is around 150 km. The road was not too bad, and we reached by 5:30 pm. We stayed at the <span class="highlight">Kaziranga Golf Resort</span>, which was in a tea estate. The cottage was too good, and a beautiful garden was maintained. Kesari organized a gathering with games, followed by a good dinner at 9 pm.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">09/05/23</span>
+            <p>After breakfast, we proceeded to <span class="location-tag">Majuli Island</span>. 
+            <img src="\src\content\india\photos\northeast17.jpg" class="travel-photo photo-right" alt="Majuli Island">
+            This island is in the Brahmaputra River, an hour's travel from the hotel. Like the Ganga, there are many ghats for ferries; we boarded at Nimati Ferry Ghat. Kesari booked tickets on a large ferry that carries motorcycles and cars. The hour-long sail on the two-deck ferry started at 9:30 am. We reached Kamala Bari Ghat. Majuli is about 10 km wide and 50 km long.</p>
+            <p>The island features only Vishnu (Lord Krishna) temples, maintained by celibate Vaishnavas who stay in houses around the temples. There are 36 Krishna temples here. We visited <span class="highlight">Auniati Satra</span>. 
+            <img src="\src\content\india\photos\northeast18.jpg" class="travel-photo photo-left" alt="Auniati Satra">
+            "Satra" indicates a sacred place. The main deity was brought from Puri. There were no restrictions on photos. We also visited the small Krishna museum in the complex. Black rice is popular here, and they make kheer from it. Next was <span class="highlight">Kamala Bari Satra</span>, where only the Bhagavad Gita is worshiped instead of a deity.</p>
+            <p>We then went to the mask-making center managed by Hemant Goswami, a 2023 Padmashree award winner. They make masks of legendary heroes for dramas, an art dating back to the 17th century. Sadly, the award winner lives in poor conditions, though some tourists donated money. After a typical village lunch of chapati, dal, and rice, we returned via ferry to Jorhat. The return trip took 30 minutes longer against the river flow. We reached Nimati Ghat by 5:30 pm and returned to the resort.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">10/05/23</span>
+            <img src="\src\content\india\photos\northeast18.jpg" class="travel-photo photo-right" alt="Final Day">
+            <p>We woke up around 5:30 am. Here, the sun rises between 4:30 to 5 am, so it was very bright. After coffee, we walked around 4,000 steps, had a heavy breakfast, and collected some plants and "suntaikai." By 11 am, we left for Jorhat airport. The flight to Kolkata was 45 minutes, followed by a 2.5-hour flight to Mumbai. We reached Mumbai at 9 pm and took a cab to Pune, arriving home by 12:30 am.</p>
+            <p>This eleven-day trip was good, and fortunately, we didn’t have any health issues during this trip and safely returned back home.</p>
+        </div>
+
+        <div class="summary-box">
+            <h3>Journey Reflection</h3>
+            <p>This 11-day odyssey through the Seven Sisters was a profound experience of culture, discipline, and natural beauty. From the narrow, respectful streets of Aizawl to the ancient rock carvings of Unakoti and the spiritual satras of Majuli, the journey showcased a side of India where tradition and traffic sense go hand in hand. Despite the unforeseen cancellation of the Manipur leg, the warmth of the hospitality and the serenity of the tea estates in Assam provided a perfect conclusion to a safe and memorable exploration of the North East.</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    const overlay = document.getElementById('lightbox-overlay');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.getElementById('close-btn');
+    const photos = document.querySelectorAll('.travel-photo');
+
+    photos.forEach(photo => {
+        photo.addEventListener('click', () => {
+            overlay.style.display = 'flex';
+            lightboxImg.src = photo.src;
+            lightboxImg.alt = photo.alt;
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        overlay.style.display = 'none';
+    });
+
+    // Close on clicking outside the image
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            overlay.style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travelogue | Shegaon Diary</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --shegaon-orange: #FF8C00;
+            --temple-gold: #FFD700;
+            --marble-white: #FDFAFA;
+            --ink: #2D3436;
+            --terracotta: #E2725B;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: #FFF9F2;
+            color: var(--ink);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        .header-banner {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1590059302830-798836ec363e?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            border-bottom: 5px solid var(--temple-gold);
+        }
+
+        .header-banner h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: white;
+        }
+
+        .header-banner p.header-dates {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin: 8px 0 0 0;
+            color: #FFFFFF;
+            opacity: 1;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 30px auto 50px;
+            background: white;
+            padding: 40px 60px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            overflow: hidden; /* Clear floats */
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: var(--shegaon-orange);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            clear: both;
+        }
+
+        section {
+            margin-bottom: 35px;
+            border-bottom: 1px solid #F1F1F1;
+            padding-bottom: 20px;
+            overflow: hidden; /* Ensures section contains floated images */
+        }
+
+        section:last-of-type { border-bottom: none; }
+
+        p {
+            line-height: 1.65;
+            font-size: 1.05rem;
+            color: #444;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* PHOTO STYLING */
+        .travel-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 4px solid white;
+            background: #eee;
+        }
+
+        .travel-photo:hover {
+            transform: scale(1.02);
+        }
+
+        .photo-left {
+            float: left;
+            margin: 10px 20px 10px 0;
+        }
+
+        .photo-right {
+            float: right;
+            margin: 10px 0 10px 20px;
+        }
+
+        /* LIGHTBOX STYLING */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            align-items: center;
+            justify-content: center;
+        }
+
+        #lightbox-img {
+            max-width: 90%;
+            max-height: 80%;
+            border: 5px solid white;
+        }
+
+        #close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 50px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            line-height: 1;
+        }
+
+        .highlight-box {
+            background-color: #FFF4E6;
+            border-left: 5px solid var(--shegaon-orange);
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-style: italic;
+            font-size: 1rem;
+            clear: both;
+        }
+
+        .summary-container {
+            background: linear-gradient(135deg, var(--shegaon-orange), var(--terracotta));
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 40px;
+            clear: both;
+        }
+
+        .summary-container h3 {
+            font-family: 'Playfair Display', serif;
+            margin-top: 0;
+            font-size: 1.6rem;
+        }
+
+        .summary-container p {
+            color: white;
+            opacity: 1;
+            font-size: 1.1rem;
+            text-align: left;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 25px; width: 92%; }
+            .header-banner h1 { font-size: 2.2rem; }
+            .travel-photo {
+                width: 100%;
+                height: auto;
+                float: none;
+                margin: 15px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="lightbox">
+        <button id="close-btn" onclick="closeLightbox()">&times;</button>
+        <img id="lightbox-img" src="" alt="Zoomed Photo">
+    </div>
+
+    <div class="header-banner">
+        <h1>SHEGAON</h1>
+        <p class="header-dates">19th June 2023 – 23rd June 2023</p>
+    </div>
+
+    <div class="container">
+        
+        <section>
+            <div class="date-badge">19 June 2023</div>
+            <p>Left home by 8 pm. Surprisingly, Uber arrived a minute after booking. The train name is Pune Amravati Express Special. Pune station was very crowded. As usual, only at the eleventh hour did they announce the boarding platform number. Fortunately, it was the first platform, so we did not need to run around. It was supposed to leave at 9:55 pm, but it was delayed by 20 minutes.</p>
+        </section>
+
+        <section>
+            <div class="date-badge">20 June 2023</div>
+            <p>Had a good sleep on the train. I only got up in the morning and realized that the train was running late by almost 3 hours. No tea! It seems the Railway stopped all unauthorized vendors from selling things on the train. I didn't see any vendors throughout the journey. This train doesn't have a pantry car, so neither train service nor local services were available.</p>
+            <p>One surprising thing is the cleanliness. Train stations are well-maintained. Nowhere were there heaps of garbage. At last, we reached Shegaon around 10 am. The station was very clean. In this region, all stations have ramps apart from the staircase to cross railway lines. So, one need not struggle to lift suitcases; we can drag them.</p>
+            <p>Lakshmi had a cup of tea. Shekhar came to receive us. His home is around 5 km from the station and is well-kept. A small garden is maintained on the front side. The weather is quite hot—more than in Pune. Now, Pune’s temperature is around 30°C, but here it is above 40°C. In Shekhar's home, they have one air cooler and a split AC.</p>
+            <p>Anuradha is always cordial and welcoming. She made a nice lunch of dal, chapati, potato subji, and mango pulp. Shekhar, after leaving us at home, left for the college. In the afternoon, Lakshmi was interacting with Anu while I took some rest. In the evening, Shekhar returned from college and Avanti also came back from school.</p>
+            
+            <div class="highlight-box">
+                "Around 6:30 pm, we left for the temple. The temple is around 5 km away from his home."
+            </div>
+            
+            <img src="\src\content\temples\photos\shegaon1.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Gajanan Maharaj Temple Reference">
+            
+            <p>This temple is dedicated to Saint Gajanan Maharaj. A proper queue system is in place, and it was moderately crowded. In most places, AC and air coolers were kept. We stood for about 20 minutes in the queue. The temple is made out of marble. Around the temple, beautiful accommodation facilities are provided. Here, rooms are booked on a day-to-day basis; online booking is not available. These accommodations are meant exclusively for people visiting the temple.</p>
+            <p>After darshan, we took Mahaprasad in the temple. We returned home around 9:30 pm. Sekar spared his bedroom for us. In spite of repeated requests, he compelled us to take it since that room had AC. Even though the AC was on, it was quite hot at night. The temperature must have been around 40°C. However, the morning weather was a little bit cooler, and I could sleep for a few hours. Tomorrow morning, we go to Anand Sagar, the other part of this sansthan.</p>
+        </section>
+
+        <section>
+            <div class="date-badge">21 June 2023</div>
+            <img src="\src\content\temples\photos\shegaon2.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Shegaon 21/06/23">
+            <p>I got up around 7 am. Anuradha made tea. After a bath, Anuradha made a nice breakfast. She made dhokla; it was quite good. We also had kachori bought from outside. In Shegaon, they prepare and sell them in every nook and corner. It is famous here. It is true that these kachoris are different from Pune kachoris!</p>
+            
+            <img src="\src\content\temples\photos\shegaon3.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Shegaon 21/06/23">
+            <p>Around 10 am, we left for Anand Sagar. It is just half a kilometer from Shekhar's home. Here, different types of rooms are available: AC rooms, non-AC rooms, and dormitories. We took an AC room as we wanted the ground floor. At last, we got an AC room on the ground floor. In this room, there are three beds, a split-type AC, and an attached bath. There are also rooms with common bathrooms. We occupied the room around 10:30 am.</p>
+            
+            <img src="\src\content\temples\photos\shegaon4.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Shegaon 21/06/23">
+            <p>The room charge is very nominal; they charge Rs 900 per day. While booking, they book for only one day, but we can extend if we want to stay more days. The whole premises is very clean; even dry leaves are picked up now and then. In the premises, canteens are available where they also charge very nominally. Since the whole place is green and clean, it is the best place for walking. Only thing is, we should avoid summer.</p>
+            
+            <img src="\src\content\temples\photos\shegaon5.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Shegaon 21/06/23">
+            <p>Anuradha came to our room around 11:30 am. In the canteen, lunch is served from 11:30 am to 2 pm. Around 1 pm, we went to the canteen. For lunch, they serve chapati, dal, subji, and a sweet similar to sheera. Rice is also served. After lunch, we took rest until 3 pm and then went around Anand Sagar.</p>
+            <p>After tea, we walked to Anand Sagar from Anand Vihar (where we stayed). It is about 2 km. Auto-rickshaws are also available. But when we reached there, it was closed. It is kept open only from 10 am to 4 pm. Then, from there, we proceeded to the Mahalaxmi temple. It is about 2 km from Anand Sagar. This temple is a newly constructed one.</p>
+            <p>Then we came to Shekhar's home, and Anuradha made khichdi and kadhi. After dinner, we returned to our room. Shekhar dropped us off. Even though the ambient temperature was above 40°C, because of the AC, the room was quite chill and I slept well the whole night.</p>
+        </section>
+
+        <section>
+            <div class="date-badge">22 June 2023</div>
+            <img src="\src\content\temples\photos\shegaon6.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Shegaon 22/07/23">
+            <p>I got up around 7 am. Had coffee and did a little walking. Shekhar came to the room around 8 am. We all went to the temple again. Being Thursday, there was a big queue. We stood for about an hour and had darshan.</p>
+            
+            <img src="\src\content\temples\photos\shegaon7.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Shegaon 22/07/23">
+            <p>Around 10 am, Shekhar dropped us at home. Anuradha, Avanti, and we took an auto and went to Anand Sagar. It was open only partially. Since the canteen of Anand Vihar was closed by 11 am, we could not take breakfast there. We took kachori from a roadside stall (it seems kachori is the main food of Shegaon people). It was good and cheap. We saw the Ganesh temple and Shiva temple. Most of the other things, like the lake, were under renovation.</p>
+            
+            <img src="\src\content\temples\photos\shegaon8.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Shegaon 22/07/23">
+            <p>After that, we returned to our room. In the canteen, we took lunch and rested. In the evening, we had coffee. Shekhar came back around 5:30 pm.</p>
+            <p>Then we went to Nagazari to visit Gomati Maharaj, the Guru of Gajanan Maharaj. It is about 10 km from our room. Then we went to Bhangat Sadan. In this place, Gajanan Maharaj lived and performed miraculous things. Then we proceeded to Krishnaji Mala; he was also a Saint and did miraculous things. There, they provided us food. Then we proceeded to Shekhar's home and had milk before returning to our room.</p>
+        </section>
+
+        <section>
+            <div class="date-badge">23 June 2023</div>
+            <p>In the morning, we walked around 3 km within the premises. There was a long queue for breakfast. I stood in the queue and had upma. By 9:30 am, Shekhar came and took us to his home. Anu also gave us breakfast again. Around 1 pm, we had our lunch. Anu prepared an elaborate lunch: puran poli with milk, rasmalai, special brinjal masala, dal, chapati, rice, and curd. After the delicious lunch, we rested until 4 pm.</p>
+            <p>Around 6:30 pm, we went to the station with Anu and Shekhar. On the way, Shekhar bought kachori for us and also bought fresh groundnuts. The train was on time. Shekhar helped us in shifting the suitcases onto the train. The journey was good. The train reached Pune the next morning—actually, it reached before the scheduled time. We took an auto and reached home around 7 am.</p>
+        </section>
+
+        <div class="summary-container">
+            <h3>Reflections on the Journey</h3>
+            <p>Overall, the trip was good and memorable. From the spiritual serenity of Gajanan Maharaj’s marble temple to the lush, well-maintained landscapes of Anand Sagar, Shegaon left a lasting impression. Despite the intense summer heat exceeding 40°C, the warmth of Shekhar and Anuradha’s hospitality, the delicious local kachoris, and the efficient cleanliness of the city made this a truly special experience.</p>
+        </div>
+
+    </div>
+
+    <script>
+        gsap.from(".container", { opacity: 0, y: 30, duration: 1, delay: 0.3 });
+
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        // Close when clicking outside the image
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target !== document.getElementById('lightbox-img')) {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>

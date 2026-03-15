@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>North India Travelogue: Dalhousie, Dharamshala, and Amritsar</title>
+    <style>
+        :root {
+            --himachal-blue: #2A5A9F; /* Deep Sky Blue */
+            --punjab-saffron: #FF9933; /* Saffron/Kesari */
+            --golden-yellow: #FFD700; /* Temple Gold */
+            --mountain-mist: #F4F7F6; /* Off-white mist */
+            --forest-green: #1B4D3E; /* Pine tree green */
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--mountain-mist);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-top: 10px solid var(--punjab-saffron);
+            position: relative;
+        }
+
+        header {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1573072230800-998056291a27?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--golden-yellow);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            margin-top: 10px;
+            font-weight: 300;
+            color: var(--golden-yellow);
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .day-entry {
+            margin-bottom: 20px;
+            border-left: 4px solid var(--himachal-blue);
+            padding-left: 20px;
+            overflow: hidden; /* Clear floats */
+        }
+
+        .date-header {
+            font-weight: bold;
+            color: var(--himachal-blue);
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        /* Photo Styles */
+        .travel-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            cursor: pointer;
+            border: 4px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            margin-bottom: 10px;
+        }
+        
+        .photo-left { float: left; margin-right: 20px; }
+        .photo-right { float: right; margin-left: 20px; }
+
+        /* Lightbox Overlay */
+        #lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        #lightbox-img { max-width: 90%; max-height: 90%; border: 5px solid white; }
+        #close-btn {
+            position: absolute;
+            top: 20px; right: 40px;
+            background: none; border: none;
+            cursor: pointer; padding: 0;
+        }
+        .cross-icon {
+            color: white; font-size: 60px; font-weight: 100; font-family: Arial, sans-serif;
+        }
+
+        .location-highlight {
+            color: var(--forest-green);
+            font-weight: bold;
+        }
+
+        .summary-box {
+            background-color: var(--himachal-blue);
+            color: white;
+            padding: 25px;
+            margin-top: 40px;
+            border-radius: 5px;
+            border-left: 10px solid var(--punjab-saffron);
+            clear: both;
+        }
+
+        .summary-box h3 {
+            margin-top: 0;
+            color: var(--golden-yellow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #777;
+            background-color: #eee;
+            clear: both;
+        }
+
+        @media (max-width: 600px) {
+            .content { padding: 15px; }
+            h1 { font-size: 1.8rem; }
+            .travel-photo { width: 100%; height: auto; float: none; margin: 10px 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="lightbox-overlay">
+    <button id="close-btn"><span class="cross-icon">&times;</span></button>
+    <img id="lightbox-img" src="" alt="Zoomed Photo">
+</div>
+
+<div class="container">
+    <header>
+        <h1>Punjab-Himachal Unveiled</h1>
+        <div class="subtitle">Dalhousie, Dharamshala, and Amritsar</div>
+        <div class="date-range">7th March to 14th March 2022</div>
+    </header>
+
+    <div class="content">
+
+        <div class="day-entry">
+            <span class="date-header">07/03/2022: The Journey to the Hills</span>
+            <p>On 7th March 2022 at 4:30 am, we left home via a booked cab. We reached Mumbai Airport (Terminal 1), also called the Domestic Airport, around 7:30 am. Flight to <span class="location-highlight">Amritsar</span> was on time. Travel time from Mumbai to Amritsar is around 2 hours. We reached Amritsar at 1:15 pm, where a Kesari representative was waiting at the airport.</p>
+            <p>We boarded the bus around 2 pm. The weather was not hot. <span class="location-highlight">Dalhousie</span> is 210 km from Amritsar. In the bus, there were no curtains, no music system, and no TV; these are the stipulations of Punjab state. Kesari arranged lunch at a hotel on the way, and the food was good. In this group, there were only 20 people, mostly Maharashtrians. We were the last two to join and had to sit at the rear side of the bus, but still, the journey was not bad.</p>
+            <p>After lunch, we proceeded to Dalhousie. From <span class="location-highlight">Pathankot</span>, the ghat road starts. Pathankot is in Punjab, and Dalhousie is in Himachal Pradesh. Being a ghat road, the journey from Pathankot to Dalhousie took 4 hours, despite being only 70 km away. We reached Dalhousie around 9 pm.</p>
+            <p>Dalhousie was quite chilly, and the ambient temperature was below 10°C. We were accommodated in Indraprastha Resort. The hotel and environment were good. After the room allotment, we had our dinner, which was delicious. The room was quite spacious and warm. Because of the long travel, we were tired, and the comfortable room ensured we had a sound sleep.</p>
+        </div>
+
+        <div class="day-entry">
+            <span class="date-header">08/03/2022: The Mini Switzerland</span>
+            <p>In Himachal Pradesh, roads are narrow. I find the drivers here to be very skilled; despite the narrow roads, hairpin bends, and the lack of parapet walls over the edges, they still manage to drive even big trucks and buses. Kesari arranged cabs for visiting places instead of the bus. After a heavy breakfast, we left the hotel and proceeded to <span class="location-highlight">Chamba Valley</span>, which is around a 2-hour travel. We visited the <span class="location-highlight">Lakshmi Narayan Temple</span>. 
+            <img src="\src\content\india\photos\punjab1.jpg" class="travel-photo photo-right" alt="Lakshmi Narayan Temple">
+            </p>
+            <p>Then we proceeded to <span class="location-highlight">Khajjiar</span>. On the way, we had our lunch. Khajjiar is a place surrounded by mountains with a small lake. In winter, the mountains are covered by ice and it looks like Switzerland, so this place is called "Mini Switzerland." There is also a Naga temple. We spent an hour here. Lakshmi may never forget this place; as we wanted to walk around the lake, the lawn was pretty wet and slippery. She slipped and suffered minor internal damage to her wrist, and the pain troubled her throughout the trip. After returning to Pune, she had to see a physician for treatment. After that, we headed back to the hotel, taking a 15-minute coffee break on the way.</p>
+        </div>
+
+        <div class="day-entry">
+            <span class="date-header">09/03/2022: The Eternal Flame</span>
+            <p>After breakfast, we left Dalhousie. <span class="location-highlight">Dharamshala</span> is quite far from Dalhousie. Being a ghat road, it took about 9 hours. On the way, after lunch, we visited the <span class="location-highlight">Jwala Mukhi Temple</span>. This is one among the 52 Shakti Peethas. Fortunately, there was no crowd, so we could properly see the temple. Here, we saw flames coming from holes in the rock in three different places. We also saw the golden "chhatri" presented by Akbar the Great. After the temple visit, we proceeded to Dharamshala, reaching the Angel Inn hotel around 7 pm.</p>
+        </div>
+
+        <div class="day-entry">
+            <span class="date-header">10/03/2022: Mountains and Monasteries</span>
+            <p>Our stay in Dharamshala was at the Angel Inn, which was quite good and the food was pleasant. After breakfast around 9 am, we left the hotel and proceeded to the <span class="location-highlight">Dharamshala Stadium</span>. 
+            <img src="\src\content\india\photos\punjab2.jpg" class="travel-photo photo-left" alt="Dharamshala Stadium">
+            It is about 30 minutes away. The stadium, with the background of Himalayan mountains covered in ice, looks beautiful.</p>
+            <p>Next, we went to the <span class="location-highlight">Aghanjar Mahadev Mandir</span>. 
+            <img src="\src\content\india\photos\punjab3.jpg" class="travel-photo photo-right" alt="Ajankar Mahadev Mandir">
+            It is a beautiful temple surrounded by waterfalls, rocks, and trees. We spent quite some time enjoying the natural surroundings. We then returned to the hotel for a lavish dinner; a special item was the cashew nut and bitter gourd (karela) sabji. Afterward, we visited the Bhagsunag Temple and the Dalai Lama Monastery. We were later dropped at the McLeod Ganj market before returning to the hotel.</p>
+        </div>
+
+        <div class="day-entry">
+            <span class="date-header">11/03/2022: The Holy City of Amritsar</span>
+            <img src="\src\content\india\photos\punjab4.jpg" class="travel-photo photo-left" alt="Amritsar Arrival">
+            <p>At 7 am, we had our breakfast and proceeded to Amritsar. It is some 200 km away, taking about 6 hours with two breaks for tea. Around 2 pm, we reached Amritsar and were accommodated in a humble hotel 5 km away from the railway station. After lunch, we left the hotel by auto-rickshaw to see <span class="location-highlight">Jallianwala Bagh</span>. 
+            <img src="\src\content\india\photos\punjab5.jpg" class="travel-photo photo-right" alt="Jillianwalla Bagh">
+            We spent an hour visiting the galleries and the well where people jumped in to save themselves from gunshots, but died.</p>
+            <p>After this infamous place, we went to the <span class="location-highlight">Golden Temple</span>. 
+            <img src="\src\content\india\photos\punjab6.jpg" class="travel-photo photo-left" alt="Golden Temple">
+            There was a big crowd. Masks were strictly prohibited. Without masks, we stood for an hour in that crowd. To add to the tension, a neighboring Sardarji was sneezing constantly. At last, we entered the sacred place where prayer was going on continuously. Then we came out of the dome and spent an hour sitting on the premises taking pictures. On the way to the auto stand, we had a very delicious Lassi from a shop. Then we visited the Gobindgarh Fort, where a light show depicted the history of Punjab before independence. After the show, we returned to the hotel for dinner.</p>
+        </div>
+
+        <div class="day-entry">
+            <span class="date-header">12/03/2022: The Border and Village Culture</span>
+            <img src="\src\content\india\photos\punjab7.jpg" class="travel-photo photo-right" alt="Attari Border/Sadda Pind">
+            <p>Since morning there was no program we got up late. After the breakfast we roam around hotel. After lunch we left hotel and proceeded to see India Pakistan border. Atari is the village of India which is on the Border. Wagah is a village of Pakistan. Every evening both armies participate in their territories parades, and lowering their flags at sunset time. We witnessed this famous program some 20 years back through southern travels.</p>
+            <p>After this event we went to Sadda Pind, where Punjabi village culture is exhibited. They also serve food in typical village style. This was the last program of the tour. The food and exhibits were okay, but we felt the entrance fee of Rs 700 per head was too costly.</p>
+        </div>
+
+        <div class="day-entry">
+            <span class="date-header">13/03/2022: A Precious Reunion</span>
+            <img src="\src\content\india\photos\punjab8.jpg" class="travel-photo photo-left" alt="Khanna Family Reunion">
+            <p>We got up leisurely around 7 am, went for a morning stroll, and had breakfast. Around 11 am, Shri RP Khanna came to the hotel. He was so happy to receive us, and we went to his home. Mrs. Khanna was equally happy to greet us. He is nearing 80, and because of a spinal problem, he finds it difficult to walk. Despite his health ailments, he came all the way to the hotel to receive us. We talked continuously about old memories and ate until 2 pm. Then we had lunch which he ordered from a hotel. After tea, he dropped us at the station around 5 pm. In the whole tour, the time we spent with them is most precious to me. He was my boss, and his affinity towards us is great.</p>
+            <p>We took the Golden Temple Express to Nizamuddin from Amritsar. The train was on time. Because of the heavy late lunch, we skipped dinner.</p>
+        </div>
+
+        <div class="day-entry">
+            <span class="date-header">14/03/2022: The Journey Home</span>
+            <img src="\src\content\india\photos\punjab9.jpg" class="travel-photo photo-right" alt="Duronto Express Journey">
+            <p>Reached Nizamuddin around 4 am. With the help of a porter, we reached the right platform to board the Duronto to Pune. The train was on time and departed at 6:15 am. This train was so cool—no crowd and no stoppages in between. We were constantly given things to eat and drink. Next day early morning around 3 am, we reached Pune. Overall, the trip was quite enjoyable.</p>
+        </div>
+
+        <div class="summary-box">
+            <h3>Reflections on the Journey</h3>
+            <p>This trip was a beautiful tapestry of spiritual fervor, historical gravity, and the enduring warmth of old friendships. From the winding, parapet-less roads of the Himachal ghats to the golden glow of Amritsar, the journey tested our endurance but rewarded us with breathtaking views of the Dhauladhars and the sacred flames of Jwala Mukhi. While the physical toll was felt—especially by Lakshmi in Khajjiar—the spirit remained high. The highlight, however, wasn't a monument, but the precious hours spent with Shri RP Khanna, proving that the best part of travel is often the people we reconnect with along the way.</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    const overlay = document.getElementById('lightbox-overlay');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.getElementById('close-btn');
+    const photos = document.querySelectorAll('.travel-photo');
+
+    photos.forEach(photo => {
+        photo.addEventListener('click', () => {
+            overlay.style.display = 'flex';
+            lightboxImg.src = photo.src;
+            lightboxImg.alt = photo.alt;
+        });
+    });
+
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        overlay.style.display = 'none';
+    });
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            overlay.style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rann Utsav & Statue of Unity: A Gujarati Odyssey</title>
+    <style>
+        :root {
+            --desert-white: #F8F9FA;
+            --kutchi-red: #B22222;
+            --sunset-orange: #FF8C00;
+            --royal-blue: #1A5276;
+            --sand-gold: #D4AC0D;
+        }
+
+        body {
+            font-family: 'Segoe UI', Candara, 'Bitstream Vera Sans', 'DejaVu Sans', 'Bitstream Vera Sans', 'Trebuchet MS', Verdana, 'Verdana Ref', sans-serif;
+            line-height: 1.4;
+            color: #333;
+            background-color: #fdf5e6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-top: 8px solid var(--kutchi-red);
+            position: relative;
+        }
+
+        header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1590050752117-23a9dcc366ed?auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--sand-gold);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            margin-top: 10px;
+            color: var(--sand-gold);
+        }
+
+        .content {
+            padding: 25px 40px;
+        }
+
+        .day-section {
+            margin-bottom: 20px;
+            border-left: 3px solid var(--sunset-orange);
+            padding-left: 20px;
+            overflow: hidden; /* Clear floats for natural photo look */
+        }
+
+        .date-header {
+            font-weight: bold;
+            color: var(--royal-blue);
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 5px;
+            text-decoration: underline;
+        }
+
+        p {
+            margin-bottom: 8px;
+            text-align: justify;
+        }
+
+        /* Photo Styles */
+        .travel-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            cursor: pointer;
+            border: 4px solid white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+            margin-bottom: 10px;
+        }
+        
+        .photo-left { float: left; margin-right: 20px; }
+        .photo-right { float: right; margin-left: 20px; }
+
+        /* Lightbox Overlay */
+        #lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        #lightbox-img { max-width: 90%; max-height: 90%; border: 5px solid white; }
+        #close-btn {
+            position: absolute;
+            top: 20px; right: 40px;
+            background: none; border: none;
+            cursor: pointer; padding: 0;
+        }
+        .cross-icon {
+            color: white; font-size: 60px; font-weight: 100; font-family: Arial, sans-serif;
+        }
+
+        .location {
+            font-weight: 600;
+            color: var(--kutchi-red);
+        }
+
+        .summary-box {
+            background-color: var(--royal-blue);
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 4px;
+            border-left: 10px solid var(--sand-gold);
+            clear: both;
+        }
+
+        .summary-box h3 {
+            margin-top: 0;
+            color: var(--sand-gold);
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 0.8rem;
+            color: #666;
+            background-color: #f2f2f2;
+            clear: both;
+        }
+
+        @media (max-width: 600px) {
+            .content { padding: 15px; }
+            h1 { font-size: 1.6rem; }
+            .travel-photo { width: 100%; height: auto; float: none; margin: 10px 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="lightbox-overlay">
+    <button id="close-btn"><span class="cross-icon">&times;</span></button>
+    <img id="lightbox-img" src="" alt="Zoomed Photo">
+</div>
+
+<div class="container">
+    <header>
+        <h1>Gujarat Rann Utsav</h1>
+        <div class="subtitle">A Journey through the White Desert and the Pride of Gujarat</div>
+        <div>02/12/23 to 09/12/23</div>
+    </header>
+
+    <div class="content">
+
+        <div class="day-section">
+            <span class="date-header">02/12/23: The Journey Begins</span>
+            <p>For this trip, the booking was done through Veena Travels. This trip is our first trip through Veena Travels. We felt this is also equally good as Kesari Travels. The tour cost is also lower in comparison with Kesari. We left home around 7:30 pm with packs of dinner.</p>
+            <p>We took the Shivneri bus and reached Sion by 11:30 pm. From there, we took an auto to the Domestic Airport. We reached the airport after midnight. Since we went by bus and availed the Senior Citizen concession, we spent just Rs 550/- to reach Sion. If we had gone by cab, we would have spent around Rs 3000/-. We took rest until 3 am. Then we completed the boarding formalities. The air ticket was booked in Akasa Airlines. Earlier also we had traveled via this airway.</p>
+        </div>
+
+        <div class="day-section">
+            <span class="date-header">03/12/23: Ahmedabad Arrival & Stepwells</span>
+            <img src="\src\content\india\photos\gujaratrann1.jpg" class="travel-photo photo-right" alt="Ahmedabad Arrival">
+            <p>The flight was on time. In fact, it reached <span class="location">Ahmedabad</span> before the scheduled time. The temperature was around 20°C. The Veena tour manager was waiting at the airport. Surprisingly, only 3 people were in this group. So instead of a big bus, only an Innova car was used throughout the tour. From the airport, he took us to Spice Restaurant for breakfast. A variety of items were served for breakfast; it was good.</p>
+            <p>After breakfast, we went to the <span class="location">Adalaj Stepwell</span>. It was built in 1498 in memory of Rana Veer Singh (the Vaghela dynasty of Dandai Des) by his wife, Queen Rudadevi. The architecture of the well and its surroundings is beautiful. We spent an hour and took photos.</p>
+            <img src="\src\content\india\photos\gujaratrann2.jpg" class="travel-photo photo-left" alt="Adalaj Stepwell">
+            <p>From there, we proceeded to <span class="location">Bhuj</span>. Bhuj is about 350 km from Ahmedabad. The highway was good, with not much traffic. Overall, the city was clean with no garbage heaps. On our way, we stopped for lunch. Since we had a heavy breakfast, we did not order full meals. We took pav bhaji; it was too good. Again on the way, we took a break and had coffee. At 4 pm we reached the resort. The name of the resort is Regenta. Rooms are cottage-type. The resort has a nice garden and a beautiful walking place.</p>
+            <p>Until 6 pm we slept in the room and then went for a walk. By 7:30 we had our dinner. It seems in Gujarat most of the restaurants and hotels serve only vegetarian food. Here also, only complete vegetarian food was served. A variety of dishes were kept for dinner. Gujarati khichdi and kadhi were the special items. Dinner was delicious.</p>
+        </div>
+
+        <div class="day-section">
+            <span class="date-header">04/12/23: Exploring the Palaces of Bhuj</span>
+            <p>Because of the long travel, after dinner, I went to sleep around 9:30 and slept immediately. I got up only by 6:30 am. We brought coffee powder, milk powder, sugar, and a kettle. Of course, in the hotel, a hot pot was also kept. We took coffee and I went for a walk. The weather was very pleasant, and I walked for 30 minutes.</p>
+            <p>After freshening up, we left the room around 9 and had a typical Gujarati breakfast—dhokla etc.—though of course they served dosa and idli as well. After breakfast, we left by 9:30 for the <span class="location">Aina Mahal</span>. Here, things used by the last king of Kutch are kept. The main attraction in this museum was the paintings over glass panels. We also visited the <span class="location">Prag Mahal</span>, which is another museum of Kutch depicting the lifestyle of the Kutch kings; a clock tower is also there. Later, we visited the <span class="location">Kutch Museum</span> and the <span class="location">Vijay Vilas Palace</span>. This is a beautiful palace and well-maintained. This palace is close to Mandvi Beach. After the palace, we went to Mandvi Beach.</p>
+        </div>
+
+        <div class="day-section">
+            <span class="date-header">05/12/23: The White Rann Experience</span>
+            <img src="\src\content\india\photos\gujaratrann3.jpg" class="travel-photo photo-right" alt="White Rann Landscape">
+            <p>After breakfast, we vacated Resort Regenta. Close to the hotel, we visited the <span class="location">Swamy Lakshmi Narayan Temple</span>. It is a beautiful marble temple. From there, we proceeded to <span class="location">Dhordo</span>, which was about a 3-hour journey. On the way, we stopped at a village where handmade embroidery wall pieces are sold. We purchased a few items for Jinu. Around 12:30 pm, we reached the <span class="location">White Rann Resort</span>.</p>
+            <img src="\src\content\india\photos\gujaratrann4.jpg" class="travel-photo photo-left" alt="White Rann Resort Entrance">
+            <p>Accommodation is in a tent. The tent is provided with a window-type AC. After lunch, we took rest. Around 4:30 we had tea and biscuits and went by camel cart to see the sunset. 
+            <img src="\src\content\india\photos\gujaratrann5.jpg" class="travel-photo photo-right" alt="Camel Cart Ride">
+            It is a white sand beach, full of salt crystals. After the sunset, we returned back to the tent. 
+            <img src="\src\content\india\photos\gujaratrann6.jpg" class="travel-photo photo-left" alt="Salt Crystals Close-up">
+            Then we had dinner; dinner was okay. By 9:30 we attended classical programs.
+            <img src="\src\content\india\photos\gujaratrann7.jpg" class="travel-photo photo-right" alt="Classical Program Performance"></p>
+        </div>
+
+        <div class="day-section">
+            <span class="date-header">06/12/23: Vande Mataram Memorial</span>
+            <img src="\src\content\india\photos\gujaratrann8.jpg" class="travel-photo photo-left" alt="Vande Mataram Memorial">
+            <p>After breakfast, we left the White Rann and proceeded towards Ahmedabad. Close to Bhuj, a museum called the <span class="location">Vande Mataram Museum</span> in Bhujodi village, Kutch, has been newly created by the Govt. of India. It is a beautiful museum that depicts the freedom struggle. There are 17 rooms, each narrating important independence events like the Quit India Movement etc. With statues and screens, each event is explained in Hindi. The show ends with the National Anthem. The total time to visit this museum is about 90 minutes. Apart from the show, one can see a beautifully erected Mahatma Gandhi statue; also, a giant-size Bharat Mata and a 5-lions statue are the main attractions of this museum.</p>
+            <p>Ahmedabad is a long way away, about 400 km. Of course, the highway was good. We reached Hotel Le Grande, an excellent hotel, around 8:30 pm. We took a light dinner of khichdi and kadhi.</p>
+        </div>
+
+        <div class="day-section">
+            <span class="date-header">07/12/23: Sabarmati and the Tent City</span>
+            <img src="\src\content\india\photos\gujaratrann9.jpg" class="travel-photo photo-right" alt="Sabarmati Ashram">
+            <p>We left the hotel by 8:30 am after a delicious breakfast of poori, uttapam, vada, idli etc. From the hotel, we went to <span class="location">Sabarmati Ashram</span>. It looks better than what we saw last time; more cleanliness is seen this time. From Sabarmati Ashram, we proceeded to <span class="location">Garudeshwar Mandir</span>. This temple is close to Kevadia Tent City. This temple is in the riverbed of the Narmada. After the temple visit, we reached the <span class="location">Kevadia Tent City</span>. 
+            <img src="\src\content\india\photos\gujaratrann10.jpg" class="travel-photo photo-left" alt="Kavedia Tent City Accommodation">
+            Our accommodation was booked by Veena Travels. This tent accommodation was better than the White Rann tent.
+            <img src="\src\content\india\photos\gujaratrann11.jpg" class="travel-photo photo-right" alt="Tent City Dining Area"></p>
+            <p>The food provided was excellent and very hygienic; the canteen was very clean. After lunch, we reached our tent around 2:30 pm and took rest until 4 pm. Then we proceeded to the <span class="location">Cactus Park</span>, which is quite a big one and well-maintained. 
+            <img src="\src\content\india\photos\gujaratrann12.jpg" class="travel-photo photo-left" alt="Cactus Park Display">
+            Then we went to the <span class="location">Butterfly Garden</span>. Because of climate change, we couldn't see any butterflies, but the garden was good. Then we went to a Shiva temple in the Narmada riverbed. Here, at 8 pm, an aarti to the Narmada River is done every day. It is an hour-long pooja. Just like the Ganga aarti, this is also done. After the aarti, we returned to the tent city and had dinner.</p>
+        </div>
+
+        <div class="day-section">
+            <span class="date-header">08/12/23: The Statue of Unity</span>
+            <p>We visited the <span class="location">Sardar Patel Zoo</span>. 
+            <img src="\src\content\india\photos\gujaratrann13.jpg" class="travel-photo photo-right" alt="Sardar Patel Zoo Bird Section">
+            It is a quite big zoo and took 2 hours to cover. The birds section was too good. After the zoo, we went to a garden called the <span class="location">Valley of Flowers</span>. Previously it was a dumping place, and the same has been converted into a garden. Some selective photo spots were also found. From this garden, from some viewpoints, we can see the Statue of Unity closely. Somehow, I didn't find a spot from where we could get a clear look at the statue.</p>
+            <p>After the Valley of Flowers, we returned back to the tent city. We took lunch and left for boating. Here, adjacent to the Narmada River, a few artificial lakes are created. From the river, water is stored in these huge lakes which are used for drinking and agricultural purposes. Boating was arranged in this lake. Boating was about 45 minutes; it was good. Then we returned back to the tent city and had high tea.</p>
+            <p>After reaching, we left for visiting the <span class="location">Statue of Unity</span>. 
+            <img src="\src\content\india\photos\gujaratrann14.jpg" class="travel-photo photo-left" alt="Statue of Unity">
+            It is a good experience. Actually, it is a hollow statue. To half of the height of the statue, we can reach by lift. To reach the foot, escalators are there. From the parking place, we had to walk quite a distance to reach the statue. Then using the escalators, we reached the foot area of the statue. Took a few photos and using the lift we reached the mid-section of the statue. It was very crowded. Large photos depicting freedom struggles are displayed in this area. After spending 30 minutes, we returned back to the ground area to see the Laser Show.</p>
+            <p>This lighting show is for 40 minutes. This light show was too good. It narrates the role played by Sardar Vallabhbhai Patel. The show was very nice. Also, the show narrates the construction of this Unity Statue. Every day this laser show is conducted from 7 pm. Afterward, bus arrangements are there to drop us at the parking area. We reached back to the tent city around 9 pm. After dinner, there was a dance program in the tent city. Since we were so tired, we preferred to skip the cultural program.</p>
+        </div>
+
+        <div class="day-section">
+            <span class="date-header">09/12/23: The Return Home</span>
+            <p>As usual, I got up around 5:30 am. Had coffee and around 6 went for a walk for 30 minutes. After getting ready, we had breakfast and left Tent City Narmada for the airport. From the tent city, the airport is 200 km away. The flight was on time. We reached Mumbai around 5 pm. After collecting the baggage, we decided to take a bus instead of a cab to Pune. We had to wait about an hour to get the Aundh bus. We reached home almost by 11:30. Overall, the trip was quite good and memorable.</p>
+        </div>
+
+        <div class="summary-box">
+            <h3>Journey Reflection</h3>
+            <p>This Gujarat expedition was a vibrant blend of heritage and modern marvels. From the surreal, salt-crusted expanse of the <strong>White Rann</strong> to the towering <strong>Statue of Unity</strong>, the trip offered a deep connection to India's history and future. Despite the long highway stretches, the hospitality of the tent cities and the intimate nature of the tour made for a comfortable and deeply memorable milestone.</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    const overlay = document.getElementById('lightbox-overlay');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.getElementById('close-btn');
+    const photos = document.querySelectorAll('.travel-photo');
+
+    photos.forEach(photo => {
+        photo.addEventListener('click', () => {
+            overlay.style.display = 'flex';
+            lightboxImg.src = photo.src;
+            lightboxImg.alt = photo.alt;
+        });
+    });
+
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        overlay.style.display = 'none';
+    });
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            overlay.style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>
