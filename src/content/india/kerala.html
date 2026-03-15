@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerala Travelogue | 2026</title>
+    <style>
+        :root {
+            --kerala-green: #2e7d32;
+            --backwater-blue: #00acc1;
+            --temple-gold: #ffd700;
+            --banana-leaf: #8bc34a;
+            --text-color: #2c3e50;
+            --bg-color: #f9fbf9;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 4px solid var(--kerala-green);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            background: linear-gradient(to right, #e8f5e9, #ffffff, #e8f5e9);
+        }
+
+        h1 {
+            color: var(--kerala-green);
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            letter-spacing: 2px;
+        }
+
+        .dates {
+            font-weight: bold;
+            color: var(--backwater-blue);
+            font-size: 1.2rem;
+        }
+
+        .destinations {
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .day-block {
+            margin-bottom: 40px;
+            border-left: 5px solid var(--banana-leaf);
+            padding-left: 20px;
+            clear: both; /* Ensures sections don't overlap with floating images */
+            overflow: hidden;
+        }
+
+        .date-header {
+            background-color: var(--kerala-green);
+            color: white;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .location-highlight {
+            color: var(--kerala-green);
+            font-weight: bold;
+            border-bottom: 1px dashed var(--kerala-green);
+        }
+
+        /* PHOTO STYLING */
+        .travel-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 4px solid white;
+        }
+
+        .photo-left {
+            float: left;
+            margin: 10px 20px 10px 0;
+        }
+
+        .photo-right {
+            float: right;
+            margin: 10px 0 10px 20px;
+        }
+
+        /* LIGHTBOX STYLING */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #lightbox-img {
+            max-width: 90%;
+            max-height: 80%;
+            margin-top: 5%;
+            border: 5px solid white;
+        }
+
+        #close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .summary-box {
+            background-color: #fff3e0;
+            border: 2px solid #fb8c00;
+            padding: 25px;
+            margin-top: 50px;
+            border-radius: 10px;
+            position: relative;
+            clear: both;
+        }
+
+        .summary-box h3 {
+            margin-top: 0;
+            color: #ef6c00;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .travel-photo {
+                width: 100%;
+                height: auto;
+                float: none;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div id="lightbox">
+    <button id="close-btn" onclick="closeLightbox()">&times;</button>
+    <img id="lightbox-img" src="" alt="Zoomed Photo">
+</div>
+
+<div class="container">
+    <header>
+        <h1>KERALA</h1>
+        <div class="dates">30/01/2026 to 06/02/2026</div>
+        <div class="destinations">
+            Thiruvananthapuram &bull; Kanyakumari &bull; Alleppey &bull; Periyar &bull; Munnar &bull; Kochi
+        </div>
+    </header>
+
+    <section class="day-block">
+        <div class="date-header">30/01/2026</div>
+        <img src="\src\content\india\photos\kerala1.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Travel Photo 1">
+        <p>We left home at 7 am for International Airport T2 Mumbai by cab. Because of heavy traffic at Lonavala, we were stuck for 30 minutes. We reached the airport at 11:15 am.</p>
+        <p>All airport formalities were completed soon by using the special counter for senior citizens. Flight 6E490 to <span class="location-highlight">Thiruvananthapuram</span> was on time. Travel duration was about 2 hours. We landed at Thiruvananthapuram airport at 4:30 pm.</p>
+        <p>Veena, the tour manager, was waiting for us at the airport. Then, by bus, we traveled about 20 minutes and reached Hotel Fort Manor. Fortunately, the bus was good. The tour manager provided the first seat for us.</p>
+        <p>After reaching the hotel, they provided coffee and biscuits. Our room was on the 9th floor. The room was good. We had dinner around 8 pm.</p>
+    </section>
+
+    <section class="day-block">
+        <div class="date-header">31/01/2026</div>
+        <img src="\src\content\india\photos\kerala2.jpg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Travel Photo 2">
+        <p>Morning got up early around 5:30 am. After the morning routine, around 7:30 am, we had our typical South Indian breakfast: Idli, dosa, vada, etc. We started moving to <span class="location-highlight">Kanyakumari</span> by bus. The distance is around 90 km.</p>
+        <p>On the way to Kanyakumari, we had a coffee break at Kumaran Koil. We reached Kanyakumari around 11 am. First, we visited the Bagavathi Amman temple. The main deity of this temple is Devi Bagavathi Amman. The temple was not very crowded, and we had a nice darshan.</p>
+        <p>After the temple, we proceeded to <span class="location-highlight">Vivekananda Memorial Rock</span> via a ferry. Because of the holiday, there was a student crowd, and we had to wait for the ferry. On the Vivekananda Memorial Rock, we saw his bronze statue and the meditation hall. Also, there is a belief that Parvathi's footprint appeared on this rock, and her footprints are kept on a silver plate. We saw that also.</p>
+        <img src="\src\content\india\photos\kerala3.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Thiruvalluvar monument">
+        <p>Then we went through the glass bridge and reached the <span class="location-highlight">Thiruvalluvar monument</span>, where we saw his statue. Then we took the ferry again and reached the shore. We had our lunch, which was good. Then we went to Gandhi Mandap where his sacred cremation ashes were kept.</p>
+        <p>After Gandhi Mandap, we proceeded to Thiruveni Sangamam, the meeting point of three seas: the Arabian Sea, the Bay of Bengal, and the Indian Ocean. Then we drank coconut water and proceeded back to Thiruvananthapuram. We reached our hotel around 8:30 pm and had dinner.</p>
+    </section>
+
+    <section class="day-block">
+        <div class="date-header">01/02/2026</div>
+        <img src="\src\content\india\photos\kerala4.jpg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Padmanabhaswamy Temple">
+        <p>In the morning, we got up around 5:30 am and got ready to go to the <span class="location-highlight">Padmanabhaswamy Temple</span>. After breakfast, we proceeded to the temple. Veena Travels arranged special darshan tickets for everyone, costing Rs 500 per head. We completed the darshan in an hour.</p>
+        <p>One common factor for all famous temples like Srirangam, Guruvayur, Tirupati, etc., is the exploitation of people who have immense faith in God. Devotees come to the temple to pray and to get some relief from their suffering. Actually, Pandits or temple authorities should console them without accepting any money, whereas the reality is that they exploit them in the name of God and grab their money. In our group, one lady was holding a Rs 200 note in her hand; it was forcefully taken by the Pandit of the temple. How sad it is.</p>
+        <img src="\src\content\india\photos\kerala5.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Jatayu Earth Center">
+        <p>Then we proceeded to the <span class="location-highlight">Jatayu Earth Center</span>. This place is some 100 km away from Thiruvananthapuram. Here, on a rock, the fight between Ravana and Jatayu is depicted in the form of a sculpture. It is believed that in this place, Jatayu sacrificed his life in the attempt to save Sita Devi from Ravana. We were to go by ropeway to the hilltop to see the sculpture.</p>
+        <p>Unfortunately, due to some technical snags, the operation of the rope car was suspended, so we couldn't visit this beautiful monument. From there, we proceeded to <span class="location-highlight">Alleppey</span> and reached Hotel Lemon Tree around 7:15 pm.</p>
+    </section>
+
+    <section class="day-block">
+        <div class="date-header">02/02/2026</div>
+        <img src="\src\content\india\photos\kerala6.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Travel Photo 6">
+        <p>The Lemon Tree hotel stay was good. After taking breakfast, we proceeded to Raju Jetty for a backwater boat ride. This backwater boat ride lasted for about 1 hour and 30 minutes. <span class="location-highlight">Vembanad Lake</span> is connected with this backwater channel. This is the biggest lake in Kerala.</p>
+        <img src="\src\content\india\photos\kerala7.jpg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Vembanad lake">
+        <p>After the boat ride, we had our typical Kerala lunch: boiled rice, sambar, and some subjis. Then we proceeded to <span class="location-highlight">Periyar</span>, about 150 km away. It is a ghat road; of course, the weather was good. Since the bus and the driver were good, the travel was comfortable. We reached <span class="location-highlight">Holiday Vista</span> around 5:30 pm.</p>
+        <img src="\src\content\india\photos\kerala8.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Holiday vista">
+        <p>Then we walked to an auditorium to see Kathakali. The show was for an hour. After that, we saw Kalaripayattu. This show exhibits adventurous acts like fighting with swords, jumping through fire rings, etc. That show was for half an hour. After that, we walked back to the hotel.</p>
+    </section>
+
+    <section class="day-block">
+        <div class="date-header">03/02/2026</div>
+        <img src="\src\content\india\photos\kerala9.jpg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Travel Photo 9">
+        <p>After breakfast, we left Holiday Vista hotel, Periyar, by 8:30 am and proceeded to visit the <span class="location-highlight">Wildlife Sanctuary</span>. In our bus, we reached the spot where the wildlife sanctuary visit is arranged. This comes under the forest department. From this spot, we traveled in a forest department bus to the lake.</p>
+        <img src="\src\content\india\photos\kerala10.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Travel Photo 10">
+        <p>Then we boarded the ferry. We traveled on the upper deck. The journey was about one and a half hours. Excellent weather, a cold breeze, and beautiful greenery made the travel wonderful. We didn't see any wild animals or elephants. We saw only a few birds and some deer.</p>
+        <p>After lunch, we proceeded to <span class="location-highlight">Munnar</span>. It is about a 5-hour journey. On the way to Munnar, we stopped at the Hindustan Ayurvedic Center. They took us to an Ayurvedic medicinal plants garden and explained Ayurvedic medicines for BP, diabetes, thyroid, etc. Our group members bought various medicinal oils for thousands of rupees. Around 6 pm, we had a coffee break. By 8 pm, we reached Hotel Silver Point, Munnar. This is a hill station and the weather was quite chill.</p>
+    </section>
+
+    <section class="day-block">
+        <div class="date-header">04/02/2026</div>
+        <img src="\src\content\india\photos\kerala11.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Travel Photo 11">
+        <p>Silver Point hotel is converted from a movie theater. The proprietor of this hotel must be a big movie fan. All rooms have movie names like Titanic, Chennai Express, etc. The dining hall's name is Maya Bazaar. Inside the hall, big portraits of scenes from that movie are mounted on the wall. Portraits of Sivaji Ganesan and MGR are seen in the main hall.</p>
+        <img src="\src\content\india\photos\kerala12.jpg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Travel Photo 12">
+        <p>After breakfast, we proceeded to <span class="location-highlight">Mattupetty Dam</span>. It is about a 30-minute drive from the hotel. On that lake, speed boat rides were arranged. It was a good experience. Then we went to Echo Point. This place is on the shore of the lake. On the opposite side, paper trees and eucalyptus trees are planted. Whatever we shout, it echoes back. We also shouted loudly and tested it; it was interesting.</p>
+        <p>After Echo Point, we had mirchi bajji and masala tea from a roadside shop. After that, we returned to the hotel and had our lunch. The afternoon schedule was to visit a tea garden and a tea factory.</p>
+        <p>After lunch, we traveled to the Kannan Devan tea factory. They explained the process from plucking tea leaves to the final product. Also, in their outlet, they sell white tea, green tea, etc.</p>
+    </section>
+
+    <section class="day-block">
+        <div class="date-header">05/02/2026</div>
+        <img src="\src\content\india\photos\kerala13.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="St. Francis Church">
+        <p>We left Silver Point hotel, Munnar, early around 8 am. After some 2 hours of travel, we had a coffee break. Around 1 pm, we reached <span class="location-highlight">Kochi</span>. After lunch, first we visited St. Francis Church.</p>
+        <p><span class="location-highlight">St. Francis Church</span> is the oldest church, located on Mattancherry Island. This church was built during the East India Company's time. In 1502, Vasco da Gama came to this place; he died in 1524, and his body was buried in this church. Subsequently, his son came here and took the remains of that body back to his country.</p>
+        <img src="\src\content\india\photos\kerala14.jpg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Chinese fishing nets">
+        <p>Next, we visited the <span class="location-highlight">Chinese fishing nets</span>. This is a very old technology for catching fish. The fishing net is attached to a wooden structure, and by a lever arrangement, the big fishing net is moved into the deep sea. After a while, using the lever mechanism, it is lifted back, and the fish are collected from the net. We watched one cycle with great curiosity. We were keenly watching while they lifted the net. To our utter surprise, not a single fish was caught.</p>
+        <img src="\src\content\india\photos\kerala15.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Dutch Palace">
+        <p>Then we proceeded to the <span class="location-highlight">Dutch Palace</span>. It was built in the 16th century by the Portuguese, a blend of European and Kerala architecture. It is a two-story building built for the Raja of Kochi. Inside this palace, paintings are seen depicting scenes from the Ramayana and Mahabharata. The ceiling is decorated with wooden structures.</p>
+        <img src="\src\content\india\photos\kerala16.jpg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Paradesi Synagogue">
+        <p>Our last sightseeing place was the <span class="location-highlight">Paradesi Synagogue</span>. It is located in Jew Town, Mattancherry Island, Kochi. It was built in 1568 for Jews who came to India from Spain and Portugal. Fourteen families initially came here; still, a few Jewish families are staying here, and this place is now their place of prayer. Here we can see the beautiful Belgian chandeliers decorating the main hall. After this, we reached Hotel Ginger on MG Road, Kochi, around 7 pm.</p>
+    </section>
+
+    <section class="day-block">
+        <div class="date-header">06/02/2026</div>
+        <img src="\src\content\india\photos\kerala17.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Travel Photo 17">
+        <p>Today is the last day of the tour. We had our breakfast around 8:30 am. Since there was no other program, we went to the <span class="location-highlight">Thrikkakara Vamanamoorthy Temple</span>. It is one of the 108 Divya Desam temples (the 63rd Divya Desam). In this temple, Perumal took the avatar of Vamanamoorthy and kept his feet on Mahabali Chakravarthy's head. Here, Onam is celebrated in a grand manner.</p>
+        <p>The main deity is Vamana, and there are Shiva, Lord Ganesh, Lord Murugan, and Parvathi Devi deities. This temple is about 10 km away from MG Road, Kochi. After the temple visit, we vacated our room and had our lunch. After lunch, some went shopping.</p>
+        <p>At last, we left the hotel around 5 pm and proceeded to the airport. On the way, we stopped at a banana chips shop. Freshly prepared chips and other Kerala items like coconut oil and masala were sold there. We also bought chips and coconut oil. After dinner at Surya Hotel, we reached the airport around 9 pm. All airport formalities were done without any hassle. The Indigo flight took off on time at 11:20 pm.</p>
+        <p>After reaching close to Mumbai, the pilot announced that due to traffic, landing would be delayed. After a delay of 30 minutes, it landed and again stopped at the end of the runway. Again, the pilot stated that a parking slot had not been allocated. After 20 minutes, the plane started to move and reached the right slot. So, instead of 1:30 am, we reached Mumbai around 3 am. We got a cab and arrived home around 7 am.</p>
+    </section>
+
+    <div class="summary-box">
+        <h3>Tour Summary & Reflections</h3>
+        <p>This eight-day journey across God's Own Country provided a rich tapestry of experiences—from the spiritual heights of Kanyakumari and Thrikkakara to the serene backwaters of Alleppey and the misty hills of Munnar. Despite minor setbacks like the Jatayu ropeway and Mumbai's airport traffic, the journey was defined by comfortable travel, excellent weather, and the vibrant culture of Kerala. A memorable chapter in a lifetime of travels.</p>
+    </div>
+</div>
+
+<script>
+    function zoomImg(img) {
+        var lightbox = document.getElementById("lightbox");
+        var lightboxImg = document.getElementById("lightbox-img");
+        lightbox.style.display = "flex";
+        lightboxImg.src = img.src;
+    }
+
+    function closeLightbox() {
+        document.getElementById("lightbox").style.display = "none";
+    }
+
+    // Close lightbox if clicking the background
+    window.onclick = function(event) {
+        var lightbox = document.getElementById("lightbox");
+        if (event.target == lightbox) {
+            closeLightbox();
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashtavinayak Temple Tour | Rewired, Not Retired</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --shendur-red: #E34234;
+            --saffron: #FF9933;
+            --sacred-yellow: #FFD700;
+            --temple-stone: #4A4A4A;
+            --ink: #2D3436;
+            --bg-warm: #FFF9F2;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: var(--bg-warm);
+            color: var(--ink);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.6;
+        }
+
+        .header-banner {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            border-bottom: 5px solid var(--sacred-yellow);
+        }
+
+        .header-banner h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header-banner p.header-dates {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin: 8px 0 0 0;
+            color: white;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 30px auto 50px;
+            background: white;
+            padding: 40px 60px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        /* Photo Styling */
+        .travel-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            cursor: pointer;
+            border: 8px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+            margin: 15px;
+            border-radius: 4px;
+        }
+
+        .photo-left { float: left; transform: rotate(-3deg); margin-right: 25px; }
+        .photo-right { float: right; transform: rotate(3deg); margin-left: 25px; }
+        
+        .travel-photo:hover {
+            transform: scale(1.05) rotate(0deg);
+            z-index: 5;
+        }
+
+        /* Clearfix for floated photos */
+        section::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Lightbox Overlay */
+        #lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            border: 5px solid white;
+        }
+
+        #close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #close-btn:hover { color: var(--saffron); }
+
+        .intro-text {
+            border-left: 4px solid var(--saffron);
+            padding-left: 25px;
+            margin-bottom: 40px;
+            font-size: 1.05rem;
+            color: #444;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--shendur-red);
+            font-size: 1.7rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 35px;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: '🕉';
+            margin-right: 15px;
+            font-size: 1.2rem;
+            color: var(--saffron);
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+            font-size: 1.05rem;
+        }
+
+        .day-indicator {
+            display: inline-block;
+            background: var(--temple-stone);
+            color: white;
+            padding: 3px 12px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, var(--saffron), var(--shendur-red));
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 50px;
+            box-shadow: 0 10px 25px rgba(227, 66, 52, 0.2);
+        }
+
+        .summary-box h3 {
+            font-family: 'Playfair Display', serif;
+            margin: 0 0 15px 0;
+            font-size: 1.5rem;
+        }
+
+        .summary-box p { margin: 0; color: white; opacity: 1; font-size: 1.1rem; }
+
+        @media (max-width: 768px) {
+            .container { padding: 25px; width: 92%; }
+            .header-banner h1 { font-size: 2rem; }
+            .travel-photo { width: 100%; height: auto; float: none; margin: 20px 0; transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="lightbox">
+        <span id="close-btn">&times;</span>
+        <img id="lightbox-img" src="" alt="Zoomed View">
+    </div>
+
+    <div class="header-banner">
+        <h1>Ashtavinayak Temple Tour</h1>
+        <p class="header-dates">12th and 13th January 2019</p>
+    </div>
+
+    <div class="container">
+        
+        <div class="intro-text">
+            <p>There are eight famous Ganesh Temples around Pune and these temples are called Ashtavinayak temples. Many tour agencies arrange this tour, and Purple Tour is one among them. We had been to these eight temples through Purple Tour. They provide AC and Non-AC bus services.</p>
+            <p>Since it is a two-day trip, a one-night stay becomes mandatory. Accommodations in either a dormitory or separate rooms are provided based on choice. The tour package includes the first day's breakfast, lunch, dinner, and night stay, and the second day's breakfast, lunch, and evening tea.</p>
+            <p>The tour starts around 6:30 am from Pune and completes by the next day, dropping us back to Pune around 8:30 pm. The total distance covered in this tour is around 750 km. Except for the highway roads like Pune–Nasik and the Pune–Mumbai Expressway (about 200 km), the remaining roads are too bad, and the journey is quite jerky!</p>
+            <p>A few temples are crowded; of course, a queue system is followed and all the temples are kept open throughout the day. People who visit Ashtavinayak temples offer a coconut to the first temple, and the same coconut is offered at every remaining temple. Here, in most of the temples, we can go close to the deity to pray and offer flowers.</p>
+            <p>In all temples, there is a donation center to receive offerings. Also, provisions exist to pay a donation with a request to do archana, and they will send the Prasad to our home by post. All these eight temples are under the Chinchwad Deosthan Trust. All the eight Ganapathis are “swayambhu” (self-manifested).</p>
+            <p>On the first day, we visited Moreshwar Temple (Morgaon), Siddhatek Temple (Siddhatek), Chintamani Temple (Theur), Mahaganapathi Temple (Ranjangaon), and Vighneshwar Temple (Ozar). We stayed in a hotel at Ozar, close to the temple. The hotel was good. Next day, we visited Girijatmaj Temple (Lenyadri), Varadavinayak Temple (Mahad), and Ballaleshwar Temple (Pali).</p>
+            <p>Some people believe that after visiting all the eight temples, one has to come to the first temple again to complete the circle. Of course, Purple Tour did not take us to the first temple again. If we want to visit the first temple again, we may have to stay one more day.</p>
+        </div>
+
+        <div class="day-indicator">Day 1</div>
+        
+        <section id="morgaon">
+            <h2>1. Moreshwar Temple, Morgaon</h2>
+            <img src="\src\content\temples\photos\ashthavinayak1.jpg" alt="Moreshwar Temple" class="travel-photo photo-left" onclick="zoomImg(this)">
+            <p>From Pune, Morgaon is about 70 km away. It is approximately a two-hour journey via Hadapsar. On the way, we took a break for breakfast and tea. This temple, when we visited, was not crowded much.</p>
+            <img src="\src\content\temples\photos\ashthavinayak2.jpg" alt="Nandi at Temple" class="travel-photo photo-right" onclick="zoomImg(this)">
+            <p>In this temple, we can see a Nandi as well.</p>
+        </section>
+
+        <section id="siddhatek">
+            <h2>2. Siddhivinayak Temple, Siddhatek</h2>
+            <img src="\src\content\temples\photos\ashthavinayak3.jpg" alt="Siddhivinayak Temple" class="travel-photo photo-left" onclick="zoomImg(this)">
+            <p>From Morgaon, Siddhivinayak Temple in Siddhatek is about 70 km away towards Daund. This road is very bad, and on both sides, we can see sugarcane fields. Just before the temple, there is a river. In earlier days, to visit this temple, one had to cross this river by ferry. Now there is a bridge, and the bus goes close to the temple.</p>
+        </section>
+
+        <section id="theur">
+            <h2>3. Chintamani Temple, Theur</h2>
+            <img src="\src\content\temples\photos\ashthavinayak4.jpg" alt="Chintamani Temple Interior" class="travel-photo photo-right" onclick="zoomImg(this)">
+            <p>Theur is about 90 km away from Siddhatek. It was about a 3-hour journey on a rough road. On the way, we took lunch in a hotel. They served chapati, rice, dal, and a subji. The food was good.</p>
+            <img src="\src\content\temples\photos\ashthavinayak5.jpg" alt="Chintamani Temple Entry" class="travel-photo photo-left" onclick="zoomImg(this)">
+            <p>The temple is very peaceful and well-maintained.</p>
+        </section>
+
+        <section id="ranjangaon">
+            <h2>4. Mahaganapathi Temple, Ranjangaon</h2>
+            <img src="\src\content\temples\photos\ashthavinayak6.jpg" alt="Mahaganapathi Temple" class="travel-photo photo-right" onclick="zoomImg(this)">
+            <p>This temple is close to Aurangabad. Earlier also we had been to this temple. This temple is fairly a big temple. Close to the temple, fresh vegetables are sold. Our tour guide took us to a special tea stall for a cup of tea. We had a nice tea.</p>
+        </section>
+
+        <section id="ozar">
+            <h2>5. Vighneshwar Temple, Ozar</h2>
+            <img src="\src\content\temples\photos\ashthavinayak7.jpg" alt="Vighneshwar Temple" class="travel-photo photo-left" onclick="zoomImg(this)">
+            <p>It is about 70 km from Ranjangaon, about 2 hours travel. Around 8 pm, we reached this temple. In the temple premises, we saw lots of shops selling brass articles and photos. Close to this temple, our night stay was arranged in a hotel. In the same hotel, we took dinner also. Dinner was good. The room was also quite clean and neat.</p>
+        </section>
+
+        <div class="day-indicator">Day 2</div>
+
+        <section id="lenyadri">
+            <h2>6. Girijatmaj Temple, Lenyadri</h2>
+            <img src="\src\content\temples\photos\ashthavinayak8.jpg" alt="Lenyadri Steps" class="travel-photo photo-right" onclick="zoomImg(this)">
+            <p>Lenyadri is about 15 km from Ozar. We got up around 4 am and left the place around 5:30 am after tea. We reached this place around 6:30 am. This temple is over a hill, in a cave. We had to climb 400 steep steps. </p>
+            <img src="\src\content\temples\photos\ashthavinayak9.jpg" alt="Girijatmaj Cave" class="travel-photo photo-left" onclick="zoomImg(this)">
+            <p>We did aarti also in this temple. Adjacent to the Ganesh deity, a Shivling is also there.</p>
+        </section>
+
+        <section id="mahad">
+            <h2>7. Varadavinayak Temple, Mahad</h2>
+            <img src="\src\content\temples\photos\ashthavinayak10.jpg" alt="Varadavinayak Temple" class="travel-photo photo-right" onclick="zoomImg(this)">
+            <p>Mahad is some 250 km away from Lenyadri. Mahad is towards the Khopoli side. For a certain distance, we travelled on the Pune-Mumbai Expressway. This temple is fairly big and some crowd was there. We had to stand in the queue for about 20 minutes. In this temple premises, a Datta Mandir is also there.</p>
+        </section>
+
+        <section id="pali">
+            <h2>8. Ballaleshwar Temple, Pali</h2>
+            <img src="\src\content\temples\photos\ashthavinayak11.jpg" alt="Ballaleshwar Temple" class="travel-photo photo-left" onclick="zoomImg(this)">
+            <p>Pali is about 80 km away from Mahad. On the way, we had our lunch in a hotel. This hotel was very good. Super clean. The food was very nice. With this temple, we completed our tour. From Pali, Pune is around a 3-hour journey. We were dropped at Aundh and reached home around 8 pm.</p>
+        </section>
+
+        <div class="summary-box">
+            <h3>Journey Summary</h3>
+            <p>Overall, the Ashtavinayak tour was a fulfilling spiritual journey across 750 km. Despite the jerky roads and long travel hours, the experience of visiting all eight swayambhu Ganapatis—from the hill-top caves of Lenyadri to the river-side peace of Siddhatek—was deeply memorable. The arrangements by Purple Tour ensured we were well-fed and rested, making this two-day pilgrimage a smooth and sacred experience.</p>
+        </div>
+
+    </div>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.getElementById('close-btn');
+
+        function zoomImg(img) {
+            lightbox.style.display = 'flex';
+            lightboxImg.src = img.src;
+            gsap.from("#lightbox-img", { scale: 0.5, opacity: 0, duration: 0.4, ease: "back.out(1.7)" });
+        }
+
+        closeBtn.onclick = function() {
+            gsap.to("#lightbox-img", { scale: 0.5, opacity: 0, duration: 0.3, onComplete: () => {
+                lightbox.style.display = 'none';
+            }});
+        }
+
+        // Close on clicking the dark background too
+        lightbox.onclick = function(e) {
+            if(e.target !== lightboxImg) closeBtn.onclick();
+        }
+
+        gsap.from(".container", { opacity: 0, y: 30, duration: 1, delay: 0.3 });
+    </script>
+</body>
+</html>

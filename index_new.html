@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nanaji's Travels | A Life of Discovery</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mist: #E8EDF3;
+            --meadow: #F2F8F5;
+            --sand: #FAF7ED;
+            --ink: #2D3436;
+            --accent: #B08D57;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: var(--mist);
+            color: var(--ink);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .bg-image-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.15;
+            background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover; background-position: center;
+        }
+
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 60px; position: fixed; width: 100%;
+            box-sizing: border-box; z-index: 100;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem; font-weight: 900;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        nav { display: flex; gap: 8px; }
+
+        .dropdown { position: relative; display: inline-block; }
+
+        .dropbtn {
+            background: none; border: none; color: var(--ink);
+            font-weight: 700; font-size: 0.8rem;
+            text-transform: uppercase; letter-spacing: 1.2px;
+            padding: 15px 15px; cursor: pointer; transition: 0.3s;
+        }
+
+        .dropdown-content {
+            display: none; position: absolute;
+            right: 0; background-color: transparent;
+            min-width: 240px; z-index: 101;
+        }
+
+        .dropdown-inner {
+            background-color: white;
+            box-shadow: 0px 10px 40px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .dropdown:hover .dropdown-content { display: block; }
+
+        .dropdown-inner a {
+            color: var(--ink);
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: 0.2s;
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .dropdown-inner a:last-child { border-bottom: none; }
+
+        .dropdown-inner a:hover {
+            background-color: var(--meadow);
+            color: var(--accent);
+            padding-left: 25px;
+        }
+
+        .main {
+            display: flex; min-height: 100vh;
+            padding: 120px 60px 60px; align-items: center;
+            position: relative; z-index: 1;
+        }
+
+        .left { flex: 1; max-width: 800px; }
+
+        .left h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.2rem; margin: 0; line-height: 1.1;
+            color: #2D3436; white-space: nowrap;
+            letter-spacing: -1px; /* Tighter look for mixed case */
+        }
+
+        .left h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem; font-style: italic; 
+            letter-spacing: 0.5px; color: #636E72;
+            margin-top: 12px; margin-bottom: 25px; font-weight: 700;
+        }
+
+        .left p {
+            font-size: 1.1rem; line-height: 1.8;
+            color: #4B5563; margin: 30px 0; max-width: 580px; 
+        }
+
+        .explore-btn {
+            background: var(--ink); color: white;
+            border: none; padding: 18px 40px; font-weight: 700;
+            border-radius: 4px; cursor: pointer; transition: all 0.3s;
+        }
+
+        .explore-btn:hover {
+            transform: translateY(-2px);
+            background: var(--accent);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        #globeCanvas {
+            position: absolute; right: 0;
+            width: 45%; height: 80%; z-index: 1;
+            mix-blend-mode: multiply;
+        }
+
+        .about-section {
+            padding: 100px 60px; background: rgba(255, 255, 255, 0.4);
+            display: flex; gap: 80px; align-items: center;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            position: relative; z-index: 2;
+        }
+
+        .bio-img-frame { flex: 1; max-width: 400px; }
+        .bio-img { width: 100%; border-radius: 4px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .bio-text { flex: 1.5; }
+        .bio-text h2 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 20px; }
+
+        @media (max-width: 1024px) {
+            .main { flex-direction: column; text-align: center; }
+            .left h1 { font-size: 3.2rem; white-space: normal; } 
+            #globeCanvas { position: relative; width: 100%; height: 350px; }
+            .about-section { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-image-overlay"></div>
+
+    <header>
+        <div class="logo">Nanaji's Travelogue</div>
+        <nav>
+            <div class="dropdown">
+                <button class="dropbtn">International</button>
+                <div class="dropdown-content">
+                    <div class="dropdown-inner">
+                        <a href="\src\content\international\bestofeurope.html">Best of Europe</a>
+                        <a href="\src\content\international\bhutan.html">Bhutan</a>
+                        <a href="\src\content\international\central_europe.html">Central Europe</a>
+                        <a href="\src\content\international\china.html">China</a>
+                        <a href="\src\content\international\dubai.html">Dubai</a>
+                        <a href="\src\content\international\egypt.html">Egypt</a>
+                        <a href="\src\content\international\indonesia.html">Indonesia</a>
+                        <a href="\src\content\international\muscat.html">Muscat</a>
+                        <a href="\src\content\international\nepal.html">Nepal</a>
+                        <a href="\src\content\international\scandinavian.html">Scandinavian Countries</a>
+                        <a href="\src\content\international\singapore.html">Singapore</a>
+                        <a href="\src\content\international\srilanka.html">Srilanka</a>
+                        <a href="\src\content\international\vietnam_combodia.html">Vietnam & Cambodia</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">India</button>
+                <div class="dropdown-content">
+                    <div class="dropdown-inner">
+                        <a href="\src\content\india\gujarat_rann.html">Gujarat Rann Festival</a>
+                        <a href="\src\content\india\jaipur_agra.html">Jaipur & Agra</a>
+                        <a href="\src\content\india\karnataka.html">Karnataka</a>
+                        <a href="\src\content\india\kerala.html">Kerala</a>
+                        <a href="\src\content\india\madhyapradesh.html">Madhya Pradesh</a>
+                        <a href="\src\content\india\northeast.html">Northeast India</a>
+                        <a href="\src\content\india\punjab_himachal.html">Punjab & Himachal</a>
+                        <a href="\src\content\india\rajasthan.html">Rajasthan</a>
+                        <a href="\src\content\india\uttarakhand.html">Uttarakhand</a>
+                        <a href="\src\content\india\uttarpradesh.html">Uttar Pradesh</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">USA</button>
+                <div class="dropdown-content">
+                    <div class="dropdown-inner">
+                        <a href="\src\content\usa\newyork.html">New York</a>
+                        <a href="\src\content\usa\seattle.html">Seattle</a>  
+                        <a href="\src\content\usa\alaska.html">Alaska</a>           
+                    </div>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Temples</button>
+                <div class="dropdown-content">
+                    <div class="dropdown-inner">
+                        <a href="\src\content\temples\andhrapradesh.html">Andhra Odyssey</a>
+                        <a href="\src\content\temples\ashtavinayak.html">Ashtavinayak</a>
+                        <a href="\src\content\temples\shegaon.html">Shegaon Diary</a>
+                        <a href="\src\content\temples\tamilnadu.html">Tamilnadu Temple Trail</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn" onclick="scrollToAbout()" style="color: var(--accent);">About Nanaji</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="left">
+            <h1>Rewired, Not Retired</h1>
+            <h3>A Lifetime of Work, A New Life of Wonder</h3>
+            <p>
+               After forty years of professional dedication, Nanaji and Nani embarked on a new chapter filled with exploration and discovery. This is the story of discovering a passion after 60 — exploring new travel destinations with curiosity that never retires!
+            </p>
+             <p style="font-size: 1.1rem; line-height: 1.9; color: #4B5563;">
+                This is a chronicle of boundless curiosity. Each trip recorded here is more than just a destination; it’s a collection of stories and moments captured with infectious enthusiasm.
+                Start your exploration today and follow Nanaji’s footprints across the globe!
+            </p>
+        </div>
+        
+        <canvas id="globeCanvas"></canvas>
+    </main>
+
+    <section id="about-nanaji" class="about-section">
+        <div class="bio-img-frame">
+            <img src="nanaji-photo.jpg" alt="Nanaji" class="bio-img">
+        </div>
+        <div class="bio-text">
+            <h2>About Nanaji</h2>
+            <p style="font-size: 1.1rem; line-height: 1.9; color: #4B5563;">
+                Based in the vibrant city of Pune, Maharashtra, Nanaji and Nani have turned their retirement into a masterclass in exploration.
+For them, every trip begins long before the flight, rooted in a deep love for researching the history and soul of their next destination.
+This digital sanctuary is Nanaji’s way of bringing those journeys home—meticulously documenting the fine details, the hidden corners, and the fleeting moments that make travel so transformative.
+            </p>
+            <p style="font-size: 1.1rem; line-height: 1.9; color: #4B5563;">
+                We invite you to walk these paths with them and perhaps find a spark for your own next great adventure!
+            </p>
+        </div>
+    </section>
+
+    <script type="module" src="main.js"></script>
+    <script>
+        gsap.from(".left h1", { opacity: 0, y: 50, duration: 1.2, ease: "power3.out" });
+        gsap.from(".left h3", { opacity: 0, y: 30, duration: 1.2, delay: 0.2, ease: "power3.out" });
+        gsap.from(".left p", { opacity: 0, y: 30, duration: 1.2, delay: 0.4 });
+
+        function scrollToAbout() {
+            document.getElementById('about-nanaji').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

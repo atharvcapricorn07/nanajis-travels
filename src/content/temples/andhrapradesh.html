@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Krishna River Trail: Coastal Shores to Sacred Peaks</title>
+    <style>
+        :root {
+            --andhra-marigold: #FF8C00; /* Deep orange */
+            --temple-gold: #D4AF37; /* Metallic gold */
+            --river-blue: #005B96; /* Krishna river blue */
+            --paddy-green: #2E8B57; /* Delta green */
+            --stone-grey: #696969; /* Rock-cut temple grey */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.5;
+            color: #222;
+            background-color: #FFF9F0; /* Soft cream */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-left: 8px solid var(--andhra-marigold);
+            border-right: 8px solid var(--andhra-marigold);
+            position: relative;
+        }
+
+        header {
+            background-color: var(--river-blue);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--temple-gold);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            margin-top: 5px;
+            font-style: italic;
+            color: var(--temple-gold);
+        }
+
+        .content {
+            padding: 20px 35px;
+        }
+
+        .day-block {
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            overflow: hidden; /* Clears floats for photos */
+        }
+
+        .date {
+            font-weight: bold;
+            color: var(--andhra-marigold);
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--temple-gold);
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+
+        p {
+            margin: 0 0 10px 0;
+            text-align: justify;
+        }
+
+        /* Photo Styles */
+        .travel-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            cursor: pointer;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            margin: 10px;
+        }
+        
+        .photo-right { float: right; margin-left: 20px; }
+        .photo-left { float: left; margin-right: 20px; }
+
+        /* Lightbox Overlay */
+        #lightbox-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        #lightbox-img { max-width: 90%; max-height: 90%; border: 4px solid white; }
+        
+        #close-btn {
+            position: absolute;
+            top: 20px; right: 30px;
+            background: none; border: none;
+            cursor: pointer; padding: 10px;
+        }
+        .cross-icon {
+            color: white; font-size: 50px; font-weight: bold; line-height: 1;
+        }
+
+        .location-tag {
+            font-weight: bold;
+            color: var(--river-blue);
+        }
+
+        .travel-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+            clear: both;
+        }
+
+        .travel-table th {
+            background-color: var(--river-blue);
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .travel-table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .summary-box {
+            background-color: #fff4e6;
+            color: #444;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+            border: 2px solid var(--andhra-marigold);
+            clear: both;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 0.8rem;
+            background-color: #eee;
+            color: #555;
+            clear: both;
+        }
+
+        @media (max-width: 600px) {
+            .content { padding: 15px; }
+            .travel-photo { width: 100%; height: auto; float: none; margin: 10px 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="lightbox-overlay">
+    <button id="close-btn" aria-label="Close photo"><span class="cross-icon">&times;</span></button>
+    <img id="lightbox-img" src="" alt="Zoomed view">
+</div>
+
+<div class="container">
+    <header>
+        <h1>Andhra-Karnataka Odyssey</h1>
+        <div class="subtitle">Kakinada | Vijayawada | Srisailam | Raichur</div>
+        <div>17th February – 22nd February 2025</div>
+    </header>
+
+    <div class="content">
+
+        <div class="day-block">
+            <span class="date">16/02/25: The Sudden Detour</span>
+            <p>After reaching the MSRTC bus stop, it was told that all MSRTC buses to Mumbai got canceled. The reason was not known. So we had to book a cab and reached Mumbai Domestic Airport (Terminal 1). We reached the airport around midnight. Till 3 am, we just took rest in the airport. There was no direct flight to Rajahmundry from Mumbai. So we took a flight from Mumbai to Hyderabad and then we took another flight to Rajahmundry.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">17/02/25: Arrival in the Godavari Delta</span>
+            <img src="\src\content\temples\photos\andhrapradesh1.jpg" class="travel-photo photo-right" alt="Rajahmundry Arrival">
+            <p>IndiGo flight 6E5012 from Mumbai to Hyderabad was on time. Travel time to Hyderabad was one hour. We reached Hyderabad at 7:30 am. From there, we took an onward flight to Rajahmundry. This IndiGo flight was a small one; only 40 seats were there. Flight duration to Rajahmundry is an hour. It departed at 8:40 am. We landed at Rajahmundry airport at 10 am.</p>
+            <p>Rajahmundry airport is a small airport. After collecting the bags, we proceeded to <span class="location-tag">Kakinada</span> where our hotel accommodation had been booked. Road travel was about 1 hour 30 minutes. Our accommodation was booked in the Sarovar Portico hotel. The hotel was good. We took a bath and got ready after lunch. Around 2 pm, we started our temple visit. Tour guides Mr. Bhushan and Mr. Sidarth were very helpful throughout the tour.</p>
+            <p>First, we went to <span class="location-tag">Annavaram</span>, about a 45-minute drive from Kakinada. From the bus parking place, we went to the temple by auto-rickshaw. The temple here is called Veera Venkata Satyanarayana Swamy temple. This temple is over a rock. We had to climb about 100 steps. This is a Vishnu temple. Fortunately, there was no crowd and we had darshan without any difficulty. The rock where the temple is located is close to the river called Pampa.</p>
+            <p>From Annavaram, we went to <span class="location-tag">Pithapuram</span>. It is about a 40-minute drive. The next temple we visited was the Kunthi Madhava Swamy temple. It is a Vishnu temple. From Kunthi Madhava Swamy temple, we went to the Sri Pada Sri Vallabha temple. This is the first incarnation of Sri Dattatreya and a most important temple for Maharashtrians (Guru Temple). We spent more than an hour in this temple. We attended the bhajan and then aarti in this temple. After the visit to this temple, we returned back to the hotel.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">18/02/25: Across the Highway to Vijayawada</span>
+            <p>Morning around 6 we got up. By 7 we took breakfast. By 7:45 we left Kakinada and proceeded to <span class="location-tag">Vijayawada</span>, 250 km away. Before leaving Kakinada, we visited the <span class="location-tag">Kukkuteswara temple</span> of Pithapuram. 
+            <img src="\src\content\temples\photos\andhrapradesh2.jpg" class="travel-photo photo-left" alt="Kukkuteswara Temple">
+            This is a Shiva temple. The Shivalingam is fairly big and made of spatikam (crystal). So the deity is in white color. Opposite to the deity, a big Nandi is also there. This one is made out of a single stone. Amman sannidhi is also there. This is considered as one among the 18 Shakti Peethas.</p>
+            <p>On the way to Vijayawada on the highway, we took a break for lunch at a hotel, Garuda. Chapati, rice, sabji, kesari, sambar, rasam, and dahi were served and the food was good. Around 3 pm, we reached Vijayawada. Before going to the hotel, we wanted to visit the <span class="location-tag">Kanaka Durga Temple</span>. Our bus was parked at a parking place. From the parking area, we went to the temple by auto-rickshaws. Since mobiles are not allowed in the temple premises, we left them in the bus.</p>
+            <p>Kanaka Durga temple is over a hill. It is about 800 steps to climb. The deity Kanaka Durga Amma is swayambhu and powerful, and blesses the devotees who pray to her. So throughout the year, people from different parts of the country come here to seek her blessings. A lift facility is available to avoid climbing. Kesari arranged for us to go via the lift. They charge Rs 100 per head. A proper queue system exists; we didn't see any mad crowd. We had a nice darshan. It took around an hour. After the Kanaka Durga temple, we went to the hotel: Lemon Tree, MG Road, Vijayawada. This is a 5-star hotel and the rooms are luxurious. Food was excellent and a variety of items were served.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">19/02/25: Rock Cut Caves and the Nallamala Hills</span>
+            <p>After breakfast, we left the Lemon Tree Hotel, Vijayawada and proceeded to <span class="location-tag">Srisailam</span>. Srisailam is 260 km away from Vijayawada. From Vijayawada, 10 km away, the <span class="location-tag">Undavalli Caves</span> are located. 
+            <img src="\src\content\temples\photos\andhrapradesh3.jpg" class="travel-photo photo-right" alt="Undavalli Caves View 1">
+            We reached this spot around 9 am. Undavalli is a four-storied rock-cut Vishnu temple. 
+            <img src="\src\content\temples\photos\andhrapradesh4.jpg" class="travel-photo photo-left" alt="Undavalli Caves View 2">
+            This temple belongs to the 4th century. On the 3rd floor, a five-foot Vishnu statue over the five-headed snake is very popular and the most attractive sculpture of this cave.</p>
+            <p>Around 1 pm we had our lunch at Kurnool. It was typical Andhra type food: rice, sambar, rasam, vada, few imli chutneys, and curd. Our next stop before Srisailam was at a Ganesh Temple called Sakshi Ganapathi. A crowd was there, but a queue was followed. It took about 15 minutes. After this temple visit, we proceeded to the hotel where our accommodation was booked. The hotel is called Srisaila's Nest. We reached the hotel around 6:30 pm. It is a small hotel; the room was clean and good. For night dinner, we had chapati and pulao.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">20/02/25: The Abode of Jyotirlinga</span>
+            <p>Morning by 6 we got up. By 7:30 we had breakfast: idli, vada, and upma. After breakfast, we proceeded to <span class="location-tag">Mallikarjuna Temple</span>, one of the 12 Jyotirlinga temples. To avoid the crowd, Kesari arranged Rs 200/- tickets for darshan. Senior citizens can go in this queue and they need not pay; an Aadhaar card is shown for age proof. Because of this, we didn't stand in long queues. Also, we had darshan of <span class="location-tag">Bhramaramba Devi</span> in the same temple, which is one among the Shakti Peethas.
+            <img src="\src\content\temples\photos\andhrapradesh5.jpg" class="travel-photo photo-right" alt="Bramarambhika Devi Sannidhi"></p>
+            <p>Shivaji Maharaj visited this temple. In his memory, a museum is created here. His statue and more exhibits showing his wars against Mughals are depicted in this museum. After seeing the museum, we returned back to the room. We took lunch in the hotel and took rest till 4:30 pm. After tea, we proceeded to another famous Shiva temple called <span class="location-tag">Shikhareswara Swamy Temple</span>. It is over a hill and we had to climb about 150 steps. In front of the deity, a small <span class="location-tag">black Nandi</span> is there. 
+            <img src="\src\content\temples\photos\andhrapradesh6.jpg" class="travel-photo photo-left" alt="Black Nandi View">
+            If we see through in between the ears of the Nandi, we can see the Srisailam Mallikarjuna temple. The surroundings of this temple are beautiful.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">21/02/25: Into the Land of Mantralayam</span>
+            <img src="\src\content\temples\photos\andhrapradesh7.jpg" class="travel-photo photo-right" alt="Mantralayam Temple">
+            <p>We left Srisailam after breakfast for <span class="location-tag">Mantralayam</span>. Mantralayam is about 250 km away. At Kurnool around 1:30 pm, we had our lunch. Around 4:30 we reached Mantralayam. Our tour guide told all male tourists that we should enter this temple in "Salman Khan style." All he meant was that before entering the temple, we must remove our shirts! There was no crowd in the temple. We had good darshan of the Brindavan.</p>
+            <p>After a cup of coffee, around 5:30 we left Mantralayam and proceeded to <span class="location-tag">Raichur</span>, about an hour's travel. After reaching Raichur, before going to the hotel, we visited one Balaji temple which was inside the premises of the medical college in Raichur. After the visit to the Balaji temple, we landed at the Royal Fort hotel. This hotel name is Royal Fort but it was very poorly maintained. Anyway, it is just a one-day stay here.</p>
+        </div>
+
+        <div class="day-block">
+            <span class="date">22/02/25: The Island of Kuruvapur</span>
+            <img src="\src\content\temples\photos\andhrapradesh8.jpg" class="travel-photo photo-left" alt="Krishna River Crossing">
+            <p>Morning at 7:30 after a poor breakfast, we left the Royal Fort for the <span class="location-tag">Kuruvapur Sripada Vallabh Temple</span>. This temple is across the river Krishna. We came up to the river bank by bus and crossed the river by boat. In the Krishna river, the water flow was low and rocks were visible in between. So the boat ride took a much longer time than the usual ride time. At last, we reached the other side of the Krishna river and walked to the temple. The temple has stipulations over the dress code: for males, a dhoti is compulsory and females have to wear a saree or salwar.</p>
+            <p>Also, in the temple premises, one very <span class="location-tag">big Banyan tree</span> is there. 
+            <img src="\src\content\temples\photos\andhrapradesh9.jpg" class="travel-photo photo-right" alt="Ancient Banyan Tree">
+            People say it is a one-thousand-year-old tree. After the darshan, we returned back to the other side of the Krishna river by boat, took the bus, and reached the hotel. In the evening, we left the hotel for the railway station and took the train to Pune. We stayed in the hotel till 7 pm and then reached the station. The train was on time, and on 23rd Feb morning, we reached Pune safely.</p>
+        </div>
+
+        <h3>Temple & Destination Summary</h3>
+        <table class="travel-table">
+            <thead>
+                <tr>
+                    <th>City</th>
+                    <th>Place</th>
+                    <th>Temple Name</th>
+                    <th>Main Deity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Kakinada</td><td>Annavaram</td><td>Sri Veera Venkata Sathya Narayana Temple</td><td>Sri Veera Venkata Sathya Narayana (Vishnu)</td></tr>
+                <tr><td>Pithapuram</td><td>Pithapuram</td><td>Kunthi Madhava Swamy Temple</td><td>Kunthi Madhava Swamy (Vishnu)</td></tr>
+                <tr><td>Pithapuram</td><td>Pithapuram</td><td>Sri Pada Srivallabha Temple</td><td>Dedicated to Saint Sri Pada Srivallabha</td></tr>
+                <tr><td>Kakinada</td><td>Pithapuram</td><td>Kukkuteswara Temple</td><td>Shiva & Shakti Peetham</td></tr>
+                <tr><td>Vijayawada</td><td>Vijayawada</td><td>Kanaka Durga Temple</td><td>Kanaka Durga Devi</td></tr>
+                <tr><td>Srisailam</td><td>Srisailam</td><td>Mallikarjuna Temple</td><td>Shiva (Jyotirlinga)</td></tr>
+                <tr><td>Srisailam</td><td>Srisailam</td><td>Shikhareswara Swamy Temple</td><td>Shiva</td></tr>
+                <tr><td>Mantralayam</td><td>Mantralayam</td><td>Raghavendra Swamy Temple</td><td>Brindavan of Swamy Raghavendra</td></tr>
+                <tr><td>Raichur</td><td>Kuruvapur</td><td>Sri Pada Srivallabha Temple</td><td>Sri Pada Srivallabha</td></tr>
+            </tbody>
+        </table>
+
+        <div class="summary-box">
+            <h3>Journey Reflection</h3>
+            <p>This pilgrimage was a remarkable odyssey spanning the vibrant landscapes of Andhra Pradesh and into Karnataka. Starting from the coastal delta of Kakinada and traversing through the bustling spiritual hub of Vijayawada, we ascended the sacred Nallamala hills to reach the powerful Jyotirlinga at Srisailam. The journey concluded with a unique river crossing to the ancient island of Kuruvapur. Despite transport hurdles and a few modest stays, the spiritual fulfillment of visiting multiple Shakti Peethas and the cherished "Guru" temples made this an unforgettable 75th-year milestone. A true testament to the beauty of faith and the resilience of a traveler.</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    const overlay = document.getElementById('lightbox-overlay');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.getElementById('close-btn');
+    const photos = document.querySelectorAll('.travel-photo');
+
+    photos.forEach(photo => {
+        photo.addEventListener('click', () => {
+            overlay.style.display = 'flex';
+            lightboxImg.src = photo.src;
+            lightboxImg.alt = photo.alt;
+        });
+    });
+
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        overlay.style.display = 'none';
+    });
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            overlay.style.display = 'none';
+        }
+    });
+</script>
+
+</body>
+</html>
