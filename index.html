@@ -1,46 +1,635 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nanaji's Travels | A Life of Discovery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Lato:wght@300;400;700&family=Satisfy&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sand:      #F7F0E3;
+            --sand-dark: #EDE0C8;
+            --stone:     #C9BAA5;
+            --sage:      #7A9E8E;
+            --terracotta:#C0664A;
+            --amber:     #C9883A;
+            --amber-lt:  #DFA85C;
+            --navy:      #2E4057;
+            --ink:       #2A2A2A;
+            --text-body: #4E4A44;
+            --text-mid:  #7A7066;
+            --white:     #FDFCFA;
+        }
 
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css" />
-<title>Nanaji's Travels</title></head>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: #FAF7F2;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='460' viewBox='0 0 900 460'%3E%3Cdefs%3E%3Cstyle%3E.land%7Bfill:%23e8dece;stroke:%23c9baa5;stroke-width:0.6;opacity:0.55%7D.grid%7Bstroke:%23c9baa5;stroke-width:0.3;opacity:0.25%7D.route%7Bstroke:%23c08060;stroke-width:1;fill:none;stroke-dasharray:4 3;opacity:0.3%7D.dot%7Bfill:%23c08060;opacity:0.45%7D%3C/style%3E%3C/defs%3E%3C!-- Graticule grid --%3E%3Cline class='grid' x1='0' y1='115' x2='900' y2='115'/%3E%3Cline class='grid' x1='0' y1='230' x2='900' y2='230'/%3E%3Cline class='grid' x1='0' y1='345' x2='900' y2='345'/%3E%3Cline class='grid' x1='150' y1='0' x2='150' y2='460'/%3E%3Cline class='grid' x1='300' y1='0' x2='300' y2='460'/%3E%3Cline class='grid' x1='450' y1='0' x2='450' y2='460'/%3E%3Cline class='grid' x1='600' y1='0' x2='600' y2='460'/%3E%3Cline class='grid' x1='750' y1='0' x2='750' y2='460'/%3E%3C!-- North America --%3E%3Cpath class='land' d='M60 80 Q75 60 110 55 Q140 50 165 65 Q180 75 175 95 Q185 105 195 115 Q200 130 185 145 Q170 155 155 160 Q140 170 125 180 Q105 195 90 190 Q70 185 60 170 Q48 155 50 135 Q52 110 60 80Z'/%3E%3C!-- Greenland --%3E%3Cpath class='land' d='M195 30 Q215 20 235 28 Q248 38 245 55 Q238 68 222 72 Q205 70 198 55 Q192 42 195 30Z'/%3E%3C!-- South America --%3E%3Cpath class='land' d='M145 230 Q158 215 175 218 Q192 222 198 240 Q205 258 200 280 Q195 305 185 325 Q172 345 158 355 Q142 360 130 348 Q118 332 120 310 Q122 288 128 268 Q132 248 145 230Z'/%3E%3C!-- Europe --%3E%3Cpath class='land' d='M390 70 Q405 58 425 62 Q440 68 445 82 Q450 95 440 105 Q428 112 415 115 Q400 118 388 110 Q378 100 380 88 Q382 78 390 70Z'/%3E%3C!-- Scandinavia --%3E%3Cpath class='land' d='M400 35 Q412 25 425 30 Q435 38 432 52 Q426 62 415 64 Q404 62 398 52 Q394 43 400 35Z'/%3E%3C!-- Africa --%3E%3Cpath class='land' d='M415 145 Q432 132 455 135 Q475 140 485 160 Q495 182 492 210 Q490 238 482 262 Q470 288 455 305 Q438 318 420 315 Q402 308 392 288 Q382 264 383 238 Q384 210 390 185 Q397 162 415 145Z'/%3E%3C!-- Russia / North Asia --%3E%3Cpath class='land' d='M480 42 Q520 28 575 32 Q625 36 665 45 Q700 55 720 68 Q735 80 725 95 Q710 108 685 112 Q655 116 625 112 Q590 108 560 105 Q530 102 505 95 Q482 88 475 75 Q470 62 480 42Z'/%3E%3C!-- India --%3E%3Cpath class='land' d='M558 150 Q572 140 588 145 Q600 152 605 168 Q608 185 600 200 Q590 212 575 218 Q560 220 550 210 Q540 198 542 182 Q544 165 558 150Z'/%3E%3C!-- Southeast Asia --%3E%3Cpath class='land' d='M650 148 Q668 138 685 145 Q698 154 700 170 Q700 185 690 195 Q678 202 664 198 Q650 192 645 178 Q641 163 650 148Z'/%3E%3C!-- China --%3E%3Cpath class='land' d='M600 95 Q628 82 660 88 Q688 95 698 115 Q705 132 695 148 Q682 160 660 162 Q635 162 615 152 Q595 140 592 122 Q590 107 600 95Z'/%3E%3C!-- Japan --%3E%3Cpath class='land' d='M730 100 Q740 90 752 95 Q762 103 760 115 Q756 124 745 127 Q734 126 728 118 Q722 108 730 100Z'/%3E%3C!-- Australia --%3E%3Cpath class='land' d='M680 280 Q705 262 740 265 Q772 270 788 292 Q800 312 795 338 Q788 360 768 372 Q745 380 720 375 Q695 368 680 348 Q665 326 666 305 Q667 287 680 280Z'/%3E%3C!-- British Isles --%3E%3Cpath class='land' d='M368 72 Q376 64 385 68 Q392 74 390 84 Q386 92 378 94 Q370 92 366 84 Q363 76 368 72Z'/%3E%3C!-- Travel routes --%3E%3Cpath class='route' d='M155 160 Q280 140 388 110'/%3E%3Cpath class='route' d='M415 145 Q490 130 558 150'/%3E%3Cpath class='route' d='M605 168 Q632 162 660 162'/%3E%3Cpath class='route' d='M660 162 Q695 160 730 100'/%3E%3Cpath class='route' d='M175 218 Q295 230 415 230'/%3E%3Cpath class='route' d='M558 150 Q575 200 575 218'/%3E%3C!-- Destination dots --%3E%3Ccircle class='dot' cx='155' cy='160' r='4'/%3E%3Ccircle class='dot' cx='175' cy='218' r='4'/%3E%3Ccircle class='dot' cx='425' cy='82' r='4'/%3E%3Ccircle class='dot' cx='455' cy='160' r='4'/%3E%3Ccircle class='dot' cx='580' cy='162' r='4'/%3E%3Ccircle class='dot' cx='575' cy='175' r='4'/%3E%3Ccircle class='dot' cx='670' cy='158' r='4'/%3E%3Ccircle class='dot' cx='745' cy='110' r='4'/%3E%3Ccircle class='dot' cx='730' cy='320' r='4'/%3E%3C/svg%3E");
+            background-size: 100% auto;
+            background-repeat: repeat-y;
+            background-position: center top;
+            color: var(--ink);
+            font-family: 'Lato', Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ── HEADER ──────────────────────────────── */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.88);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.3);
+            transition: box-shadow .4s;
+        }
+        header.scrolled { box-shadow: 0 4px 28px rgba(46,64,87,.07); }
+
+        /* Logo always dark now (light bg) */
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 12px;
+            color: var(--navy);
+            transition: color .5s;
+        }
+        header.scrolled .logo { color: var(--navy); }
+
+        .logo-mark {
+            width: 30px; height: 30px;
+            border: 1.5px solid var(--amber);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--amber); font-size: .6rem; flex-shrink: 0;
+            transition: border-color .5s, color .5s;
+        }
+        header.scrolled .logo-mark { border-color: var(--amber); color: var(--amber); }
+
+        nav { display: flex; gap: 2px; }
+        .dropdown { position: relative; display: inline-block; }
+
+        .dropbtn {
+            background: none; border: none;
+            color: var(--text-body);
+            font-family: 'Lato', Arial, sans-serif;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: var(--amber);
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .dropdown:hover .dropbtn { color: var(--amber); }
+        .dropdown:hover .dropbtn::after { transform: scaleX(1); }
+
+        .dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 240px; z-index: 300;
+        }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        .dropdown-inner {
+            margin-top: 8px;
+            background: var(--white);
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+            animation: dropIn .2s ease;
+        }
+        @keyframes dropIn {
+            from { opacity: 0; transform: translateY(-8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .dropdown-inner a {
+            display: block; padding: 11px 22px;
+            color: var(--text-body);
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .88rem; letter-spacing: .4px;
+            text-decoration: none;
+            transition: all .2s;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+        }
+        .dropdown-inner a:last-child { border-bottom: none; }
+        .dropdown-inner a:hover {
+            background: var(--sand); color: var(--terracotta); padding-left: 30px;
+        }
+
+        /* ── HERO ──────────────────────────────────── */
+        .hero {
+            min-height: 100vh; position: relative;
+            display: flex; align-items: center;
+            padding: 100px 60px 80px;
+            overflow: hidden;
+        }
+
+        /* Full-bleed travel photo */
+        .hero-photo {
+            position: absolute; inset: 0;
+            background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center 50%;
+            transform-origin: center;
+            animation: slowZoom 22s ease-in-out infinite alternate;
+        }
+        @keyframes slowZoom {
+            from { transform: scale(1); }
+            to   { transform: scale(1.06); }
+        }
+
+        /* Light wash overlay — photo whispers in the background, text leads */
+        .hero-overlay {
+            position: absolute; inset: 0;
+            background:
+                linear-gradient(to bottom right,
+                    rgba(240,235,225,.82) 0%,
+                    rgba(235,228,215,.78) 50%,
+                    rgba(225,218,205,.72) 100%);
+        }
+
+        /* Hero text */
+        .hero-content { position: relative; z-index: 5; max-width: 640px; }
+
+        .eyebrow {
+            font-family: 'Satisfy', cursive;
+            font-size: 1.4rem; color: var(--terracotta);
+            display: block; margin-bottom: 16px;
+            opacity: 0; animation: riseIn .9s .15s ease forwards;
+        }
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.2rem, 5.5vw, 6rem);
+            line-height: 1.04; font-weight: 700;
+            color: var(--navy);
+            letter-spacing: -1px; margin-bottom: 10px;
+            opacity: 0; animation: riseIn 1s .3s ease forwards;
+        }
+        .hero-title em { font-style: italic; color: var(--sage); }
+
+        .hero-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.45rem; font-style: italic; font-weight: 300;
+            color: var(--text-mid); margin-bottom: 30px;
+            opacity: 0; animation: riseIn .9s .45s ease forwards;
+        }
+
+        .divider {
+            display: flex; align-items: center; gap: 14px;
+            margin-bottom: 28px;
+            opacity: 0; animation: riseIn .8s .55s ease forwards;
+        }
+        .divider-line {
+            flex: 1; max-width: 140px; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--stone), transparent);
+        }
+        .divider-sym { color: var(--amber); font-size: .8rem; }
+
+        .hero-body {
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1.15rem; line-height: 1.85;
+            color: var(--text-body);
+            max-width: 520px; margin-bottom: 16px;
+            opacity: 0; animation: riseIn .9s .65s ease forwards;
+            text-shadow: none;
+        }
+        .hero-body + .hero-body { animation-delay: .75s; }
+
+        .cta-row {
+            margin-top: 38px;
+            opacity: 0; animation: riseIn .9s .9s ease forwards;
+        }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: var(--navy);
+            color: var(--sand);
+            border: none;
+            font-family: 'EB Garamond', serif;
+            font-size: .8rem; letter-spacing: 2.5px; text-transform: uppercase;
+            padding: 15px 38px; cursor: pointer;
+            transition: all .35s ease; border-radius: 2px;
+            backdrop-filter: none;
+        }
+        .btn-primary:hover {
+            background: var(--sage);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(122,158,142,.3);
+        }
+
+        @keyframes riseIn {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scroll cue */
+        .scroll-cue {
+            position: absolute; bottom: 36px; left: 50%;
+            transform: translateX(-50%);
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            opacity: 0; animation: riseIn .8s 1.4s ease forwards;
+        }
+        .scroll-cue span {
+            font-family: 'EB Garamond', serif;
+            font-size: .68rem; letter-spacing: 3px; text-transform: uppercase;
+            color: var(--text-mid); opacity: .7;
+        }
+        .scroll-bar {
+            width: 1px; height: 44px;
+            background: linear-gradient(to bottom, var(--stone), transparent);
+            animation: barSlide 2.2s ease-in-out infinite;
+        }
+        @keyframes barSlide {
+            0%   { transform-origin: top; transform: scaleY(0); opacity: 0; }
+            40%  { transform-origin: top; transform: scaleY(1); opacity: 1; }
+            80%  { transform-origin: bottom; transform: scaleY(0); opacity: 0; }
+            100% { transform-origin: bottom; transform: scaleY(0); opacity: 0; }
+        }
+
+        /* ── STATS BAND ──────────────────────────── */
+        .stats-band {
+            background: var(--sand-dark);
+            border-top: 1px solid var(--stone);
+            border-bottom: 1px solid var(--stone);
+            padding: 80px 60px; position: relative; overflow: hidden;
+        }
+        .stats-band::before {
+            content: ''; position: absolute; inset: 0;
+            background-image: radial-gradient(circle, rgba(201,186,165,.25) 1px, transparent 1px);
+            background-size: 28px 28px;
+        }
+        .band-inner {
+            max-width: 900px; margin: 0 auto;
+            text-align: center; position: relative; z-index: 2;
+        }
+        .band-eyebrow {
+            font-family: 'Satisfy', cursive;
+            font-size: 1.2rem; color: var(--terracotta);
+            display: block; margin-bottom: 6px;
+        }
+        .band-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8rem; font-weight: 700;
+            color: var(--navy); margin-bottom: 56px;
+        }
+        .stats-row { display: flex; justify-content: center; }
+        .stat {
+            flex: 1; max-width: 200px;
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            padding: 0 20px;
+            border-right: 1px solid var(--stone);
+        }
+        .stat:last-child { border-right: none; }
+        .stat-num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.8rem; font-weight: 700; line-height: 1;
+            color: var(--amber);
+        }
+        .stat-rule { width: 22px; height: 1px; background: var(--stone); }
+        .stat-lbl {
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .68rem; letter-spacing: 2.8px; text-transform: uppercase;
+            color: var(--text-mid);
+        }
+
+        /* ── ABOUT ──────────────────────────────── */
+        .about-section { display: flex; min-height: 80vh; background: var(--white); }
+
+        .about-img-panel {
+            flex: 1; position: relative; overflow: hidden; min-height: 540px;
+        }
+        .about-img-panel img {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform 8s ease;
+            filter: saturate(.9) brightness(.97);
+        }
+        .about-img-panel:hover img { transform: scale(1.04); }
+        .about-img-panel::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 35%;
+            background: linear-gradient(to top, rgba(46,64,87,.3), transparent);
+        }
+        .frame-corner {
+            position: absolute; width: 20px; height: 20px;
+            border-color: rgba(253,252,250,.65); border-style: solid; z-index: 3;
+        }
+        .frame-corner.tl { top: 18px; left: 18px; border-width: 1.5px 0 0 1.5px; }
+        .frame-corner.tr { top: 18px; right: 18px; border-width: 1.5px 1.5px 0 0; }
+        .frame-corner.bl { bottom: 18px; left: 18px; border-width: 0 0 1.5px 1.5px; }
+        .frame-corner.br { bottom: 18px; right: 18px; border-width: 0 1.5px 1.5px 0; }
+
+        .about-text-panel {
+            flex: 1.2; background: var(--sand);
+            padding: 80px 72px;
+            display: flex; flex-direction: column; justify-content: center;
+            position: relative; overflow: hidden;
+        }
+        .about-text-panel::before {
+            content: ''; position: absolute; inset: 0;
+            background-image: radial-gradient(circle, rgba(201,186,165,.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        .about-eyebrow {
+            font-family: 'Satisfy', cursive;
+            font-size: 1.25rem; color: var(--terracotta);
+            display: block; margin-bottom: 12px; position: relative; z-index: 2;
+        }
+        .about-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem; font-weight: 700;
+            color: var(--navy); line-height: 1.05;
+            margin-bottom: 28px; position: relative; z-index: 2;
+        }
+        .ornament {
+            display: flex; align-items: center; gap: 14px;
+            margin-bottom: 32px; position: relative; z-index: 2;
+        }
+        .orn-line { flex: 1; height: 1px; background: var(--stone); max-width: 80px; }
+        .orn-sym  { color: var(--amber); font-size: .75rem; }
+
+        .about-p {
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: 1.08rem; line-height: 1.9;
+            color: var(--text-body); margin-bottom: 20px;
+            position: relative; z-index: 2;
+        }
+        .signature {
+            margin-top: 32px;
+            font-family: 'Satisfy', cursive;
+            font-size: 2rem; color: var(--terracotta); opacity: .8;
+            position: relative; z-index: 2;
+        }
+
+        /* ── FOOTER ─────────────────────────────── */
+        footer {
+            background: var(--sand-dark); padding: 32px 60px;
+            text-align: center; border-top: 1px solid var(--stone);
+        }
+        footer p {
+            font-family: 'Lato', Arial, sans-serif;
+        }
+
+        /* ── SCROLL REVEAL ──────────────────────── */
+        .reveal       { opacity: 0; transform: translateY(28px); }
+        .reveal-left  { opacity: 0; transform: translateX(-28px); }
+        .reveal-right { opacity: 0; transform: translateX(28px); }
+        .in-view { animation: revealFade .8s ease forwards; }
+        @keyframes revealFade { to { opacity: 1; transform: translate(0); } }
+
+        /* ── RESPONSIVE ─────────────────────────── */
+        @media (max-width: 900px) {
+            .about-section { flex-direction: column; }
+            .about-img-panel { min-height: 360px; }
+            .about-text-panel { padding: 56px 36px; }
+            .about-title { font-size: 2.8rem; }
+        }
+        @media (max-width: 640px) {
+            header { padding: 0 20px; }
+            .hero  { padding: 90px 24px 60px; }
+            .hero-title { font-size: 3rem; }
+            .stats-row { flex-wrap: wrap; }
+            .stat { max-width: 50%; border-right: none; padding: 16px; }
+            .stats-band { padding: 60px 24px; }
+        }
+    </style>
+</head>
 <body>
-  <header>
-    <div class="logo">NANAJI'S TRAVELS</div>
+
+<!-- ══════ HEADER ══════ -->
+<header id="site-header">
+    <a class="logo" href="#">
+        <div class="logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
     <nav>
-  <a href="index.html">Home</a>
-  <a href="destinations.html">Destinations</a>
-  <a href="about.html">About</a>
-  <a href="kesaritours.html">Kesari Tours</a>
-  <a href="learnmore.html">Learn More</a>
-</nav>
-  </header>
+        <div class="dropdown">
+            <button class="dropbtn">International</button>
+            <div class="dropdown-content"><div class="dropdown-inner">
+                <a href="src/content/international/bestofeurope.html">Best of Europe</a>
+                <a href="src/content/international/bhutan.html">Bhutan</a>
+                <a href="src/content/international/central_europe.html">Central Europe</a>
+                <a href="src/content/international/china.html">China</a>
+                <a href="src/content/international/dubai.html">Dubai</a>
+                <a href="src/content/international/egypt.html">Egypt</a>
+                <a href="src/content/international/indonesia.html">Indonesia</a>
+                <a href="src/content/international/muscat.html">Muscat</a>
+                <a href="src/content/international/nepal.html">Nepal</a>
+                <a href="src/content/international/scandinavian.html">Scandinavian Countries</a>
+                <a href="src/content/international/singapore.html">Singapore</a>
+                <a href="src/content/international/srilanka.html">Srilanka</a>
+                <a href="src/content/international/vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">India</button>
+            <div class="dropdown-content"><div class="dropdown-inner">
+                <a href="src/content/india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="src/content/india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="src/content/india/karnataka.html">Karnataka</a>
+                <a href="src/content/india/kerala.html">Kerala</a>
+                <a href="src/content/india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="src/content/india/northeast.html">Northeast India</a>
+                <a href="src/content/india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="src/content/india/rajasthan.html">Rajasthan</a>
+                <a href="src/content/india/uttarakhand.html">Uttarakhand</a>
+                <a href="src/content/india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">USA</button>
+            <div class="dropdown-content"><div class="dropdown-inner">
+                <a href="src/content/usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="src/content/usa/seattle.html">Seattle</a>
+                <a href="src/content/usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Temples</button>
+            <div class="dropdown-content"><div class="dropdown-inner">
+                <a href="src/content/temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="src/content/temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="src/content/temples/shegaon.html">Shegaon Diary</a>
+                <a href="src/content/temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn" onclick="scrollToAbout()" style="color:var(--terracotta)">About Nanaji</button>
+        </div>
+    </nav>
+</header>
 
-  <main class="main">
-    <div class="left">
-      <h3>THE BLUE PLANET</h3>
-      <h1>EARTH</h1>
-      <p>
-Nanaji and Nani have journeyed across the globe, exploring everything from the world’s most iconic landmarks to the most remote and hidden corners of the Earth. Their travels have taken them through bustling cities, quiet villages, breathtaking natural wonders, and cultural gems that few people ever get to see. Every stop has been carefully documented, capturing the stories, people, and moments that made each place special. Explore the map to discover where they’ve been—and maybe find some inspiration for your own adventures.      </p>
-      <div class="buttons">
-        <button class="learn-more">Learn More</button>
-        
-      </div>
+<!-- ══════ HERO ══════ -->
+<section class="hero">
+    <div class="hero-photo"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content" id="heroContent">
+        <span class="eyebrow">A Lifetime of Wonder</span>
+        <h1 class="hero-title">Rewired,<br><em>Not Retired</em></h1>
+        <p class="hero-sub">A Lifetime of Work, A New Life of Wonder</p>
+
+        <div class="divider">
+            <div class="divider-line"></div>
+            <span class="divider-sym">✦</span>
+            <div class="divider-line"></div>
+        </div>
+
+        <p class="hero-body">
+            After forty years of professional dedication, Nanaji and Nani embarked on a new chapter filled
+            with adventure and wonder. This is a journey of discovering a passion after 60 — exploring new
+            travel destinations with curiosity that never retires!
+        </p>
+        <p class="hero-body">
+            Each trip recorded here is more than just a destination; it's a collection of stories and moments
+            captured with infectious enthusiasm by Nanaji. Start your exploration today and follow his footprints
+            across the globe!
+        </p>
+
+
     </div>
-    <canvas id="globeCanvas"></canvas>
 
-  </main>
+    <div class="scroll-cue">
+        <span>Scroll</span>
+        <div class="scroll-bar"></div>
+    </div>
+</section>
 
-<script type="module" src="main.js"></script>  <script>
-  document.querySelector('.learn-more').addEventListener('click', () => {
-    window.location.href = 'html/learnmore.html';
-  });
+<!-- ══════ STATS ══════ -->
+<section class="stats-band">
+    <div class="band-inner">
+        <span class="band-eyebrow reveal">Chronicles of a Grand Voyage</span>
+        <h2 class="band-title reveal">A World Explored</h2>
+        <div class="stats-row">
+            <div class="stat reveal" style="--delay:.1s">
+                <div class="stat-num" data-target="27">0</div>
+                <div class="stat-rule"></div>
+                <div class="stat-lbl">Countries</div>
+            </div>
+            <div class="stat reveal" style="--delay:.2s">
+                <div class="stat-num" data-target="5">0</div>
+                <div class="stat-rule"></div>
+                <div class="stat-lbl">Continents</div>
+            </div>
+            <div class="stat reveal" style="--delay:.3s">
+                <!-- Infinite memories — no count-up, just symbol -->
+                <div class="stat-num" id="infiniteStat" style="font-size:3rem;opacity:0;">∞</div>
+                <div class="stat-rule"></div>
+                <div class="stat-lbl">Memories Made</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════ ABOUT ══════ -->
+<section id="about-nanaji" class="about-section">
+    <div class="about-img-panel reveal-left">
+        <img src="src/content/india/photos/CoverPage.png" alt="Nanaji & Nani">
+        <div class="frame-corner tl"></div>
+        <div class="frame-corner tr"></div>
+        <div class="frame-corner bl"></div>
+        <div class="frame-corner br"></div>
+    </div>
+    <div class="about-text-panel reveal-right">
+        <span class="about-eyebrow">The Travellers</span>
+        <h2 class="about-title">About Nanaji</h2>
+        <div class="ornament">
+            <div class="orn-line"></div>
+            <span class="orn-sym">✦</span>
+            <div class="orn-line"></div>
+        </div>
+        <p class="about-p">
+            Based in the vibrant city of Pune, Maharashtra, Nanaji and Nani's lives are a testament to dedication and family. After dedicated careers — Nanaji with the Ministry of Defence and Nani with the State Bank of India — they both retired at the age of sixty. Having spent decades in the diligent grind of work and the heart-centered task of raising their two daughters, their retirement marked the beginning of a new chapter.
+        </p>
+        <p class="about-p">
+            With their daughters now settled in their own lives, Nanaji and Nani have leveraged professional tours to explore the world together. These chronicles are more than just a record of places; they are the reflections of two souls who, after a lifetime of dedication, are now savouring every moment of a journey well-deserved. This space serves as a bridge between their roots in India and their family across the globe, celebrating a journey that is as much about heritage as it is about the future.
+        </p>
+        <p class="about-p">
+            We invite you to walk these paths with them and perhaps find a spark for your own next great adventure!
+        </p>
+        <div class="signature">— Nanaji &amp; Nani</div>
+    </div>
+</section>
+
+<!-- ══════ FOOTER ══════ -->
+<footer>
+    <p>Nanaji's Travelogue &nbsp;✦&nbsp; Pune, Maharashtra &nbsp;✦&nbsp; A Life of Discovery</p>
+</footer>
+
+<script type="module" src="main.js"></script>
+<script>
+/* ── HEADER SCROLL ── */
+window.addEventListener('scroll', () => {
+    document.getElementById('site-header')
+        .classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+/* ── SCROLL REVEALS ── */
+const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        el.style.animationDelay = el.style.getPropertyValue('--delay') || '0s';
+        el.classList.add('in-view');
+        io.unobserve(el);
+    });
+}, { threshold: .14 });
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => io.observe(el));
+
+/* ── COUNT-UP (destinations & continents) ── */
+const cio = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target, target = +el.dataset.target;
+        const start = Date.now(), dur = 1500;
+        const tick = () => {
+            const prog = Math.min((Date.now()-start)/dur, 1);
+            const ease = 1 - Math.pow(1-prog, 3);
+            el.textContent = Math.round(ease * target);
+            if (prog < 1) requestAnimationFrame(tick);
+            else el.textContent = target + '+';
+        };
+        tick(); cio.unobserve(el);
+    });
+}, { threshold: .5 });
+document.querySelectorAll('[data-target]').forEach(el => cio.observe(el));
+
+/* ── INFINITE SYMBOL FADE-IN ── */
+const infIO = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = document.getElementById('infiniteStat');
+        el.style.transition = 'opacity 1.4s ease, transform 1.4s ease';
+        el.style.transform   = 'scale(.7)';
+        requestAnimationFrame(() => {
+            el.style.opacity   = '1';
+            el.style.transform = 'scale(1)';
+        });
+        infIO.unobserve(e.target);
+    });
+}, { threshold: .5 });
+const infEl = document.getElementById('infiniteStat');
+if (infEl) infIO.observe(infEl.closest('.stat'));
+
+/* ── SUBTLE HERO PARALLAX ── */
+const heroContent = document.getElementById('heroContent');
+window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (heroContent && y < window.innerHeight) {
+        heroContent.style.transform = `translateY(${y * .15}px)`;
+        heroContent.style.opacity   = (1 - y / 680).toString();
+    }
+}, { passive: true });
+
+function scrollToAbout() {
+    document.getElementById('about-nanaji').scrollIntoView({ behavior: 'smooth' });
+}
 </script>
-      <div id="popup"><span id="popup-label"></span></div>
-
 </body>
 </html>
