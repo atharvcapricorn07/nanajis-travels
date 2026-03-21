@@ -127,6 +127,7 @@
         .hero {
             min-height: 100vh; position: relative;
             display: flex; align-items: center;
+            justify-content: space-between;
             padding: 100px 60px 80px;
             overflow: hidden;
         }
@@ -457,16 +458,16 @@
             .hero {
                 flex-direction: column;
                 align-items: flex-start;
-                justify-content: center;
-                min-height: 100vh;
-                padding: 120px 24px 60px;
+                justify-content: flex-start;
+                min-height: auto;
+                padding: 120px 24px 48px;
             }
             .hero-overlay {
                 background: linear-gradient(
                     to bottom,
                     rgba(240,235,225,.55) 0%,
                     rgba(235,228,215,.75) 55%,
-                    rgba(225,218,205,.92) 100%
+                    rgba(225,218,205,.96) 100%
                 );
             }
             .hero-content { max-width: 100%; }
@@ -475,6 +476,31 @@
             .hero-sub { font-size: 1.2rem; }
             .hero-body { font-size: 1rem; line-height: 1.75; max-width: 100%; }
             .scroll-cue { display: none; }
+
+            /* Timeline: visible on mobile, full-width below hero text */
+            .hero-tl {
+                display: block;
+                width: 100%;
+                margin-top: 36px;
+                padding: 16px 20px;
+                background: rgba(253,252,250,.75);
+                backdrop-filter: blur(10px);
+                border-radius: 6px;
+                border: 1px solid rgba(201,186,165,.35);
+                opacity: 1;
+                animation: none;
+            }
+            /* Collapse three columns into a single column on mobile */
+            .htl-grid {
+                flex-direction: column;
+                gap: 0;
+            }
+            /* Remove the horizontal bridge between columns */
+            .htl-col:not(:last-child)::after { display: none; }
+            /* Each column flows directly into the next */
+            .htl-col {
+                padding-right: 0;
+            }
         }
         @media (max-width: 640px) {
             .hero-title { font-size: 2.4rem; }
@@ -483,6 +509,147 @@
             .stats-band { padding: 60px 24px; }
             .about-text-panel { padding: 40px 24px 28px; }
         }
+        /* Hero two-column */
+        .hero-content { position: relative; z-index: 5; max-width: 520px; flex-shrink: 0; }
+
+        /* ── HERO TIMELINE PANEL ───────────────────── */
+        .hero-tl {
+            position: relative; z-index: 5;
+            padding: 20px 24px 16px;
+            background: rgba(253,252,250,.58);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(201,186,165,.35);
+            border-radius: 6px;
+            opacity: 0; animation: riseIn .9s 1s ease forwards;
+        }
+
+        .htl-header {
+            font-family: 'Satisfy', cursive;
+            font-size: .95rem;
+            color: var(--terracotta);
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            text-align: center;
+        }
+
+        /* Three columns side by side */
+        .htl-grid {
+            display: flex;
+            gap: 0;
+            align-items: flex-start;
+        }
+
+        /* Each column is a continued timeline track */
+        .htl-col {
+            position: relative;
+            flex: 1;
+            padding-left: 18px;
+            padding-right: 12px;
+        }
+
+        /* Running vertical line per column */
+        .htl-col::before {
+            content: '';
+            position: absolute;
+            left: 5px; top: 6px; bottom: 6px;
+            width: 1.5px;
+            background: linear-gradient(to bottom,
+                var(--amber-lt),
+                var(--stone) 60%,
+                var(--sage));
+            opacity: .65;
+        }
+
+        /* Thin horizontal bridge connecting columns at the bottom */
+        .htl-col:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            bottom: 6px;
+            left: 5px;
+            right: -1px;
+            height: 1.5px;
+            background: linear-gradient(to right, var(--sage), var(--stone));
+            opacity: .45;
+        }
+
+        /* Year group */
+        .htl-year-block { margin-bottom: 2px; }
+
+        /* Year node on the line */
+        .htl-year {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 5px 0 3px;
+        }
+        .htl-year::before {
+            content: '';
+            position: absolute;
+            left: -18px;
+            width: 11px; height: 11px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 2px solid var(--amber);
+            box-shadow: 0 0 0 3px rgba(201,136,58,.12);
+        }
+        .htl-year-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: .9rem; font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--navy);
+        }
+
+        /* Destination entry */
+        .htl-item {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 1.5px 0;
+            text-decoration: none;
+            transition: all .18s;
+        }
+        /* Dot on the spine */
+        .htl-item::before {
+            content: '';
+            position: absolute;
+            left: -14.5px;
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--stone);
+            transition: background .18s;
+            flex-shrink: 0;
+        }
+        /* Connector dash */
+        .htl-item::after {
+            content: '';
+            display: inline-block;
+            width: 10px; height: 1px;
+            background: var(--stone);
+            margin-right: 5px;
+            flex-shrink: 0;
+            transition: background .18s, width .18s;
+        }
+        .htl-item:hover::before { background: var(--terracotta); }
+        .htl-item:hover::after  { width: 14px; background: var(--terracotta); }
+        .htl-item:hover .htl-iname { color: var(--terracotta); }
+
+        .htl-iname {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: .83rem;
+            font-style: italic;
+            color: var(--text-body);
+            transition: color .18s;
+            white-space: nowrap;
+        }
+
+        /* ── INFOGRAPHIC TIMELINE ──────────────────── */
+        #timeline-section {
+            background: var(--white);
+            padding: 80px 0 100px;
+        }
+
     </style>
 </head>
 <body>
@@ -503,11 +670,11 @@
                 <a href="src/content/international/china.html">China</a>
                 <a href="src/content/international/dubai.html">Dubai</a>
                 <a href="src/content/international/egypt.html">Egypt</a>
-                <a href="src/content/international/indonesia.html">Indonesia</a>
+                <a href="src/content/international/indonesia.html">Indonesia & Bali</a>
                 <a href="src/content/international/muscat.html">Muscat</a>
                 <a href="src/content/international/nepal.html">Nepal</a>
                 <a href="src/content/international/scandinavian.html">Scandinavian Countries</a>
-                <a href="src/content/international/singapore.html">Singapore</a>
+                <a href="src/content/international/singapore.html">SouthEast Asia</a>
                 <a href="src/content/international/srilanka.html">Srilanka &amp; Maldives</a>
                 <a href="src/content/international/vietnam_combodia.html">Vietnam &amp; Cambodia</a>
             </div></div>
@@ -530,8 +697,6 @@
         <div class="dropdown">
             <button class="dropbtn">USA</button>
             <div class="dropdown-content"><div class="dropdown-inner">
-                <a href="src/content/usa/bayarea.html">Bay Area California</a>
-                <a href="src/content/usa/california.html">Southern California</a>
                 <a href="src/content/usa/newyork.html">New York &amp; Washington DC</a>
                 <a href="src/content/usa/seattle.html">Seattle</a>
                 <a href="src/content/usa/alaska.html">Alaska</a>
@@ -560,13 +725,11 @@
     <div class="hero-content" id="heroContent">
         <h1 class="hero-title">Rewired,<br><em>Not Retired</em></h1>
         <p class="hero-sub">A Lifetime of Work, A New Life of Wonder</p>
-
         <div class="divider">
             <div class="divider-line"></div>
             <span class="divider-sym">✦</span>
             <div class="divider-line"></div>
         </div>
-
         <p class="hero-body">
             After forty years of professional dedication, Nanaji and Nani embarked on a new chapter filled
             with adventure and wonder. This is a journey of discovering a passion after 60 — exploring new
@@ -577,8 +740,145 @@
             captured with infectious enthusiasm by Nanaji. Start your exploration today and follow his footprints
             across the globe!
         </p>
+    </div>
 
+    <!-- ── HERO TIMELINE ── -->
+    <div class="hero-tl">
+        <div class="htl-header">A Journey since 2012</div>
+        <div class="htl-grid">
 
+            <!-- COLUMN 1: Nov 2012 – Sep 2016 -->
+            <div class="htl-col">
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Nov 2012</span></div>
+                    <a href="src/content/international/singapore.html" class="htl-item"><span class="htl-iname">South East Asia</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">May 2013</span></div>
+                    <a href="src/content/usa/bayarea.html" class="htl-item"><span class="htl-iname">Bay Area California</span></a>
+                    <a href="src/content/usa/socal.html" class="htl-item"><span class="htl-iname">Southern California</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Sep 2014</span></div>
+                    <a href="src/content/international/dubai.html" class="htl-item"><span class="htl-iname">Dubai</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Nov 2014</span></div>
+                    <a href="src/content/temples/tamilnadu.html" class="htl-item"><span class="htl-iname">Tamilnadu Temple Trail</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Jun 2015</span></div>
+                    <a href="src/content/international/bestofeurope.html" class="htl-item"><span class="htl-iname">Best of Europe</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">May 2016</span></div>
+                    <a href="src/content/international/china.html" class="htl-item"><span class="htl-iname">China</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Sep 2016</span></div>
+                    <a href="src/content/usa/newyork.html" class="htl-item"><span class="htl-iname">New York &amp; Washington DC</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Apr 2017</span></div>
+                    <a href="src/content/international/bhutan.html" class="htl-item"><span class="htl-iname">Bhutan</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">May 2017</span></div>
+                    <a href="src/content/usa/seattle.html" class="htl-item"><span class="htl-iname">Seattle</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Mar 2018</span></div>
+                    <a href="src/content/international/srilanka.html" class="htl-item"><span class="htl-iname">Sri Lanka &amp; Maldives</span></a>
+                </div>
+            </div>
+
+            <!-- COLUMN 2: Jan 2019 – Dec 2023 -->
+            <div class="htl-col">
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Jan 2019</span></div>
+                    <a href="src/content/international/nepal.html" class="htl-item"><span class="htl-iname">Nepal</span></a>
+                    <a href="src/content/temples/ashtavinayak.html" class="htl-item"><span class="htl-iname">Ashtavinayak</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Oct 2019</span></div>
+                    <a href="src/content/india/karnataka.html" class="htl-item"><span class="htl-iname">Karnataka</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Dec 2019</span></div>
+                    <a href="src/content/india/rajasthan.html" class="htl-item"><span class="htl-iname">Rajasthan</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Feb 2020</span></div>
+                    <a href="src/content/international/egypt.html" class="htl-item"><span class="htl-iname">Egypt</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Mar 2022</span></div>
+                    <a href="src/content/india/punjab_himachal.html" class="htl-item"><span class="htl-iname">Punjab &amp; Himachal</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Aug 2022</span></div>
+                    <a href="src/content/usa/alaska.html" class="htl-item"><span class="htl-iname">Alaska</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Apr 2023</span></div>
+                    <a href="src/content/india/northeast.html" class="htl-item"><span class="htl-iname">Northeast India</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Jun 2023</span></div>
+                    <a href="src/content/temples/shegaon.html" class="htl-item"><span class="htl-iname">Shegaon</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Sep 2023</span></div>
+                    <a href="src/content/international/scandinavian.html" class="htl-item"><span class="htl-iname">Scandinavian Countries</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Dec 2023</span></div>
+                    <a href="src/content/international/muscat.html" class="htl-item"><span class="htl-iname">Muscat</span></a>
+                    <a href="src/content/india/gujarat_rann.html" class="htl-item"><span class="htl-iname">Gujarat Rann</span></a>
+                </div>
+            </div>
+
+            <!-- COLUMN 3: Oct 2024 – Jan 2026 -->
+            <div class="htl-col">
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Oct 2024</span></div>
+                    <a href="src/content/international/vietnam_combodia.html" class="htl-item"><span class="htl-iname">Vietnam &amp; Cambodia</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Nov 2024</span></div>
+                    <a href="src/content/india/uttarpradesh.html" class="htl-item"><span class="htl-iname">Uttar Pradesh</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Dec 2024</span></div>
+                    <a href="src/content/india/jaipur_agra.html" class="htl-item"><span class="htl-iname">Jaipur &amp; Agra</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Feb 2025</span></div>
+                    <a href="src/content/temples/andhrapradesh.html" class="htl-item"><span class="htl-iname">Andhra-Karnataka Temples</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Mar 2025</span></div>
+                    <a href="src/content/india/madhyapradesh.html" class="htl-item"><span class="htl-iname">Madhya Pradesh</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">May 2025</span></div>
+                    <a href="src/content/international/indonesia.html" class="htl-item"><span class="htl-iname">Indonesia &amp; Bali</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Jul 2025</span></div>
+                    <a href="src/content/international/central_europe.html" class="htl-item"><span class="htl-iname">Central Europe</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Nov 2025</span></div>
+                    <a href="src/content/india/uttarakhand.html" class="htl-item"><span class="htl-iname">Uttarakhand</span></a>
+                </div>
+                <div class="htl-year-block">
+                    <div class="htl-year"><span class="htl-year-label">Jan 2026</span></div>
+                    <a href="src/content/india/kerala.html" class="htl-item"><span class="htl-iname">Kerala</span></a>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <div class="scroll-cue">
@@ -594,12 +894,12 @@
         <h2 class="band-title reveal">A World Explored</h2>
         <div class="stats-row">
             <div class="stat reveal" style="--delay:.1s">
-                <div class="stat-num" data-target="27">0</div>
+                <div class="stat-num" data-target="35">0</div>
                 <div class="stat-rule"></div>
                 <div class="stat-lbl">Countries</div>
             </div>
             <div class="stat reveal" style="--delay:.2s">
-                <div class="stat-num" data-target="5">0</div>
+                <div class="stat-num" data-target="4">0</div>
                 <div class="stat-rule"></div>
                 <div class="stat-lbl">Continents</div>
             </div>
@@ -642,6 +942,7 @@
         <div class="signature">— Nanaji &amp; Nani</div>
     </div>
 </section>
+
 
 <!-- ══════ FOOTER ══════ -->
 <footer>
@@ -694,7 +995,7 @@ const cio = new IntersectionObserver(entries => {
             const ease = 1 - Math.pow(1-prog, 3);
             el.textContent = Math.round(ease * target);
             if (prog < 1) requestAnimationFrame(tick);
-            else el.textContent = target + '+';
+            else el.textContent = target === 4 ? target : target + '+';
         };
         tick(); cio.unobserve(el);
     });
