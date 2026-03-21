@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grand Europe Tour| A Journey</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
             /* European Union Flag Palette */
@@ -22,7 +22,134 @@
             color: var(--text);
             margin: 0;
             padding: 0;
+            padding-top: 72px; /* offset for fixed nav */
             line-height: 1.8;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-about-btn {
+            background: none; border: none;
+            color: #C0664A;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s;
+        }
+        .site-about-btn:hover { color: #C9883A; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto;
+                flex-direction: column;
+                align-items: center;
+                padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex;
+                width: calc(100% + 32px);
+                margin: 0 -16px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
 
         .journal-container {
@@ -254,6 +381,71 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="bestofeurope.html">Best of Europe</a>
+                <a href="bhutan.html">Bhutan</a>
+                <a href="central_europe.html">Central Europe</a>
+                <a href="china.html">China</a>
+                <a href="dubai.html">Dubai</a>
+                <a href="egypt.html">Egypt</a>
+                <a href="indonesia.html">Indonesia</a>
+                <a href="muscat.html">Muscat</a>
+                <a href="nepal.html">Nepal</a>
+                <a href="scandinavian.html">Scandinavian Countries</a>
+                <a href="singapore.html">Singapore</a>
+                <a href="srilanka.html">Srilanka</a>
+                <a href="vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="../india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="../india/karnataka.html">Karnataka</a>
+                <a href="../india/kerala.html">Kerala</a>
+                <a href="../india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="../india/northeast.html">Northeast India</a>
+                <a href="../india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="../india/rajasthan.html">Rajasthan</a>
+                <a href="../india/uttarakhand.html">Uttarakhand</a>
+                <a href="../india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
 <div id="lightbox-modal" class="lightbox">
     <span class="close">&times;</span>
     <img class="lightbox-content" id="lightbox-img" src="">
@@ -292,7 +484,7 @@
 
     <p>On 15th June, after breakfast, we left the hotel around 8:30 for seeing other things. Because of heavy traffic, we could reach the <strong>London Museum</strong> around 10 am. The very first attraction was a free washroom! In this museum, the most important thing to see is the ‘Crown Jewels’. What a big irony! We Indians purchased tickets and stood in the queue to see the famous <strong>Indian Kohinoor Diamond</strong>. Now that diamond is decorating the crown of Queen Elizabeth. The looted booty from India is exhibited proudly in London. The Kohinoor diamond reminds us of the audacities, atrocities, and cruelties done to Indians by the British. Andaman cellular jail still remains as a mute witness.</p>
     
-    <img src="\src\content\international\photos\europe1.jpg" alt="London Tower Bridge" class="photo-frame float-right">
+    <img src="photos/europe1.jpg" alt="London Tower Bridge" class="photo-frame float-right">
 
     <p>After the visit to the museum, we went around that place. We had a close look at <strong>London Tower Bridge</strong> over the Thames River. This place is very beautiful. After that, we had been to an Indian restaurant for lunch. After lunch, we saw the famous wax museum (Madame Tussauds). Wax statues of eminent Indian personalities like Mahatma Gandhi, Indira Gandhi, Sachin Tendulkar, Amitabh Bachchan, etc., were also found. After seeing this famous museum, we proceeded to watch the Changing Guard ceremony at <strong>Buckingham Palace</strong>. The ceremony was colourful.</p>
     
@@ -304,7 +496,7 @@
 
     <p>After reaching Paris, we went for an orientation tour. We could see Trams also on the road. After the city tour, we were taken to an Indian restaurant and finished our lunch. After lunch, we proceeded to the <strong>Eiffel Tower</strong>. We were cautioned by the local guides about pickpockets.</p>
     
-    <img src="\src\content\international\photos\europe2.jpg" alt="Eiffel Tower" class="photo-frame float-left">
+    <img src="photos/europe2.jpg" alt="Eiffel Tower" class="photo-frame float-left">
 
     <p>The local guide arranged tickets to go to the top. There are three stages to reach the top. We went by a sliding car and changed to the next one and reached the second stage. The panoramic views of the whole city were super. We took lots of photographs. Unfortunately, we could not go to the top level due to technical problems on the third-stage lift. We spent some time in the middle stage and came back to the ground. The Eiffel Tower is situated on the river bank of Seine. After the Eiffel Tower, we went on a cruise through the river <strong>Seine</strong>. We spent boating for about an hour.</p>
     
@@ -317,13 +509,13 @@
     <h2>Brussels & Rotterdam</h2>
     <p>On 18th June after breakfast around 8:30, we left Paris and proceeded to Belgium. Our plan was to visit Brussels. Distance from Paris to Brussels is around 350 Km. The bus was going around at 100 km/hr speed. Both sides of the highways are agricultural lands and the greenery was pleasant.</p>
     
-    <img src="\src\content\international\photos\europe3.jpg" alt="Brussels" class="photo-frame float-right rotate-90">
+    <img src="photos/europe3.jpg" alt="Brussels" class="photo-frame float-right rotate-90">
 
     <p>We took lunch at an Indian hotel. Then we went to Grand Place. It is a place where a few churches and monuments are there. Here only the famous <strong>Manneken Pis</strong> statue is there. About this statue, legends are narrating different stories. One thing is certain, that the people of this place have immense attachment with this statue. From the roadside shops, we purchased souvenirs, T-shirts, etc. After spending an hour we moved to see Atomium. This was created in this country during the Trade Fair.</p>
 
     <p>From Brussels, Rotterdam is around 200 km. We left Brussels around 5:30 pm and reached Rotterdam around 7 pm. On 19th morning we left to see Amsterdam. Holland is very famous for Tulip flower gardens. But the flowering season ends in mid-May. So we could not visit Tulip flower gardens.</p>
     
-    <img src="\src\content\international\photos\europe4.jpg" alt="Amsterdam" class="photo-frame float-left">
+    <img src="photos/europe4.jpg" alt="Amsterdam" class="photo-frame float-left">
 
     <p>Amsterdam city is below sea level. Here people are quite tall. People of this country use cycles more than four-wheelers. All roads have separate lanes for cyclists. In Amsterdam, we visited <strong>Madurodam</strong>. It is a war memorial created in 1952. A miniature city is created in this. It looks so beautiful. We found miniature buildings, trains, bridges, rivers, etc. Then we went for a city tour. We boarded a cruise to have an Amsterdam city tour.</p>
 
@@ -331,7 +523,7 @@
     <p>We left Amsterdam around 4 pm. The city of Cologne is around 270 Km away. We reached <strong>Cologne</strong> around 7:30 pm. We saw the famous Cathedral. The Cathedral was very old, still intact. During the Second World War, all the neighbouring countries were bombarding Germany. Even during that time, this church was not damaged. It was not due to any religious sentiments. This massive church helped the enemies as an excellent landmark to aim at other targets.
     After seeing the church we went to an Indian hotel for dinner. We stayed for a night at the Express Holiday Inn Hotel.</p>
     
-    <img src="\src\content\international\photos\europe5.jpg" alt="Cuckoo Clock" class="photo-frame float-right">
+    <img src="photos/europe5.jpg" alt="Cuckoo Clock" class="photo-frame float-right">
 
     <p>On 20th June we left Cologne in the morning around 6:30. Our plan was to reach Switzerland before night. From Cologne, we went to Titisee. Here a <strong>Cuckoo Clock Factory</strong> is there. They are making clocks from Pine wood. Also beautiful dolls and glass showpieces are sold here. We bought a cuckoo clock. Cuckoo clocks from the price range 50 Euros to 1000 Euros are sold here.</p>
 
@@ -339,74 +531,74 @@
 
     <p>We were going to Rhine Waterfalls. The way was excellent. We went through the black dense forest. Also, we crossed many long tunnels of Alps mountains. One side we saw the beautiful Alps mountains covered with ice and glittering by bright sunlight. The other side was a deep valley. Pine trees are grown all over the mountain. The natural beauty is spectacular.</p>
     
-    <img src="\src\content\international\photos\europe6.jpg" alt="Rhine Waterfalls" class="photo-frame float-left">
+    <img src="photos/europe6.jpg" alt="Rhine Waterfalls" class="photo-frame float-left">
 
     <p>We reached the <strong>Rhine Waterfalls</strong> around 4 pm. This is the biggest waterfall in Europe. Also, there is a hill close to the waterfalls. We reach the base of the hill through a boat. It is a thrilling ride! We reached the base of the hill and climbed to the top through steps. From this point, we can have a spectacular view of the waterfalls.</p>
     
     <p>Then we proceeded to Engelberg. We reached Engelberg at around 7:30 pm. Our stay was at Hotel Edelweiss. This hotel is on a hill. To reach, through a tunnel we walked and through a lift we reached the hill top and reached the hotel base!</p>
     
-    <img src="\src\content\international\photos\europe7.jpg" alt="Mount Titlis" class="photo-frame float-right">
+    <img src="photos/europe7.jpg" alt="Mount Titlis" class="photo-frame float-right">
 
     <p>On 21st June morning, we walked to the base for going to <strong>Mount Titlis</strong>. This is one of the peaks of Alps. Altitude is 10,000 ft. To reach the top we have to move in three levels. The third one is a revolving car. While going in the rope car of the first stage, we saw in the valley healthy cows were grazing and a bell was tied over the neck of each cow. The ringing sound of the bell we could hear from the rope car.</p>
     
     <p>We reached the top level. Temperature was around -7°C. Moreover, there was continuous snowfall also. I felt a mild headache and felt scared to go for ice skating. I just wandered on the ice and returned back to shelter. It is a unique experience.</p>
     
-    <img src="\src\content\international\photos\europe8.jpg" alt="Lucerne Lion Monument" class="photo-frame float-left">
+    <img src="photos/europe8.jpg" alt="Lucerne Lion Monument" class="photo-frame float-left">
 
     <p>After seeing Mount Titlis, we went to city <strong>Lucerne</strong>. We saw the statue of the Lion Monument. This monument was for the Swiss soldiers who sacrificed their life during the French Revolution. The lion is wounded and the pain expression is exhibited on the face of the lion brilliantly.</p>
 
-    <img src="\src\content\international\photos\europe9.jpg" alt="Trummelbach Glacial Waterfalls" class="photo-frame float-right">
+    <img src="photos/europe9.jpg" alt="Trummelbach Glacial Waterfalls" class="photo-frame float-right">
 
     <p>On 22nd morning we left the hotel early. On the way to station we visited <strong>Trummelbach Glacial waterfalls</strong>. This waterfall is inside a tunnel. We reached the base of the mountain and went to the tunnel through a sliding cabin on rails. We saw the waterfalls and proceeded to Lauterbrunnen station to board the train.</p>
 
-    <img src="\src\content\international\photos\europe10.jpg" alt="Jungfraujoch" class="photo-frame float-left">
+    <img src="photos/europe10.jpg" alt="Jungfraujoch" class="photo-frame float-left">
 
     <p>That day's main visit was to go to <strong>Jungfraujoch</strong>, the highest peak point of Europe. Altitude of this place is 13,300 ft. Temperature was around -10°C. Fortunately when we visited, there was no snowfall. Bright sun was there. Here also they issue a certificate that we visited this peak! We were proud while standing on the peak point of Europe. It was a wonderful moment!</p>
 
     <h2>Vaduz, Swarovski & Innsbruck</h2>
     
-    <img src="\src\content\international\photos\europe11.jpg" alt="Vaduz" class="photo-frame float-right">
+    <img src="photos/europe11.jpg" alt="Vaduz" class="photo-frame float-right">
 
     <p>23rd morning we left Switzerland and proceeded to Liechtenstein. This is a very small country in Europe. Main business is making wine. <strong>Vaduz</strong> is the capital of this country. Through a toy train, we went through this city. From Vaduz, we proceeded to Austria.</p>
     
-    <img src="\src\content\international\photos\europe12.jpg" alt="Swarovski Crystal Museum" class="photo-frame float-left">
+    <img src="photos/europe12.jpg" alt="Swarovski Crystal Museum" class="photo-frame float-left">
 
     <p>Innsbruck is around 150 Km away. Before Innsbruck, we stopped at Wattens to visit the world-famous <strong>Swarovski Crystal Museum</strong>. This is a museum plus showroom. Many crystal massive showpieces are in the museum.</p>
     
-    <img src="\src\content\international\photos\europe13.jpg" alt="Maria Theresien Street" class="photo-frame float-right rotate-90">
+    <img src="photos/europe13.jpg" alt="Maria Theresien Street" class="photo-frame float-right rotate-90">
 
     <p>After the museum, we went to City Innsbruck. Inns is the name of the river. Being the city is on the river bank the city is named as Innsbruck. Here we went to <strong>Maria Theresien</strong> to see the Golden Roof.
     Then we had a nice indian dinner at Hotel Olympia.</p>
 
     <h2>Italy & The Vatican</h2>
 
-    <img src="\src\content\international\photos\europe14.jpg" alt="Venice" class="photo-frame float-left">
+    <img src="photos/europe14.jpg" alt="Venice" class="photo-frame float-left">
 
     <p>On 24th June morning, we left Innsbruck and proceeded to Italy. The first city in Italy we visited is <strong>Venice</strong>. Venice is a small island and listed as a world heritage city. To reach this city we have to move in a cruise. Four-wheelers and two-wheelers are prohibited in this city. The city is full of backwater canals. People are moving from one place to other only by boats.</p>
     
     <p>First, we visited a glass factory. Beautiful showpieces made out of glass were sold here. In the main street, we saw many old monuments and churches. Then we travelled in a small boat (Gondola) to move around the city.</p>
     
-    <img src="\src\content\international\photos\europe15.jpg" alt="Ferrari Museum" class="photo-frame float-right">
+    <img src="photos/europe15.jpg" alt="Ferrari Museum" class="photo-frame float-right">
 
     <p>On 25th June morning, we left Padova and proceeded to visit the <strong>Ferrari Car Museum</strong>. Also on payment, a joy ride on a Ferrari car facility was there. But no one went!</p>
 
-    <img src="\src\content\international\photos\europe16.jpg" alt="Leaning Tower of Pisa" class="photo-frame float-left rotate-n90">
+    <img src="photos/europe16.jpg" alt="Leaning Tower of Pisa" class="photo-frame float-left rotate-n90">
 
     <p>After the car museum, we proceeded to the famous place <strong>Pisa</strong> to see the <strong>Leaning Tower</strong>. The City Pisa is 300 km away from Padova. This tower was not made deliberately in a slanting way. Due to some miscalculation, the tower was slanting initially. Mussolini did a brilliant work to arrest further tilting. He drilled on the base and filled it with a huge amount of concrete and he saved the monument. It is very nicely maintained. The leaning tower was useful for Newton to conduct his experiments to determine the value of ‘g’.</p>
 
-    <img src="\src\content\international\photos\europe17.jpg" alt="David Statue" class="photo-frame float-right rotate-90">
+    <img src="photos/europe17.jpg" alt="David Statue" class="photo-frame float-right rotate-90">
 
     <p>From the city of Pisa, we proceeded to <strong>Florence</strong>. Here we went to Michelangelo point where the <strong>David Statue</strong> is erected.</p>
 
-    <img src="\src\content\international\photos\europe18.jpg" alt="Rome Forts" class="photo-frame float-left">
+    <img src="photos/europe18.jpg" alt="Rome Forts" class="photo-frame float-left">
 
     <p>On 26th morning we reached <strong>Rome</strong>. In the bus, we were moving around Rome, the ancient city of Italy. We saw the damaged Forts of Rome where once upon a time the brave kings of Rome were ruling.</p>
     
-    <img src="\src\content\international\photos\europe19.jpg" alt="Vatican Museum" class="photo-frame float-right">
+    <img src="photos/europe19.jpg" alt="Vatican Museum" class="photo-frame float-right">
 
     <p>After lunch, we went to <strong>Vatican City</strong>. We went to see the famous Vatican Museum. This place was very much crowded. We followed the local guide and an electronic gadget with earphone was given to us. In the museum, Michelangelo’s paintings are carefully preserved. This zone of the museum is the silent zone and photography is strictly prohibited. The paintings are superb.</p>
     
-    <img src="\src\content\international\photos\europe20.jpg" alt="Trevi Fountain" class="photo-frame float-left">
+    <img src="photos/europe20.jpg" alt="Trevi Fountain" class="photo-frame float-left">
 
     <p>After Vatican, we visited <strong>Trevi Fountain</strong>. People believe that if coins are put in this fountain their wishes would be fulfilled.</p>
 
@@ -420,6 +612,21 @@
 </article>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     // Lightbox Logic
     const modal = document.getElementById("lightbox-modal");
     const modalImg = document.getElementById("lightbox-img");

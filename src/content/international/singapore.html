@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>S.E. Asia Odyssey | Nanaji's Travels</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600&family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --paper: #ffffff;
@@ -16,12 +16,124 @@
         }
 
         body {
-            background-color: #f1f7f3; /* Soft Mint Gray background */
+            background-color: #f1f7f3;
             color: var(--ink);
             font-family: 'Inter', sans-serif;
             line-height: 1.8;
             margin: 0;
             padding: 0;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
 
         .journal-container {
@@ -240,6 +352,71 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="bestofeurope.html">Best of Europe</a>
+                <a href="bhutan.html">Bhutan</a>
+                <a href="central_europe.html">Central Europe</a>
+                <a href="china.html">China</a>
+                <a href="dubai.html">Dubai</a>
+                <a href="egypt.html">Egypt</a>
+                <a href="indonesia.html">Indonesia</a>
+                <a href="muscat.html">Muscat</a>
+                <a href="nepal.html">Nepal</a>
+                <a href="scandinavian.html">Scandinavian Countries</a>
+                <a href="singapore.html">Singapore</a>
+                <a href="srilanka.html">Srilanka</a>
+                <a href="vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="../india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="../india/karnataka.html">Karnataka</a>
+                <a href="../india/kerala.html">Kerala</a>
+                <a href="../india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="../india/northeast.html">Northeast India</a>
+                <a href="../india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="../india/rajasthan.html">Rajasthan</a>
+                <a href="../india/uttarakhand.html">Uttarakhand</a>
+                <a href="../india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
 <div id="lightbox-modal" class="lightbox">
     <span class="close">&times;</span>
     <img class="lightbox-content" id="lightbox-img" src="">
@@ -276,7 +453,7 @@
         <span class="date-entry">25th November 2012</span>
         <p>A day of wonders. We soared 165 meters high on the <strong>Singapore Flyer</strong>, a giant wheel with many glass cubicles moving slowly. Later, a boat ride on the Singapore River showcased the Fountain of Wealth and towering skyscrapers.</p>
 
-        <img src="\src\content\international\photos\singapore1.jpg" alt="Sentosa Island" class="journal-photo float-right">
+        <img src="photos/singapore1.jpg" alt="Sentosa Island" class="journal-photo float-right">
 
         <p>We explored the lush <strong>Botanical Gardens</strong> before heading to Sentosa Island via a magnificent cable car ride. The highlights included the Underwater World and the spectacular "Songs of the Sea" fountain show at sunset.</p>
         <p>Another thing we noticed, Singapore is very famous for levying fines. Sign boards warn that if food is wasted they are liable to be fined.</p> 
@@ -288,7 +465,7 @@
     <section class="day">
         <span class="date-entry">26th November 2012</span>
 
-        <img src="\src\content\international\photos\singapore3.jpg" alt="Genting Highlands" class="journal-photo float-left">
+        <img src="photos/singapore3.jpg" alt="Genting Highlands" class="journal-photo float-left">
 
         <p>We crossed into Malaysia by bus, passing through endless <strong>plantations of palm trees</strong>. Our destination: Genting Highlands, sitting 4,000 feet above sea level. We stayed at the massive First World Hotel—a place with 6,000 rooms!</p>
         
@@ -296,7 +473,7 @@
         
         <span class="date-entry">27th November 2012</span>
 
-        <img src="\src\content\international\photos\singapore2.jpg" alt="Petronas Twin Towers" class="journal-photo float-right">
+        <img src="photos/singapore2.jpg" alt="Petronas Twin Towers" class="journal-photo float-right">
 
         <p>After breakfast where 'Dosa' had the longest queue, we explored the outdoor sports area before heading to Kuala Lumpur. The <strong>Twin Towers</strong> were a magnificent sight, glittering like diamonds in the night sky.</p>
     </section>
@@ -325,6 +502,21 @@
 </article>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     // Get the lightbox elements
     const modal = document.getElementById("lightbox-modal");
     const modalImg = document.getElementById("lightbox-img");

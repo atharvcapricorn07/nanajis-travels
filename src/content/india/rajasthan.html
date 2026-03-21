@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rajasthan Travelogue: Mewar and Marwar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,6 +13,118 @@
             background-color: #fffaf0;
             margin: 0;
             padding: 0;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
         .container {
             max-width: 900px;
@@ -93,6 +206,71 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../international/bestofeurope.html">Best of Europe</a>
+                <a href="../international/bhutan.html">Bhutan</a>
+                <a href="../international/central_europe.html">Central Europe</a>
+                <a href="../international/china.html">China</a>
+                <a href="../international/dubai.html">Dubai</a>
+                <a href="../international/egypt.html">Egypt</a>
+                <a href="../international/indonesia.html">Indonesia</a>
+                <a href="../international/muscat.html">Muscat</a>
+                <a href="../international/nepal.html">Nepal</a>
+                <a href="../international/scandinavian.html">Scandinavian Countries</a>
+                <a href="../international/singapore.html">Singapore</a>
+                <a href="../international/srilanka.html">Srilanka</a>
+                <a href="../international/vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="karnataka.html">Karnataka</a>
+                <a href="kerala.html">Kerala</a>
+                <a href="madhyapradesh.html">Madhya Pradesh</a>
+                <a href="northeast.html">Northeast India</a>
+                <a href="punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="rajasthan.html">Rajasthan</a>
+                <a href="uttarakhand.html">Uttarakhand</a>
+                <a href="uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
 <div id="photo-overlay">
     <span id="close-btn">&times;</span>
     <img id="zoomed-img" src="" alt="Zoomed view">
@@ -130,18 +308,18 @@
             <p>On the way, he stopped once to have coffee. Around 2:00 PM we reached HG Grandiose hotel. Mount Abu is a plateau over a small mountain. Length wise it is 9 km and breadth wise 4 km. Altitude is around 5000 ft. Then we had our lunch. Though a large variety of dishes were not there, food was good. After lunch we checked into our allotted room. Room was good with all required facilities. Wi-Fi was also provided. After freshening we took rest till 5:30 PM. Then we had coffee.</p>
             
             <h3>Nakki Lake</h3>
-            <img src="\src\content\india\photos\rajasthan1.jpg" class="travel-photo photo-right" alt="Nakki Lake">
+            <img src="photos/rajasthan1.jpg" class="travel-photo photo-right" alt="Nakki Lake">
             <p>After that, from the hotel we walked to see Nakki Lake. It is a big lake. Boating facility is also there. Close to the lake a small garden is there. Garden is full of colorful lights. Close to the lake lots of small shops of garments, eatables, etc. are there. Here masala milk is famous. We found lots of such shops. Hot condensed milk with kesar and malai and sugar in a mug made out of clay is served! We spent an hour there and returned back to hotel. Had dinner at 8:30. Dinner was simple but good. Night was pretty cool. Ambient temperature may be around 15°C.</p>
         </div>
 
         <span class="date-header">13/11/19</span>
         <div class="location-block">
             <h3>Guru Shikhar Dattatreya Mandir</h3>
-            <img src="\src\content\india\photos\rajasthan2.jpg" class="travel-photo photo-left" alt="Guru Shikhar">
+            <img src="photos/rajasthan2.jpg" class="travel-photo photo-left" alt="Guru Shikhar">
             <p>After the breakfast we left hotel and proceeded to Guru Shikhar Dattatreya Mandir. This temple is over a hill. Lord Shiva is the main deity of this temple. This temple is on the middle of the rock and on the top of the hill, Charan Paduka of the saint Guru Shikhar Dattatreya is kept. This place is about 5700 feet above the sea level. From top of the hill we can see Pakistan border. Close to this temple we can see ISRO observatory and BARC laboratory. On our way back we saw 'Peace Garden' belongs to Brahma Kumari’s mission. World renowned spiritual leader Brahma Kumari’s movement head quarter is Mount Abu.</p>
             
             <h3>Universal Peace Hall</h3>
-            <img src="\src\content\india\photos\rajasthan3.jpg" class="travel-photo photo-right" alt="Peace Hall">
+            <img src="photos/rajasthan3.jpg" class="travel-photo photo-right" alt="Peace Hall">
             <p>After the temple’s visit we went to Brahma Kumari's Universal Peace Hall. Here two big halls are there. Specialty is no pillars are in the hall, from any corner one can see the stage clearly. Also one of the volunteers gave brief lecture about this ashram. After the visit of universal peace hall, we went to hotel and took our lunch and with our baggage we proceeded to Udaipur. On the way we visited Dilwara temple.</p>
             
             <h3>Dilwara Temple</h3>
@@ -152,16 +330,16 @@
         <span class="date-header">14/11/19</span>
         <div class="location-block">
             <h3>Moti Magri / Maharana Pratap Smarak</h3>
-            <img src="\src\content\india\photos\rajasthan4.jpg" class="travel-photo photo-left" alt="Maharana Pratap">
+            <img src="photos/rajasthan4.jpg" class="travel-photo photo-left" alt="Maharana Pratap">
             <p>We got up at 6:00 AM and got ready by 7:30 AM for breakfast. After our breakfast, we proceeded to see the important tourist spots. Maharana Pratap Memorial is a historic site that is dedicated to the great Maharana Pratap Singh and his loyal horse Chetak. The memorial was constructed in 1948.</p>
             <p>Maharana Pratap was a great warrior. When Akbar was ruling Delhi, most of the Rajputs kings were in favor of Akbar and the only Rajput king Rana Pratap who was ruling Mewar stood alone against Akbar, and a war took place against Akbar on June 18, 1576 at Haldighati. In that war even his brothers were with Akbar. In this war Akbar didn't participate. Only Man Singh, another Rajput king, heading Akbar's army. Maharana Pratap with his small army of 20,000 soldiers had to fight against Akbar's 2,00,000. In this war Maharana Pratap heavily lost and wounded. But his famous horse Chetak with his serious wounds saved him and ultimately Chetak died. In this war, Mughals captured many places of Mewar, but they were unable to oust Maharana Pratap who continued to harass the Mughals through guerrilla tactics. In this memorial we can see the beautiful statue of Maharana Pratap on this famous horse Chetak.</p>
             
             <h3>Saheliyon-ki-Bari</h3>
-            <img src="\src\content\india\photos\rajasthan5.jpg" class="travel-photo photo-right" alt="Saheliyon ki Bari">
+            <img src="photos/rajasthan5.jpg" class="travel-photo photo-right" alt="Saheliyon ki Bari">
             <p>It is big garden. Lot of fountains and marble statues are there. The beauty of the garden is that all the fountains work on gravitational flow of water. Local guide says that no electrical or electronic gadgets are used in these fountains. When we clap our hands or whistle loudly, the fountains become more intense!</p>
             
             <h3>City Palace Udaipur (Maharana of Mewar)</h3>
-            <img src="\src\content\india\photos\rajasthan6.jpg" class="travel-photo photo-left" alt="City Palace Udaipur">
+            <img src="photos/rajasthan6.jpg" class="travel-photo photo-left" alt="City Palace Udaipur">
             <p>On the east bank of Lake Pichola, the City Palace in Udaipur was built around 400 years back by Maharana Udai Singh and his successors in 1559. The Maharanas used to live in the palace and administer their kingdom. Inside this palace unique paintings, antique furniture, variety of ornaments, various items made out of crystals and porcelains are kept. Also a museum is there inside. A beautiful Sheesh Mahal is also there. It is a four story palace and we have to climb some 300 or more steps. There was light and sound show for an hour from 7:00 PM. The show narrated the history of Rajasthan starting from Alauddin Khalji to independence India. The show ended by 8:00 PM. After that we returned back to hotel.</p>
         </div>
 
@@ -171,11 +349,11 @@
             <p>After our breakfast we went to Eklingji temple, Kailashpuri Udaipur. It is about an hour drive from hotel. This is the personal temple of Maharana of Mewar. This temple complex was built by various kings of Mewar. Main deity is Shiva with four faces in black colour. Inside this temple complex various deities are also there. Most of the sculptures are partially damaged. This destruction was done by Alauddin Khalji. Arvind Singh at present from that dynasty comes here every Monday and does pooja. Since camera and phones are not allowed in this temple, photos could not be taken.</p>
             
             <h3>Haldighati Museum</h3>
-            <img src="\src\content\india\photos\rajasthan7.jpg" class="travel-photo photo-right" alt="Haldighati">
+            <img src="photos/rajasthan7.jpg" class="travel-photo photo-right" alt="Haldighati">
             <p>Haldighati is a hilly place where Maharana Pratap fought against Akbar. This place is about 2 hour drive from the main city. The mud of this mount being yellow, this place is called Haldighati. This museum depicts the war between Akbar and Maharana Pratap. In this great war against Akbar's massive force Maharana Pratap was saved by his horse Chetak. Place of war Rakta Talai, Haldighati. In this village, villagers are selling Sitaphal (custard apple) at a throw away price. A full bag may be around 20 big fruits are sold for Rs 100/-. Nearby to this museum a memorial is there for the horse Chetak.</p>
             
             <h3>Shrinathji Temple</h3>
-            <img src="\src\content\india\photos\rajasthan8.jpg" class="travel-photo photo-left" alt="Shrinath Temple">
+            <img src="photos/rajasthan8.jpg" class="travel-photo photo-left" alt="Shrinath Temple">
             <p>From Haldighati, Nathdwara is about 2 hours travel. We reached this place around 4:00 PM. From the parking place we took auto and went to the temple. This Krishna temple is one among the five famous Krishna temples of India (Pancha Dwarka). Big crowd was there. There is no proper queue. Kesari arranged a pandit to take us inside the temple. Somehow we managed to see the main deity of Krishna. The main deity is in black colour with Radha. After the darshan we returned back to hotel. Also we saw the biggest Shiva statue which is now under construction. This may be the largest statue in India.</p>
         </div>
 
@@ -183,13 +361,13 @@
         <div class="location-block">
             <h3>Chittorgarh Fort</h3>
             <p>We left Udaipur early since we have to travel a long distance, some 300 km. That day plan was to see the fort of Chittorgarh—Rana Kumbha Palace, Meera Mandir, Vijay Stambha and Padmini's palace and Dargah of Ajmer. Then night stay was planned at Pushkar. So we left after our breakfast around 8:00 AM. Chittorgarh is 115 km away from Udaipur. We reached Chittorgarh around 10:00 AM. From the parking place we went to the fort by six seater auto.</p>
-            <img src="\src\content\india\photos\rajasthan9.jpg" class="travel-photo photo-right" alt="Ranakumba Palace">
+            <img src="photos/rajasthan9.jpg" class="travel-photo photo-right" alt="Ranakumba Palace">
             <p>In 1290, Khalji dynasty captured Delhi. They were from Afghanistan. Subsequently Jalal-ud-din Khalji became the king. He nominated his son-in-law & brother-in-law Alauddin Khalji as the Governor of Kara (present Allahabad). Because of his greediness he assassinated his uncle Jalal-ud-din Khalji and became the king of Delhi. Then he invaded Gujarat and captured it. After hearing the beauty of Padmavati, wife of Ratan Singh of Chittor, he declared war against him and Ratan Singh was killed. Before Alauddin Khalji entered the fort of Chittorgarh, Padmavati and thousands of Rajput ladies jumped into the sacred fire and killed themselves.</p>
-            <img src="\src\content\india\photos\rajasthan10.jpg" class="travel-photo photo-left" alt="Meera Mandir">
+            <img src="photos/rajasthan10.jpg" class="travel-photo photo-left" alt="Meera Mandir">
             <p>Chittorgarh Fort is the largest fort of India located on a hill near Gambheri river. This fort was built by various Maurya rulers in 7th century. This fort was attacked three times: First—In 1303 by Alauddin Khalji; Second—In 1535 by Sultan Bahadur Shah; Third—In 1567 by Akbar. All the three times in this fort thousands of Rajput ladies killed themselves by jumping into sacred fire (jauhar) to avoid submitting them to Mughals. Within the fort the four important places are Rana Kumbha Palace, Meera Mandir, Vijay Stambha and Padmini's palace. Being the fort is very big, by the hired six seater auto we visited all the places.</p>
             
             <h3>Dargah of Ajmer</h3>
-            <img src="\src\content\india\photos\rajasthan11.jpg" class="travel-photo photo-right" alt="Ajmer Dargah">
+            <img src="photos/rajasthan11.jpg" class="travel-photo photo-right" alt="Ajmer Dargah">
             <p>Then we proceeded to Ajmer. On the way we took our lunch. We reached Ajmer around 6:00 PM. Dargah of Ajmer is considered the most popular one in Asia. People from different corner of the world are visiting this Dargah. Our bus was parked a few km away. We went by auto to the point called Delhi Gate. After that we walked. Dargah was very much crowded and no proper queue system is followed. Like Shrinathji temple of Nathdwara, here also people were pushing and pulling. Because of the fear of pick pocketers, we left all our valuable things in the bus itself. Here we (ladies and gents) have to cover heads before entering into the Dargah. At the entrance we can get a cover for Rs 10/-.</p>
             <p>Difference between Mosque and Dargah: Mosque is like a temple. Generally other community people may not visit. Regular prayers at stipulated time are done here. Dargah is "samadhi" of a spiritual leader of that community. Here people belonging to other community also used to visit. Other important Dargahs are Haji Ali at Mumbai, also one at Nagore. And we returned back to bus and proceeded to Pushkar. Pushkar is close to Ajmer. It is about 20 km. Our rooms were booked in Hotel Pushkar Fort. This is a huge resort with big lawns and gardens. Rooms are spacious and good. We reached this hotel around 8:30 PM and had our dinner.</p>
         </div>
@@ -197,20 +375,20 @@
         <span class="date-header">17/11/19</span>
         <div class="location-block">
             <h3>Pushkar Lake & Brahma Temple</h3>
-            <img src="\src\content\india\photos\rajasthan12.jpg" class="travel-photo photo-left" alt="Brahma Temple">
+            <img src="photos/rajasthan12.jpg" class="travel-photo photo-left" alt="Brahma Temple">
             <p>After the breakfast (Resort is so rich, but the breakfast was so-so) we proceeded to Pushkar Lake. Pushkar is the only place where temple is there for Brahma. In this temple, Archana or Aratis are not done. All kind of poojas are done at the Lake Pushkar. Kesari engaged a Pandit for a simple puja for Rs 10, but it ended with Rs 500/- donation. Here people also do special rituals for their ancestors like done at places like Varanasi and Rameshwaram. After this pooja we went to Pushkar temple. Fortunately no rush was there. We had a good darshan of Brahma and then boarded the bus and proceeded to Ranthambore. It is around 300 km away from this place. After a break for lunch and coffee, around 6:00 PM we reached Ankur Resort, Sawai Madhopur. We were garlanded while checking in!</p>
         </div>
 
         <span class="date-header">18/11/19</span>
         <div class="location-block">
             <h3>National Park of Ranthambore</h3>
-            <img src="\src\content\india\photos\rajasthan13.jpg" class="travel-photo photo-right" alt="Ranthambore 1">
+            <img src="photos/rajasthan13.jpg" class="travel-photo photo-right" alt="Ranthambore 1">
             <p>We got up early around 5:00 AM. Had a clean shave (Tigers won't like unshaven clumsy look). And carefully chosen the clothes (Guide suggested not to wear bright coloured dresses) and left to see National Park of Ranthambore, Tigers Resort. In this park about 100 Bengal tigers are there. Kesari arranged through forest department a special vehicle and a guide. The forest is about 10 km away from the resort. Forest is divided into many zones. We went around the forest for about 3 hours, but didn't spot any tiger. Of course we saw deer, peacocks, wild boar etc. Around 10:00 AM we returned back to hotel. Took bath and after lunch we proceeded to Jaipur.</p>
-            <img src="\src\content\india\photos\rajasthan14.jpg" class="travel-photo photo-left" alt="Ranthambore 2">
+            <img src="photos/rajasthan14.jpg" class="travel-photo photo-left" alt="Ranthambore 2">
             <p>Jaipur is 150 km away from this place. Before entering the main city we visited the famous Chokhi Dhani of Jaipur.</p>
             
             <h3>Chokhi Dhani</h3>
-            <img src="\src\content\india\photos\rajasthan15.jpg" class="travel-photo photo-right" alt="Chokhi Dhani">
+            <img src="photos/rajasthan15.jpg" class="travel-photo photo-right" alt="Chokhi Dhani">
             <p>We reached there around 5:30 PM. We spent around 2 hours in seeing various replicas like Vaishno Devi temple, Tirupati Balaji temple, Haldighati and there were few stages where dances, fortune tellers, puppet show etc. were performed. Also various stalls were there for selling cosmetics, dresses etc. Then we had special typical Rajasthani dinner, food is served in the typical style of "Chokhi Dhani". After dinner we left that place and came to our hotel Vesta Jaipur. It is good hotel.</p>
         </div>
 
@@ -220,32 +398,32 @@
             <p>This palace was constructed by Maharaja Sawai Jai Singh. Also he created Hawa Mahal and Jantar Mantar. In this palace we can see two huge vessels made out of sterling silver, used by Maharaja Madho Singh. He used to drink only Ganges water. For that purpose these vessels were made. Other attractive items are clothes of Maharaja Madho Singh. He was a huge man weighing 250 kg! His big clothes were kept here.</p>
             
             <h3>Jantar Mantar</h3>
-            <img src="\src\content\india\photos\rajasthan16.jpg" class="travel-photo photo-left" alt="Jantar Mantar">
+            <img src="photos/rajasthan16.jpg" class="travel-photo photo-left" alt="Jantar Mantar">
             <p>Jantar Mantar was built by Raja Sawai Jai Singh in 1734. It is an astronomical observation site. In this site 20 main fixed construction with graduations engraved on marble slabs to measure precisely are seen. Mostly work on basis of Shadow. A massive clock construction is there and we see the time precisely. The least count of this clock is 2 seconds!</p>
             
             <h3>Amer Fort</h3>
-            <img src="\src\content\india\photos\rajasthan17.jpg" class="travel-photo photo-right" alt="Amer Fort">
+            <img src="photos/rajasthan17.jpg" class="travel-photo photo-right" alt="Amer Fort">
             <p>This fort was constructed by Man Singh, a trusted General of Akbar. A beautiful Hall is there in this Fort. This Hall is famous for its mosaic glass works. King used to discuss important issues with his ministers in this hall. Most beautiful Sheesh Mahal is also there in this fort. The walls and ceilings are carved with beautiful paintings. A Kali temple is also there inside this fort. It is surprising to see the arrangements to collect rain water from the roof and preserved in the tanks provided in the ground floor.</p>
             
             <h3>Birla Mandir</h3>
-            <img src="\src\content\india\photos\rajasthan18.jpg" class="travel-photo photo-left" alt="Birla Mandir">
+            <img src="photos/rajasthan18.jpg" class="travel-photo photo-left" alt="Birla Mandir">
             <p>This is the beautiful Mandir constructed by Ganga Prasad Birla and Nirmala Birla. Main deity of the temple is Lakshmi Narayan.</p>
         </div>
 
         <span class="date-header">20/11/19</span>
         <div class="location-block">
-            <img src="\src\content\india\photos\rajasthan19.jpg" class="travel-photo photo-right" alt="Camel Farm">
+            <img src="photos/rajasthan19.jpg" class="travel-photo photo-right" alt="Camel Farm">
             <p>After breakfast we left early around 8:00 AM to Bikaner. It is about 300 km away from Jaipur. On the way we took lunch. Before entering into Bikaner we visited Camel Research Farm (ICAR National Research Centre). This is the Govt. organization. Hundreds of Camels are being taken care of. At the entrance a canteen is there. We had tea, the milk used was from camel! Cost of a grown-up camel is around 4 lakh. In this state many places camel is being sold. A guide was briefing about camel. At a time it drinks around 40 liters of water and days together it won't drink water. Camel finds food by its own. Mostly it takes leaves of desert trees. Male camels are stupid and at times rude! Grown up camel weight is around 500 kg. Two shops are there here. They sell woolen things made out of camel wool. Also camel leather products like hand bags, wallet etc. are being sold. After the visit of camel Farm, we proceeded to Bikaner and reached Hotel Chirag, Bikaner.</p>
         </div>
 
         <span class="date-header">21/11/19</span>
         <div class="location-block">
             <h3>Karni Mata Mandir, Deshnoke</h3>
-            <img src="\src\content\india\photos\rajasthan20.jpg" class="travel-photo photo-left" alt="Karni Mandir">
+            <img src="photos/rajasthan20.jpg" class="travel-photo photo-left" alt="Karni Mandir">
             <p>This temple is about 30 km away from Bikaner city. Main deity is Karni Devi. In this temple thousands of mice are there. They roam around inside temple. According to local guide these mice never get out of this temple and rats and mice from outside never get inside. Also snakes which are common in this place never come closer to this temple.</p>
             
             <h3>Junagarh Fort</h3>
-            <img src="\src\content\india\photos\rajasthan21.jpg" class="travel-photo photo-right" alt="Junagarh Fort">
+            <img src="photos/rajasthan21.jpg" class="travel-photo photo-right" alt="Junagarh Fort">
             <p>Junagarh Fort is 45 minutes drive from the city. This Fort was initially called Chintamani and then renamed as Junagarh Fort. This Fort was built by Rao Bika in 1478. This Fort was in use by Royals till 1902. Palaces of this Fort or any part of this fort were not damaged by any invader. From the beginning, these kings accepted Akbar’s rule. A small museum is there in the palace. In this museum lots of medals, roles of Rajputs in Second World War, after independence their role in forming democratic government all we can see here.</p>
         </div>
 
@@ -256,30 +434,30 @@
             <p>Jaisalmer is also called as Golden City. Here stones are in gold colour. Most of the buildings like fort and palaces constructed in olden days, were used only stones without any binding material. They arrange the stones in such a way they get locked in that position forever. Main reason for not using any binding material is water scarcity. In summer the temperature goes to 50°C. Till Indira Gandhiji’s time, people here were struggling to get even drinking water. During Indira Gandhi’s tenure as a Prime Minister, Indira Gandhi Canal was made, which provide abundant water to this city from the neighboring State Himachal Pradesh. Even today this place is getting enough water supply; in certain places cultivation is done. (cultivation in Thar desert!)</p>
             
             <h3>Gadisar Lake</h3>
-            <img src="\src\content\india\photos\rajasthan22.jpg" class="travel-photo photo-left" alt="Gadisar Lake">
+            <img src="photos/rajasthan22.jpg" class="travel-photo photo-left" alt="Gadisar Lake">
             <p>This lake was made by King Gadsingh. Till the time of water supply from the canal, this lake was the only source of water. Now this lake is used as a tourist place and boating arrangement is there. Kesari arranged boating in this lake. After boating we watched a puppet show at Kala Vikas. The puppet show was not a continuous story. Few independent episodes were shown. A museum is also there in this hall. This Theatre hall and the museum is the effort of a single man, who was a teacher in a school. He is eighty-plus and now his relatives are managing this show. After the show we returned back to hotel.</p>
         </div>
 
         <span class="date-header">23/11/19</span>
         <div class="location-block">
             <h3>Jaisalmer Fort</h3>
-            <img src="\src\content\india\photos\rajasthan23.jpg" class="travel-photo photo-right" alt="Jaisalmer Fort">
+            <img src="photos/rajasthan23.jpg" class="travel-photo photo-right" alt="Jaisalmer Fort">
             <p>Next day after breakfast we first went to Jaisalmer Fort. This fort locally known as Golden Fort. This is one among the largest forts of Rajasthan. Being scarcity of water, in this fort no plastering material is used. Stones are kept one over the other by locking system so that they never get shifted from its place even if it is hampered. This fort was constructed during 1156 by King Rawal Jaisal. This fort is having palace for the royal people and this fort accommodated common people. King and his people around 3000 were staying here. Now also major portion of the fort is occupied by residents. Inside this Fort 3 Jain temples are there. These temples are looking like Dilwara temple.</p>
             
             <h3>Patwon ki Haveli</h3>
-            <img src="\src\content\india\photos\rajasthan24.jpg" class="travel-photo photo-left" alt="Patwon ki Haveli">
+            <img src="photos/rajasthan24.jpg" class="travel-photo photo-left" alt="Patwon ki Haveli">
             <p>After the palace we visited Patwon ki Haveli. There are five hawelis there. These hawelis are outside the fort. These hawelis were constructed by rich traders in 18th century. These are like Mansions. Very rich look and inside decorated with beautiful marble carvings. Apparently looks these traders are richer than kings of that time. Inside these Mansions Sheesh Mahal, spacious hall, kitchen etc. are there. After Havelis visit, we returned back to Hotel and had our lunch. Around 4:00 we left to see Sam Sand Dunes, Thar desert.</p>
             
             <h3>Sam Sand Dunes</h3>
-            <img src="\src\content\india\photos\rajasthan25.jpg" class="travel-photo photo-right" alt="Sam Dunes 1">
+            <img src="photos/rajasthan25.jpg" class="travel-photo photo-right" alt="Sam Dunes 1">
             <p>It is 40 km from city. Up to the desert area we went by bus. There are two options to move around the desert. One option is to ride over the camel. Two persons can go over the camel and the caretaker will walk along the camel. Other option is to move on camel cart. 4 or 5 person can sit on this cart and a camel will pull this cart. To manage the cart and camel one person will be there. In our group some opted camel and some opted camel cart. The drive is about 20 minutes. They dropped us in a heap of sand, from there we can see the sunset. We were roaming around in that area for an hour. Being that day was cloudy, we didn't see the sunset clearly.</p>
-            <img src="\src\content\india\photos\rajasthan26.jpg" class="travel-photo photo-left" alt="Sam Dunes 2">
+            <img src="photos/rajasthan26.jpg" class="travel-photo photo-left" alt="Sam Dunes 2">
             <p>After the camel cart ride, we returned back to the parking place, and Kesari booked ticket for a local dance program. It is an open place and beds were spread with pillows. We sat comfortably and the program was about 45 minutes. The program started with a prayer song on Lord Ganesh and continued with typical Rajasthani dances. After the dance program we had dinner in the same premises and after the dinner we returned back to Hotel.</p>
         </div>
 
         <span class="date-header">24/11/19</span>
         <div class="location-block">
-            <img src="\src\content\india\photos\rajasthan27.jpg" class="travel-photo photo-right" alt="War Museum">
+            <img src="photos/rajasthan27.jpg" class="travel-photo photo-right" alt="War Museum">
             <p>After breakfast 9:30 AM we left for Jodhpur. It is 260 km away from Jaisalmer via Pokran. On the way 5 km away from Jaisalmer city, we stopped at war museum (Museum, Jaisalmer). In this museum war took place between India and Pakistan since 1947 are depicted. Detailed descriptions and war hero photos of 1965 war are kept in this museum. Few American Pattern Tanks, which were used by Pakistan in 1965 war were captured by Indian Army. Those tanks are also kept here. A video show for some 20 minutes is shown about Indo-Pakistan wars. A sale counter is there. Souvenirs, T-shirts, handicrafts, story books are all sold here.</p>
             <p>Around 1:00 PM we reached Pokran and had our lunch. From here Jodhpur is about 150 km and we reached Jodhpur around 5:00 PM. Our rooms are booked in Rudransh Inn. Evening we went for shopping—Rajasthan Handicrafts. Clothes, bedspreads, famous rajais and handicrafts are sold here.</p>
         </div>
@@ -287,15 +465,15 @@
         <span class="date-header">25/11/19</span>
         <div class="location-block">
             <h3>Mehrangarh Fort</h3>
-            <img src="\src\content\india\photos\rajasthan28.jpg" class="travel-photo photo-left" alt="Mehrangarh Fort">
+            <img src="photos/rajasthan28.jpg" class="travel-photo photo-left" alt="Mehrangarh Fort">
             <p>After our breakfast, our first visiting place was Mehrangarh Fort. Mehrangarh fort was built by Rao Jodha in the year 1459. It is a big fort. There are 15 floors in the palace of this fort. In this Fort lift is there. We can reach 12th floor directly and the top 3 stories we can walk and see. This Fort is 400 years old. In this fort different sections are there. Sheesh Mahal, Palki Museum, Armor museum, paintings etc. we can see. Present king of this Dynasty is Maharaja Gaj Singh Ji is the son of Maharaja Hanwant Singh of Jodhpur by his first wife, Maharani Krishna Kumari of Dhrangadhra. He succeeded to the titles and dignities of his father when only four years of age, in 1952, when his father died suddenly in a plane crash.</p>
             
             <h3>Jaswant Thada</h3>
-            <img src="\src\content\india\photos\rajasthan29.jpg" class="travel-photo photo-right" alt="Jaswant Thada">
+            <img src="photos/rajasthan29.jpg" class="travel-photo photo-right" alt="Jaswant Thada">
             <p>It was built by Maharaja Sardar Singh of Jodhpur State in 1899 in memory of his father, Maharaja Jaswant Singh II, and serves as the cremation ground for the royal family of Marwar.</p>
             
             <h3>Umaid Bhawan Palace</h3>
-            <img src="\src\content\india\photos\rajasthan30.jpg" class="travel-photo photo-left" alt="Umaid Bhawan">
+            <img src="photos/rajasthan30.jpg" class="travel-photo photo-left" alt="Umaid Bhawan">
             <p>The construction of this palace has been started in 1929 and completed in 1943 by the king Umaid Singh. This is considered as one of the biggest residential palaces in the world having 347 rooms. The Palace is divided into three parts: the residence of Royal family, a luxury hotel managed by Taj groups named Taj Umaid Bhawan Palace and a museum. The classic cars of the Maharajas are also on display in the garden in front of the museum. After the palace visit, we returned back to hotel. Evening we went for local shopping.</p>
         </div>
 
@@ -312,6 +490,21 @@
 </div>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     const overlay = document.getElementById('photo-overlay');
     const zoomedImg = document.getElementById('zoomed-img');
     const closeBtn = document.getElementById('close-btn');

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sri Lanka & Maldives Travelogue | Nanaji's Travels</title>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Poppins:wght@400;600&family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             /* Palette: Emerald Green (Sri Lanka) -> Turquoise (Maldives) -> Sand */
@@ -24,6 +24,118 @@
             line-height: 1.8;
             margin: 0;
             padding: 0;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
 
         .container {
@@ -229,6 +341,72 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="bestofeurope.html">Best of Europe</a>
+                <a href="bhutan.html">Bhutan</a>
+                <a href="central_europe.html">Central Europe</a>
+                <a href="china.html">China</a>
+                <a href="dubai.html">Dubai</a>
+                <a href="egypt.html">Egypt</a>
+                <a href="indonesia.html">Indonesia</a>
+                <a href="muscat.html">Muscat</a>
+                <a href="nepal.html">Nepal</a>
+                <a href="scandinavian.html">Scandinavian Countries</a>
+                <a href="singapore.html">Singapore</a>
+                <a href="srilanka.html">Srilanka</a>
+                <a href="vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="../india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="../india/karnataka.html">Karnataka</a>
+                <a href="../india/kerala.html">Kerala</a>
+                <a href="../india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="../india/northeast.html">Northeast India</a>
+                <a href="../india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="../india/rajasthan.html">Rajasthan</a>
+                <a href="../india/uttarakhand.html">Uttarakhand</a>
+                <a href="../india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
+
 <div id="lightbox-modal" class="lightbox">
     <span class="close">&times;</span>
     <img class="lightbox-content" id="lightbox-img" src="">
@@ -260,7 +438,7 @@
 
         <h3>Pinnawala Elephant Orphanage</h3>
         
-        <img src="\src\content\international\photos\srilanka1.jpg" alt="Pinnawala Elephant Orphanage" class="journal-photo float-right">
+        <img src="photos/srilanka1.jpg" alt="Pinnawala Elephant Orphanage" class="journal-photo float-right">
 
         <p>After breakfast, we proceeded to a city called Pinnawala. It is about a 3-hour journey. The road was narrow. Both sides were full of greenery, mostly coconut trees. The weather was quite good. At Pinnawala, we visited the elephant orphanage. Here, about 100 elephants are taken care of. Many baby elephants are also there. Every day they are fed with milk and other nutritious food.</p>
         <p>Every day these elephants are taken to the nearby <strong>Maha Oya river</strong> where they spend an hour in the river and come back to the orphanage. This orphanage was created in 1975 mainly to protect baby orphan elephants. This orphanage is the biggest one in Asia. We saw the spectacular sight of them going together to the river Maha Oya, playing for an hour, and returning back to the orphanage.</p>
@@ -271,15 +449,15 @@
         <h2>Sigiriya & The Golden Temple</h2>
         <p><strong>11th March 2018:</strong> After breakfast, we proceeded to the fortress <strong>Sigiriya</strong> located close to the city Dambulla. The name of this place is derived from this structure — <em>Sīhāgiri</em>, the Lion Rock. This rock is very steep and about 200 meters high. According to ancient Sri Lankan legend, this site was selected by King Kasyapa (477 – 495 AD). Sigiriya today is a UNESCO-listed World Heritage site.</p>
         
-        <img src="\src\content\international\photos\srilanka2.jpg" alt="Sigiriya Rock" class="journal-photo float-left">
+        <img src="photos/srilanka2.jpg" alt="Sigiriya Rock" class="journal-photo float-left">
 
         <p>Steps are made to reach the top of the rock where the fortress is. Though some of our people went to the top, considering our upcoming US trip, we decided not to take any adventurous activity, so we did not climb up the hill. Instead, the Kesari guide arranged an auto-rickshaw to go around Sigiriya Rock to see beautiful viewpoints. We saw about 10 viewpoints, and in all spots, we could see the Sigiriya rock.</p>
 
-        <img src="\src\content\international\photos\srilanka3.jpg" alt="View of Sigiriya" class="journal-photo float-right">
+        <img src="photos/srilanka3.jpg" alt="View of Sigiriya" class="journal-photo float-right">
 
         <h3>Dambulla Cave Temple</h3>
         
-        <img src="\src\content\international\photos\srilanka4.jpg" alt="Dambulla Cave Temple" class="journal-photo float-left">
+        <img src="photos/srilanka4.jpg" alt="Dambulla Cave Temple" class="journal-photo float-left">
 
         <p>The Dambulla Cave temple complex is also called the Golden Temple of Sri Lanka. This is also one among the UNESCO heritages of Sri Lanka. In this complex, there are five caves; one was made, and the remaining four are natural. Inside the caves, Buddha statues are there in different postures. Also, we can see many beautiful paintings of Buddha inside. In this cave complex, one Hindu temple is also there (Murugan temple).</p>
         
@@ -298,22 +476,22 @@
 
         <h2>Nuwara Eliya: Little England</h2>
         
-        <img src="\src\content\international\photos\srilanka5.jpg" alt="Nuwara Eliya" class="journal-photo float-right">
+        <img src="photos/srilanka5.jpg" alt="Nuwara Eliya" class="journal-photo float-right">
 
         <p><strong>13th March 2018:</strong> After our breakfast at Grand Kandyan Hotel, we proceeded to the next city called <strong>Nuwara Eliya</strong>. This city is at an altitude of 6000 ft above sea level. This city was developed in the 19th century by the British. When this country was under the British, this city was developed mainly for their entertainment, like playing golf, hunting, etc. Also, they developed many tea estates in this region. During this development, they brought many Indian workers for developing the tea estates.</p>
         <p>In this city, even today we can see some British architectural buildings like Queen’s Cottage, Grand Hill Club, St. Andrew’s Hotel, and the Town Post Office. While going to Nuwara Eliya, we visited a tea estate. The estate got its own tea factory. We saw the process. A sale counter also was there, and apart from various kinds of tea like green tea, black tea, lemon tea, etc., they were selling almonds, pistachios, etc.</p>
 
         <h3>Hanuman Temple & Sita Mandir</h3>
         
-        <img src="\src\content\international\photos\srilanka6.jpg" alt="Hanuman Temple" class="journal-photo float-left">
+        <img src="photos/srilanka6.jpg" alt="Hanuman Temple" class="journal-photo float-left">
 
         <p>After the visit to the tea factory, we proceeded to one <strong>Hanuman Temple</strong>. The Hanuman murthy in this temple is of large size. After Hanuman darshan, adjacent to the temple in a mess, we took food. The food was typical homemade food. It was very tasty.</p>
         
-        <img src="\src\content\international\photos\srilanka7.jpg" alt="Sita Amman Temple" class="journal-photo float-right">
+        <img src="photos/srilanka7.jpg" alt="Sita Amman Temple" class="journal-photo float-right">
 
         <p>After Hanuman Mandir, we proceeded to <strong>Sita Mandir (Seetha Amman Temple)</strong>. It is a beautiful temple adjacent to a river. Close to the temple, we see footprints over a stone. According to legend, this footprint is Hanuman’s foot; when he came to Sri Lanka, he stepped down first only in this place.</p>
         
-        <img src="\src\content\international\photos\srilanka8.jpg" alt="Ashok Vatika" class="journal-photo float-left">
+        <img src="photos/srilanka8.jpg" alt="Ashok Vatika" class="journal-photo float-left">
 
         <p>After this temple, we visited <strong>Ashok Vatika</strong>. Now this has been made into a beautiful garden. After Ashok Vatika, we went to Nuwara Eliya Lake. It was just like Ooty Lake. We had boat riding for an hour. After the lake’s visit, we proceeded to Hotel Araliya Green Hills. Being at an altitude of 6000 ft above sea level, the weather was quite chill. Hotel rooms were equipped with room heaters.</p>
 
@@ -323,12 +501,12 @@
 
         <p><strong>15th March 2018:</strong> We left Jetwing Hotel around 9 am after our breakfast. We visited Vibhishana Temple. In the same premises, we then went to <strong>Kelaniya Raja Maha Viharaya</strong> Buddha temple, which was built in the third century.</p>
         
-        <img src="\src\content\international\photos\srilanka9.jpg" alt="Kelaniya Raja Maha Viharaya" class="journal-photo float-right">
+        <img src="photos/srilanka9.jpg" alt="Kelaniya Raja Maha Viharaya" class="journal-photo float-right">
 
         <p>In this temple, we can see lots of Buddha statues in different postures. Also, we can see beautiful paintings over the walls and ceilings. In the outer premises, we can see statues of Hindu Gods.</p>
         <p>After the visit to this temple, we had our lunch and went through the city of Colombo. We saw the Parliament Building, Indian Embassy, Twin Towers of Sri Lanka, Victoria Garden, etc.</p> 
         
-        <img src="\src\content\international\photos\srilanka10.jpg" alt="Parliament Building" class="journal-photo float-left">
+        <img src="photos/srilanka10.jpg" alt="Parliament Building" class="journal-photo float-left">
 
         <p>The last spot was the Fashion Mall, where people did some shopping. Then we returned back to the hotel.</p>
 
@@ -337,7 +515,7 @@
             <p><strong>16th March 2018:</strong> We left Hotel Jetwing of Colombo around 9:30 am. Colombo international airport is an hour's drive from the hotel. In the airport, checking was done at three or four places. After these formalities, we got our boarding pass to Maldives. For free internet, we had to scan our boarding pass to get a password, and after entering the password in our mobile, Wi-Fi got connected.</p>
             <p>At last, we boarded the Sri Lankan flight to Maldives in the noon. From Colombo, it is an hour and 30 minutes flight. Around 3 pm we reached Maldives. Maldives is a group of many islands. The weather was very hot.</p>
             
-            <img src="\src\content\international\photos\srilanka11.jpg" alt="Maldives View 1" class="journal-photo float-right">
+            <img src="photos/srilanka11.jpg" alt="Maldives View 1" class="journal-photo float-right">
 
             <p>After collecting our luggage, we came out of the airport. From there we had to go to a different island by a <strong>speed boat</strong>. It was about 45 minutes of travel. The blue color sea looked beautiful.</p>
             
@@ -346,9 +524,9 @@
 
             <p><strong>17th March 2018:</strong> Only two nights stay was there at Maldives. Kesari did not arrange any specific tour in Maldives. The hotel arranges many water activities like <strong>scuba diving</strong>, submarine travel, etc., on a payment basis. We and the Bangalore people decided to move around the island. So after breakfast, we walked in different parts of the island along the seashore.</p>
             
-            <img src="\src\content\international\photos\srilanka12.jpg" alt="Maldives View 2" class="journal-photo float-left">
+            <img src="photos/srilanka12.jpg" alt="Maldives View 2" class="journal-photo float-left">
 
-            <img src="\src\content\international\photos\srilanka13.jpg" alt="Maldives View 3" class="journal-photo float-right">
+            <img src="photos/srilanka13.jpg" alt="Maldives View 3" class="journal-photo float-right">
 
             <p><strong>18th March 2018:</strong> After lunch, we left Maldives and reached the main Island where the airport is. We were taken around for a city orientation tour of Male. After the city tour, we came back to the airport to take a flight to Colombo and then subsequently to Mumbai from there. We reached the early morning of 19th March and took a cab to Pune and reached home safely.</p>
         </div>
@@ -362,6 +540,21 @@
 </div>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     // Get the lightbox elements
     const modal = document.getElementById("lightbox-modal");
     const modalImg = document.getElementById("lightbox-img");

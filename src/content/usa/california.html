@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Southern California Travelogue 2013</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2d3436;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
+        }
+
+        /* ── PAGE LAYOUT ─────────────────────────── */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 40px;
+            position: relative;
+        }
+        header {
+            border-bottom: 4px solid #d35400;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        h1 { color: #2c3e50; margin-bottom: 5px; font-size: 2.5em; }
+        .subtitle { color: #d35400; font-weight: bold; font-style: italic; }
+
+        h2 {
+            color: #c0392b;
+            border-left: 5px solid #c0392b;
+            padding-left: 15px;
+            margin-top: 30px;
+            font-size: 1.4em;
+        }
+        h3 {
+            color: #e67e22;
+            margin-top: 20px;
+            font-size: 1.15em;
+        }
+        .intro {
+            background-color: #fef9f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-style: italic;
+            overflow: hidden;
+            border-left: 4px solid #e67e22;
+            margin-bottom: 30px;
+        }
+        .entry {
+            margin-bottom: 25px;
+            text-align: justify;
+            overflow: hidden;
+        }
+        .date-header {
+            color: #d35400;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+            border-bottom: 1px dashed #d35400;
+            width: fit-content;
+        }
+
+        /* Photo Styling */
+        .travel-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            cursor: pointer;
+            border: 4px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            margin: 15px;
+        }
+        .travel-photo:hover { transform: scale(1.02); }
+        .photo-left { float: left; margin-left: 0; }
+        .photo-right { float: right; margin-right: 0; }
+
+        /* Modal */
+        #photoModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        #modalImg {
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px; right: 35px;
+            cursor: pointer;
+            width: 40px; height: 40px;
+        }
+
+        /* Info box for tour costs */
+        .info-box {
+            background-color: #f8f4ee;
+            border: 1px solid #ddd;
+            border-left: 5px solid #e67e22;
+            border-radius: 6px;
+            padding: 18px 22px;
+            margin: 20px 0 28px;
+            font-size: 0.95em;
+            color: #444;
+        }
+        .info-box h3 {
+            margin: 0 0 10px 0;
+            color: #c0392b;
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .info-box table { width: 100%; border-collapse: collapse; }
+        .info-box td { padding: 4px 8px; }
+        .info-box td:last-child { text-align: right; font-weight: 600; color: #2c3e50; }
+
+        /* Summary box */
+        .summary-box {
+            background: linear-gradient(135deg, #fff8f0, #fef3e2);
+            border: 1px solid #e8c99a;
+            border-left: 5px solid #d35400;
+            border-radius: 8px;
+            padding: 28px 32px;
+            margin-top: 30px;
+            clear: both;
+        }
+        .summary-box h2 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            color: #8b3a0f;
+            border-left: none;
+            padding-left: 0;
+            font-size: 1.6em;
+            margin-top: 0;
+            margin-bottom: 14px;
+        }
+        .summary-box p {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.15em;
+            line-height: 1.85;
+            color: #4a2e12;
+            font-style: italic;
+            margin: 0;
+        }
+
+        footer { margin-top: 40px; text-align: center; font-size: 0.9em; color: #7f8c8d; }
+        p { margin-bottom: 15px; }
+
+        @media (max-width: 600px) {
+            .container { padding: 25px; }
+            .travel-photo { float: none; display: block; margin: 15px auto; width: 100%; height: auto; aspect-ratio: 1/1; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../international/bestofeurope.html">Best of Europe</a>
+                <a href="../international/bhutan.html">Bhutan</a>
+                <a href="../international/central_europe.html">Central Europe</a>
+                <a href="../international/china.html">China</a>
+                <a href="../international/dubai.html">Dubai</a>
+                <a href="../international/egypt.html">Egypt</a>
+                <a href="../international/indonesia.html">Indonesia</a>
+                <a href="../international/muscat.html">Muscat</a>
+                <a href="../international/nepal.html">Nepal</a>
+                <a href="../international/scandinavian.html">Scandinavian Countries</a>
+                <a href="../international/singapore.html">Singapore</a>
+                <a href="../international/srilanka.html">Srilanka</a>
+                <a href="../international/vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="../india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="../india/karnataka.html">Karnataka</a>
+                <a href="../india/kerala.html">Kerala</a>
+                <a href="../india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="../india/northeast.html">Northeast India</a>
+                <a href="../india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="../india/rajasthan.html">Rajasthan</a>
+                <a href="../india/uttarakhand.html">Uttarakhand</a>
+                <a href="../india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="bayarea.html">California Bay Area</a>
+                <a href="socal.html">Southern California</a>
+                <a href="newyork.html">New York &amp; Washington DC</a>
+                <a href="seattle.html">Seattle</a>
+                <a href="alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
+<div id="photoModal">
+    <svg class="close-btn" onclick="closeModal()" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <img id="modalImg" src="">
+</div>
+
+<div class="container">
+    <header>
+        <h1>Southern California</h1>
+        <div class="subtitle">Los Angeles · San Diego · Las Vegas · Grand Canyon &nbsp;|&nbsp; July 2013</div>
+    </header>
+
+    <!-- INTRO / TOUR COSTS -->
+    <div class="intro">
+        <p>During our stay in Sunnyvale, Uma and Shashi arranged a six-day package tour through Lassen Tours covering Los Angeles, San Diego, Universal Studios, Las Vegas, and the Grand Canyon. The tour ran from 11th to 16th July 2013.</p>
+    </div>
+
+
+    <section class="content">
+
+        <!-- DAY 1 -->
+        <div class="entry">
+            <h2>Day 1 — The Journey to Los Angeles</h2>
+            <span class="date-header">11th July 2013</span>
+            <img src="photos/socal1.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Departure from Cupertino">
+            <p>The boarding point was Cupertino, being the nearest. Uma drove us there and we arrived around 8:45 am. Waiting at the stop were another couple, Mr. Sarkar and Mrs. Gowri, who had come from Kolkata to visit family and explore the area. From that moment we were together for the entire tour. The bus arrived around 9:00 am, Uma said goodbye, and we were off.</p>
+            <p>Our first destination was Los Angeles, around 350 miles away. The bus cruised at about 70 miles per hour, stopping at restrooms every two hours in addition to lunch breaks. We never travelled at night during this tour, and the bus and guide changed a few times along the way. The guides were Chinese, and so was most of the group — we four were the only exceptions. For much of the journey the guides spoke in Chinese, which sounded to me like a continuous recitation of Sama Veda mantras at a ritual.</p>
+            <p>The route was rewarding. On both sides of the road lay fertile farmland — tomatoes, grapes, cabbage, cherry, apricot, and almond orchards. We were told California is the largest almond-producing state in the country.</p>
+            <p>Around 4:00 pm we reached Hollywood. The bus stopped for an hour. We walked along the famous street, saw the Dolby Theatre, and then moved to the Music Center, another well-known landmark. Around 7:00 pm we stopped for a 45-minute dinner break, but since Uma had packed plenty of food we had no need of a restaurant. By 8:00 pm we were checked into the Holiday Inn, La Mirada. The room was spacious and comfortable, and after our packed dinner, we turned in for the night.</p>
+        </div>
+
+        <!-- DAY 2 -->
+        <div class="entry">
+            <h2>Day 2 — Universal Studios Hollywood</h2>
+            <span class="date-header">12th July 2013</span>
+
+            <h3>The Studio Tour</h3>
+            <img src="photos/socal2.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Universal Studios Hollywood">
+            <p>We left the hotel around 8:30 am. Universal Studios was only about 20 miles away but heavy traffic meant we arrived at 9:30 am. Upon entering we joined the queue for the famous studio bus tour, and each of us was handed 3D spectacles for the experience ahead.</p>
+            <p>The tour was extraordinary — about two hours long. The bus wound through elaborate sets: a London street, a New York City block, an airplane crash site, hotel interiors, and residential neighbourhoods. It also passed through several tunnels, each triggering an immersive 3D cinema experience — rainforests with wild animals leaping overhead, soaring mountain passes, artificial rain and floods. We were thrilled and, at moments, genuinely frightened. It was one of the most impressive attractions I have ever experienced.</p>
+            <p>After the bus tour we were free to explore until 6:00 pm. Finding vegetarian food proved difficult — we eventually managed plain rice and finger chips. It was the first time in my life I had to eat plain rice with nothing — no dal, no curd, nothing.</p>
+
+            <h3>Water World</h3>
+            <img src="photos/socal3.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Water World show Universal Studios">
+            <p>A 20-minute live action show featuring pirates in a fierce battle. Real stunt sequences — shooting, fire, jumping from boat houses into water, high-speed chases — culminating in a fireworks finale. Spectacular.</p>
+
+            <h3>The Blues Brothers</h3>
+            <p>Tired after hours of walking, we sat down in what appeared to be an open-air seating area. We only realised it was a concert venue once it had filled up around us. The Blues Brothers performed for about 30 minutes — three men and a woman. The songs were entirely unfamiliar to us, but the energy was infectious and we enjoyed every minute.</p>
+
+            <h3>Shrek 4-D</h3>
+            <p>A long queue, special spectacles, and a genuinely thrilling 4D experience. A new kind of entertainment altogether.</p>
+
+            <h3>Horror Maze</h3>
+            <p>We walked through an artificial thick forest and graveyard, mostly in darkness, with costumed performers jumping out to terrify us at every turn. Mrs. Gowri was frightened most of the time and screamed loudly on several occasions, which inadvertently added to the atmosphere for the rest of us.</p>
+
+            <h3>Special Effects Stage</h3>
+            <p>A live demonstration of film stunts and tricks — fake blood with sauce, trick knives that appear to pierce the body, and volunteers from the audience drafted into scenes. It reminded us of Ramoji Film City in Hyderabad, which offers something remarkably similar. Though Universal Studios is considerably larger with more pavilions, Ramoji holds its own — and as Indians, we ought to be proud to have something of that calibre at home.</p>
+
+            <p>We left Universal Studios at around 6:30 pm and returned to the hotel an hour later, passing the 75-storey tallest building in Los Angeles along the way. That evening the hotel restaurant could not offer us anything vegetarian — not even bread. We made do with biscuits and fruit for dinner.</p>
+        </div>
+
+        <!-- DAY 3 -->
+        <div class="entry">
+            <h2>Day 3 — San Diego</h2>
+            <span class="date-header">13th July 2013</span>
+            <p>Our tour offered a choice between San Diego and Disneyland. We chose San Diego. It is about 120 miles from Los Angeles, and the drive was largely barren — the only notable sight being a large naval residential complex and, further along, a nuclear reactor that, we were told, is only activated during electricity shortages. Wind turbines were visible throughout. That day's guide was excellent — unlike the others, he spoke considerably more English than Chinese.</p>
+
+            <h3>Naval Base San Diego</h3>
+            <img src="photos/socal5.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Naval Base San Diego">
+            <p>One of the largest naval bases in the United States. We were given an hour to explore the waterfront. There was a cruise option available and a large warship museum nearby, but we had insufficient time for either. We walked along the shore, took in the sight of the assembled fleet, and moved on.</p>
+
+            <h3>Hotel Del Coronado &amp; Beach</h3>
+            <img src="photos/socal6.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Hotel Del Coronado">
+            <p>The Hotel Del Coronado is the grandest hotel in the area, sitting right on the beach. The beach was lively with sunbathers from the many hotels in the neighbourhood.</p>
+
+            <h3>San Diego Museum</h3>
+            <img src="photos/socal7.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="San Diego Museum">
+            <p>The museum itself was unremarkable, but the entrance was memorable: a woman playing a giant violin, collecting donations, and — most surprisingly — an American in a white dhoti performing Hare Krishna bhajan and collecting money. We were tired by this point and found a Starbucks for a much-needed cup of coffee and half an hour's rest.</p>
+
+            <h3>Balboa Park</h3>
+            <img src="photos/socal8.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Balboa Park San Diego">
+            <p>Balboa Park was the highlight of the day. It is a living history museum — a scale recreation of California as it looked some 200 years ago, complete with a post office, typical home, saloon, courthouse, jail, wine shop, and hotel, all faithfully modelled. It was fascinating to walk through. We also saw the large bridge over the bay before heading back.</p>
+
+            <h3>Disneyland Fireworks — An Unexpected Evening</h3>
+            <img src="photos/socal9.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Disneyland fireworks">
+            <p>On the return journey the tour guide mentioned that there is a nightly fireworks show at Disneyland. Lakshmi persuaded him to arrange transport, and he contacted the hotel to make reservations. Back at the hotel we were asked to wait in our rooms for a call that never came. When we went down to enquire, we discovered the bus had already left without us.</p>
+            <p>If it had been only me, I would quietly have returned to the room. But Lakshmi pressed the hotel management firmly on their lapse. They acknowledged the communication failure and arranged a separate bus for us and our Bengali friends. We reached Disneyland by 9:15 pm, the show started at 9:30, and it was wonderful. We returned to the hotel by bus and retired contentedly.</p>
+        </div>
+
+        <!-- DAY 4 -->
+        <div class="entry">
+            <h2>Day 4 — Las Vegas</h2>
+            <span class="date-header">14th July 2013</span>
+            <p>We boarded the bus at 6:45 am for the 280-mile journey from Los Angeles to Las Vegas. We had barely covered 20 miles when a Chinese girl began screaming — she had left her suitcase at the hotel. The bus halted while her friend retrieved it. About 30 minutes later, we were underway again.</p>
+            <p>The journey was demanding. We passed through the San Bernardino Mountains — high altitude ranges that must be spectacular in winter when covered with snow — and then crossed the Mojave Desert under fierce heat. Even brief stops outside the bus were unbearable. We arrived in Las Vegas around 4:00 pm.</p>
+            <p>Las Vegas is in the state of Nevada and exists entirely for entertainment. The city is full of enormous hotels and casinos, many running to hundreds of floors, each with its own theatre offering dance, comedy, glamour, and other shows that run through the night.</p>
+            <p>We were accommodated in the Excalibur Hotel — a very large property with two towers of 28 floors each. Our room was on the 12th floor of Tower I.</p>
+
+            <h3>The Las Vegas Strip</h3>
+            <img src="photos/socal11.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Las Vegas at night">
+            <p>The Strip is roughly 4 miles long, a scenic route lined with the city's grandest casinos — Bellagio, MGM Grand, Caesars Palace, New York New York, Paris Las Vegas, Circus Circus, and many more. The street is alive with light decorations, enormous video screens, and a constant parade of performers: singers, instrumentalists, dancers, and entertainers in elaborate costumes. Food stalls are everywhere, though at sky-high prices</p>
+            <p>As part of the tour we had paid $25 for a night tour that began at 4:30 pm. Our guide took us through several casinos and along the busy Strip, returning us to the hotel after dinner at 11:00 pm.</p>
+            <p>The most remarkable feature of each casino is the architecture. Every one is designed differently and in ways that are difficult to convey in words. In one casino the ceiling is designed to look exactly like the open sky — so convincingly that standing beneath it, one genuinely feels as though one is outdoors under a blue sky with moon and stars. Monorail trains connect the main hotels for those who want to cover the Strip without walking.</p>
+
+            <h3>Bellagio Musical Fountain</h3>
+            <img src="photos/socal12.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Bellagio fountain Las Vegas">
+            <p>The Bellagio fountain show runs every half hour and lasts about ten minutes. We were able to stand close to the water and watch the jets rise and fall in perfect choreography with the music. It was wonderful. The Strip also featured a colourful light-and-music show overhead in one section, the roof glittering in changing colours above the crowd below.</p>
+        </div>
+
+        <!-- DAY 5 -->
+        <div class="entry">
+            <h2>Day 5 — Grand Canyon &amp; Hoover Dam</h2>
+            <span class="date-header">15th July 2013</span>
+            <img src="photos/socal13.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Grand Canyon">
+            <p>The Grand Canyon is about 300 miles from Las Vegas, in the state of Arizona. We left the hotel at 6:45 am. The Hoover Dam is on the route but the bus could not stop due to parking constraints — we caught a glimpse from the windows as we passed.</p>
+            <p>We reached the canyon around 1:00 pm and went straight to the IMAX theatre for the 3D film about the Grand Canyon. The film recounts its discovery by a Spanish explorer and brings the canyon's extraordinary scale to life. This is the largest gorge on earth: 1,600 metres deep and 446 kilometres long - so vast it is visible from outer space. The 3D experience was thrilling; at one point we felt as though we were travelling in a helicopter through the valley itself.</p>
+            <p>After the film we searched for vegetarian food and found only finger chips and a vegetable-stuffed bun — for which we paid around $20.</p>
+            <p>We then boarded the bus to reach the canyon rim, but the moment we arrived heavy rain began. We waited in the bus. The rain eased to a drizzle, but we had come too far to turn back. We walked to the edge and looked out over the deepest valley on earth. It was wonderful. The sadness was that the drizzle and cloud cover made photography difficult — I managed only a few shots.</p>
+            <p>We left the canyon around 3:00 pm and were back at the hotel by 7:00 pm. After a brief rest we went out to see a few more casinos and had vegetarian pizza and mango pulp for dinner.</p>
+        </div>
+
+        <!-- DAY 6 -->
+        <div class="entry">
+            <h2>Day 6 — The Return</h2>
+            <span class="date-header">16th July 2013</span>
+            <img src="photos/socal14.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Return journey California">
+            <p>The last day of the tour. We left Las Vegas at 7:00 am for the 300-mile return to Cupertino, stopping every two hours for a 15-minute break. At lunchtime, the driver - in a kind gesture - pointed us to an Indian shop that also ran a small restaurant. We had unlimited vegetarian food: chapatti, dal, a subji, plain rice, curd, and a sweet kheer. It was delicious. Interestingly, even the Chinese bus driver chose to eat there, despite Chinese restaurants being available nearby.</p>
+            <p>We reached Cupertino around 6:00 pm. We had no mobile phone and could find no public telephone. An elderly lady noticed us and came over to ask if we needed help. We explained that we needed to contact our daughter. Without hesitation she offered us her phone. This kind of spontaneous generosity was something I witnessed repeatedly throughout our stay in America.</p>
+            <p>It reminded me of an earlier incident — when our daughter Revathy came to Mumbai, she arrived early and needed to reach me. Unable to use her iPhone, she asked someone for help, and was charged ₹10 for a one-minute local call. The contrast says something.</p>
+        </div>
+
+    </section>
+
+    <!-- SUMMARY BOX -->
+    <div class="summary-box">
+        <h2>Six Days Well Spent</h2>
+        <p>Five nights and six days is a short time to cover Los Angeles, San Diego, Las Vegas, and the Grand Canyon — and yet the tour packed in more than one might expect. From the elaborate illusions of Universal Studios to the eerie vastness of the Grand Canyon in the rain, from the neon extravagance of the Las Vegas Strip to the quiet satisfaction of plain rice eaten at last with a proper Indian meal — each day brought something entirely new. The company of Mr. Sarkar and Mrs. Gowri made every moment more entertaining, and the quiet generosity of strangers along the way left a lasting impression. It was, from first morning to last evening, a good tour indeed.</p>
+    </div>
+
+</div>
+
+<script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
+    function openModal(src) {
+        document.getElementById("photoModal").style.display = "flex";
+        document.getElementById("modalImg").src = src;
+    }
+
+    function closeModal() {
+        document.getElementById("photoModal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        let modal = document.getElementById("photoModal");
+        if (event.target == modal) closeModal();
+    }
+</script>
+
+</body>
+</html>

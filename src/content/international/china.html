@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>China Tour 2016 | Nanaji's Travels</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@1,400&family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --imperial-red: #AA381E;
@@ -20,7 +20,119 @@
             color: var(--ink);
             margin: 0;
             padding: 0;
+            padding-top: 72px;
             line-height: 1.8;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
 
         .journal-container {
@@ -232,6 +344,71 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="bestofeurope.html">Best of Europe</a>
+                <a href="bhutan.html">Bhutan</a>
+                <a href="central_europe.html">Central Europe</a>
+                <a href="china.html">China</a>
+                <a href="dubai.html">Dubai</a>
+                <a href="egypt.html">Egypt</a>
+                <a href="indonesia.html">Indonesia</a>
+                <a href="muscat.html">Muscat</a>
+                <a href="nepal.html">Nepal</a>
+                <a href="scandinavian.html">Scandinavian Countries</a>
+                <a href="singapore.html">Singapore</a>
+                <a href="srilanka.html">Srilanka</a>
+                <a href="vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="../india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="../india/karnataka.html">Karnataka</a>
+                <a href="../india/kerala.html">Kerala</a>
+                <a href="../india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="../india/northeast.html">Northeast India</a>
+                <a href="../india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="../india/rajasthan.html">Rajasthan</a>
+                <a href="../india/uttarakhand.html">Uttarakhand</a>
+                <a href="../india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
 <div id="lightbox-modal" class="lightbox">
     <span class="close">&times;</span>
     <img class="lightbox-content" id="lightbox-img" src="">
@@ -254,7 +431,7 @@
     </div>
 
     <div class="photo-wrap float-right">
-        <img src="\src\content\international\photos\china1.jpg" alt="Sherey">
+        <img src="photos/china1.jpg" alt="Sherey">
         <p class="photo-caption">Sherey</p>
     </div>
     <p>At Beijing airport local guide of Kesari was waiting for us. Her name is <strong>Sherey</strong>. Her real name is different and she preferred to call her by this name. Her accent was quite good and every word she utters we understood. 
@@ -276,7 +453,7 @@
     <span class="date-stamp">27/05/2016</span>
 
     <div class="photo-wrap float-left">
-        <img src="\src\content\international\photos\china2.jpg" alt="Forbidden City">
+        <img src="photos/china2.jpg" alt="Forbidden City">
         <p class="photo-caption">Forbidden City</p>
     </div>
     <p>On 26th after we reached Beijing we went to <strong>Ganges restaurant</strong> and had delicious dinner of Indian style and then reached <strong>Qianmen Hotel</strong>. We were so tired and had a sound sleep. Next day around 6 am we were ready to move out for visiting places. 
@@ -286,7 +463,7 @@
     <h2>Forbidden City & Temple of Heaven</h2>
 
     <div class="photo-wrap float-right">
-        <img src="\src\content\international\photos\china3.jpg" alt="Temple of Heaven">
+        <img src="photos/china3.jpg" alt="Temple of Heaven">
         <p class="photo-caption">Temple of Heaven</p>
     </div>
     <p>Tiananmen Square is the entrance place for the <strong>Forbidden City</strong>. The Palaces of this place were built during 15th century by Ming emperors. Now UNESCO declared these palaces as one of the world heritages.
@@ -298,7 +475,7 @@
     <span class="date-stamp">28/05/2016</span>
 
     <div class="photo-wrap float-left">
-        <img src="\src\content\international\photos\china4.jpg" alt="Jade Factory">
+        <img src="photos/china4.jpg" alt="Jade Factory">
         <p class="photo-caption">Jade Factory</p>
     </div>
     <p>After we took our breakfast we left the hotel around 8 am. First we visited <strong>Jade Factory</strong>. Ladies of China are not using gold much for their jewelry. They use Jade more for this purpose. Chinese believes that such show pieces made out Jade brings luck. Also numerology is very much believed. Number four, fourteen, forty etc are considered most inauspicious. </p>
@@ -306,7 +483,7 @@
     <h2>Great Wall of China</h2>
 
     <div class="photo-wrap float-right">
-        <img src="\src\content\international\photos\china5.jpg" alt="Great Wall of China">
+        <img src="photos/china5.jpg" alt="Great Wall of China">
         <p class="photo-caption">Great Wall of China</p>
     </div>
     <p>About this I read in my school days. I never thought that one day I would be walking over this wall. The <strong>great wall of China</strong> is about 6000 km long and belongs to 15th century. This wall was earlier in several parts and during Ming dynasty they joined together and a made a long one. 
@@ -317,7 +494,7 @@
     <span class="date-stamp">29/05/2016</span>
 
     <div class="photo-wrap float-left">
-        <img src="\src\content\international\photos\china6.jpg" alt="Terracotta warriors museum">
+        <img src="photos/china6.jpg" alt="Terracotta warriors museum">
         <p class="photo-caption">Terracotta warriors museum</p>
     </div>
     <p>From the airport we went to Terracotta warriors workshop. Then we visited the <strong>Terracotta warriors museum</strong>. The first emperor of China Qin Shi Huang believed that after his demise, he would be ruling the other world. As per his order, sculptures depicted armies and buried them along with the King’s body. In that army there were 8000 soldiers, 500 horses and 130 chariots were there. After the museum, we went to Pagoda temple where beautiful statues of Buddha's are kept.</p>
@@ -335,7 +512,7 @@
     <span class="date-stamp">02/06/2016</span>
 
     <div class="photo-wrap float-right">
-        <img src="\src\content\international\photos\china7.jpg" alt="Shanghai">
+        <img src="photos/china7.jpg" alt="Shanghai">
         <p class="photo-caption">Shanghai</p>
     </div>
     <p>Around 10 am we reached <strong>Shanghai</strong>. Shanghai is a beautiful city. It looks like Singapore. First we visited the Jin Mao Tower. It is having 88 floors. Due to cloudy weather we missed the spectacular view of Shanghai from the top floor. 
@@ -359,6 +536,21 @@
 </article>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     // Get the lightbox elements
     const modal = document.getElementById("lightbox-modal");
     const modalImg = document.getElementById("lightbox-img");

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Travelogue | Shegaon Diary</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --shegaon-orange: #FF8C00;
@@ -20,6 +20,118 @@
             background-color: #FFF9F2;
             color: var(--ink);
             font-family: 'Plus Jakarta Sans', sans-serif;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
 
         .header-banner {
@@ -196,6 +308,71 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../international/bestofeurope.html">Best of Europe</a>
+                <a href="../international/bhutan.html">Bhutan</a>
+                <a href="../international/central_europe.html">Central Europe</a>
+                <a href="../international/china.html">China</a>
+                <a href="../international/dubai.html">Dubai</a>
+                <a href="../international/egypt.html">Egypt</a>
+                <a href="../international/indonesia.html">Indonesia</a>
+                <a href="../international/muscat.html">Muscat</a>
+                <a href="../international/nepal.html">Nepal</a>
+                <a href="../international/scandinavian.html">Scandinavian Countries</a>
+                <a href="../international/singapore.html">Singapore</a>
+                <a href="../international/srilanka.html">Srilanka</a>
+                <a href="../international/vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="../india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="../india/karnataka.html">Karnataka</a>
+                <a href="../india/kerala.html">Kerala</a>
+                <a href="../india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="../india/northeast.html">Northeast India</a>
+                <a href="../india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="../india/rajasthan.html">Rajasthan</a>
+                <a href="../india/uttarakhand.html">Uttarakhand</a>
+                <a href="../india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="andhrapradesh.html">Andhra Odyssey</a>
+                <a href="ashtavinayak.html">Ashtavinayak</a>
+                <a href="shegaon.html">Shegaon Diary</a>
+                <a href="tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
     <div id="lightbox">
         <button id="close-btn" onclick="closeLightbox()">&times;</button>
         <img id="lightbox-img" src="" alt="Zoomed Photo">
@@ -224,7 +401,7 @@
                 "Around 6:30 pm, we left for the temple. The temple is around 5 km away from his home."
             </div>
             
-            <img src="\src\content\temples\photos\shegaon1.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Gajanan Maharaj Temple Reference">
+            <img src="photos/shegaon1.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Gajanan Maharaj Temple Reference">
             
             <p>This temple is dedicated to Saint Gajanan Maharaj. A proper queue system is in place, and it was moderately crowded. In most places, AC and air coolers were kept. We stood for about 20 minutes in the queue. The temple is made out of marble. Around the temple, beautiful accommodation facilities are provided. Here, rooms are booked on a day-to-day basis; online booking is not available. These accommodations are meant exclusively for people visiting the temple.</p>
             <p>After darshan, we took Mahaprasad in the temple. We returned home around 9:30 pm. Sekar spared his bedroom for us. In spite of repeated requests, he compelled us to take it since that room had AC. Even though the AC was on, it was quite hot at night. The temperature must have been around 40°C. However, the morning weather was a little bit cooler, and I could sleep for a few hours. Tomorrow morning, we go to Anand Sagar, the other part of this sansthan.</p>
@@ -232,16 +409,16 @@
 
         <section>
             <div class="date-badge">21 June 2023</div>
-            <img src="\src\content\temples\photos\shegaon2.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Shegaon 21/06/23">
+            <img src="photos/shegaon2.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Shegaon 21/06/23">
             <p>I got up around 7 am. Anuradha made tea. After a bath, Anuradha made a nice breakfast. She made dhokla; it was quite good. We also had kachori bought from outside. In Shegaon, they prepare and sell them in every nook and corner. It is famous here. It is true that these kachoris are different from Pune kachoris!</p>
             
-            <img src="\src\content\temples\photos\shegaon3.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Shegaon 21/06/23">
+            <img src="photos/shegaon3.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Shegaon 21/06/23">
             <p>Around 10 am, we left for Anand Sagar. It is just half a kilometer from Shekhar's home. Here, different types of rooms are available: AC rooms, non-AC rooms, and dormitories. We took an AC room as we wanted the ground floor. At last, we got an AC room on the ground floor. In this room, there are three beds, a split-type AC, and an attached bath. There are also rooms with common bathrooms. We occupied the room around 10:30 am.</p>
             
-            <img src="\src\content\temples\photos\shegaon4.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Shegaon 21/06/23">
+            <img src="photos/shegaon4.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Shegaon 21/06/23">
             <p>The room charge is very nominal; they charge Rs 900 per day. While booking, they book for only one day, but we can extend if we want to stay more days. The whole premises is very clean; even dry leaves are picked up now and then. In the premises, canteens are available where they also charge very nominally. Since the whole place is green and clean, it is the best place for walking. Only thing is, we should avoid summer.</p>
             
-            <img src="\src\content\temples\photos\shegaon5.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Shegaon 21/06/23">
+            <img src="photos/shegaon5.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Shegaon 21/06/23">
             <p>Anuradha came to our room around 11:30 am. In the canteen, lunch is served from 11:30 am to 2 pm. Around 1 pm, we went to the canteen. For lunch, they serve chapati, dal, subji, and a sweet similar to sheera. Rice is also served. After lunch, we took rest until 3 pm and then went around Anand Sagar.</p>
             <p>After tea, we walked to Anand Sagar from Anand Vihar (where we stayed). It is about 2 km. Auto-rickshaws are also available. But when we reached there, it was closed. It is kept open only from 10 am to 4 pm. Then, from there, we proceeded to the Mahalaxmi temple. It is about 2 km from Anand Sagar. This temple is a newly constructed one.</p>
             <p>Then we came to Shekhar's home, and Anuradha made khichdi and kadhi. After dinner, we returned to our room. Shekhar dropped us off. Even though the ambient temperature was above 40°C, because of the AC, the room was quite chill and I slept well the whole night.</p>
@@ -249,13 +426,13 @@
 
         <section>
             <div class="date-badge">22 June 2023</div>
-            <img src="\src\content\temples\photos\shegaon6.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Shegaon 22/07/23">
+            <img src="photos/shegaon6.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Shegaon 22/07/23">
             <p>I got up around 7 am. Had coffee and did a little walking. Shekhar came to the room around 8 am. We all went to the temple again. Being Thursday, there was a big queue. We stood for about an hour and had darshan.</p>
             
-            <img src="\src\content\temples\photos\shegaon7.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Shegaon 22/07/23">
+            <img src="photos/shegaon7.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Shegaon 22/07/23">
             <p>Around 10 am, Shekhar dropped us at home. Anuradha, Avanti, and we took an auto and went to Anand Sagar. It was open only partially. Since the canteen of Anand Vihar was closed by 11 am, we could not take breakfast there. We took kachori from a roadside stall (it seems kachori is the main food of Shegaon people). It was good and cheap. We saw the Ganesh temple and Shiva temple. Most of the other things, like the lake, were under renovation.</p>
             
-            <img src="\src\content\temples\photos\shegaon8.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Shegaon 22/07/23">
+            <img src="photos/shegaon8.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Shegaon 22/07/23">
             <p>After that, we returned to our room. In the canteen, we took lunch and rested. In the evening, we had coffee. Shekhar came back around 5:30 pm.</p>
             <p>Then we went to Nagazari to visit Gomati Maharaj, the Guru of Gajanan Maharaj. It is about 10 km from our room. Then we went to Bhangat Sadan. In this place, Gajanan Maharaj lived and performed miraculous things. Then we proceeded to Krishnaji Mala; he was also a Saint and did miraculous things. There, they provided us food. Then we proceeded to Shekhar's home and had milk before returning to our room.</p>
         </section>
@@ -274,6 +451,21 @@
     </div>
 
     <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
         gsap.from(".container", { opacity: 0, y: 30, duration: 1, delay: 0.3 });
 
         function openLightbox(src) {

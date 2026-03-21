@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nepal Diaries | A Spiritual Journey</title>
-    <link href="https://fonts.googleapis.com/css2?family=Karma:wght@400;600;700&family=Martel+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Karma:wght@400;600;700&family=Martel+Sans:wght@300;400;700&family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         /* --- NEPAL VIBE PALETTE --- */
         :root {
@@ -23,7 +23,119 @@
             line-height: 1.8;
             margin: 0;
             padding: 0;
+            padding-top: 72px;
             font-size: 18px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
 
         .container {
@@ -231,6 +343,72 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="bestofeurope.html">Best of Europe</a>
+                <a href="bhutan.html">Bhutan</a>
+                <a href="central_europe.html">Central Europe</a>
+                <a href="china.html">China</a>
+                <a href="dubai.html">Dubai</a>
+                <a href="egypt.html">Egypt</a>
+                <a href="indonesia.html">Indonesia</a>
+                <a href="muscat.html">Muscat</a>
+                <a href="nepal.html">Nepal</a>
+                <a href="scandinavian.html">Scandinavian Countries</a>
+                <a href="singapore.html">Singapore</a>
+                <a href="srilanka.html">Srilanka</a>
+                <a href="vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="../india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="../india/karnataka.html">Karnataka</a>
+                <a href="../india/kerala.html">Kerala</a>
+                <a href="../india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="../india/northeast.html">Northeast India</a>
+                <a href="../india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="../india/rajasthan.html">Rajasthan</a>
+                <a href="../india/uttarakhand.html">Uttarakhand</a>
+                <a href="../india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
+
 <div id="lightbox-modal" class="lightbox">
     <span class="close">&times;</span>
     <img class="lightbox-content" id="lightbox-img" src="">
@@ -252,7 +430,7 @@
             <p>Roads are narrow and bad. Cities are not well connected. Woolen things seem to be cheaper here. Also, Rudraksha is famous. Religious people buy 'Shaligram' here and perform regular pooja. This Shaligram is a black stone with a smooth surface, mostly oval-shaped, found in the sacred river Gandaki.</p>
             <p>While shopping, we have to ascertain whether the cost is in Indian rupees or Nepalese. One hundred Indian rupees is equal to one hundred and sixty Nepalese rupees. Also, bargaining is rampant here. If they say Rs 100/-, you can bargain for Rs 40/- also. India and Nepal have a 15-minute time difference; Nepal time is 15 minutes ahead of Indian time.</p>
             
-            <img src="\src\content\international\photos\nepal1.jpg" alt="Nepal Flag" class="journal-photo float-right">
+            <img src="photos/nepal1.jpg" alt="Nepal Flag" class="journal-photo float-right">
 
             <p>This country’s national flag is very different. It is neither square nor rectangle but two right triangles joined together. Their national language is Nepali, and the script is Devanagari. People here speak English and Hindi also. Dussehra is their main festival. Other Hindu festivals like Diwali, Maha Shivaratri, etc., are also celebrated.</p>
         </div>
@@ -274,19 +452,19 @@
         <h2>26/01/19: Janakpur to Kathmandu</h2>
         <p><strong>Happy Republic Day!</strong> Last night we could sleep peacefully. Morning 6:30 there was a wakeup call. We got ready by 6:30. For breakfast, paratha and bread were there. After breakfast, we went to <strong>Sita Mandir (Janaki Mandir)</strong>. This temple was close to the hotel, so we walked there.</p>
         
-        <img src="\src\content\international\photos\nepal2.jpg" alt="Janaki Mandir - 9 Lakh Temple" class="journal-photo float-left">
+        <img src="photos/nepal2.jpg" alt="Janaki Mandir - 9 Lakh Temple" class="journal-photo float-left">
 
         <p>This temple was constructed by a Nepal Queen in 1901. The total construction cost was around 9 Lakhs. So this temple is also called the "Nau Lakha Mandir". It is a spacious temple and looks beautiful. Mostly Mughal people were employed to construct this temple. Though it is a Hindu temple, the architecture is of the Mughal type.</p>
 
         <p>A museum is also there within the temple premises depicting Janaka and Sita's associations. After the temple visit, we proceeded to Janakpur airport. It was so small and resembles a small railway station. There was no X-ray scanner here; we had to open our suitcases for them to check before boarding.</p>
 
-        <img src="\src\content\international\photos\nepal3.jpg" alt="Small Plane at Janakpur" class="journal-photo float-right">
+        <img src="photos/nepal3.jpg" alt="Small Plane at Janakpur" class="journal-photo float-right">
 
         <p>The airplane was like a toy plane. The traveling time from Janakpur to Kathmandu is about 25 minutes. We left Janakpur around 12:30 and reached Kathmandu around 1 pm.</p>
         <p>After that, we came to a government office to take permission to go to <strong>Muktinath</strong>. We submitted Xerox copies of our passports and photographs. The fee was Rs 1000/- (Nepalese currency). After completing the formalities for going to Muktinath, we proceeded to Hotel Himalaya.</p>
         <p>Our lunch was arranged in this hotel. After lunch, we got our booked room. The room in this hotel was nice, spacious with necessary amenities.</p>
         
-        <img src="\src\content\international\photos\nepal4.jpg" alt="Sleeping Vishnu Temple" class="journal-photo float-left">
+        <img src="photos/nepal4.jpg" alt="Sleeping Vishnu Temple" class="journal-photo float-left">
 
         <p>Around 4 pm we went to the <strong>Budhanilkantha Temple (Vishnu Temple)</strong>. In this temple, Vishnu is in a sleeping posture. This temple was nice, and after worship, we returned to the room.</p>
 
@@ -303,7 +481,7 @@
         
         <p>Then we left the airport and came to <strong>Fewa Lake</strong>. It is a huge lake. We went boating. In that lake, in the middle, there is a patch of land and a temple is there. This temple is called Tal Barahi Temple. We visited this temple. While boating we could see the mountain range of Annapurna.</p>
 
-        <img src="\src\content\international\photos\nepal5.jpg" alt="Annapurna Mountain Range" class="journal-photo float-right">
+        <img src="photos/nepal5.jpg" alt="Annapurna Mountain Range" class="journal-photo float-right">
 
         <p>Then we returned to the hotel. We did some shopping also. Around 12 we had our lunch. Lunch was very delicious. For lunch, we had Puri, bitter gourd deep fry, Paneer matar gravy, Mango pulp, and dal.</p>
         <p>After lunch, we took rest till 3 pm and went to see <strong>Devi’s Falls</strong>. Then we roamed around the city and went to a temple called <strong>Bindhyabasini</strong>. We had to climb some 50 steps. In this temple, Devi, Shiva, Lakshmi Narayan, and Lord Ganesh all are there. From this temple, we saw the Annapurna mountain chain partly covered with ice. Because of bright sunlight, ice-covered peaks were glittering like silver.</p>
@@ -315,7 +493,7 @@
         <p>From Jomsom airport, Muktinath is about 20 km by road. We took a bus and started moving to Muktinath. After traveling 10 km, the bus could not go further due to heavy snow.</p>
         <p>Some youngsters attempted to walk but returned after half a km. It was very chill and slippery.</p>
 
-        <img src="\src\content\international\photos\nepal6.jpg" alt="Muktinath / Jomsom" class="journal-photo float-left">
+        <img src="photos/nepal6.jpg" alt="Muktinath / Jomsom" class="journal-photo float-left">
 
         <p>In that place, a kilometer away just close to the Gandaki river, one more Narayanan temple is there. About 10 people from our group went and I was also one among them. After worshipping and seeing the river, we returned to the hotel by bus.</p>
         <p>At night we had a simple dinner and went to bed early. The altitude of this place is 12,000 feet. Oxygen is less. Even some people struggled to breathe. Fortunately, we did not face any such problem. Because of the extreme chill, we didn’t have proper sleep though.</p>
@@ -331,7 +509,7 @@
         <h2>31/01/19: Chitwan National Park</h2>
         <p>Morning around 6 we got up and got ready to proceed to Chitwan, some 5 hours journey. The road was not bad. Also on both sides, there was beautiful scenery. Also, river Narayani close to the highway made the travel more pleasant. We reached Chitwan around 1 pm. We checked in at Paradise Resort. The hotel is very moderate. The room is not at all in good shape. Even basic essentials are not provided in the room.</p>
         
-        <img src="\src\content\international\photos\nepal7.jpg" alt="Chitwan National Park" class="journal-photo float-right">
+        <img src="photos/nepal7.jpg" alt="Chitwan National Park" class="journal-photo float-right">
 
         <p>We paid Rs 3000 per head and went for a safari. It is about a 2-hour drive in the forest, called <strong>Chitwan National Park</strong>. We saw sambar, deer, peacocks, and rhinoceroses and returned to the hotel.</p>
 
@@ -347,7 +525,7 @@
         <h2>02/02/19: Patan & Bhaktapur</h2>
         <p>On 2nd February we got up leisurely around 6:30 am. We had our breakfast around 8 am. We left the hotel by 10 to see <strong>Patan Durbar Square</strong>.</p>
 
-        <img src="\src\content\international\photos\nepal8.jpg" alt="Patan Durbar Square" class="journal-photo float-left">
+        <img src="photos/nepal8.jpg" alt="Patan Durbar Square" class="journal-photo float-left">
 
         <p>Here lots of temples are there. First, we visited a Living God (Kumari). A girl child of 6 years old is believed to be a living God. In her horoscope, some special features are seen, and so the child is being worshipped here. Then we saw some groups of temples with lots of architectural beauty. These temples are very old and considered one of the world Heritages and come under UNESCO. One Krishna temple is also here. Another one is a Golden temple. This visit was about 2 hours and we returned to the hotel for lunch.</p>
         <p>Around 3 pm again we started to visit <strong>Bhaktapur Durbar Square</strong>. This place is also full of old beautiful temples with lots of wooden carvings. Here also one golden gate is there. These groups of temples are also one among the world heritages. After this visit, we returned to the hotel.</p>
@@ -371,6 +549,21 @@
 </div>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     // Lightbox Logic
     const modal = document.getElementById("lightbox-modal");
     const modalImg = document.getElementById("lightbox-img");

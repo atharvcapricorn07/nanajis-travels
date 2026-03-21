@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seattle Travelogue 2017</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,6 +13,118 @@
             background-color: #f0f4f8;
             margin: 0;
             padding: 0;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
         .container {
             max-width: 900px;
@@ -120,6 +233,72 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../international/bestofeurope.html">Best of Europe</a>
+                <a href="../international/bhutan.html">Bhutan</a>
+                <a href="../international/central_europe.html">Central Europe</a>
+                <a href="../international/china.html">China</a>
+                <a href="../international/dubai.html">Dubai</a>
+                <a href="../international/egypt.html">Egypt</a>
+                <a href="../international/indonesia.html">Indonesia</a>
+                <a href="../international/muscat.html">Muscat</a>
+                <a href="../international/nepal.html">Nepal</a>
+                <a href="../international/scandinavian.html">Scandinavian Countries</a>
+                <a href="../international/singapore.html">Singapore</a>
+                <a href="../international/srilanka.html">Srilanka</a>
+                <a href="../international/vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="../india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="../india/karnataka.html">Karnataka</a>
+                <a href="../india/kerala.html">Kerala</a>
+                <a href="../india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="../india/northeast.html">Northeast India</a>
+                <a href="../india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="../india/rajasthan.html">Rajasthan</a>
+                <a href="../india/uttarakhand.html">Uttarakhand</a>
+                <a href="../india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
+
 <div id="photoModal">
     <svg class="close-btn" onclick="closeModal()" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M18 6L6 18M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -134,7 +313,7 @@
     </header>
 
     <div class="intro">
-        <img src="\src\content\usa\photos\seattle0.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Seattle Intro">
+        <img src="photos/seattle0.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Seattle Intro">
         <p>In May 2017, I embarked on an extensive nearly six-month journey from Pune, India, to the Pacific Northwest region of the United States. Traveling via London, the journey across continents led to the evergreen landscapes of Washington State, specifically the city of Sammamish. Known for its proximity to Seattle—a city famous for its frequent rainfall and lush surroundings—this region served as the perfect base for exploring some of North America's most iconic natural landmarks. From the snow-capped peaks of the Cascade Range to the tranquil waters of the Puget Sound, the itinerary was designed to capture the unique blend of coastal beauty and volcanic grandeur that defines this corner of the world.</p>
     </div>
 
@@ -146,65 +325,65 @@
 
         <div class="entry">
             <span class="date-header">21/05/17 - Snoqualmie Falls</span>
-            <img src="\src\content\usa\photos\seattle1.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Snoqualmie Falls 1">
+            <img src="photos/seattle1.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Snoqualmie Falls 1">
             <p>After breakfast, around 11 o’clock, we left for Snoqualmie Falls. It is about an hour's drive from home. Uma packed paratha, pickle, cakes, etc. After parking the car, we went to see the waterfalls. It is spectacular. After seeing the falls, we walked down to the river. It is about a 2 km steep walk down. Also, a hydraulic power station is here. It was pretty cool. We sat on a stone close to the riverbed. In the dense forest with bright sun and a cold breeze, it was so nice. From there, we could also see the falls. In a shaded place, we started eating our dinner. Paratha with pickle; it was too good, especially since we were hungry.</p>
-            <img src="\src\content\usa\photos\seattle2.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Snoqualmie Falls 2">
+            <img src="photos/seattle2.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Snoqualmie Falls 2">
             <p>Then we started walking up to reach our parking place. While going down, we could walk easily. While returning, it was so steep, and every 10 meters we had to stop for a while to take a deep breath. Walking that distance of about 2 km, we found it very difficult, and at last, we came to the parking place and sat for a while to take a rest. After a brief rest, we started returning home. On the way, they stopped at Costco and purchased fruits, milk, cereals, etc.</p>
         </div>
 
         <div class="entry">
             <span class="date-header">28/05/17 - San Juan Island</span>
-            <img src="\src\content\usa\photos\seattle3.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="San Juan Island 1">
+            <img src="photos/seattle3.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="San Juan Island 1">
             <p>San Juan Island, Orcas Island, Shaw Island, and Lopez Island are all close to Washington State. During vacations or weekends, people from Washington State go to these islands with their cars via ferry and spend the day there, returning on the same day or after a few days. To go to these islands, one has to book tickets well in advance. Especially during weekends, there is a heavy rush for these islands. Shashi had booked tickets for visiting San Juan Island about a fortnight ago.</p>
-            <img src="\src\content\usa\photos\seattle4.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="San Juan Island 2">
+            <img src="photos/seattle4.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="San Juan Island 2">
             <p>On the 27th itself, lots of preparation was done. Puliyodarai rice, mint chutney, some sweets, namkeen, etc., were packed and kept ready. On the 28th, we got up early around 5 am. Sandwiches and coffee in a flask were also taken. We left home around 6:30 am. They have two cars; one is a bigger one where eight people can travel. In that car, we left along with the eatables, fruits, playthings, etc. Anacortes is the place where the ferry deck is situated. From home, it is around a 2-hour drive. We reached this place around 8:30 am.</p>
-            <img src="\src\content\usa\photos\seattle7.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Anacortes">
+            <img src="photos/seattle7.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Anacortes">
             <p>When we reached there, many were already waiting in the queue to drive their cars onto the deck of the ferry. We also waited in the queue for our turn. During that time, we took our breakfast – sandwiches and coffee. Cars are allowed inside the ferry one by one. After the check, our car was also driven inside and parked on the lowest deck.</p>
             <p>After parking the car in the ferry, we went inside and found a comfortable place to sit. The ferry travel was about 2 hours. In the ferry, we moved around and took lots of photos. Just before reaching Friday Harbor, they announced and asked us to move to the car parking area. We went to our car and got into it. As soon as the ferry reached the port, cars moved out one by one. We also came out. The port where we landed is called Friday Harbor.</p>
-            <img src="\src\content\usa\photos\seattle6.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Friday Harbor">
+            <img src="photos/seattle6.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Friday Harbor">
             <p>From Friday Harbor, we drove to the State Park. It is a kind of beach. Invariably, whales are seen from this beach. We sat on this beach for some 2 or 3 hours. We were not lucky enough to have a glimpse of whales. We ate our lunch and walked around the beach and saw the lighthouse. From the State Park, we proceeded to the Lavender Farm. Here, lavender plants are grown. We could see flowers only on a few plants. We could see lots of buds on many of these bushy plants. Perhaps July may be the season to visit this farm to see the complete lavender flower bed. A nursery is also here where we can buy lavender plants.</p>
-            <img src="\src\content\usa\photos\seattle5.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Sculpture Park">
+            <img src="photos/seattle5.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Sculpture Park">
             <p>Then we went to the Sculpture Park. Here we found sculptures of different things. Some were made using stone and some were made out of wood. A beautiful pond is also there in this park. After spending some time here, we proceeded back to Friday Harbor. We were searching for a coffee shop and at last found one. Here, most of the shops close around 5. After a good coffee, we roamed around until 7:30 pm and proceeded to board the ferry. Since sunset happens after 8:30 pm, it was quite bright when we boarded the ferry. We reached Anacortes around 10 pm and reached home almost at midnight.</p>
         </div>
 
         <div class="entry">
             <span class="date-header">03/07/17 - Mount Rainier National Park</span>
-            <img src="\src\content\usa\photos\seattle8.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Mount Rainier 1">
+            <img src="photos/seattle8.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Mount Rainier 1">
             <p>Being US Independence Day, Uma and Shashi had a holiday. It was planned, perhaps a month back, to visit Mount Rainier. Accordingly, they booked a hotel for the 4th night stay. We used to see this mountain peak as and when we drive along Sammamish Lake, a beautiful mountain covered completely in ice. This place is about a 3-hour drive from home. Uma packed lots of eatables and food for two days. We left home on the 3rd morning around 10. The weather was good and so the travel was pleasant. Before we left, we had our breakfast.</p>
-            <img src="\src\content\usa\photos\seattle9.jpeg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Mount Rainier 2">
+            <img src="photos/seattle9.jpeg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Mount Rainier 2">
             <p>While traveling, we were eating biscuits, fruits, etc. The first point we reached was the Paradise Visitor Center. We walked in the dense woods. We saw a well where hot water was jetting out. Also, we saw a small museum. After the museum, we went to a great waterfall called Narada. It was amazing. The sprinkling of water was so huge that we became very wet. After the falls, we moved towards Mount Rainier. This is the third biggest mountain in the US on the Cascade Range in Washington State. It is an active volcano. In 1854, it erupted. This mount is fully covered by ice. The height of this mountain is 14,400 feet. Since this mountain is a miniature of Mount Everest, Everest climbers come here to train. This mountain plays an important role in providing the heaviest rain in the Seattle range. There is an information center at the base of the mountain. Lots of geographical information about this mountain is displayed here. Also, a movie is played continuously here to depict the history of this mountain, the plants around this place, different varieties of flowering plants, animals, birds, etc.</p>
             <p>We started to climb over the mountain. The weather was very good. With the bright sun, it was quite warm, so one could walk around on the ice without any warm clothes! It was very funny. The ice was not hard like stone; it was just like fine sand. It was very slippery. With great difficulty, we walked about half a mile. Because of the slipperiness, we got scared and decided to stop further adventures and started returning. While coming down, it was more difficult. We were so tired and decided to move to the restaurant. Since Shashi had booked a cottage at a place called Mountain View, we went there. The rooms were good. Leftover lunch food was there, and Uma brought a rice cooker and rice. She prepared dahi bath. We finished our early dinner around 8 and slept by 9:30. The night was quite warm and we had to use the AC.</p>
         </div>
 
         <div class="entry">
             <span class="date-header">04/07/17 - Paradise and Sunrise</span>
-            <img src="\src\content\usa\photos\seattle10.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Paradise">
+            <img src="photos/seattle10.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Paradise">
             <p>We got up late. After the hotel breakfast, we left the restaurant around 10 am. There is a very big National Park there, and many beauty spots are in this park. This area is covered with trees and plants. Lots of seasonal flower plants grow all over the place. We could see several flower beds of different flowers. It was so amazing. This area is called Paradise. From the mountain, ice melts and forms rivers and waterfalls. There is one hanging bridge over a small river, and this is one of the attractions in the National Park. Only one person is allowed to walk across the bridge at a time.</p>
             <p>We walked through this bridge and spent some time on the riverbed. The water of the river was very chilly. Then we proceeded to Sunrise Point. This is one of the best viewpoints to see mountain peaks like Seymour Peak, Governors Ridge, Mount Adams, Tamanos Mountain, etc. After this, we went to one of the picnic spots and had our homemade lunch. In this place, we found lots of ice plains and kids started playing with the ice. They made ice balls and started throwing them at others. Then we started our return journey. It was around a 3-hour journey. Around 6 pm, we reached home safely.</p>
         </div>
 
         <div class="entry">
             <span class="date-header">15/07/17 - Oregon State & Multnomah Falls</span>
-            <img src="\src\content\usa\photos\seattle11.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Hood Mountain">
+            <img src="photos/seattle11.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Hood Mountain">
             <p>On the 14th evening, Jinu and Pavan were to come to Seattle from New York. But at the eleventh hour, their flight was cancelled and they had to make lots of changes to their plan. At last, they came to San Francisco and then to Long Beach and then reached Portland, Oregon. We left home around 9:30 am. As usual, we took lots of food material. Oregon State is between Washington State and California. This state is called the Evergreen State because three-fourths of the state is covered by dense forests. The Columbia River is between Washington State and Oregon. From Sammamish to Portland, it is about a 5-hour drive. We reached Portland airport around 2 pm. Jinu and Pavan were waiting at the airport. After picking them up, we proceeded to Mount Hood National Forest. We found a parking place and searched for a picnic spot to have our lunch.</p>
             <p>We found a nice place with benches and tables. We finished our lunch. After lunch, we started walking towards Multnomah Falls. We walked about a mile in the dense forest area, and it was very pleasant. This waterfall is the second tallest waterfall in the USA. The first one is Yosemite Falls in California. Then we went to an ice cream stall and had ice creams. After the ice cream, we went to see Wahkeena Falls and the dam, but it was found to be closed.</p>
-            <img src="\src\content\usa\photos\seattle12.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Wahkeena falls">
+            <img src="photos/seattle12.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Wahkeena falls">
             <p>Then we went to Horsetail Falls. It was also quite tall and beautiful. The water from the waterfall was quite chilly. We were walking in the water and spent time around this waterfall. Then we proceeded to Vista House. This is another sunset point. Since the days are longer here, sunset takes place around 9 pm! So we could not wait until that time. On the way to the hotel, we stopped at an Indian restaurant called Namaste India. We found a variety of Indian food, viz. butter naan, chana masala, dal makhani, aloo mutter sabzi, samosa, pakora, salad, fried rice, raita, gulab jamun, ice cream, etc. After the lavish dinner, we went to the Hillsboro Residence Inn. The hotel was very good. Shashi had booked two rooms. The rooms were big and there were enough beds for us to sleep.</p>
-            <img src="\src\content\usa\photos\seattle13.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Cannon Beach">
+            <img src="photos/seattle13.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Cannon Beach">
             <p>The next morning, we got up a bit late. We had our breakfast at the hotel and left around 9:30 am. This time Pavan drove the car. The weather was good. From the hotel, in an hour, we reached Cannon Beach. It was pretty chilly. We saw the beautiful Haystack Rocks on the seashore. The seawater was so chilly we could not even put our legs in for a long time. After Cannon Beach, we started moving back home. It is a long drive of around 5 hours. We searched for a Chipotle for lunch. Since we did not find one, we stopped at a Pizza Hut. After the pizza lunch, we continued our return journey. After a brief break for a cup of coffee for some 30 minutes, we reached home around 9 pm.</p>
         </div>
 
         <div class="entry">
             <span class="date-header">12/08/17 - Olympic National Park</span>
-            <img src="\src\content\usa\photos\seattle14.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Olympic National Park">
+            <img src="photos/seattle14.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Olympic National Park">
             <p>Olympic National Park is some 4 hours drive from Uma’s place. We left home around 9 am. Around 1 pm we reached Olympic National Park. We first went to Hurricane Ridge. Olympic is a mountain range having several peaks. Hurricane is one of the peaks of this range. After lunch, we just walked a mile. After the forest walk, we went to Lake Crescent.</p>
-            <img src="\src\content\usa\photos\seattle15.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Lake Crescent">
+            <img src="photos/seattle15.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Lake Crescent">
             <p>Here people come with their boats and do boating. The arrangement was so nice that one single person can shift the boat from the car trailer to the lake. After the lake, we started our long return journey. We reached Issaquah, a place close to Sammamish, around 9 pm. There is a hotel called Madras Dosa Corner. We had dinner there and returned home by 10 pm.</p>
         </div>
 
         <div class="entry">
             <span class="date-header">02/09/17 - Deception Pass State Park</span>
-            <img src="\src\content\usa\photos\seattle16.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Deception Pass">
+            <img src="photos/seattle16.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Deception Pass">
             <p>Deception Pass State Park is around a 3-hour drive from home. We left home around 10:30 am after the aarthi. After an hour's drive on the highway, we had a miraculous escape from a major accident. Ahead of our car, another car was going. Of course, Shashi was keeping a safe distance between the cars. All of a sudden, the car in front of us crashed against the car which had suddenly stopped. Actually, it was a multiple-car crash. Since the speed was moderately high, Shashi could not abruptly apply the brakes and avoid the crash. Luckily, there was no vehicle moving in the adjacent lane at that moment, and Shashi just jumped to the next lane and avoided the crash. Only our car had a big jerk. It was really an escape from a major accident. We reached Deception Pass State Park around 1 pm. In this park, there are two islands: Fidalgo Island and Whidbey Island. These islands are connected by bridges. On each island, there are different beaches. Facilities are there for boating. Adjacent to the beach is a dense forest. We can walk along the shore or go trekking. In this park, there is a tree-climbing sport facility. In a tall pine tree, safety gadgets are fixed and a trainer coaches the climbers.</p>
         </div>
 
@@ -215,23 +394,38 @@
 
         <div class="entry">
             <span class="date-header">22/08/17 - Space Needle & The Locks</span>
-            <img src="\src\content\usa\photos\seattle17.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Space Needle">
+            <img src="photos/seattle17.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Space Needle">
             <p>Ramamurthy and Geetha arrived from Washington DC. They came via Chicago. They reached Seattle at 10:30 pm. Uma and Shashi went to the airport to receive them. They arrived home around 11:30 pm. On 23/08/2017, we all went to Seattle. We visited the Space Needle center. We roamed around in that area. Also, we went to the market area and spent some time at the street shops. After the Space Needle, we went to the Carl S. English Jr. Botanical Garden and Hiram M. Chittenden Locks. We went to the garden and found a comfortable place and finished our dinner which we brought from home.</p>
-            <img src="\src\content\usa\photos\seattle18.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Locks 1">
+            <img src="photos/seattle18.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Locks 1">
             <p>Then we went to see the Chittenden Locks. What is this lock? It is not something like door locks! The USA is a very big country. The east side border is the Atlantic Ocean and the west border is the Pacific Ocean. Because of these two big oceans, there are many Pugets (backwater) on the west side and east side. In this country, there are 50 states, and every state has many lakes. These lakes are very big and deep. Boats, cruises, and ferries sail in these lakes. In some places, it becomes necessary to connect a lake and a Puget. These two cannot be connected by a channel because of two reasons. One reason is the elevation difference; invariably, the lake and Puget are at different levels. The second reason: lake water is free from salt and Puget water is salty; if they are connected directly, lake water will also become salty and unusable for drinking and irrigation. So the lake and Puget are connected with a deep concrete chamber with two strong doors, one at each end. One of the doors is kept closed at all times. When ferries and boats are to sail to the Puget from the lake, the door on the Puget side is closed and the door on the lake side is kept open, and ferries and boats are allowed inside the chamber. Then the lake side door is closed, and now the water level in the chamber is at the same level as the lake. The water level of the chamber is brought down to the level of the Puget by draining water from the chamber through pipes provided externally. When the level is reduced to the level of the Puget, the door on the Puget side is opened and boats and ferries sail out to the Puget side. 
-            <img src="\src\content\usa\photos\seattle19.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Locks 2">
+            <img src="photos/seattle19.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Locks 2">
             The reverse actions are done when boats and ferries are to sail from the Puget to the lake. After witnessing this, we returned home. Before coming home, we visited the LV temple (here Indians give initials to God also). This temple is called the LV temple, Lord Venkateshwara! After the visit to the temple, we returned home.</p>
         </div>
     </section>
 
     <div class="conclusion">
-        <img src="\src\content\usa\photos\seattle20.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Conclusion">
+        <img src="photos/seattle20.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Conclusion">
         <p>Beyond the many miles traveled and sights explored, this journey was defined by the warmth of a long-term stay. We had a wonderful six months celebrating traditional festivals, marking family birthdays, and treasuring daily life with Shashi, Uma and our grandchildren. These personal moments—from quiet evenings at home to joyful holiday celebrations—formed the heart of our time in Washington. As we departed for our return flight in late September, we left with a profound sense of gratitude for the half-year spent together, carrying home memories of both the grand landscapes of the Pacific Northwest and the irreplaceable time spent with family.</p>
     </div>
 
 </div>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     function openModal(src) {
         document.getElementById("photoModal").style.display = "flex";
         document.getElementById("modalImg").src = src;
