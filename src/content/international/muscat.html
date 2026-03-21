@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muscat Diaries | A Family Visit</title>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;700&family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         /* --- MUSCAT VIBE PALETTE --- */
         :root {
@@ -23,7 +23,119 @@
             line-height: 1.8;
             margin: 0;
             padding: 0;
+            padding-top: 72px;
             font-size: 18px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
 
         .container {
@@ -233,6 +345,72 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="bestofeurope.html">Best of Europe</a>
+                <a href="bhutan.html">Bhutan</a>
+                <a href="central_europe.html">Central Europe</a>
+                <a href="china.html">China</a>
+                <a href="dubai.html">Dubai</a>
+                <a href="egypt.html">Egypt</a>
+                <a href="indonesia.html">Indonesia</a>
+                <a href="muscat.html">Muscat</a>
+                <a href="nepal.html">Nepal</a>
+                <a href="scandinavian.html">Scandinavian Countries</a>
+                <a href="singapore.html">Singapore</a>
+                <a href="srilanka.html">Srilanka</a>
+                <a href="vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="../india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="../india/karnataka.html">Karnataka</a>
+                <a href="../india/kerala.html">Kerala</a>
+                <a href="../india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="../india/northeast.html">Northeast India</a>
+                <a href="../india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="../india/rajasthan.html">Rajasthan</a>
+                <a href="../india/uttarakhand.html">Uttarakhand</a>
+                <a href="../india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
+
 <div id="lightbox-modal" class="lightbox">
     <span class="close">&times;</span>
     <img class="lightbox-content" id="lightbox-img" src="">
@@ -279,7 +457,7 @@
         <p>In the evening in two cars, we went around the city. Muscat is a newly created city. Basically, it is a desert having very little rain and there are no rivers or lakes. This city is surrounded by rocks and they are mostly heaps of sands without any greenery. Oil and gas are abundantly available and the country Oman depends on these. For water, seawater is converted into drinking water. Day-to-day commodities like vegetables, milk products, groceries etc., are imported from European countries and Asian countries.</p>
         <p>In the city roads are broad and traffic rules are adhered to and cars are moving at terrific speed. Pedestrians seem to be very few. I didn't see many multistoried buildings. Buildings are of Mughal architecture. They are all uniformly painted in half-white color. Electricity is generated by thermal power stations using gas. The city is glittering at night with bright colorful lights. Car horns were seldom used.</p>
         
-        <img src="\src\content\international\photos\muscat1.jpg" alt="Mosque at Night" class="journal-photo float-right">
+        <img src="photos/muscat1.jpg" alt="Mosque at Night" class="journal-photo float-right">
 
         <p>Manikkam and Akila in two different cars took us to roam around the city. The Grand Mosque was looking beautiful with colorful lights. They parked their cars and we saw the beautiful Grand Mosque from outside. After the Grand Mosque, we visited the <strong>Sultan’s Palace</strong>. With colorful lights, the palace gave a magnificent look.</p>
         
@@ -296,11 +474,11 @@
         <h3>Sultan Qaboos Grand Mosque</h3>
         <p>After breakfast, she took us to the Grand Mosque of Muscat. A dress code is stipulated to visit this Mosque. For gents, any normal dress, half shirt or T-shirt is acceptable. Only for ladies, their hands should be fully covered. Hair should not be visible and should be covered. Sarees are not acceptable since the stomach portion is visible.</p>
         
-        <img src="\src\content\international\photos\muscat2.jpg" alt="Grand Mosque Exterior" class="journal-photo float-left">
+        <img src="photos/muscat2.jpg" alt="Grand Mosque Exterior" class="journal-photo float-left">
 
         <p>This Mosque's praying spot is facing Mecca. This Grand Mosque is built using only marble. Inside, the Quran is embedded on the wall. Also, some countries donated colorful marbles with engraved paintings. With footwear, people are not allowed to enter. Beautiful lighting arrangements are made and this Mosque glitters during the night and it is a spectacular sight to look at from a distance.</p>
 
-        <img src="\src\content\international\photos\muscat3.jpg" alt="Grand Mosque Interior" class="journal-photo float-right">
+        <img src="photos/muscat3.jpg" alt="Grand Mosque Interior" class="journal-photo float-right">
 
         <p>We spent an hour here and returned home. From home, it is about a 45-minute drive. Akila’s car driving is scary. Invariably she drives in the extreme right lane of the highway and overtakes most of the cars moving in the other lane. Anu also pointed out the same when I was chatting with her.</p>
         <p>While returning home, Akila wanted to take an account statement from her bank. She left us in the car and went. It took nearly an hour. Here apparently people look lethargic. Even in the airport, they took a long time for the immigration process.</p>
@@ -311,7 +489,7 @@
         <h2>27/12/23: Thiruvathirai Celebrations</h2>
         <p>Lakshmi and Geetha also joined our morning walk. We all five went on our usual route. About an hour we walked but just covered 5000 steps. In Muscat, most of the houses in the front yard had drumstick trees. Also neem trees and imli (tamarind) trees were common.</p>
         
-        <img src="\src\content\international\photos\muscat4.jpg" alt="Thiruvathirai Celebration" class="journal-photo float-left">
+        <img src="photos/muscat4.jpg" alt="Thiruvathirai Celebration" class="journal-photo float-left">
 
         <p>Being today is <strong>Thiruvathirai</strong>, Ramamurthy's star birthday, we all wished him. Akila made Thiruvathirai Kali and special Kootu using seven vegetables. We ate that in the morning around 10.</p>
 
@@ -320,7 +498,7 @@
         <h2>28/12/23: The Big Day Trip</h2>
         <p>As usual in the morning, Ramamurthy prepared coffee for everyone. In addition, he prepared about 15 cups of tea and filled a flask for travel. Akila got up early and prepared idli, imli rice, and curd rice for our trip. I helped her in packing those items. Also, she packed pickles, Vadam, Thepla, lemon juice, and mixed fruit juice for the trip.</p>
         
-        <img src="\src\content\international\photos\muscat5.jpg" alt="Day Trip Start" class="journal-photo float-right">
+        <img src="photos/muscat5.jpg" alt="Day Trip Start" class="journal-photo float-right">
 
         <p>Morning around 8:30 we all left in 2 cars; one was driven by RaguRam and the other one was a hired one.</p>
 
@@ -332,11 +510,11 @@
 
         <h3>Bimmah Sinkhole</h3>
         
-        <img src="\src\content\international\photos\muscat6.jpg" alt="Bimmah Sinkhole View 1" class="journal-photo float-left">
+        <img src="photos/muscat6.jpg" alt="Bimmah Sinkhole View 1" class="journal-photo float-left">
 
         <p>The next interesting spot was the Sinkhole. This spot was close to the beach of the Arabian Sea. It was an hour's travel from the Dam. It is a natural deep pond. To reach the pond we have to go down 85 steps. Along cement steps, railing was provided. So getting down was not very difficult.</p>
         
-        <img src="\src\content\international\photos\muscat7.jpg" alt="Bimmah Sinkhole View 2" class="journal-photo float-right">
+        <img src="photos/muscat7.jpg" alt="Bimmah Sinkhole View 2" class="journal-photo float-right">
 
         <p>We both went down to have a close look and took many photos. Akila and Manikkam were also with us. This spot was very nice.</p>
 
@@ -344,16 +522,16 @@
 
         <h3>The Beaches & Sur</h3>
         
-        <img src="\src\content\international\photos\muscat8.jpg" alt="Pebble Beach" class="journal-photo float-left">
+        <img src="photos/muscat8.jpg" alt="Pebble Beach" class="journal-photo float-left">
 
         <p>Then we proceeded to another Beach called <strong>Pebble Beach</strong>. This seashore was full of pebbles of different sizes and colors. After wandering around the Beach for some time we located a tea shop and took tea. And went to one more Beach called <strong>Wadi Shab Beach</strong>.</p>
         <p>Then we went to Wadi Tiwi, a village. Here roads are very narrow and the lands are fertile. We could see lots of banana trees. After leaving Wadi Tiwi, we could reach the main road and proceeded to the lighthouse.</p>
         
-        <img src="\src\content\international\photos\muscat9.jpg" alt="Sur Sultan's Boat" class="journal-photo float-right">
+        <img src="photos/muscat9.jpg" alt="Sur Sultan's Boat" class="journal-photo float-right">
 
         <p>On the way, we saw Sur Sultan's boat kept as his memory. The present Sultan's grandfather used this boat. In his memory, this is kept for public view.</p>
 
-        <img src="\src\content\international\photos\muscat10.jpg" alt="Sur Lighthouse" class="journal-photo float-left">
+        <img src="photos/muscat10.jpg" alt="Sur Lighthouse" class="journal-photo float-left">
 
         <p>Our last visiting spot was <strong>Sur Lighthouse</strong>. To reach this spot, we crossed a hanging Bridge. This bridge was decorated colorfully with lights of blue, red, and white.</p>
 
@@ -362,7 +540,7 @@
         <h2>29/12/23: Kalbuh Park & Ravi's Cooking</h2>
         <p>As usual after the morning coffee, we four went for a morning walk for about an hour. Akila and Manikkam had to visit school to attend a parents' meeting. So cooking was done by multiple people. I made mint thogayal. After coming from the meeting Anu made palak dal kootu and rasam plus Arachu Kalaki. Lunch was good. After lunch, we had an hour nap.</p>
         
-        <img src="\src\content\international\photos\muscat11.jpg" alt="Kalbuh Park" class="journal-photo float-right">
+        <img src="photos/muscat11.jpg" alt="Kalbuh Park" class="journal-photo float-right">
 
         <p>Evening we all went to <strong>Kalbuh Park</strong>, a nice walking place. Luckily Akila managed to get a parking place to park her car. We walked along the beach. Colorful flowers, beautiful statues making the walking path more attractive. Also, the Frankincense cup is looking colorful.</p>
 
@@ -377,7 +555,7 @@
         <p>After lunch, all the people were fully engrossed with their Tamil serials. Till Ravi came about 5 pm, no one lifted their eyes from their mobiles. He came and prepared tea for everyone. By that time Akila returned back and planned to visit the nearby Krishna temple. Myself, Ramamurthy, and Geetha preferred to walk. People with leg problems came with Akila in her car.</p>
         <p>Krishna temple is a fairly big temple. During our visit, we could see lots of people. After the temple's visit, we went to a photo studio for a photoshoot. Akila stipulated a dress code also. We gents wore colorful kurta pajamas and all ladies wore Mysore silk sarees.</p>
 
-        <img src="\src\content\international\photos\muscat12.jpg" alt="Family Photo Session" class="journal-photo float-left">
+        <img src="photos/muscat12.jpg" alt="Family Photo Session" class="journal-photo float-left">
 
         <p>The photographer edited the photo in such a way that all the old people look at least 15 years younger. After the photo session, we all went to Sree Saravana for dinner. Each preferred different dishes. Most of us took dosa of different types, Mysore masala dosa, rava onion masala etc. Dinner was ended with strong coffee.</p>
 
@@ -385,11 +563,11 @@
         <p>Akila planned to take us for Dolphin watching. Earlier day she booked tickets for seven people. Myself, Lakshmi, Ramamurthy, Geetha, Uma, and Jula Akka. She booked for the 8 O'clock slot. The harbor was some 30 minutes drive. We reached there around 7:40. We just left home after taking coffee, not even we took a bath.</p>
         <p>It was a small motorboat. Apart from us, another 10 people were there in the boat. Getting into the boat was a bit troublesome for us. But it was not risky or difficult. But the boat speed was scary. It started moving at a tremendous speed. After some 30 minutes drive in one particular place, he almost stopped the boat.</p>
         
-        <img src="\src\content\international\photos\muscat13.jpg" alt="Dolphin Watching 1" class="journal-photo float-right">
+        <img src="photos/muscat13.jpg" alt="Dolphin Watching 1" class="journal-photo float-right">
 
         <p>In that area, we could see Dolphins moving around in groups. They used to appear on the surface of the Sea, but before I could click they disappeared under the sea. We were watching their movements. Though we have seen Dolphin shows earlier, for the first time we saw these many Dolphins in groups over the sea so closely. After some time, the boat started to return. Return journey also at the same high speed.</p>
         
-        <img src="\src\content\international\photos\muscat14.jpg" alt="Dolphin Watching 2" class="journal-photo float-left">
+        <img src="photos/muscat14.jpg" alt="Dolphin Watching 2" class="journal-photo float-left">
 
         <p>While coming back, he took some different route, the boat was moving between rocks, and in one place the boat entered a small tunnel. We took lots of photos.</p>
 
@@ -414,13 +592,13 @@
 
         <h2>03/01/24: Nizwa & Al Hoota Cave</h2>
         
-        <img src="\src\content\international\photos\muscat15.jpg" alt="Day Trip" class="journal-photo float-right">
+        <img src="photos/muscat15.jpg" alt="Day Trip" class="journal-photo float-right">
 
         <p>After coffee and breakfast, we four—myself, Lakshmi, Ramamurthy, and Geetha—with Akila left home around 9 am. We took packed imli rice, dahi rice, and thepla for lunch. We proceeded to <strong>Nizwa Fort</strong>. It was about two hours drive from home. We reached the Fort around 11 am. We didn't enter into the Fort and just drove around the Fort. Lots of window shops we saw, and mostly they were selling all sorts of decoration pieces, mostly handmade things.</p>
 
         <p>Before reaching the Fort, we had a break to take tea. In Muscat, we found lots of coffee shops on the roadside. They sell masala tea, coffee, and Indian stuff like paratha, Samosa, Dabeli etc. These stalls are invariably managed by Indians.</p>
         
-        <img src="\src\content\international\photos\muscat16.jpg" alt="Cave Train" class="journal-photo float-left">
+        <img src="photos/muscat16.jpg" alt="Cave Train" class="journal-photo float-left">
 
         <p>Then we proceeded to <strong>Al Hoota Cave</strong>. From the Fort, this place is some 45 minutes drive. We reached around 12 pm. Being a working day this spot was not crowded. After parking the car all we went inside. Tickets are there to enter the caves. From the entrance to the cave, a special train is there. Of course, on that day the train service was suspended due to maintenance. This distance is about 1 km. Weather was pleasant, we walked this distance without any difficulty.</p>
 
@@ -430,7 +608,7 @@
         <p>Then proceeded to <strong>Misfat Al Abriyeen</strong> village. This place was very fertile. We could see banana trees, Mango trees, and lime trees. Also, water was flowing around through a small canal. Some old houses, we could see. They say it is 300 years old. Roads were very narrow. Most of the places, only one car moves in a direction. When a car came in the opposite direction, somehow they managed to cross each other.</p>
         <p>Here generally driving persons have immense patience. They never use the horn. They respect pedestrians and while driving they maintain a safe distance from the car which is moving in front of them. Bumper-to-bumper driving is not permitted.</p>
         
-        <img src="\src\content\international\photos\muscat17.jpg" alt="Nizwa Fort" class="journal-photo float-right">
+        <img src="photos/muscat17.jpg" alt="Nizwa Fort" class="journal-photo float-right">
 
         <p>After this village, we went to one more village called Al Hamra. After this village, we started our return journey. While returning again we stopped at Nizwa Fort. This time we hired a local buggy and went around the Fort. This Omani driver was describing the Fort with the help of his iPad.</p>
 
@@ -439,7 +617,7 @@
         <h2>04/01/24: Relaxed Day</h2>
         <p>We three, myself, Lakshmi, and Ramamurthy went for a walk as usual. With Akila, myself, Ramamurthy, and Umashankar went for shopping. We did some small shopping like USB cables, knives, USB ports, iPhone cables, etc. They are all seem to be cheaper.</p>
         
-        <img src="\src\content\international\photos\muscat18.jpg" alt="Sabudana Vada Snack" class="journal-photo float-left">
+        <img src="photos/muscat18.jpg" alt="Sabudana Vada Snack" class="journal-photo float-left">
 
         <p>For lunch, Akila prepared Pav Bhaji. For eleven people she had to make a large quantity. It was delicious. Evening Ravi came and made his special item Sabudana Vada and groundnut Chutney. He makes always in hundreds. He was serving hot sabudana vadas with chutney and we were eating the crispy vada with chutney countlessly. No sightseeing was planned that day.</p>
 
@@ -450,7 +628,7 @@
 
         <h2>06/01/24: The Wave</h2>
         
-        <img src="\src\content\international\photos\muscat19.jpg" alt="The Wave / Al Mouj" class="journal-photo float-right">
+        <img src="photos/muscat19.jpg" alt="The Wave / Al Mouj" class="journal-photo float-right">
 
         <p>Akila took us to a place called <strong>Al Mouj (The Wave)</strong>, where her own apartment is there. Her apartment community looks pretty good. It is close to the seashore. This government allots specific places for buying property for immigrants. The Wave is one among the places where immigrants are permitted to buy property.</p>
 
@@ -473,6 +651,21 @@
 </div>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     // Get the lightbox elements
     const modal = document.getElementById("lightbox-modal");
     const modalImg = document.getElementById("lightbox-img");

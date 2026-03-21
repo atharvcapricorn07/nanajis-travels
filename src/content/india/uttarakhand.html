@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uttarakhand Travelogue | 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,6 +13,118 @@
             background-color: #f4f7f1;
             margin: 0;
             padding: 0;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
         .main-container {
             max-width: 900px;
@@ -189,6 +302,72 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../international/bestofeurope.html">Best of Europe</a>
+                <a href="../international/bhutan.html">Bhutan</a>
+                <a href="../international/central_europe.html">Central Europe</a>
+                <a href="../international/china.html">China</a>
+                <a href="../international/dubai.html">Dubai</a>
+                <a href="../international/egypt.html">Egypt</a>
+                <a href="../international/indonesia.html">Indonesia</a>
+                <a href="../international/muscat.html">Muscat</a>
+                <a href="../international/nepal.html">Nepal</a>
+                <a href="../international/scandinavian.html">Scandinavian Countries</a>
+                <a href="../international/singapore.html">Singapore</a>
+                <a href="../international/srilanka.html">Srilanka</a>
+                <a href="../international/vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="karnataka.html">Karnataka</a>
+                <a href="kerala.html">Kerala</a>
+                <a href="madhyapradesh.html">Madhya Pradesh</a>
+                <a href="northeast.html">Northeast India</a>
+                <a href="punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="rajasthan.html">Rajasthan</a>
+                <a href="uttarakhand.html">Uttarakhand</a>
+                <a href="uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
+
 <div id="lightbox">
     <span id="close-btn" onclick="closeLightbox()">&times;</span>
     <img id="lightbox-img" src="">
@@ -208,70 +387,70 @@
 
     <div class="day-block">
         <span class="date-label">19/11/25</span>
-        <img src="\src\content\india\photos\uttarakhand1.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="19/11 Section Photo">
+        <img src="photos/uttarakhand1.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="19/11 Section Photo">
         <p>Travel duration from Pune to Delhi was 1 hr 40 minutes. The flight reached 15 minutes earlier than the scheduled time. We collected our bags and took rest in the airport until 5 am.</p>
         <p>Then the Veena representative called us and we boarded the bus to Haridwar. Haridwar is about 200 km away from Delhi. The highway was good, but the 20-seater bus was not very comfortable. These small buses don't have proper shock absorbers. On the way at a hotel, we had a breakfast of idli, paratha, and coffee. We reached Haridwar around 10:30 am. Just before entering the city, we crossed the Patanjali complex, where Ramdev Baba stays. We saw lots of huge buildings like medications, yoga, and healthcare including coaching for IIT entrance exams in that complex.</p>
         <p>Our accommodation was arranged in a hotel called Classic Residence. The room was good. Food was also okay. After lunch, we took rest until 4 pm. Then we proceeded to see the Ganga Aarti by the same bus.</p>
-        <img src="\src\content\india\photos\uttarakhand2.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Ganges River">
+        <img src="photos/uttarakhand2.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Ganges River">
         <p>I do remember I had come to this place with my parents when I was a school-going child. From the parking place, we walked through the narrow market lane and reached the ghat and sat on the <strong>Ganges river</strong> bed steps. This place was moderately crowded. This aarti takes place every day just before sunset. The ghat is called Har Ki Pauri. After the initial pooja by pandits, they play the famous Ganga aarti song by Anuradha Paudwal and do the aarti. This aarti duration is about 10 minutes. Then we returned back to the bus and reached the hotel. Had dinner around 8:30. Being the winter season, the weather was pleasant and we had a good sleep.</p>
     </div>
 
     <div class="day-block">
         <span class="date-label">20/11/25</span>
-        <img src="\src\content\india\photos\uttarakhand3.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Badrinath Kedarinath Temple">
+        <img src="photos/uttarakhand3.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Badrinath Kedarinath Temple">
         <p>We got ready by 7 am and had our breakfast at the hotel. We started to proceed to Rishikesh around 8 am. It is an hour's journey from Haridwar, around 25 km away. We reached Rishikesh around 9 am. We got down at Tapovan, then we visited the <strong>Badrinath Kedarnath temple</strong>. It's a small temple. Here separate deities for Kedarnath (Shiv Ling) and Badrinath (Shalikram) are there. This temple foundation was laid by Jayendra Saraswathi Shankaracharya in 1986.</p>
         <p>Next, we visited the Sita Ram Dham temple. The main deity in this temple is Sita Devi. This temple is located close to the Ganges. From this temple, we can see the clean Ganges river flowing through. Next, we visited the Radha Krishna Mandir. The main deities are Radha and Krishna. They kept two mirrors parallel to each other and we can see the infinity images of Radha & Krishna. Also, a large-sized Hanuman deity is seen at the entrance of the temple.</p>
         <p>Then we were taken to a shop where Rudraksha and Spatika Mala are sold. The shop owner gave an hour's lecture about the great curing effects of these. The price range was from Rs 3000 onwards, but no one purchased any item. Then we went to the <strong>Lakshman temple</strong>.</p>
-        <img src="\src\content\india\photos\uttarakhand4.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Lakshman Temple">
+        <img src="photos/uttarakhand4.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Lakshman Temple">
         <p>Perhaps this may be the single temple in the whole country for Lord Lakshman. A lone deity is there in this temple. Then we crossed the Ganges through a hanging bridge. In earlier days, the Lakshman Jhula bridge was in use. Now that is not used, as one of the strings was broken. Adjacent to Lakshman Jhula, a new hanging bridge called <strong>Hanuman Bridge</strong> is in use.</p>
-        <img src="\src\content\india\photos\uttarakhand5.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Hanuman Bridge">
+        <img src="photos/uttarakhand5.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Hanuman Bridge">
         <p>From this new bridge, we can see the old bridge, Lakshman Jhula. Then we took a local cab and went to the famous old hotel Chotiwala. Some 30 years back when I visited with my kids, we took food here. In Rishikesh, rafting sport is famous. Even our travels arranged this. Considering our age, we preferred to skip it.</p>
         <p>Around 4 pm, we left Rishikesh and moved to Mussoorie. It is 70 km away from Rishikesh. It is a ghat road with sharp turnings and hairpin bends. We had a break at Dehradun for tea. Then we proceeded and reached Mussoorie around 8:15. Weather was quite chill; the temperature was around 9 degrees. Our accommodation was arranged at a hotel called Honeymoon Inn. The room was good. We finished our dinner and went to sleep.</p>
     </div>
 
     <div class="day-block">
         <span class="date-label">21/11/25</span>
-        <img src="\src\content\india\photos\uttarakhand6.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="21/11 Section Photo">
+        <img src="photos/uttarakhand6.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="21/11 Section Photo">
         <p>Early morning from the hotel room, the view of the sky was pretty beautiful. Altitude of this place is around 6,500 ft. Weather is pretty chill. Hotels or shops are at elevated places or downwards. So all the time we have to walk up or down to go anywhere. Roads are narrow. Cycle rickshaws are in use. Morning walk was pleasant. Then after breakfast, we proceeded to <strong>Kempty waterfalls</strong>. As usual, from the hotel to the bus parking, we went by cycle rickshaw and boarded the bus.</p>
-        <img src="\src\content\india\photos\uttarakhand7.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Kempty Falls">
+        <img src="photos/uttarakhand7.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Kempty Falls">
         <p>After about 45 minutes of travel, we reached the place. From there we walked through a narrow lane and reached the waterfalls, and we took a few photos. Then from there we went by a rope car and reached a spot close to the waterfalls. It was spectacular. We took lots of photos and even had video calls. Since Tanvi was online, we could share our experience. Then we returned back to the hotel and had our lunch. Until 4 pm we took rest.</p>
         <p>At 4 pm we walked around 1 km and went to Gun Hill point through the rope car. This is one of the peaks in Mussoorie. In this peak, one Sani Mandir with a Hanuman deity is there. Also, telescopic view points are there. From this peak, we saw the <strong>beautiful sunset</strong> and had a nice tea.</p>
-        <img src="\src\content\india\photos\uttarakhand8.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Sunset">
+        <img src="photos/uttarakhand8.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Sunset">
         <p>While returning to the hotel, we did some street shopping. Here woolen wears are cheaper. Also, wooden decorative pieces and wooden kitchen utilities are sold in plenty.</p>
     </div>
 
     <div class="day-block">
         <span class="date-label">22/11/25</span>
-        <img src="\src\content\india\photos\uttarakhand9.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="22/11 Section Photo">
+        <img src="photos/uttarakhand9.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="22/11 Section Photo">
         <p>In the morning we got up early. The weather was very pleasant. I went for a walk. In the beautiful environment, walking was so pleasant. But it was scary to see lots of stray dogs and monkeys. Monkeys and dogs were fighting for a bread piece or a chapatti. Invariably monkeys were smart to grab the eatables from the dogs and escape.</p>
         <p>After breakfast, we left Mussoorie and proceeded to Nainital. It was a long way, some 350 km away. Up to Haridwar, our tour bus was not good and so throughout we felt that the bus was just bumping. At Haridwar, we had our lunch and continued our journey. Around 4:30 in the evening, we had another break to have coffee. From Jim Corbett, the ghat road started, with some U-turns and hairpin bends. We reached Nainital around 8 pm. Weather was pretty chill. From the bus parking place, we were transferred to a smaller vehicle and we reached the hotel. The name of the hotel is Vintage Inn. Rooms were good. Dinner was delicious. Because of the room heater, we could comfortably sleep.</p>
     </div>
 
     <div class="day-block">
         <span class="date-label">23/11/25</span>
-        <img src="\src\content\india\photos\uttarakhand10.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Nainital Lake">
+        <img src="photos/uttarakhand10.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Nainital Lake">
         <p>The day was quite bright and warm. It was not biting cold. After breakfast, we left in a car for <strong>Nainital Lake</strong>. Then we took an electric rickshaw and roamed around the lake. Then there was boat riding in Nainital Lake. Boating was for about 15 minutes. Then we visited the Naina Devi temple. This temple is one among the 51 Shakti Peeths. In this temple, other deities like Shiva, Hanuman, Radha Krishna, and Dashavatar are also there.</p>
         <p>Then we walked to see the snow point. From the temple, the rope car boarding point is about one kilometer walk. They charge Rs 380 to travel to this point through the ropeway car. We can spend an hour at that peak point and return through the cable car. We went through the cable car. Fortunately, the weather was too good. No fog or clouds. Here there is a flower called Buransh. It is a kind of medicine. Juice of this flower is famous here. We had this juice.</p>
         <p>There is a tower called <strong>Magic Tower 360</strong>. It is a mechanical revolving platform that takes people to a high altitude by slowly revolving. We can see the spectacular scenery of Nainital. Ticket fare is Rs 300 per head. We both went and took pictures and videos.</p>
-        <img src="\src\content\india\photos\uttarakhand11.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Magic Tower 360">
+        <img src="photos/uttarakhand11.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Magic Tower 360">
         <span class="sub-section">Kainchi Dham</span>
         <p>In Nainital, there lived a Saint called Neem Karoli, and lots of followers are there. His Ashram is there in Nainital in a place called <strong>Kainchi Dham</strong>.</p>
-        <img src="\src\content\india\photos\uttarakhand12.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Kainchi Dham">
+        <img src="photos/uttarakhand12.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Kainchi Dham">
         <p>Since Veena didn't have any visiting schedule except shopping, we and one more family booked a cab and went to this place. A big queue was there, but quickly we could complete the darshan of his holy place.</p>
     </div>
 
     <div class="day-block">
         <span class="date-label">24/11/25</span>
-        <img src="\src\content\india\photos\uttarakhand13.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Jim Corbett House">
+        <img src="photos/uttarakhand13.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Jim Corbett House">
         <p>After breakfast, we left the Vintage Inn hotel, Nainital, and started for Jim Corbett. It is about 70 km away. On the way, we stopped at Kaladungi. Here is <strong>Jim Corbett's house</strong>, which was converted into a small museum. Jim Corbett was a social worker. After his education, he worked in the Railways and then joined the Indian Army and participated in the Second World War. He retired with the rank of Major and settled in Kaladungi. He purchased lands around his place and started agriculture, giving employment to the poor. He shared the yields with the employees of his firm. So people loved him and he became more popular.</p>
         <p>Also, he was a wild animal lover. He became more popular after he shot down the man-eater Champawat which killed more than 400 people. He was also a writer. He published several books on wild animals. In this museum, some of his belongings and some write-ups about him are there. His paintings are also seen in the museum. After the museum, we continued our journey and reached Jim Corbett around 12. We were checked into Aura Resort. The room was good and spacious. Jim Corbett weather is not very chill like Nainital. After dinner, we proceeded to see the Dhangarhi museum. Here the wild animals which died naturally, or while fighting with other animals, are processed and kept. Taxidermy of a tiger is kept with a description that the tiger fought with an elephant the whole night and ultimately the elephant killed that tiger. In the museum, a small documentary film about the forest is shown. We spent an hour in this museum and returned back to the hotel.</p>
     </div>
 
     <div class="day-block">
         <span class="date-label">25/11/25</span>
-        <img src="\src\content\india\photos\uttarakhand14.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="25/11 Safari">
+        <img src="photos/uttarakhand14.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="25/11 Safari">
         <p>As per the travel itinerary, the visit was a forest safari. Usually, a time slot is allotted by the forest department. Every day there are two slots: one in the morning and one in the evening. We got only the afternoon session. In the morning there was no program and we got up leisurely and around 8:30 we had our breakfast. The resort was beautiful and we were roaming around. After lunch, by 1:30, we left the hotel for the forest safari. This safari is under the control of the forest department. They have six-seater jeeps. For every jeep, a forest guard will accompany. They have a very specific route and they never deviate from the route. Also, these jeep movements are monitored. Before leaving, persons' details are recorded before traveling in the jeep.</p>
-        <img src="\src\content\india\photos\uttarakhand15.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="25/11 Wildlife">
+        <img src="photos/uttarakhand15.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="25/11 Wildlife">
         <p>Persons are not allowed to get down from the jeep throughout the travel. In the forest, there is a guard room with proper fencing. There they allow you to get down from the jeep to avail washroom facilities. The safari duration is about 2 hours. This forest is not a plain one; it is surrounded by mountains. In this forest, elephants, cheetahs, tigers, and deer are seen. This forest is full of Sal trees. Also, we saw plenty of curry leaf trees. We roamed around for 2 hours but didn't see any wild animals. We saw deer in groups and different colorful birds. After two hours we returned back and boarded the bus to the hotel.</p>
     </div>
 
@@ -283,9 +462,9 @@
 
     <div class="day-block">
         <span class="date-label">27/11/25</span>
-        <img src="\src\content\india\photos\uttarakhand16.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="27/11 Family">
+        <img src="photos/uttarakhand16.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="27/11 Family">
         <p>Uma prepared idli, sambar, and chutney for breakfast. After breakfast, we left for Julla Akka's home. Before lunch, I moved around Munirka market. Around 1 pm we had our lunch and took rest until 4 pm. From Jula Akka's home, we went to Sarojini market. Then from there, we took an auto and reached Uma Shankar's home. At night she prepared aloo paratha and a subji. Again chit-chatting and then slept.</p>
-        <img src="\src\content\india\photos\uttarakhand17.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="27/11 Market">
+        <img src="photos/uttarakhand17.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="27/11 Market">
     </div>
 
     <div class="day-block">
@@ -295,14 +474,14 @@
 
     <div class="day-block">
         <span class="date-label">29/11/25</span>
-        <img src="\src\content\india\photos\uttarakhand18.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Rashtrapati Bhavan 1">
+        <img src="photos/uttarakhand18.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Rashtrapati Bhavan 1">
         <p>Hema arranged a pass to visit Rashtrapati Bhavan. The time slot given to us was 10:30 am. After our breakfast, we took an auto-rickshaw and left home around 9:15. We reached Gate no. 38 of Rashtrapati Bhavan around 10:15. After the initial formalities, we entered the Rashtrapati Bhavan premises and took a few photos. While entering the Rashtrapati Bhavan, we handed over the mobile phones.</p>
-        <img src="\src\content\india\photos\uttarakhand19.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Rashtrapati Bhavan 2">
+        <img src="photos/uttarakhand19.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Rashtrapati Bhavan 2">
         <p>In our group, about 40 people were there. A guide was with us. After the entrance, the first showpiece was a beautiful goddess made out of Plaster of Paris with one thousand hands, presented by Vietnam. Then we visited Durbar Hall. It is just below the beautiful dome which we used to see from the outside of Rashtrapati Bhavan. In this hall only, every year the award ceremony takes place. Then we saw two halls opposite to each other. One is called Shrayu Hall, where delegates visiting from other countries used to meet the President, and the other hall is called Brahmaputra Hall. It is a dining hall used for delegates. Over this hall, a balcony is there and normally musicians used to play music while dinner or lunch is served.</p>
         <p>Then through a corridor, we reached the famous Ashoka Hall. During British times, this hall was meant for ballroom dancing. The floor is wooden, under which springs are given for a cushioning effect. The roof is decorated with beautiful paintings. Presently this hall is used for photography sessions after every function like an award ceremony. While going to Ashoka Hall, we could see the Mughal Garden. This garden will open to the public during March and September. During that time, this garden will be full of beautiful roses and tulip flowers. Then we were taken to an art gallery where beautiful paintings are kept. After this visit, we returned back to the entrance and took an auto and reached home.</p>
-        <img src="\src\content\india\photos\uttarakhand20.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Rashtrapati Bhavan 3">
+        <img src="photos/uttarakhand20.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Rashtrapati Bhavan 3">
         <p>In the evening, <strong>Hema and Adithi</strong> came and we were chatting for some time. After our dinner, we took a cab and reached Airport Terminal 2. Fortunately, the IndiGo flight was at the right time and reached Pune early morning around 4 am. From the airport, we took a cab and reached home safely. The entire trip was memorable.</p>
-        <img src="\src\content\india\photos\uttarakhand21.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Hema and Adithi">
+        <img src="photos/uttarakhand21.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Hema and Adithi">
     </div>
 
     <section class="summary-box">
@@ -337,6 +516,21 @@
 </div>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     function openLightbox(src) {
         document.getElementById('lightbox-img').src = src;
         document.getElementById('lightbox').style.display = 'flex';

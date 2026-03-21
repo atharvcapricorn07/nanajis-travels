@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>California Travelogue 2013</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2d3436;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 0;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
+        }
+
+        /* ── PAGE LAYOUT ─────────────────────────── */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 40px;
+            position: relative;
+        }
+        header {
+            border-bottom: 4px solid #d35400;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            color: #d35400;
+            font-weight: bold;
+            font-style: italic;
+        }
+        h2 {
+            color: #c0392b;
+            border-left: 5px solid #c0392b;
+            padding-left: 15px;
+            margin-top: 30px;
+            font-size: 1.4em;
+        }
+        h3 {
+            color: #e67e22;
+            margin-top: 20px;
+            font-size: 1.15em;
+        }
+        .intro {
+            background-color: #fef9f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-style: italic;
+            overflow: hidden;
+            border-left: 4px solid #e67e22;
+            margin-bottom: 30px;
+        }
+        .entry {
+            margin-bottom: 25px;
+            text-align: justify;
+            overflow: hidden;
+        }
+        .date-header {
+            color: #d35400;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+            border-bottom: 1px dashed #d35400;
+            width: fit-content;
+        }
+
+        /* Photo Styling */
+        .travel-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            cursor: pointer;
+            border: 4px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            margin: 15px;
+        }
+        .travel-photo:hover { transform: scale(1.02); }
+        .photo-left { float: left; margin-left: 0; }
+        .photo-right { float: right; margin-right: 0; }
+
+        /* Modal */
+        #photoModal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        #modalImg {
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px; right: 35px;
+            cursor: pointer;
+            width: 40px; height: 40px;
+        }
+
+        /* Summary box */
+        .summary-box {
+            background: linear-gradient(135deg, #fff8f0, #fef3e2);
+            border: 1px solid #e8c99a;
+            border-left: 5px solid #d35400;
+            border-radius: 8px;
+            padding: 28px 32px;
+            margin-top: 30px;
+            clear: both;
+        }
+        .summary-box h2 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            color: #8b3a0f;
+            border-left: none;
+            padding-left: 0;
+            font-size: 1.6em;
+            margin-top: 0;
+            margin-bottom: 14px;
+        }
+        .summary-box p {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.15em;
+            line-height: 1.85;
+            color: #4a2e12;
+            font-style: italic;
+            margin: 0;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        p { margin-bottom: 15px; }
+
+        @media (max-width: 600px) {
+            .container { padding: 25px; }
+            .travel-photo { float: none; display: block; margin: 15px auto; width: 100%; height: auto; aspect-ratio: 1/1; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../international/bestofeurope.html">Best of Europe</a>
+                <a href="../international/bhutan.html">Bhutan</a>
+                <a href="../international/central_europe.html">Central Europe</a>
+                <a href="../international/china.html">China</a>
+                <a href="../international/dubai.html">Dubai</a>
+                <a href="../international/egypt.html">Egypt</a>
+                <a href="../international/indonesia.html">Indonesia</a>
+                <a href="../international/muscat.html">Muscat</a>
+                <a href="../international/nepal.html">Nepal</a>
+                <a href="../international/scandinavian.html">Scandinavian Countries</a>
+                <a href="../international/singapore.html">Singapore</a>
+                <a href="../international/srilanka.html">Srilanka</a>
+                <a href="../international/vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="../india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="../india/karnataka.html">Karnataka</a>
+                <a href="../india/kerala.html">Kerala</a>
+                <a href="../india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="../india/northeast.html">Northeast India</a>
+                <a href="../india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="../india/rajasthan.html">Rajasthan</a>
+                <a href="../india/uttarakhand.html">Uttarakhand</a>
+                <a href="../india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
+<div id="photoModal">
+    <svg class="close-btn" onclick="closeModal()" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <img id="modalImg" src="">
+</div>
+
+<div class="container">
+    <header>
+        <h1>Our First Trip to the USA</h1>
+        <div class="subtitle">Sunnyvale, California&nbsp;|&nbsp; May – September 2013</div>
+    </header>
+
+    <!-- INTRODUCTION -->
+    <div class="intro">
+        <img src="photos/bayarea1.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Cycling around the apricot orchard">
+        <p>After years of holding a passport but never applying for a US visa, the arrival of both our daughters in the USA finally made it necessary. Uma and Shashi handled the entire process — mock interviews over Skype, document preparation, followed by a nerve-wracking interview in Mumbai during a Shiv Sena bandh — and to our surprise, we received a 10-year visa. Tickets were booked for 6th May 2013. We flew United Airlines from Mumbai, a 16-hour non-stop journey crossing Pakistan, China, Russia, Europe, and the Atlantic, landing at Newark before a connecting flight to San Francisco. Uma and Shashi met us at the airport, and we arrived at their Sunnyvale home on 7th May — tired, jet-lagged, and overwhelmed with joy. The weeks that followed settled into a gentle rhythm: long morning walks, cycling around the apricot orchard, teaching Tanvi mathematics, telling Atharv the Mahabharata chapter by chapter every night, and maintaining daily religious observances — including Amavasai tharpanam and even my father's Harinya shraddha, performed at the local temple.</p>
+    </div>
+
+    <section class="content">
+
+        <!-- SUNNYVALE HINDU TEMPLE -->
+        <div class="entry">
+            <h2>Sunnyvale Hindu Temple</h2>
+            <span class="date-header">10th May 2013</span>
+            <img src="photos/bayarea2.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Sunnyvale Hindu Temple">
+            <p>On Saturday evening we visited the Sunnyvale Hindu Temple, about 8 km from home. The temple was clean and housed deities of Ganesh, Ram and Sita, Shiva, Karthikeyan, Lakshmi, Balaji, and Navagraha. Indians donate generously, and apples, oranges, and bananas are distributed as prasad. Evenings often include a meal for devotees, and we were lucky to attend a concert by the renowned musician Balamurali Krishna that day — followed by a delicious dinner. We also visited a nearby Durga temple and the Sai Baba temple, where special pujas are held every Thursday and devotees take turns performing the aarti.</p>
+        </div>
+
+        <!-- BUS JOURNEY -->
+        <div class="entry">
+            <h2>Bus Journey — Exploring by Local Bus</h2>
+            <img src="photos/bayarea3.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Local bus journey">
+            <p>We were keen to experience the local bus service. The buses are spotlessly clean, conductor-free, and run on a flat fare of $2 regardless of distance ($1 for senior citizens). Passengers deposit the exact fare into a machine near the driver. Drivers are courteous and wait until all passengers — including wheelchair users and cyclists — are settled before moving. We travelled on two routes: to Great America and Palo Alto, both enjoyable journeys.</p>
+        </div>
+
+        <!-- CHERRY PICKING -->
+        <div class="entry">
+            <h2>Cherry Picking at Brentwood</h2>
+            <img src="photos/bayarea4.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Cherry picking at Brentwood">
+            <p>Around mid-May, fruit-picking season opens at orchards in the region. We drove about 100 km — approximately two hours — to a cherry orchard in Brentwood. Armed with plastic buckets, we spent an hour picking cherries from trees heavy with fruit, eating considerably more than we collected. We brought a packed lunch, paid for our pickings, and returned home thoroughly content.</p>
+        </div>
+
+        <!-- SHIVA VISHNU TEMPLE -->
+        <div class="entry">
+            <h2>Shiva Vishnu Temple, Livermore</h2>
+            <img src="photos/bayarea5.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Shiva Vishnu Temple Livermore">
+            <p>This is one of California's grandest Hindu temples, housing Ganesh, Balaji, a Shiva lingam, Ram Sita, Hanuman, and Navagraha. Funded by the generosity of wealthy Indian Americans, it stays open from morning to 8 pm without a midday break, and prasad is distributed continuously. What struck me most was seeing several Americans seated before the pandits, seeking raksha — a reminder that Hinduism's reach is wider than one might imagine.</p>
+        </div>
+
+        <!-- GOLDEN GATE -->
+        <div class="entry">
+            <h2>Golden Gate Bridge &amp; San Francisco</h2>
+            <span class="date-header">27th May 2013</span>
+            <img src="photos/bayarea6.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Golden Gate Bridge">
+            <p>We drove the 60 miles to San Francisco, a city that reminded me of Ooty — hilly, winding roads, and a cool sea breeze off the Pacific. We navigated the steep Lombard Street, where cars inched forward in bumper-to-bumper traffic down an almost vertical slope, before reaching the Golden Gate Bridge. The bridge spans the Pacific Ocean connecting San Francisco and Sausalito, bold and unmissable in its orange colour, with no pillar in the middle. We took a 30-minute bus tour of the area and then drove down the famous crooked Lombard Street for a second look.</p>
+            <img src="photos/bayarea7.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="San Francisco Fisherman's Wharf">
+            <p>For lunch we went to Fisherman's Wharf, on the seafront, where we ate at Chipotle — layered Mexican rice with rajma, capsicum, carrot, and cheese, the go-to vegetarian meal here. We walked the full length of the wharf, watched street performers, spotted sea lions basking on the shore, and shared a $2 cup of coffee before heading home around 6 pm.</p>
+        </div>
+
+        <!-- SHORELINE LAKE -->
+        <div class="entry">
+            <h2>Shoreline Lake</h2>
+            <span class="date-header">28th May 2013</span>
+            <img src="photos/bayarea8.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Shoreline Lake">
+            <p>About 45 minutes from home, Shoreline Lake is a beautifully landscaped spot surrounded by trees and green lawns — and famously, the Google campus is visible on the way. We arrived with packed food and spent the day walking around the lake, watching ducks and birds, and relaxing on the grass. In the afternoon we went pedal boating — a four-seat boat that Atharv was absolutely determined to steer. After much nagging, he got his turn, and to everyone's delight, he managed it.</p>
+        </div>
+
+        <!-- CALIFORNIA ACADEMY OF SCIENCES -->
+        <div class="entry">
+            <h2>California Academy of Sciences, San Francisco</h2>
+            <span class="date-header">2nd June 2013</span>
+            <img src="photos/bayarea9.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="California Academy of Sciences aquarium">
+            <p>Located in Golden Gate Park, this world-class academy has three unmissable attractions. The aquarium dazzled us with its variety of fish. The planetarium screened a 30-minute show about the 1906 San Francisco earthquake — which killed 3,000 people, injured 2 lakh more, and levelled most of the city — rendered in vivid 3D that made us feel we were living through it.</p>
+            <img src="photos/bayarea10.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="California Academy of Sciences rainforest">
+            <p>The artificial rainforest, a large enclosed dome, recreated a tropical ecosystem complete with exotic plants, butterflies, birds, insects, and snakes.</p>
+            <img src="photos/bayarea11.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="California Academy earthquake simulator">
+            <p>Finally, the earthquake simulator: after a short film, we stepped into a small cubicle that began to shake violently — we gripped the rails and laughed in equal measure. We lunched on packed chapattis and subji in the academy's hall before heading home.</p>
+        </div>
+
+        <!-- MYSTERY SPOT -->
+        <div class="entry">
+            <h2>The Mystery Spot, Santa Cruz</h2>
+            <span class="date-header">10th June 2013</span>
+            <img src="photos/bayarea12.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Mystery Spot Santa Cruz">
+            <p>Some 50 miles from home, deep in a redwood forest of enormous trees, lies the Mystery Spot — a small area where, it is claimed, the laws of gravity behave strangely. The story goes that in 1930 a buyer tried to build a house here but found no pole or beam would stand straight. Our guide demonstrated: a ball placed on a slanted plank rolled upward, water poured on the same plank flowed uphill, and a pendulum hanging from the ceiling took a diagonal position. The most theatrical trick involved people of different heights standing on the plank — the tallest appeared shortest, the shortest tallest.</p>
+            <img src="photos/bayarea13.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Mystery Spot illusions">
+            <p>Uma looked it up afterwards: some visitors insist the forces are real and point to the slanting trees in the area as evidence; others argue it is all an elaborate set of visual illusions created by the unusual geometry of the wooden structures. Either way, we collected our free stickers — and I fully intended to display mine on our car back in Pune.</p>
+        </div>
+
+        <!-- TRAIN JOURNEY -->
+        <div class="entry">
+            <h2>Train Journey — Caltrain to Palo Alto</h2>
+            <img src="photos/bayarea14.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Caltrain Sunnyvale to Palo Alto">
+            <p>Sunnyvale has its own Caltrain station, and we were keen to try it. The California Train (Caltrain) runs from Gilroy to San Francisco — the full length of the state — divided into 7 fare zones. We bought tickets ($3 each) from a machine and rode a double-decker, spotlessly clean train from Sunnyvale to Palo Alto, both within Zone 3. The journey took about 20 minutes. At Palo Alto, close to the world-famous Stanford University, we watched students board with their bicycles — cycling to the station, loading the bike onto the train, and cycling again to campus. We wandered the main street of Palo Alto for half an hour before catching a bus back to Sunnyvale.</p>
+        </div>
+
+        <!-- PEBBLE BEACH -->
+        <div class="entry">
+            <h2>Pebble Beach — 17-Mile Drive</h2>
+            <span class="date-header">29th June 2013</span>
+            <img src="photos/bayarea15.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Pebble Beach 17-Mile Drive">
+            <p>A three-hour drive south, mostly along winding coastal mountain roads with spectacular views and agricultural fields of cabbage, cauliflower, and cherry on either side. The entrance to the 17-Mile Drive costs $10 per car. The route along the Pacific coast has some 20 points of interest. Bird Rock — a sea-bound rock almost completely covered by birds — was a remarkable sight.</p>
+            <img src="photos/bayarea16.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Lone Cypress Pebble Beach">
+            <p>The Lone Cypress, growing in solitary defiance on a craggy cliff, is one of the most photographed trees in the world. The Ghost Tree, with its twisted pale branches, was eerie and beautiful. We used the coin-operated binoculars, marvelled at the scenery, packed a lunch, and watched American families arrive in large cars — with portable tents, barbecue kits, pets, and sometimes a motorboat in tow — to spend the entire day on the shore.</p>
+        </div>
+
+        <!-- SAN FRANCISCO ZOO -->
+        <div class="entry">
+            <h2>San Francisco Zoo</h2>
+            <span class="date-header">4th July 2013 — Independence Day</span>
+            <img src="photos/bayarea17.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="San Francisco Zoo">
+            <p>We made a full day of America's Independence Day at the San Francisco Zoo, situated close to the beach in delightfully cool, foggy weather. The zoo is spacious, with animals roaming within large, open enclosures rather than cages — tigers, zebras, rhinos, gorillas, monkeys, kangaroos, and a peacock that danced obligingly while we photographed it. A steam train circles the zoo and we rode it with the children. A lone male giraffe lived separately from the herd, we were told, because the females gave him no peace. There were also penguins, fed fish at midday, and two sea lions that had been found in the wild with bullet wounds, surgically treated, and given sanctuary. Two large birds with a single wing each — also rescued — were similarly moving. We ate our packed lunch under a cool tree, walked the artificial Africa forest exhibit, and left around 4 pm.</p>
+        </div>
+
+        <!-- NECTAR & PEACH PICKING -->
+        <div class="entry">
+            <h2>Nectar &amp; Peach Picking at Tachella Farms</h2>
+            <span class="date-header">6th July 2013</span>
+            <img src="photos/bayarea18.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Nectar and peach picking Tachella Farms">
+            <p>Another trip to Brentwood — this time three hours each way through barren hills dotted with wind turbines — with Shashi's friend Ashish joining us. Tachella Farms had black cherry, peaches, and nectarines for pick-your-own harvest. I saw nectarines for the first time: a large, thin-skinned, deep-red, intensely juicy fruit. The rule was simple — anything you pick, you buy, but you may eat freely as you go. We ate enthusiastically. Uma had packed methi paratha and tomato rice; Ashish contributed milk sweets.</p>
+            <img src="photos/bayarea19.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Locked keys Livermore temple">
+            <p>On the way back we stopped at the Shiva Vishnu Temple in Livermore for prasad, accidentally the car keys got locked in the boot. With both their phones nearly dead (5% and 2% charge), they calmly accessed Toyota's roadside helpline online. A mechanic arrived within 20 minutes, inflated a tube between the door frame to create a gap, and used a hooked rod to pop the lock open. The whole operation took less than half an hour, and Atharv kept the waiting crowd thoroughly entertained throughout.</p>
+        </div>
+
+        <!-- MOUNT MADONNA -->
+        <div class="entry">
+            <h2>Mount Madonna &amp; Kim Son Monastery</h2>
+            <span class="date-header">17th August 2013</span>
+            <img src="photos/bayarea20.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Sankat Mochan Hanuman Temple Mount Madonna">
+            <p>Lakshmi had heard from friends at Duck Park about the Sankat Mochan Hanuman Temple on Mount Madonna, and her desire to visit it was resolute. Uma researched the temple thoroughly, made an advance reservation (required for entry), and downloaded a map since the GPS route was unusually complex. Lakshmi, characteristically, had prepared a handwritten list of wishes to place in the temple's drop box.</p>
+            <p>We left home at 11:30 am and arrived at the temple — founded in 2003 by Indian saint Baba Hari Dass within the Mount Madonna residential centre — at around 1 pm. The temple is modest but serene, with aartis at 6:30 am and 6 pm. The pandit blessed each of us and distributed prasad. What surprised us most were a few American pandits, dressed in white dhoti and kurtha with sindoor on their foreheads, conducting the rituals as naturally as any Indian priest.</p>
+            <img src="photos/bayarea21.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Kim Son Buddhist Monastery">
+            <p>Adjacent to the temple is the Kim Son Buddhist Monastery, a meditation centre of quiet beauty. We saw a magnificent reclining Buddha and a laughing Buddha at the entrance. Inside, a group of monks in saffron robes chanted religious verses.</p>
+            <img src="photos/bayarea22.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Kim Son Monastery nursery">
+            <p>We sat with our packed methi paratha and dahi lunch in the monastery grounds, pausing to admire a beautifully stocked nursery of flowering plants on our way back.</p>
+        </div>
+
+        <!-- OTHER VISITS -->
+        <div class="entry">
+            <h2>Other Memorable Visits</h2>
+            <h3>SAP Labs &amp; Stanford University — 3rd August 2013</h3>
+            <img src="photos/bayarea23.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="SAP Labs Palo Alto">
+            <p>Uma took us to her office at SAP Labs in Palo Alto on a Saturday. The building had an auto-lock main door, motion-sensitive lights, and a well-stocked canteen with free coffee, tea, cold drinks, yogurt, and fruit for all employees.</p>
+            <img src="photos/bayarea24.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Stanford University campus">
+            <p>On the way back we drove through the Stanford University campus. Lakshmi scanned every signboard earnestly searching for one that said "Stanford University"; we never found one, and it remains a family joke.</p>
+
+            <h3>Great Mall &amp; Shopping — 4th August 2013</h3>
+            <img src="photos/bayarea25.jpg" class="travel-photo photo-right" onclick="openModal(this.src)" alt="Great Mall California">
+            <p>The Great Mall was enormous, with shops for clothing, electronics, cosmetics, furniture, and branded goods — Uma and Shashi had concession coupons giving 10–20% off most stores. We also visited Target, Costco (wholesale, membership required), Safeway (the quintessential American supermarket), Dollar Tree ($1 items), and India Cash &amp; Carry — a taste of home with Indian groceries, vegetables, and spices.</p>
+
+            <h3>Chuck E. Cheese's — 27th July 2013</h3>
+            <img src="photos/bayarea26.jpg" class="travel-photo photo-left" onclick="openModal(this.src)" alt="Chuck E Cheese's">
+            <p>We took the children to Chuck E. Cheese's, an indoor amusement centre packed with token-operated games. Players earn points and redeem them for prizes. All four of us tried the games with equal enthusiasm and equally poor results — our combined points were enough for a tiny plastic trinket, which we accepted with great dignity.</p>
+        </div>
+
+    </section>
+
+    <!-- THE RETURN -->
+    <div class="entry">
+        <h2>The Return</h2>
+        <p>On 3rd September we woke early to leave by 7:30 am. Atharv was visibly upset. Tanvi pressed a photo frame and some showpieces into my hands as parting gifts. At San Francisco airport, Shashi helped us redistribute weight between check-in and cabin bags — we had, predictably, over-packed — and waited with us until the security checkpoint. An overstuffed cabin bag was kindly checked through by an airhostess. At Newark, we ran to collect a bag and sprint to the Mumbai connection, a 40-minute gap, and made it, guided by helpful airport officials.</p>
+        <p>The 16-hour return flight passed smoothly. At Mumbai customs, an official asked whether I carried liquor, I said no, and he waved me past the X-ray queue entirely. We reached home in Pune by 3 am — furniture covered and dust-free, car and bike started first try after an air refill. Through our journey as well as during our entire stay, we never had a single bitter experience. The trip was good indeed.</p>
+    </div>
+
+    <!-- SUMMARY BOX -->
+    <div class="summary-box">
+        <h2>A Wonderful Four Months</h2>
+        <p>Four months is a long time to be away from home — and yet it passed in what felt like a breath. Beyond the bridges, beaches, and redwood forests, what we carried back from California was something quieter and harder to name: the feeling of having lived, however briefly, as a family under one roof again. Watching Atharv grow more mischievous by the day, helping Tanvi with her maths, sharing meals and morning walks with Uma and Shashi — these simple rhythms were the true gift of the trip. We arrived as visitors and left feeling we had truly belonged. The memories of California's grand landscapes will endure, but it is the ordinary evenings at home in Sunnyvale that we shall treasure most.</p>
+    </div>
+
+</div>
+
+<script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
+    function openModal(src) {
+        document.getElementById("photoModal").style.display = "flex";
+        document.getElementById("modalImg").src = src;
+    }
+
+    function closeModal() {
+        document.getElementById("photoModal").style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        let modal = document.getElementById("photoModal");
+        if (event.target == modal) closeModal();
+    }
+</script>
+
+</body>
+</html>

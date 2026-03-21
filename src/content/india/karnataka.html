@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coastal Heritage of Karnataka - Travelogue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --karnataka-yellow: #FFD700;
@@ -20,6 +21,118 @@
             background-color: #f9f9f9;
             margin: 0;
             padding: 0;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
 
         .container {
@@ -149,6 +262,71 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../international/bestofeurope.html">Best of Europe</a>
+                <a href="../international/bhutan.html">Bhutan</a>
+                <a href="../international/central_europe.html">Central Europe</a>
+                <a href="../international/china.html">China</a>
+                <a href="../international/dubai.html">Dubai</a>
+                <a href="../international/egypt.html">Egypt</a>
+                <a href="../international/indonesia.html">Indonesia</a>
+                <a href="../international/muscat.html">Muscat</a>
+                <a href="../international/nepal.html">Nepal</a>
+                <a href="../international/scandinavian.html">Scandinavian Countries</a>
+                <a href="../international/singapore.html">Singapore</a>
+                <a href="../international/srilanka.html">Srilanka</a>
+                <a href="../international/vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="karnataka.html">Karnataka</a>
+                <a href="kerala.html">Kerala</a>
+                <a href="madhyapradesh.html">Madhya Pradesh</a>
+                <a href="northeast.html">Northeast India</a>
+                <a href="punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="rajasthan.html">Rajasthan</a>
+                <a href="uttarakhand.html">Uttarakhand</a>
+                <a href="uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
 <div id="lightbox-overlay">
     <button id="close-btn">&times;</button>
     <img id="lightbox-img" src="" alt="Zoomed view">
@@ -176,14 +354,14 @@
             <span class="date-header">12/10/19</span>
             <p>Hubli station was impressive! Very clean and every platform is having an escalator. So there was no pain of lifting suitcases to cross over the bridges. Kesari has booked a room in hotel Kyriad. This hotel is about 6 km from the station and situated in the center place of the city. The room was good and the food served in this hotel was too good.</p>
             <p>After freshening, we went around the city and in Kamat hotel we took breakfast. Kesari arranged lunch at Kyriad hotel. Lunch was good. After the lunch, we went to see a very old Siva temple called <span class="highlight">Chandramouleshwar temple</span>. 
-            <img src="\src\content\india\photos\karnataka1.jpg" class="travel-photo photo-right" alt="Chandramouleshwar temple"> It is just 2 km from the hotel. After this temple, we saw Unkal lake. It is fairly a big lake. Unfortunately, this lake is not maintained properly. Then we went around the market area and went back to the hotel. After the delicious dinner, we had a good sleep.</p>
+            <img src="photos/karnataka1.jpg" class="travel-photo photo-right" alt="Chandramouleshwar temple"> It is just 2 km from the hotel. After this temple, we saw Unkal lake. It is fairly a big lake. Unfortunately, this lake is not maintained properly. Then we went around the market area and went back to the hotel. After the delicious dinner, we had a good sleep.</p>
         </div>
 
         <div class="date-section">
             <span class="date-header">13/10/19</span>
             <p>After a heavy breakfast, we proceeded to Hampi. It is about 170 km from Hubli. It took nearly 4 hours to reach. In this place, two famous temples are there. They are <span class="highlight">Virupaksha temple</span> and Vijaya Vittala temple. 
-            <img src="\src\content\india\photos\karnataka2.jpg" class="travel-photo photo-left" alt="Virupaksha temple view 1">
-            <img src="\src\content\india\photos\karnataka3.jpg" class="travel-photo photo-right" alt="Virupaksha temple view 2">
+            <img src="photos/karnataka2.jpg" class="travel-photo photo-left" alt="Virupaksha temple view 1">
+            <img src="photos/karnataka3.jpg" class="travel-photo photo-right" alt="Virupaksha temple view 2">
             These temples belong to the 7th century, constructed by Krishna Devarayar, emperor of the Vijayanagara Empire. After him, his son-in-law was ruling this empire and he was defeated by Mogul kings and the whole temple complex was ruined. Now only these two temples, partially damaged, are existing. Virupaksha temple is on the bank of the river Tungabhadra.</p>
             <p>From Virupaksha temple, Vijaya Vittala temple is about 3 km away. Battery car transport is available to go to Vijaya Vittala temple. These two temples are beautiful with lots of architectural sculptures. After these two temples, we returned back to the hotel. Because of the bad road, we could come back at almost 11 pm.</p>
         </div>
@@ -192,26 +370,26 @@
             <span class="date-header">14/10/19</span>
             <p>On 14th Oct also we had to get up early and get ready early to proceed to Badami. After our usual breakfast of idli, vada, etc., around 8 am we proceeded to Badami. Badami is 105 km away from Hubli. It took nearly 3 hrs to reach this place. Badami, a beautiful town with a lot of temples, was the capital during Chalukyas' time (5th and 6th century, much older than Hampi).</p>
             <p>Over a hill, four cave temples are carved. To reach the top, we have to climb about 1000 steps. The first cave is called the <span class="highlight">Shivite cave</span>. 
-            <img src="\src\content\india\photos\karnataka4.jpg" class="travel-photo photo-left" alt="Shivite cave"> Here the carving of 18-armed Shiva is famous and it reflects several postures of Bharatnatyam. Also, the sculptures of Ganesha and Ardhanareeshwara are famous. Ceilings are also decorated with beautiful carvings. After climbing hundreds of steps, we can find the second cave called the Vishnu cave. Here also we see lots of beautiful carvings. The third cave is called the Vaishnav cave. The fourth cave is called the <span class="highlight">Jain cave</span>. 
-            <img src="\src\content\india\photos\karnataka5.jpg" class="travel-photo photo-right" alt="Jain cave view 1">
-            <img src="\src\content\india\photos\karnataka6.jpg" class="travel-photo photo-left" alt="Jain cave view 2">
+            <img src="photos/karnataka4.jpg" class="travel-photo photo-left" alt="Shivite cave"> Here the carving of 18-armed Shiva is famous and it reflects several postures of Bharatnatyam. Also, the sculptures of Ganesha and Ardhanareeshwara are famous. Ceilings are also decorated with beautiful carvings. After climbing hundreds of steps, we can find the second cave called the Vishnu cave. Here also we see lots of beautiful carvings. The third cave is called the Vaishnav cave. The fourth cave is called the <span class="highlight">Jain cave</span>. 
+            <img src="photos/karnataka5.jpg" class="travel-photo photo-right" alt="Jain cave view 1">
+            <img src="photos/karnataka6.jpg" class="travel-photo photo-left" alt="Jain cave view 2">
             After seeing all the four caves, we went to the <span class="highlight">Shiva temple</span>. 
-            <img src="\src\content\india\photos\karnataka7.jpg" class="travel-photo photo-right" alt="Shiva temple Badami"> Adjacent to this temple a lake is there. After this temple’s visit, we took lunch and proceeded to Shakambari temple, one among the 51 Shaktipeeths. After this Devi temple, we returned back to Hubli.</p>
+            <img src="photos/karnataka7.jpg" class="travel-photo photo-right" alt="Shiva temple Badami"> Adjacent to this temple a lake is there. After this temple’s visit, we took lunch and proceeded to Shakambari temple, one among the 51 Shaktipeeths. After this Devi temple, we returned back to Hubli.</p>
         </div>
 
         <div class="date-section">
             <span class="date-header">15/10/19</span>
             <p>On 15th October, we left Hubli with our baggage towards <span class="highlight">Murudeshwara</span>. 
-            <img src="\src\content\india\photos\karnataka8.jpg" class="travel-photo photo-left" alt="Murudeshwara gateway"> Murudeshwara is 205 km away from Hubli, and about a 5-hour bus journey. On the way we stopped at Sahasralinga. In this place over the river Shalmala, one thousand lingas are carved over the rocks which are on the river and river banks. After this linga darshan, on our way to Murudeshwara, we stopped again at Sri Marikamba temple.</p>
+            <img src="photos/karnataka8.jpg" class="travel-photo photo-left" alt="Murudeshwara gateway"> Murudeshwara is 205 km away from Hubli, and about a 5-hour bus journey. On the way we stopped at Sahasralinga. In this place over the river Shalmala, one thousand lingas are carved over the rocks which are on the river and river banks. After this linga darshan, on our way to Murudeshwara, we stopped again at Sri Marikamba temple.</p>
             <p>After the temple, we stopped at <span class="highlight">Jog waterfalls</span>. 
-            <img src="\src\content\india\photos\karnataka9.jpg" class="travel-photo photo-right" alt="Jog waterfalls"> This is the second-highest waterfall in India. This waterfall is from the river Sharavathi. But we saw only a little water. I heard from the guide that this waterfall goes dry in summer. Perhaps, during rain, more water may flow in this waterfall. After spending an hour in the waterfall area, we proceeded to Murudeshwara and reached our hotel around 7 pm. Hotel room and food were not very impressive.</p>
+            <img src="photos/karnataka9.jpg" class="travel-photo photo-right" alt="Jog waterfalls"> This is the second-highest waterfall in India. This waterfall is from the river Sharavathi. But we saw only a little water. I heard from the guide that this waterfall goes dry in summer. Perhaps, during rain, more water may flow in this waterfall. After spending an hour in the waterfall area, we proceeded to Murudeshwara and reached our hotel around 7 pm. Hotel room and food were not very impressive.</p>
         </div>
 
         <div class="date-section">
             <span class="date-header">16/10/19</span>
             <p>After the breakfast, we started to move to the famous temple Athmalinga in Gokarna. This place is called the Kasi of South India. We had a nice darshan, and even we could touch this sacred deity. After this place, we proceeded to <span class="highlight">Murudeshwara temple</span>. 
-            <img src="\src\content\india\photos\karnataka10.jpg" class="travel-photo photo-left" alt="Murudeshwara temple gopuram">
-            <img src="\src\content\india\photos\karnataka11.jpg" class="travel-photo photo-right" alt="Murudeshwara statue">
+            <img src="photos/karnataka10.jpg" class="travel-photo photo-left" alt="Murudeshwara temple gopuram">
+            <img src="photos/karnataka11.jpg" class="travel-photo photo-right" alt="Murudeshwara statue">
             This temple is beautiful. The Gopuram of this temple is the second tallest in India. The first one is at Srirangam, Tiruchy. Lift facility is there to reach the top floor of the Gopuram. We went there also. Adjacent to the temple, a large statue of Shiva is erected over a hill. We can climb to this place and have a close look. Also, many beautiful statues—Arjun in a rath with Krishna, Ganesh, and Ravan with Athmalinga, etc., are there. In this temple, a museum is there and here in the painting gallery, the story of Athamalingam is nicely depicted. This temple is close to the seashore.</p>
         </div>
 
@@ -223,8 +401,8 @@
         <div class="date-section">
             <span class="date-header">18/10/19</span>
             <p>Only one night we stayed at Udupi. On the 18th morning, from Udupi, we proceeded to Mangalore via <span class="highlight">Shringeri temple</span>. 
-            <img src="\src\content\india\photos\karnataka12.jpg" class="travel-photo photo-left" alt="Shringeri temple view 1">
-            <img src="\src\content\india\photos\karnataka13.jpg" class="travel-photo photo-right" alt="Shringeri temple view 2">
+            <img src="photos/karnataka12.jpg" class="travel-photo photo-left" alt="Shringeri temple view 1">
+            <img src="photos/karnataka13.jpg" class="travel-photo photo-right" alt="Shringeri temple view 2">
             From Udupi, this place is about a 3-hr journey. It is a hill road with many hairpin bends and dense forest. Shringeri temple, called the Sarada Peetham, was established by the spiritual leader Adi Shankaracharya. The main deity is Goddess Saraswathi. Also, a Shiva temple is there within the temple complex. After the temple visit, we had our lunch in a local hotel and proceeded to Mangalore.</p>
             <p>On the way to Mangalore, we had a stop at a place called Moodabidri. Here a Jain temple is there with 1000 stone pillars. Here many beautiful stone sculptures are seen. After this temple, we reached the Mangalore city. Before going to the hotel, we visited the famous Manjunath temple of Mangalore. This is the oldest Shiva temple and situated at the foot of the hill Kadri. After this temple, we checked into a hotel, Safire.</p>
         </div>
@@ -232,13 +410,13 @@
         <div class="date-section">
             <span class="date-header">19/10/19</span>
             <p>After our breakfast, we left Mangalore to visit <span class="highlight">Kukke Subramanya temple</span>. 
-            <img src="\src\content\india\photos\karnataka14.jpg" class="travel-photo photo-left" alt="Kukke Subramanya temple"> This place is about 100 km away from the main city. This temple is situated on the river banks of Kumaradhara. Here the main deity is Subramanya. The posture of the deity is unique. Lord Subramanya is standing over snake Vasuki with a peacock. Also, a Shiva temple is there within the premises. Here special poojas are conducted for Sarpa Dosha like Shri Kalahasti. A queue system is there to see the main deity. We stood in the queue and had darshan without any difficulty.</p>
+            <img src="photos/karnataka14.jpg" class="travel-photo photo-left" alt="Kukke Subramanya temple"> This place is about 100 km away from the main city. This temple is situated on the river banks of Kumaradhara. Here the main deity is Subramanya. The posture of the deity is unique. Lord Subramanya is standing over snake Vasuki with a peacock. Also, a Shiva temple is there within the premises. Here special poojas are conducted for Sarpa Dosha like Shri Kalahasti. A queue system is there to see the main deity. We stood in the queue and had darshan without any difficulty.</p>
         </div>
 
         <div class="date-section">
             <span class="date-header">20/10/19</span>
             <p>After our breakfast, we proceeded to <span class="highlight">Dharmasthala</span>. 
-            <img src="\src\content\india\photos\karnataka15.jpg" class="travel-photo photo-right" alt="Dharmasthala temple"> It is about 75 km from Mangalore city and about a 2-hour bus journey. We reached this place around 11 am. Being Sunday, a long queue was there to worship the main deity. Kesari arranged a special ticket to have a quick darshan. The ticket is Rs 200/- per head. In spite of the ticket, we stood about an hour in the queue. This temple is about 700 years old. The main deity is Lord Shiva worshiped as Manjunatheswara. After the visit, in a local hotel, we had our lunch and proceeded to Mangalore city. Before going to the hotel, we visited Mangala Devi temple of Mangalore. Kesari arranged a gathering at the hotel hall and a cake was cut and distributed. Also, Kesari distributed books.</p>
+            <img src="photos/karnataka15.jpg" class="travel-photo photo-right" alt="Dharmasthala temple"> It is about 75 km from Mangalore city and about a 2-hour bus journey. We reached this place around 11 am. Being Sunday, a long queue was there to worship the main deity. Kesari arranged a special ticket to have a quick darshan. The ticket is Rs 200/- per head. In spite of the ticket, we stood about an hour in the queue. This temple is about 700 years old. The main deity is Lord Shiva worshiped as Manjunatheswara. After the visit, in a local hotel, we had our lunch and proceeded to Mangalore city. Before going to the hotel, we visited Mangala Devi temple of Mangalore. Kesari arranged a gathering at the hotel hall and a cake was cut and distributed. Also, Kesari distributed books.</p>
         </div>
 
         <div class="date-section">
@@ -254,6 +432,21 @@
 </div>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     const overlay = document.getElementById('lightbox-overlay');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.getElementById('close-btn');

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heart of India: Madhya Pradesh Travelogue</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --mp-stone: #7D6B5D;
@@ -20,6 +21,118 @@
             background-color: #f4eee1;
             margin: 0;
             padding: 0;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
 
         .container {
@@ -158,6 +271,71 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../international/bestofeurope.html">Best of Europe</a>
+                <a href="../international/bhutan.html">Bhutan</a>
+                <a href="../international/central_europe.html">Central Europe</a>
+                <a href="../international/china.html">China</a>
+                <a href="../international/dubai.html">Dubai</a>
+                <a href="../international/egypt.html">Egypt</a>
+                <a href="../international/indonesia.html">Indonesia</a>
+                <a href="../international/muscat.html">Muscat</a>
+                <a href="../international/nepal.html">Nepal</a>
+                <a href="../international/scandinavian.html">Scandinavian Countries</a>
+                <a href="../international/singapore.html">Singapore</a>
+                <a href="../international/srilanka.html">Srilanka</a>
+                <a href="../international/vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="karnataka.html">Karnataka</a>
+                <a href="kerala.html">Kerala</a>
+                <a href="madhyapradesh.html">Madhya Pradesh</a>
+                <a href="northeast.html">Northeast India</a>
+                <a href="punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="rajasthan.html">Rajasthan</a>
+                <a href="uttarakhand.html">Uttarakhand</a>
+                <a href="uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
 <div id="lightbox-overlay">
     <button id="close-btn">&times;</button>
     <img id="lightbox-img" src="" alt="Zoomed view">
@@ -181,9 +359,9 @@
             <span class="date-header">10/03/2025</span>
             <p>The train was at the right time. We arrived at Jabalpur station around 5:30 am. We didn't want to move out in the dark. We waited at the station until 6:30 am. Then we took an auto and reached Hotel Trio Max. This hotel is near the railway station.</p>
             <p>As per the itinerary, the actual tour starts from tomorrow only. We didn't want to sit the whole day in the hotel. Around 9 am, we got ready and left the hotel. Nearby the hotel, we found Indian Coffee House, a decent vegetarian hotel. We took breakfast with filter coffee. From the hotel, we took an auto and reached the Jabalpur bus stand. From there, we took a bus to <span class="highlight">Bhedaghat</span>, around 20 km away from the city. From the bus stop to reach <span class="highlight">Dhuandhar Waterfalls</span>, 
-            <img src="\src\content\india\photos\madhyapradesh1.jpg" class="travel-photo photo-right" alt="Dhuandhar Waterfalls"> we had to walk about 200 steps down.</p>
+            <img src="photos/madhyapradesh1.jpg" class="travel-photo photo-right" alt="Dhuandhar Waterfalls"> we had to walk about 200 steps down.</p>
             <p>The waterfall was wonderful. The river is Narmada. We spent an hour and took lots of photos. Also, a ropeway facility is there to view the waterfalls. After this visit, we reached back to the main road by climbing again 200 steps. From there, we took an auto to <span class="highlight">Beda Ghat</span>, 
-            <img src="\src\content\india\photos\madhyapradesh2.jpg" class="travel-photo photo-left" alt="Beda Ghat Boating"> where boating arrangements are there. From the main road, we had to go down about 200 steps. Boating arrangement is in the Narmada River, and both sides are marble rocks of different colors—white, blue. It is an open boat and they take 20 passengers. Per head, they take Rs 100/-. Boat riding was about 30 minutes. Marble rocks of different shapes and lots of trees make that boat ride more pleasant.</p>
+            <img src="photos/madhyapradesh2.jpg" class="travel-photo photo-left" alt="Beda Ghat Boating"> where boating arrangements are there. From the main road, we had to go down about 200 steps. Boating arrangement is in the Narmada River, and both sides are marble rocks of different colors—white, blue. It is an open boat and they take 20 passengers. Per head, they take Rs 100/-. Boat riding was about 30 minutes. Marble rocks of different shapes and lots of trees make that boat ride more pleasant.</p>
             <p>Boat riding was nice and the beautiful poetic description in Hindi about Bhedaghat by the boatman was entertaining. After the boat ride, we returned back to the main road, took a bus, and returned back to the hotel around 3:30 pm. Then we had our late lunch. Lunch was Rajasthani type. Dal Baati, different subjis, and kadhi were all tasty. After lunch, we preferred to take rest.</p>
         </div>
 
@@ -191,44 +369,44 @@
             <span class="date-header">11/03/2025</span>
             <p>We left TrioMax Hotel, Jabalpur at 8 am after our breakfast. <span class="highlight">Pachmarhi</span> is about 300 km from Jabalpur. Pachmarhi is on the way to Nagpur from Jabalpur. This highway road is good. This road goes through a few forest areas. In these areas, the highway road is fenced with wire mesh to prevent wild animals from entering.</p>
             <p>We came up to Piparia on the highway, then took a narrow road to Pachmarhi. We took lunch around 1 pm in a normal hotel in Piparia. The ghat road starts after Piparia. In this ghat road, we traveled about 30 km. This is a forest road; at times, people traveling on this road see Bison. We didn't see any wild animals. Because of summer, the forest area was not green. Around 3:30 pm, we reached hotel <span class="highlight">Summer House</span>. 
-            <img src="\src\content\india\photos\madhyapradesh3.jpg" class="travel-photo photo-right" alt="Summer House Hotel"> They welcomed us with aarthi. The room was good. Food was good. Since there is no program today, we just took rest.</p>
+            <img src="photos/madhyapradesh3.jpg" class="travel-photo photo-right" alt="Summer House Hotel"> They welcomed us with aarthi. The room was good. Food was good. Since there is no program today, we just took rest.</p>
         </div>
 
         <div class="day-section">
             <span class="date-header">12/03/2025</span>
             <p>After breakfast, we left the hotel for sightseeing. First, we went to <span class="highlight">Pandav Caves</span>. We went by a <span class="highlight">special open jeep</span>. 
-            <img src="\src\content\india\photos\madhyapradesh4.jpg" class="travel-photo photo-left" alt="Special Open Jeep"> This is about a half-hour drive from the hotel. There are five caves over a hill. We have to climb 40 steps. Actually, we couldn't enter into the <span class="highlight">pandava caves</span>. 
-            <img src="\src\content\india\photos\madhyapradesh5.jpg" class="travel-photo photo-right" alt="Pandava Caves"> For safety purposes, all the caves were locked. There is no relevance between this place and the Mahabharata or Pandavas. Since five caves are there, these caves are named Pandava Caves.</p>
+            <img src="photos/madhyapradesh4.jpg" class="travel-photo photo-left" alt="Special Open Jeep"> This is about a half-hour drive from the hotel. There are five caves over a hill. We have to climb 40 steps. Actually, we couldn't enter into the <span class="highlight">pandava caves</span>. 
+            <img src="photos/madhyapradesh5.jpg" class="travel-photo photo-right" alt="Pandava Caves"> For safety purposes, all the caves were locked. There is no relevance between this place and the Mahabharata or Pandavas. Since five caves are there, these caves are named Pandava Caves.</p>
             <p>Next, we were taken to a place called <span class="highlight">Handikhoh</span>. From this point, we can view the beautiful valley. Also, a binocular facility is there to view more clearly. Next point was <span class="highlight">Gupta Mahadev temple</span>. 
-            <img src="\src\content\india\photos\madhyapradesh6.jpg" class="travel-photo photo-left" alt="Gupta Mahadev Temple"> From the parking area, we had to walk some 500 meters. The main deity is Shiva. The deity is in a cave. Through a narrow way, we have to enter and walk about 20 meters into the cave. Since the 20-meter way is so narrow, we had to walk sideways. Since it is one way, only 5 people are allowed at a time. But there was not a big crowd.</p>
+            <img src="photos/madhyapradesh6.jpg" class="travel-photo photo-left" alt="Gupta Mahadev Temple"> From the parking area, we had to walk some 500 meters. The main deity is Shiva. The deity is in a cave. Through a narrow way, we have to enter and walk about 20 meters into the cave. Since the 20-meter way is so narrow, we had to walk sideways. Since it is one way, only 5 people are allowed at a time. But there was not a big crowd.</p>
             <p>After the visit, we proceeded to <span class="highlight">bada Mahadev temple</span>. 
-            <img src="\src\content\india\photos\madhyapradesh7.jpg" class="travel-photo photo-right" alt="Bada Mahadev Temple"> This is also inside a cave, but quite big. We can enter without any difficulty. Adjacent to this temple, another cave is there for Parvati Devi. Since it is difficult to climb, we paid our respect to the Devi from outside only. Then we returned back to the hotel and had our lunch. After a brief rest, again we proceeded in the jeep to see <span class="highlight">Jata Shankar Temple</span>. This temple visit was really hectic and tiresome. After reaching the parking place, we have to walk one km. Then we went down 300 steps and entered a cave to pay respect to the Shiva deity. Inside the cave, water was dripping and the main deity Shiva was with a five-headed snake. This is a very old temple and belongs to the 4th century. After visiting this temple, we repeated the same exercise of 300 steps up and a 1 km walk.</p>
+            <img src="photos/madhyapradesh7.jpg" class="travel-photo photo-right" alt="Bada Mahadev Temple"> This is also inside a cave, but quite big. We can enter without any difficulty. Adjacent to this temple, another cave is there for Parvati Devi. Since it is difficult to climb, we paid our respect to the Devi from outside only. Then we returned back to the hotel and had our lunch. After a brief rest, again we proceeded in the jeep to see <span class="highlight">Jata Shankar Temple</span>. This temple visit was really hectic and tiresome. After reaching the parking place, we have to walk one km. Then we went down 300 steps and entered a cave to pay respect to the Shiva deity. Inside the cave, water was dripping and the main deity Shiva was with a five-headed snake. This is a very old temple and belongs to the 4th century. After visiting this temple, we repeated the same exercise of 300 steps up and a 1 km walk.</p>
             <p>And our last spot of the day was the <span class="highlight">sun set point</span>. 
-            <img src="\src\content\india\photos\madhyapradesh8.jpg" class="travel-photo photo-left" alt="Sunset Point"> This sunset point is named after the first President, <span class="highlight">Dr. Rajendra Prasad</span>. Reached there by jeep, saw the sunset, and returned back to the room. In the dinner menu, my favorite khichdi and kadhi pakoda were there. I took only that and went for an early sleep.</p>
+            <img src="photos/madhyapradesh8.jpg" class="travel-photo photo-left" alt="Sunset Point"> This sunset point is named after the first President, <span class="highlight">Dr. Rajendra Prasad</span>. Reached there by jeep, saw the sunset, and returned back to the room. In the dinner menu, my favorite khichdi and kadhi pakoda were there. I took only that and went for an early sleep.</p>
         </div>
 
         <div class="day-section">
             <span class="date-header">13/03/2025</span>
             <p>After breakfast, we left Hotel Summer House, Pachmarhi for Bhopal. Bhopal is about 200 km away from Pachmarhi. On the way to Bhopal, 150 km from Pachmarhi, a beautiful place called <span class="highlight">Bhimbetka</span> is here. Here over seven hills, 750 human shelters are there. This belongs to the Stone Age period. In the caves, we saw many paintings. The whole location is in the forest. This place would be under complete greenery. It is under <span class="highlight">UNESCO heritage</span>. 
-            <img src="\src\content\india\photos\madhyapradesh9.jpg" class="travel-photo photo-right" alt="Bhimbetka UNESCO site"> 
-            <img src="\src\content\india\photos\madhyapradesh10.jpg" class="travel-photo photo-left" alt="Bhimbetka Cave Paintings"></p>
+            <img src="photos/madhyapradesh9.jpg" class="travel-photo photo-right" alt="Bhimbetka UNESCO site"> 
+            <img src="photos/madhyapradesh10.jpg" class="travel-photo photo-left" alt="Bhimbetka Cave Paintings"></p>
             <p>We spent an hour here. After visiting this place, we then proceeded to <span class="highlight">Bhojpur</span> to see one very old Shiva temple which is incomplete. The name of this temple is <span class="highlight">Bhojeswar Mahadev temple</span>. 
-            <img src="\src\content\india\photos\madhyapradesh11.jpg" class="travel-photo photo-right" alt="Bhojpur Temple"> The main deity is Lord Shiva. It is 8 feet tall and the circumference is 17.5 feet. This was constructed by Bhoj Raj, a king of this place, in the 11th century, and the construction was not completed for unknown reasons. After this temple, we reached our hotel Golden Tulip, Bhopal. This hotel is also quite good.</p>
+            <img src="photos/madhyapradesh11.jpg" class="travel-photo photo-right" alt="Bhojpur Temple"> The main deity is Lord Shiva. It is 8 feet tall and the circumference is 17.5 feet. This was constructed by Bhoj Raj, a king of this place, in the 11th century, and the construction was not completed for unknown reasons. After this temple, we reached our hotel Golden Tulip, Bhopal. This hotel is also quite good.</p>
         </div>
 
         <div class="day-section">
             <span class="date-header">14/03/2025</span>
             <p>Today our plan is to visit the famous <span class="highlight">Sanchi</span>. From Bhopal main city, Sanchi is about 40 km away. Before describing Sanchi, if we revise a little about Indian history, we may appreciate it more. Siddhartha Gautama Buddha's period was between 500 to 400 BCE. Much later, Ashoka the Great, the son of Bindusara, the last king of the Mauryan dynasty, ruled India. King Ashoka the Great's period was 268 to 232 BCE. Ashoka the Great ruled the entire India except a small southern portion. After the war of Kalinga, he embraced Buddhism and spent the remaining life in spreading Buddhism. This Sanchi was created during his period.</p>
             <p>In Sanchi, the <span class="highlight">great Stupa</span>, 
-            <img src="\src\content\india\photos\madhyapradesh12.jpg" class="travel-photo photo-left" alt="Sanchi Stupa Gate"> 
-            <img src="\src\content\india\photos\madhyapradesh13.jpg" class="travel-photo photo-right" alt="Great Stupa Sanchi"> a structure of Mauryan architecture, is one of the important monuments in India. It is a hemispherical brick structure. The stupa was crowned by a special structure. The stupa's four entrances were decorated with elaborate gateways with beautiful carvings. This beautiful monument comes under UNESCO. Apart from the main stupa, smaller stupas and monasteries are seen in this complex. The smooth stone Ashoka Pillar is another main attraction in this complex. Though it is broken, all the broken pieces are preserved here. This monument's picture is embedded in the present Rs 200/- currency. After Sanchi, we returned back to the hotel.</p>
+            <img src="photos/madhyapradesh12.jpg" class="travel-photo photo-left" alt="Sanchi Stupa Gate"> 
+            <img src="photos/madhyapradesh13.jpg" class="travel-photo photo-right" alt="Great Stupa Sanchi"> a structure of Mauryan architecture, is one of the important monuments in India. It is a hemispherical brick structure. The stupa was crowned by a special structure. The stupa's four entrances were decorated with elaborate gateways with beautiful carvings. This beautiful monument comes under UNESCO. Apart from the main stupa, smaller stupas and monasteries are seen in this complex. The smooth stone Ashoka Pillar is another main attraction in this complex. Though it is broken, all the broken pieces are preserved here. This monument's picture is embedded in the present Rs 200/- currency. After Sanchi, we returned back to the hotel.</p>
         </div>
 
         <div class="day-section">
             <span class="date-header">15/03/2025</span>
             <p>We left Golden Tulip Hotel, Bhopal after breakfast around 8 am. We proceeded to <span class="highlight">Ujjain</span>. Ujjain is about 200 km from Bhopal. Close to the hotel, the famous artificial lake of Bhopal is there. Here, a statue of <span class="highlight">Bhoja Raj</span> is there. Bhoja Raj is a Rajput king. Bhopal was created by him and this city was initially called Bhojpur. This artificial lake was also created by this king only. This lake is called the Upper Lake.</p>
             <p>We reached Ujjain around 12:45. After our lunch, we proceeded to <span class="highlight">Kala Birav temple</span>. 
-            <img src="\src\content\india\photos\madhyapradesh14.jpg" class="travel-photo photo-left" alt="Kala Bhairav Temple"> For this deity, country liquor is offered and the same is distributed as Prasad. Earlier, when I was working in Itarsi, we visited this temple. Because of the very hot weather and very long queue, I opted along with some others not to stand for hours together. I skipped this temple and stayed with some others in the restaurant where we took food. Most of the people, except around 10 like me, proceeded to this temple. In the hot sun, they stood about 3 hours, had darshan, and returned back. Lakshmi also did.</p>
+            <img src="photos/madhyapradesh14.jpg" class="travel-photo photo-left" alt="Kala Bhairav Temple"> For this deity, country liquor is offered and the same is distributed as Prasad. Earlier, when I was working in Itarsi, we visited this temple. Because of the very hot weather and very long queue, I opted along with some others not to stand for hours together. I skipped this temple and stayed with some others in the restaurant where we took food. Most of the people, except around 10 like me, proceeded to this temple. In the hot sun, they stood about 3 hours, had darshan, and returned back. Lakshmi also did.</p>
             <p>Then we boarded the bus and proceeded to <span class="highlight">Mahakaleshwar Temple</span>. This is one of the most popular Jyotirlinga shrines among the twelve. Since there was a heavy rush, we had to buy a ticket for Rs 250/- per head. So we didn't stand in the line for a long time. After paying respect to Mahakaleshwar, inside the same temple premises, we saw the other temples. <span class="highlight">Harsiddhi Mata Temple</span>, one of the 52 Shaktipeeths, is close to Mahakaleshwar temple. That also we worshiped. Within the same premises, Lord Ganesha, Parvati Devi, Kartikeya, and Nagachandreshwar deities are also seen.</p>
             <p>After completion, we came out of the mandir and moved to the <span class="highlight">Mahakal Corridor</span>. The Mahakal Corridor is about a 1 km passage decorated with 108 beautiful carved pillars and 192 statues, mostly characters from the Mahabharata and Ramayana. We walked through this passage, reached the exit gate, took auto-rickshaws to the parking place, and boarded our bus. From this point, Indore is about 80 km. It took about 2 hours to reach the Lemon Tree Hotel. We reached the hotel around 10 pm and had our late dinner.</p>
         </div>
@@ -237,17 +415,17 @@
             <span class="date-header">16/03/2025</span>
             <p>On 16th March 25, we visited <span class="highlight">Mandu</span>. Mandu or Mandavgad is in the western part of Madhya Pradesh. It is about 100 km from Indore. Mandu initially was a guarded city and ruled by Rajputs until the 10th century. After the Mughal invasion, this place was ruled by different Sultans nominated by Mughal kings. Here, lots of ancient forts and temples are there.</p>
             <p><span class="highlight">Jahaz Mahal</span>: 
-            <img src="\src\content\india\photos\madhyapradesh15.jpg" class="travel-photo photo-right" alt="Jahaz Mahal"> This is a beautiful Mahal constructed during the Khilji dynasty in the 15th century. This palace is well maintained with a beautiful garden. Then we went to visit <span class="highlight">Baz Bahadur Palace</span>. It is an ancient palace of Mandu. This palace is situated on the hill slope to the east of Rewa Kund. As per the Persian inscription on the entrance arch, it was built in 1508 by Nasir-ud-Din, the Sultan of Malwa. Incidentally, Nasir-ud-Din Shah Khilji is credited with designing this aesthetic structure which underwent repairs and renovations during the period of Baz Bahadur. The King became fond of this palace because of his eternal romance with the accomplished singer Roopmati who used to visit the nearby Rewa Kund.</p>
+            <img src="photos/madhyapradesh15.jpg" class="travel-photo photo-right" alt="Jahaz Mahal"> This is a beautiful Mahal constructed during the Khilji dynasty in the 15th century. This palace is well maintained with a beautiful garden. Then we went to visit <span class="highlight">Baz Bahadur Palace</span>. It is an ancient palace of Mandu. This palace is situated on the hill slope to the east of Rewa Kund. As per the Persian inscription on the entrance arch, it was built in 1508 by Nasir-ud-Din, the Sultan of Malwa. Incidentally, Nasir-ud-Din Shah Khilji is credited with designing this aesthetic structure which underwent repairs and renovations during the period of Baz Bahadur. The King became fond of this palace because of his eternal romance with the accomplished singer Roopmati who used to visit the nearby Rewa Kund.</p>
             <p>After the palace, we visited <span class="highlight">Rani Roopmati pavilion</span>. 
-            <img src="\src\content\india\photos\madhyapradesh16.jpg" class="travel-photo photo-left" alt="Rani Roopmati Pavilion"> According to legend, Roopmati was a Hindu singer and shepherdess with whom Sultan Baz Bahadur, the Muslim ruler of Malwa, fell in love. She agreed to marry him and became the Queen of Malwa. Mughal Akbar decided to conquer Mandu and sent Adham Khan to capture Mandu. Adham Khan marched on the fort and defeated Baz Bahadur. As Adham Khan came to Mandu, he was surprised by the beauty of Roopmati. Rani Roopmati stoically poisoned herself to avoid capture, bringing an end to the love story. This palace was initially built for military purposes and later converted into a palace for Roopmati.</p>
+            <img src="photos/madhyapradesh16.jpg" class="travel-photo photo-left" alt="Rani Roopmati Pavilion"> According to legend, Roopmati was a Hindu singer and shepherdess with whom Sultan Baz Bahadur, the Muslim ruler of Malwa, fell in love. She agreed to marry him and became the Queen of Malwa. Mughal Akbar decided to conquer Mandu and sent Adham Khan to capture Mandu. Adham Khan marched on the fort and defeated Baz Bahadur. As Adham Khan came to Mandu, he was surprised by the beauty of Roopmati. Rani Roopmati stoically poisoned herself to avoid capture, bringing an end to the love story. This palace was initially built for military purposes and later converted into a palace for Roopmati.</p>
             <p>Then we proceeded to the monument of <span class="highlight">Maharani Ahilyabai Holkar</span>. 
-            <img src="\src\content\india\photos\madhyapradesh17.jpg" class="travel-photo photo-right" alt="Maharani Ahilyabai Holkar Monument"> She became the Queen of Malwa after the demise of her husband. She was an excellent administrator and protected the people of Malwa from the invaders. She died in 1795. Also, the present Kashi Vishwanath temple was built by her during her rule. Then the Kesari group was given time for shopping, mainly to buy Maheshwari sarees. After the saree purchase, we proceeded to Indore and reached our hotel. Before dinner, we visited <span class="highlight">Chappan Dukan</span>. These 56 shops are on a single street and they sell different types of snacks, ice creams, cold drinks, etc. These shops are open every day only from 7 o'clock in the evening and close by 10 pm.</p>
+            <img src="photos/madhyapradesh17.jpg" class="travel-photo photo-right" alt="Maharani Ahilyabai Holkar Monument"> She became the Queen of Malwa after the demise of her husband. She was an excellent administrator and protected the people of Malwa from the invaders. She died in 1795. Also, the present Kashi Vishwanath temple was built by her during her rule. Then the Kesari group was given time for shopping, mainly to buy Maheshwari sarees. After the saree purchase, we proceeded to Indore and reached our hotel. Before dinner, we visited <span class="highlight">Chappan Dukan</span>. These 56 shops are on a single street and they sell different types of snacks, ice creams, cold drinks, etc. These shops are open every day only from 7 o'clock in the evening and close by 10 pm.</p>
         </div>
 
         <div class="day-section">
             <span class="date-header">17/03/2025</span>
             <p>Today's agenda is to visit <span class="highlight">Omkareshwar Temple</span>. After breakfast, we left the hotel around 8 am. Omkareshwar is 80 km away from Indore. The road is very, very bad and with lots and lots of speed breakers. The 2-hour and 30-minute journey was really a big torture. At last, we reached Omkareshwar around 11 am. From the parking place to the temple premises, about a 2 km distance, we went by rickshaw. Then we walked through the <span class="highlight">hanging bridge over Krishna river</span> 
-            <img src="\src\content\india\photos\madhyapradesh18.jpg" class="travel-photo photo-left" alt="Omkareshwar Hanging Bridge"> (mistakenly mentioned as Krishna river) and stood in the line. About two hours we stood in the line. Fortunately, proper shelter was provided to stand in instead of the hot sun.</p>
+            <img src="photos/madhyapradesh18.jpg" class="travel-photo photo-left" alt="Omkareshwar Hanging Bridge"> (mistakenly mentioned as Krishna river) and stood in the line. About two hours we stood in the line. Fortunately, proper shelter was provided to stand in instead of the hot sun.</p>
             <p>When we just reached the sanctum, the door was closed for 'Naivedyam' and we again waited for forty minutes. After that, we were allowed and we went so close to the main deity Omkareshwar and Parvati Devi. Some of our group people got stuck in the queue and we had to wait for them. Another 45 minutes we were waiting for them. At last, they also finished their worship. Before leaving the premises, in the same premises, one more deity called Mamleshwar (Lord Shiva) was worshiped, and we walked to the main road and took a rickshaw to the bus parking place. Boarded the bus and after a travel of 10 minutes, we took our lunch at 3:30 pm. Lunch was simple but good. Then continued our return journey. We reached the hotel around 7 pm.</p>
         </div>
 
@@ -318,6 +496,21 @@
 </div>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     const overlay = document.getElementById('lightbox-overlay');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.getElementById('close-btn');

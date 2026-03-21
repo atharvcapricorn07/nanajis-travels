@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travelogue: Jaipur & Agra 2024</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --jaipur-pink: #ef98aa;
@@ -20,6 +21,118 @@
             background-color: var(--agra-white);
             margin: 0;
             padding: 0;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
 
         .container {
@@ -154,6 +267,71 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../international/bestofeurope.html">Best of Europe</a>
+                <a href="../international/bhutan.html">Bhutan</a>
+                <a href="../international/central_europe.html">Central Europe</a>
+                <a href="../international/china.html">China</a>
+                <a href="../international/dubai.html">Dubai</a>
+                <a href="../international/egypt.html">Egypt</a>
+                <a href="../international/indonesia.html">Indonesia</a>
+                <a href="../international/muscat.html">Muscat</a>
+                <a href="../international/nepal.html">Nepal</a>
+                <a href="../international/scandinavian.html">Scandinavian Countries</a>
+                <a href="../international/singapore.html">Singapore</a>
+                <a href="../international/srilanka.html">Srilanka</a>
+                <a href="../international/vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="karnataka.html">Karnataka</a>
+                <a href="kerala.html">Kerala</a>
+                <a href="madhyapradesh.html">Madhya Pradesh</a>
+                <a href="northeast.html">Northeast India</a>
+                <a href="punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="rajasthan.html">Rajasthan</a>
+                <a href="uttarakhand.html">Uttarakhand</a>
+                <a href="uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
 <div id="photo-overlay">
     <span id="close-btn">&times;</span>
     <img id="zoomed-img" src="" alt="Zoomed view">
@@ -171,52 +349,52 @@
         <div class="date-section">
             <span class="date-header">19/12/2024</span>
             <p>Sekar Kale, Anu, and Anvi reached home around 7 am from their place, Shegaon. They came by bus. They got down at Khadki, took an Uber, and reached home without any difficulty. After a bath, we all went to the Upsouth hotel and had our breakfast.</p>
-            <img src="\src\content\india\photos\jaipur1.jpg" class="travel-photo photo-right" alt="Pune Airport Reference">
+            <img src="photos/jaipur1.jpg" class="travel-photo photo-right" alt="Pune Airport Reference">
             <p>By 11:30, we all left for Pune airport in two cabs. Shashi booked our air tickets to Jaipur on Air India. We reached the airport around 12:30, and the new building of Pune Airport looks pretty good. On the first floor, paintings of Shivaji Maharaj attracted every passenger.</p>
             <p>The flight was supposed to depart by 2:45, but it was late by half an hour. Travel time to Jaipur was about an hour and 30 minutes. We reached Jaipur around 5 pm. We collected our baggage, took a bigger cab, and all five proceeded to <span class="highlight-text">Leela Palace</span> from the airport. The drive was an hour.</p>
-            <img src="\src\content\india\photos\jaipur2.jpg" class="travel-photo photo-left" alt="Leela Palace Welcome">
+            <img src="photos/jaipur2.jpg" class="travel-photo photo-left" alt="Leela Palace Welcome">
             <p>The welcome procedure in the hotel was overwhelming. While we entered the main gate, a group of people started playing drums and pipe. One girl in Rajasthani costume was dancing to the music tune. With that music party and dance performer, we reached the main entrance. There, another girl performed aarthi and put a thilak on our foreheads, and we reached the reception lobby. There, they served lemon tea.</p>
             <p>Uma and Shashi booked four rooms in this Leela Palace. It is a 5-star hotel; the rooms are luxurious and more spacious with large glass windows. From the glass windows, we could see the swimming pool, garden, mountains, tombs of this palace, marble carvings, etc. After some rest, we had our dinner and took rest.</p>
-            <img src="\src\content\india\photos\jaipur3.jpg" class="travel-photo photo-right" alt="End of Day 1">
+            <img src="photos/jaipur3.jpg" class="travel-photo photo-right" alt="End of Day 1">
         </div>
 
         <div class="date-section">
             <span class="date-header">20/12/2024</span>
             <p>I got up around 5:30. I made coffee, and after coffee, I went down and found a nice place for a walk. For about 45 minutes, I walked around and returned to the room. After a bath, we all went to the dining hall. We found a variety of foodstuff there: South Indian dishes like idli, vada, dosa, pakkoda, pav bhaji, beetroot halva, etc.</p>
             <p>After eating an elaborate breakfast, we had filter coffee. Then we left for sightseeing. Since we were 9 people, Shashi booked a van. First, we went to <span class="highlight-text">Jal Mahal</span>.</p>
-            <img src="\src\content\india\photos\jaipur4.jpg" class="travel-photo photo-left" alt="Jal Mahal">
+            <img src="photos/jaipur4.jpg" class="travel-photo photo-left" alt="Jal Mahal">
             <p>This Mahal is in the middle of a lake. Right now, we can only see the Mahal from the outside. From the guide, we understand that after the formation of the BJP government, it has been given for lease to a private party, and the Mahal is being renovated for commercial use.</p>
             <p>Uma and Anuradha took photos in Rajasthan dress costumes. After this, we proceeded to the <span class="highlight-text">Jaipur Palace</span>. We spent some two hours in this palace. We saw the gigantic silver vessel which was used by Maharaj Sawai Madho Singh to bring Ganges water. He used only Ganges water for bathing and drinking. Also, we saw Mubarak Mahal, the weapons museum, textile museum, etc.</p>
-            <img src="\src\content\india\photos\jaipur5.jpg" class="travel-photo photo-right" alt="Jaipur Palace">
+            <img src="photos/jaipur5.jpg" class="travel-photo photo-right" alt="Jaipur Palace">
             <p>Then we proceeded to <span class="highlight-text">Jantar Mantar</span>. It is a UNESCO heritage site. Jantar Mantar features various astronomical devices built by Sawai Jai Singh in the 17th century.</p>
-            <img src="\src\content\india\photos\jaipur6.jpg" class="travel-photo photo-left" alt="Jantar Mantar">
+            <img src="photos/jaipur6.jpg" class="travel-photo photo-left" alt="Jantar Mantar">
             <p>After that, we halted at the famous Ravat Kachori hotel. Here, we tasted onion and dal kachori. After that, we did some shopping, mainly purchasing dress materials.</p>
         </div>
 
         <div class="date-section">
             <span class="date-header">21/12/2024</span>
             <p>Today also I got up before 6 am and, after coffee, I walked around the premises of this hotel. Leela Palace made a nice footpath around the hotel to walk around. Walking on this footpath is pleasurable. A beautiful garden, few fountains, and marble carvings are all there along this footpath. So it was enjoyable.</p>
-            <img src="\src\content\india\photos\jaipur7.jpeg" class="travel-photo photo-right" alt="Breakfast at Leela">
+            <img src="photos/jaipur7.jpeg" class="travel-photo photo-right" alt="Breakfast at Leela">
             <p>After the walk and bath, we all together went to the dining place of the hotel to have breakfast. From the buffet table, I picked up dosa, dal vada, puri, and subji. After that, I ate poha with kadi. The breakfast session ended with a filter coffee.</p>
             <p>Around 11, we all left the hotel to visit <span class="highlight-text">Amer Fort</span>. It is a prime tourist attraction in Jaipur. This fort is over a hill. To reach the fort from the bottom of the hill, we have to hire a jeep. Alternatively, we can travel via elephant.</p>
-            <img src="\src\content\india\photos\jaipur8.jpg" class="travel-photo photo-left" alt="Amer Fort">
+            <img src="photos/jaipur8.jpg" class="travel-photo photo-left" alt="Amer Fort">
             <p>Near this fort, there is a village called Elephant Village. Here, more elephants are looked after by the villagers for their survival. They use these <span class="highlight-text">elephants</span> for taking the tourists to the fort. Many tourists, especially tourists from other countries, enjoy this elephant ride.</p>
-            <img src="\src\content\india\photos\jaipur9.jpg" class="travel-photo photo-right" alt="Elephant Ride">
+            <img src="photos/jaipur9.jpg" class="travel-photo photo-right" alt="Elephant Ride">
             <p>For elephants, a separate path is made to reach the fort. This elephant service is available only up to 11 am, as elephants do not prefer to walk in the hot weather. We reached the bottom of the hill by our usual van and from there we hired a jeep and a guide. Because of the large number of tourist vehicles, it took more than an hour to reach the palace. This palace was built by the King <span class="highlight-text">Man Singh</span> in 1592.</p>
-            <img src="\src\content\india\photos\jaipur10.jpg" class="travel-photo photo-left" alt="King Man Singh Reference">
+            <img src="photos/jaipur10.jpg" class="travel-photo photo-left" alt="King Man Singh Reference">
             <p>Still, some portion of this palace is occupied by the king’s dynasty people. At the entrance, there is a temple, and the deity is Sheela Devi. This palace is constructed using red stone and marble. The palace has four floors. The architecture of this palace is a combination of Mughal and Rajput styles. In this palace, the Hall for Public Audience, <span class="highlight-text">Sheesh Mahal</span>, and Sukh Nivas are all located.</p>
-            <img src="\src\content\india\photos\jaipur11.jpg" class="travel-photo photo-right" alt="Sheesh Mahal">
+            <img src="photos/jaipur11.jpg" class="travel-photo photo-right" alt="Sheesh Mahal">
             <p>Sukh Nivas is the part of the palace where the queens stayed. To keep it cool, a water flow arrangement is seen in this room. Sheesh Mahal is the most attractive place of this palace. A large number of mirrors are embedded all over the roof and walls. All these mirrors were brought from Belgium during that time.</p>
             <p>We spent about two hours in this palace and took a late lunch at a hotel called Rajwad. Then we returned to the hotel. From 6 pm to 7 pm in the hotel, there was a cultural program. We attended the program, and after that, we had our dinner and then went to our room to sleep.</p>
         </div>
 
         <div class="date-section">
             <span class="date-header">22/12/2024</span>
-            <img src="\src\content\india\photos\jaipur12.jpg" class="travel-photo photo-left" alt="Start of Day 4">
+            <img src="photos/jaipur12.jpg" class="travel-photo photo-left" alt="Start of Day 4">
             <p>The 22nd of December was almost a rest day. We got up leisurely and had our great breakfast without any hurry. Around 12, we left Leela Palace. In the van, we went and were dropped at <span class="highlight-text">Hawa Mahal</span>.</p>
-            <img src="\src\content\india\photos\jaipur13.jpg" class="travel-photo photo-right" alt="Hawa Mahal">
+            <img src="photos/jaipur13.jpg" class="travel-photo photo-right" alt="Hawa Mahal">
             <p>Johari Bazaar starts from this point. There are about 350 shops there, on both sides of the road. They sell garments, sarees, jewelry, leather items, ladies' bags, etc. While doing shopping, we tasted samosa, kachori, and lassi. Athu was getting irritated walking in that dusty environment. From there, we went to the <span class="highlight-text">Birla Temple</span>. It is a beautiful marble temple.</p>
-            <img src="\src\content\india\photos\jaipur14.jpg" class="travel-photo photo-left" alt="Birla Temple">
+            <img src="photos/jaipur14.jpg" class="travel-photo photo-left" alt="Birla Temple">
             <p>After the Birla Temple visit, we returned back to the hotel.</p>
         </div>
 
@@ -224,17 +402,17 @@
             <span class="date-header">23/12/2024</span>
             <p>After a heavy breakfast, we checked out from Leela Palace and proceeded to Agra. We left around 9 am. Our plan was to visit Fatehpur Sikri first and then visit the Taj Mahal. The distance is only around 250 km from Jaipur to Agra. Because of poor roads and traffic congestion, it was very much delayed.</p>
             <p>To visit the <span class="highlight-text">Taj Mahal</span>, visiting time closes by 4:30 pm. Only up to 4:30 pm will they allow entry to the premises. Shashi booked rooms in the Courtyard Marriott. This is also a 5-star hotel. We reached the hotel by 3:30 pm only. After checking in, we hurriedly changed our dress (Uma wanted everyone to wear white dress) and rushed to the <span class="highlight-text">Taj Mahal</span>.</p>
-            <img src="\src\content\india\photos\jaipur15.jpg" class="travel-photo photo-right" alt="Taj Mahal 1">
+            <img src="photos/jaipur15.jpg" class="travel-photo photo-right" alt="Taj Mahal 1">
             <p>The tour guide arranged by Shashi was waiting at the hotel entrance. The tour guide even arranged entrance tickets for the Taj Mahal. Luckily, we could reach the entrance gate of the Taj Mahal before 4:30. Shashi arranged a photographer also.</p>
-            <img src="\src\content\india\photos\jaipur16.jpg" class="travel-photo photo-left" alt="Taj Mahal 2">
+            <img src="photos/jaipur16.jpg" class="travel-photo photo-left" alt="Taj Mahal 2">
             <p>I had been to the Taj when I was a kid with my parents. Then, about 30 years back, myself and Lakshmi visited with Uma and Jinu. It was a great pleasure to visit again with my grandchildren. By 6:30, visiting time ends, and they close the gate. We were the last group to get out of the gate. Then the guide took us to a good shop and we purchased a marble memento. Since the hotel was close by, we reached soon and took dinner there.</p>
         </div>
 
         <div class="date-section">
             <span class="date-header">24/12/2024</span>
-            <img src="\src\content\india\photos\jaipur17.jpg" class="travel-photo photo-right" alt="Start of Last Day">
+            <img src="photos/jaipur17.jpg" class="travel-photo photo-right" alt="Start of Last Day">
             <p>The last day of our tour. We all got up very early and assembled at the dining place by 6:30. By 7:30 am, we left the hotel and proceeded to Delhi. Delhi is 230 km away from Agra. Uma and Shashi wanted to visit at least one Krishna temple in Mathura, as it is on the way to Delhi. The driver suggested the Vrindavan Banki Bihari Temple.</p>
-            <img src="\src\content\india\photos\jaipur18.jpg" class="travel-photo photo-left" alt="Trip Conclusion">
+            <img src="photos/jaipur18.jpg" class="travel-photo photo-left" alt="Trip Conclusion">
             <p>After reaching Vrindavan, he parked at a parking place and suggested going to the temple by rickshaw. We hired two rickshaws and thought we would be dropped at the entrance of the temple. He dropped us at a place after which vehicles can't go. From that point, we started walking through narrow streets. The streets were narrow and crowded. Somehow we reached the entrance of the temple, removed our footwear, left them under the custody of a shopkeeper, and went inside the temple.</p>
             <p>The temple was crowded. All eleven of us entered together and, because of the crowd, we got separated. One group split into three groups. Tanvi and Athu were with Shashi. Shashi's elder brother Narendra, his son Ninad, myself, Uma, and Lakshmi were together. Anu, Sekar and their daughter were together. Fortunately, we had mobiles and were in touch. We entered through one gate of the temple and exited through another gate.</p>
             <p>All three groups were moving around the temple but couldn't locate the shop where we left our footwear. At last, Shashi's group found the shop. He sent the location map and with that we all reached that spot, took an auto rickshaw again, and then boarded our van. Atharv took an assurance from Shashi and Uma that there would be no more temple visits until they leave India!</p>
@@ -250,6 +428,21 @@
 </div>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     const overlay = document.getElementById('photo-overlay');
     const zoomedImg = document.getElementById('zoomed-img');
     const closeBtn = document.getElementById('close-btn');

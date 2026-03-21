@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Krishna River Trail: Coastal Shores to Sacred Peaks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --andhra-marigold: #FF8C00; /* Deep orange */
@@ -17,9 +18,121 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.5;
             color: #222;
-            background-color: #FFF9F0; /* Soft cream */
+            background-color: #FFF9F0;
             margin: 0;
             padding: 0;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
 
         .container {
@@ -168,6 +281,71 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../international/bestofeurope.html">Best of Europe</a>
+                <a href="../international/bhutan.html">Bhutan</a>
+                <a href="../international/central_europe.html">Central Europe</a>
+                <a href="../international/china.html">China</a>
+                <a href="../international/dubai.html">Dubai</a>
+                <a href="../international/egypt.html">Egypt</a>
+                <a href="../international/indonesia.html">Indonesia</a>
+                <a href="../international/muscat.html">Muscat</a>
+                <a href="../international/nepal.html">Nepal</a>
+                <a href="../international/scandinavian.html">Scandinavian Countries</a>
+                <a href="../international/singapore.html">Singapore</a>
+                <a href="../international/srilanka.html">Srilanka</a>
+                <a href="../international/vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="../india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="../india/karnataka.html">Karnataka</a>
+                <a href="../india/kerala.html">Kerala</a>
+                <a href="../india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="../india/northeast.html">Northeast India</a>
+                <a href="../india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="../india/rajasthan.html">Rajasthan</a>
+                <a href="../india/uttarakhand.html">Uttarakhand</a>
+                <a href="../india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="andhrapradesh.html">Andhra Odyssey</a>
+                <a href="ashtavinayak.html">Ashtavinayak</a>
+                <a href="shegaon.html">Shegaon Diary</a>
+                <a href="tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
 <div id="lightbox-overlay">
     <button id="close-btn" aria-label="Close photo"><span class="cross-icon">&times;</span></button>
     <img id="lightbox-img" src="" alt="Zoomed view">
@@ -189,7 +367,7 @@
 
         <div class="day-block">
             <span class="date">17/02/25: Arrival in the Godavari Delta</span>
-            <img src="\src\content\temples\photos\andhrapradesh1.jpg" class="travel-photo photo-right" alt="Rajahmundry Arrival">
+            <img src="photos/andhrapradesh1.jpg" class="travel-photo photo-right" alt="Rajahmundry Arrival">
             <p>IndiGo flight 6E5012 from Mumbai to Hyderabad was on time. Travel time to Hyderabad was one hour. We reached Hyderabad at 7:30 am. From there, we took an onward flight to Rajahmundry. This IndiGo flight was a small one; only 40 seats were there. Flight duration to Rajahmundry is an hour. It departed at 8:40 am. We landed at Rajahmundry airport at 10 am.</p>
             <p>Rajahmundry airport is a small airport. After collecting the bags, we proceeded to <span class="location-tag">Kakinada</span> where our hotel accommodation had been booked. Road travel was about 1 hour 30 minutes. Our accommodation was booked in the Sarovar Portico hotel. The hotel was good. We took a bath and got ready after lunch. Around 2 pm, we started our temple visit. Tour guides Mr. Bhushan and Mr. Sidarth were very helpful throughout the tour.</p>
             <p>First, we went to <span class="location-tag">Annavaram</span>, about a 45-minute drive from Kakinada. From the bus parking place, we went to the temple by auto-rickshaw. The temple here is called Veera Venkata Satyanarayana Swamy temple. This temple is over a rock. We had to climb about 100 steps. This is a Vishnu temple. Fortunately, there was no crowd and we had darshan without any difficulty. The rock where the temple is located is close to the river called Pampa.</p>
@@ -199,7 +377,7 @@
         <div class="day-block">
             <span class="date">18/02/25: Across the Highway to Vijayawada</span>
             <p>Morning around 6 we got up. By 7 we took breakfast. By 7:45 we left Kakinada and proceeded to <span class="location-tag">Vijayawada</span>, 250 km away. Before leaving Kakinada, we visited the <span class="location-tag">Kukkuteswara temple</span> of Pithapuram. 
-            <img src="\src\content\temples\photos\andhrapradesh2.jpg" class="travel-photo photo-left" alt="Kukkuteswara Temple">
+            <img src="photos/andhrapradesh2.jpg" class="travel-photo photo-left" alt="Kukkuteswara Temple">
             This is a Shiva temple. The Shivalingam is fairly big and made of spatikam (crystal). So the deity is in white color. Opposite to the deity, a big Nandi is also there. This one is made out of a single stone. Amman sannidhi is also there. This is considered as one among the 18 Shakti Peethas.</p>
             <p>On the way to Vijayawada on the highway, we took a break for lunch at a hotel, Garuda. Chapati, rice, sabji, kesari, sambar, rasam, and dahi were served and the food was good. Around 3 pm, we reached Vijayawada. Before going to the hotel, we wanted to visit the <span class="location-tag">Kanaka Durga Temple</span>. Our bus was parked at a parking place. From the parking area, we went to the temple by auto-rickshaws. Since mobiles are not allowed in the temple premises, we left them in the bus.</p>
             <p>Kanaka Durga temple is over a hill. It is about 800 steps to climb. The deity Kanaka Durga Amma is swayambhu and powerful, and blesses the devotees who pray to her. So throughout the year, people from different parts of the country come here to seek her blessings. A lift facility is available to avoid climbing. Kesari arranged for us to go via the lift. They charge Rs 100 per head. A proper queue system exists; we didn't see any mad crowd. We had a nice darshan. It took around an hour. After the Kanaka Durga temple, we went to the hotel: Lemon Tree, MG Road, Vijayawada. This is a 5-star hotel and the rooms are luxurious. Food was excellent and a variety of items were served.</p>
@@ -208,9 +386,9 @@
         <div class="day-block">
             <span class="date">19/02/25: Rock Cut Caves and the Nallamala Hills</span>
             <p>After breakfast, we left the Lemon Tree Hotel, Vijayawada and proceeded to <span class="location-tag">Srisailam</span>. Srisailam is 260 km away from Vijayawada. From Vijayawada, 10 km away, the <span class="location-tag">Undavalli Caves</span> are located. 
-            <img src="\src\content\temples\photos\andhrapradesh3.jpg" class="travel-photo photo-right" alt="Undavalli Caves View 1">
+            <img src="photos/andhrapradesh3.jpg" class="travel-photo photo-right" alt="Undavalli Caves View 1">
             We reached this spot around 9 am. Undavalli is a four-storied rock-cut Vishnu temple. 
-            <img src="\src\content\temples\photos\andhrapradesh4.jpg" class="travel-photo photo-left" alt="Undavalli Caves View 2">
+            <img src="photos/andhrapradesh4.jpg" class="travel-photo photo-left" alt="Undavalli Caves View 2">
             This temple belongs to the 4th century. On the 3rd floor, a five-foot Vishnu statue over the five-headed snake is very popular and the most attractive sculpture of this cave.</p>
             <p>Around 1 pm we had our lunch at Kurnool. It was typical Andhra type food: rice, sambar, rasam, vada, few imli chutneys, and curd. Our next stop before Srisailam was at a Ganesh Temple called Sakshi Ganapathi. A crowd was there, but a queue was followed. It took about 15 minutes. After this temple visit, we proceeded to the hotel where our accommodation was booked. The hotel is called Srisaila's Nest. We reached the hotel around 6:30 pm. It is a small hotel; the room was clean and good. For night dinner, we had chapati and pulao.</p>
         </div>
@@ -218,25 +396,25 @@
         <div class="day-block">
             <span class="date">20/02/25: The Abode of Jyotirlinga</span>
             <p>Morning by 6 we got up. By 7:30 we had breakfast: idli, vada, and upma. After breakfast, we proceeded to <span class="location-tag">Mallikarjuna Temple</span>, one of the 12 Jyotirlinga temples. To avoid the crowd, Kesari arranged Rs 200/- tickets for darshan. Senior citizens can go in this queue and they need not pay; an Aadhaar card is shown for age proof. Because of this, we didn't stand in long queues. Also, we had darshan of <span class="location-tag">Bhramaramba Devi</span> in the same temple, which is one among the Shakti Peethas.
-            <img src="\src\content\temples\photos\andhrapradesh5.jpg" class="travel-photo photo-right" alt="Bramarambhika Devi Sannidhi"></p>
+            <img src="photos/andhrapradesh5.jpg" class="travel-photo photo-right" alt="Bramarambhika Devi Sannidhi"></p>
             <p>Shivaji Maharaj visited this temple. In his memory, a museum is created here. His statue and more exhibits showing his wars against Mughals are depicted in this museum. After seeing the museum, we returned back to the room. We took lunch in the hotel and took rest till 4:30 pm. After tea, we proceeded to another famous Shiva temple called <span class="location-tag">Shikhareswara Swamy Temple</span>. It is over a hill and we had to climb about 150 steps. In front of the deity, a small <span class="location-tag">black Nandi</span> is there. 
-            <img src="\src\content\temples\photos\andhrapradesh6.jpg" class="travel-photo photo-left" alt="Black Nandi View">
+            <img src="photos/andhrapradesh6.jpg" class="travel-photo photo-left" alt="Black Nandi View">
             If we see through in between the ears of the Nandi, we can see the Srisailam Mallikarjuna temple. The surroundings of this temple are beautiful.</p>
         </div>
 
         <div class="day-block">
             <span class="date">21/02/25: Into the Land of Mantralayam</span>
-            <img src="\src\content\temples\photos\andhrapradesh7.jpg" class="travel-photo photo-right" alt="Mantralayam Temple">
+            <img src="photos/andhrapradesh7.jpg" class="travel-photo photo-right" alt="Mantralayam Temple">
             <p>We left Srisailam after breakfast for <span class="location-tag">Mantralayam</span>. Mantralayam is about 250 km away. At Kurnool around 1:30 pm, we had our lunch. Around 4:30 we reached Mantralayam. Our tour guide told all male tourists that we should enter this temple in "Salman Khan style." All he meant was that before entering the temple, we must remove our shirts! There was no crowd in the temple. We had good darshan of the Brindavan.</p>
             <p>After a cup of coffee, around 5:30 we left Mantralayam and proceeded to <span class="location-tag">Raichur</span>, about an hour's travel. After reaching Raichur, before going to the hotel, we visited one Balaji temple which was inside the premises of the medical college in Raichur. After the visit to the Balaji temple, we landed at the Royal Fort hotel. This hotel name is Royal Fort but it was very poorly maintained. Anyway, it is just a one-day stay here.</p>
         </div>
 
         <div class="day-block">
             <span class="date">22/02/25: The Island of Kuruvapur</span>
-            <img src="\src\content\temples\photos\andhrapradesh8.jpg" class="travel-photo photo-left" alt="Krishna River Crossing">
+            <img src="photos/andhrapradesh8.jpg" class="travel-photo photo-left" alt="Krishna River Crossing">
             <p>Morning at 7:30 after a poor breakfast, we left the Royal Fort for the <span class="location-tag">Kuruvapur Sripada Vallabh Temple</span>. This temple is across the river Krishna. We came up to the river bank by bus and crossed the river by boat. In the Krishna river, the water flow was low and rocks were visible in between. So the boat ride took a much longer time than the usual ride time. At last, we reached the other side of the Krishna river and walked to the temple. The temple has stipulations over the dress code: for males, a dhoti is compulsory and females have to wear a saree or salwar.</p>
             <p>Also, in the temple premises, one very <span class="location-tag">big Banyan tree</span> is there. 
-            <img src="\src\content\temples\photos\andhrapradesh9.jpg" class="travel-photo photo-right" alt="Ancient Banyan Tree">
+            <img src="photos/andhrapradesh9.jpg" class="travel-photo photo-right" alt="Ancient Banyan Tree">
             People say it is a one-thousand-year-old tree. After the darshan, we returned back to the other side of the Krishna river by boat, took the bus, and reached the hotel. In the evening, we left the hotel for the railway station and took the train to Pune. We stayed in the hotel till 7 pm and then reached the station. The train was on time, and on 23rd Feb morning, we reached Pune safely.</p>
         </div>
 
@@ -273,6 +451,21 @@
 </div>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     const overlay = document.getElementById('lightbox-overlay');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.getElementById('close-btn');

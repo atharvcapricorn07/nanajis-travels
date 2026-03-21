@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Central Europe Travelogue | 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Georgia', serif;
@@ -12,6 +13,118 @@
             background-color: #f4f1ea;
             margin: 0;
             padding: 0;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
         header {
             background-color: #60100b;
@@ -88,6 +201,71 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="bestofeurope.html">Best of Europe</a>
+                <a href="bhutan.html">Bhutan</a>
+                <a href="central_europe.html">Central Europe</a>
+                <a href="china.html">China</a>
+                <a href="dubai.html">Dubai</a>
+                <a href="egypt.html">Egypt</a>
+                <a href="indonesia.html">Indonesia</a>
+                <a href="muscat.html">Muscat</a>
+                <a href="nepal.html">Nepal</a>
+                <a href="scandinavian.html">Scandinavian Countries</a>
+                <a href="singapore.html">Singapore</a>
+                <a href="srilanka.html">Srilanka</a>
+                <a href="vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="../india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="../india/karnataka.html">Karnataka</a>
+                <a href="../india/kerala.html">Kerala</a>
+                <a href="../india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="../india/northeast.html">Northeast India</a>
+                <a href="../india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="../india/rajasthan.html">Rajasthan</a>
+                <a href="../india/uttarakhand.html">Uttarakhand</a>
+                <a href="../india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
 <header>
     <h1>Central Europe</h1>
     <p>(Budapest, Zagreb, Ljubljana, Vienna, Bratislava & Prague)</p>
@@ -103,7 +281,7 @@
 
     <section class="date-section">
         <span class="date-header">13/07/2025</span>
-        <img src="\src\content\international\photos\ceurope1.jpg" class="travel-photo img-right" onclick="openLightbox(this.src)">
+        <img src="photos/ceurope1.jpg" class="travel-photo img-right" onclick="openLightbox(this.src)">
         <p>Tickets were from Mumbai to Doha (Qatar) and then from Doha to Budapest (Hungary). Indigo flight 6E1303 was at the right time. The flight departed at 4:20 am. The duration of the flight to Doha from Mumbai was about 3 hours. The plane crossed the Arabian Sea and Dubai and reached Doha at 5:45 am, local time. The connecting flight to Budapest was QR199 and the departure time was 9:20. The flight duration to Budapest from Doha is about 5 hours.</p>
         <p>Tigris River was seen during the flight. The flight was about 20,000 ft above. The weather was quite hot. No clouds in between and from the window I could see clearly the ground; the entire stretch of Najaf, Baghdad, Erbil, Mosul, etc., were all desert without any greenery. In that barren landscape, the long Tigris River was seen throughout the flight. We know this river is the key source for agriculture even during the Mesopotamia civilization. After crossing Ankara, the plane started crossing the Black Sea. The blue-colored sea, a few tiny ships, and the beautiful shore was a spectacular view from the plane. Another rarest view I witnessed while flying: I saw another plane moving exactly in the opposite direction, below the plane in which we were traveling.</p>
         <p>The pilot of our flight announced that the aircraft was landing. Since I occupied the window seat, I was looking at the runway. It came close to the runway and suddenly the flaps started extending and the plane started taking off, and after a minute the pilot said that the permission to land was denied and it would take another 10 minutes; he took a long circle and then landed. Probably another plane was being prepared to take off.</p>
@@ -113,7 +291,7 @@
     <section class="date-section">
         <span class="date-header">14/07/2025</span>
         <div class="country-highlight">Hungary</div>
-        <img src="\src\content\international\photos\ceurope2.jpg" class="travel-photo img-left" onclick="openLightbox(this.src)">
+        <img src="photos/ceurope2.jpg" class="travel-photo img-left" onclick="openLightbox(this.src)">
         <p>It is a beautiful country in Central Europe. The capital city is Budapest. The language spoken in this country is Hungarian, but English is also used widely. The currency of Hungary is the Hungarian Forint. Rs 500 is approximately equal to 120 HF. Hungary is predominantly a Catholic Christian Country. Danubius, Tisza, and Drava are the major rivers of Hungary.</p>
         <p>This country was with the alliance of Germany in the First World War and Second World War. During the Hitler regime, he massacred all Jews of this country. After the Second World War, half of the country was taken away by the neighboring countries and this country came under the rule of Russia. The 40th President of the US, Ronald Reagan, helped to drive Russians from this country and Hungary got freedom. Budapest, the capital of this country, is a beautiful city.</p>
         <p>In this country, sunrise is taking place early in the morning, so even at 5 am I could see the sunlight. Using the room kettle and instant coffee powder, I made coffee. By 8 am we got ready and reached the hotel lobby for breakfast. Being vegetarian, we could get only bread, butter, and fruits. I also drank fresh coffee with milk. We left the hotel around 9 am.</p>
@@ -126,13 +304,13 @@
     <section class="date-section">
         <span class="date-header">15/07/2025</span>
         <div class="country-highlight">Croatia Republic</div>
-        <img src="\src\content\international\photos\ceurope3.jpg" class="travel-photo img-right" onclick="openLightbox(this.src)">
+        <img src="photos/ceurope3.jpg" class="travel-photo img-right" onclick="openLightbox(this.src)">
         <p>We got up around 5 am. At 7 am we had our continental breakfast. By 8 am we left Budapest and proceeded to Zagreb, the capital of Croatia. It is 350 km away. The highway was quite good and had less traffic, so travel was comfortable. This 350 km stretch is full of greenery with tall trees and mountains. After 2 hours of travel, we had a coffee break for 30 minutes.</p>
         <p>Croatia Republic is a beautiful country in Central Europe. This country is bounded by the Adriatic Sea. The water color is an amazing green. Slovenia is its neighboring country. Even though Croatian is the official language, English is also widely used. Zagreb is the capital city. Monuments, old churches, and natural beauty are the specialties of this city. The weather is very pleasant throughout the year. Croatia was a part of Yugoslavia till 1991. In 1991, the Croatia Republic got total independence from Yugoslavia. It is a small country and the population is only 35 lakhs.</p>
         <p>By 11 am we started again to travel. At 11:30 we crossed Hungary and entered Croatia. In between these two countries, there is no check post or border security. We reached Zagreb around 1 pm. The bus was parked at a designated place. From there we walked about 20 minutes to an Indian restaurant called Taste of India. We had our lunch there. After lunch, we walked to Ban Jelačić Square, the center of the city. We roamed around this square for 30 minutes and took a tram to the parking place. We started around 3 pm towards Ljubljana, the capital of Slovenia. It is 150 km from Croatia.</p>
         
         <div class="country-highlight">Republic of Slovenia</div>
-        <img src="\src\content\international\photos\ceurope4.jpg" class="travel-photo img-left" onclick="openLightbox(this.src)">
+        <img src="photos/ceurope4.jpg" class="travel-photo img-left" onclick="openLightbox(this.src)">
         <p>The Republic of Slovenia is a country in Central Europe. Italy, Hungary, and Austria are the neighboring countries. Slovene is the national language of this country, but the majority of people understand English. The majority of people are Christians. Next to Christians, Muslims are more numerous here. Ljubljana is the capital city of Slovenia.</p>
         <p>Around 5 pm we reached Ljubljana and the local guide was waiting for us for an orientation walk tour around the city. Along with her, we visited the Triple Bridges over the river <b>Ljubljanica</b>. Then we went to the central market, an open-air market selling various fancy items on the roadside. Then we went to Dragon Bridge, another old bridge on this river. While walking, a drunkard gave trouble to our lady guide. She called the police, but fortunately, nothing serious happened. All these bridges belong to the 18th and 19th centuries.</p>
         <p>Also, we visited St. Nicholas Church. The 19th-century bronze door was attractive. In the town hall area, we saw many bars. In these Central European countries, we observe most people, ladies as well as gents, are smokers. Constantly they smoke and pollute the beautiful natural environment. Then we went to the Namaste Ljubljana hotel, an Indian restaurant. After dinner, we were accommodated in the M Hotel of Ljubljana.</p>
@@ -143,26 +321,26 @@
         <p>After breakfast at the M Hotel, around 9 am we vacated the hotel and proceeded to Bled. It took an hour to reach Bled Lake. The blue water lake looks beautiful. The circumference is around 6 km. The depth of this lake is around 30 feet. To protect the lake water purity, only manual boats are operated. During winter, the whole lake will be frozen. We went by a boat to Bled Island. There is a church on the island. The church is beautiful and the name of the church is Queen Mary. The church was constructed in the 16th century. It is assumed that all the materials required to build this church on this island must have been taken by small boats. There is a very big bell and it is believed that by ringing this bell 3 times, wishes will get fulfilled. We both rang this bell 3 times. From the island, we returned by the same boat and proceeded to Bled Castle by bus.</p>
         
         <h3>Bled Castle</h3>
-        <img src="\src\content\international\photos\ceurope5.jpg" class="travel-photo img-right" onclick="openLightbox(this.src)">
+        <img src="photos/ceurope5.jpg" class="travel-photo img-right" onclick="openLightbox(this.src)">
         <p>It was built in the 11th century and renovated in the 20th century without any big alterations. This castle was initially occupied by bishops. To reach this castle we have to climb about 100 steps, which takes about 30 minutes. The castle is built over the hill and below is Lake Bled. The lake and its surroundings look spectacular if we see from the castle. This is the most attractive tourist spot in Ljubljana.</p>
-        <img src="\src\content\international\photos\ceurope6.jpg" class="travel-photo img-left" onclick="openLightbox(this.src)">
+        <img src="photos/ceurope6.jpg" class="travel-photo img-left" onclick="openLightbox(this.src)">
         <p>After the visit to the castle, we returned back to the hill base and went to Pizza Hut. For lunch, we had pizza and finger chips. Around 2 pm we left Bled and proceeded to Vienna, Austria. It is 375 km from Slovenia and about 5 hours of travel including a 30-minute break. Both sides of the highway were full of greenery, tall trees, and mountains. This highway has a few long tunnels. We reached Vienna around 8:15 pm. Since the driving time of the driver had almost ended, we could not go to an Indian restaurant. Indian food was ordered and we took dinner in our room.</p>
     </section>
 
     <section class="date-section">
         <span class="date-header">17/07/2025</span>
         <div class="country-highlight">Austria</div>
-        <img src="\src\content\international\photos\ceurope7.jpg" class="travel-photo img-right" onclick="openLightbox(this.src)">
+        <img src="photos/ceurope7.jpg" class="travel-photo img-right" onclick="openLightbox(this.src)">
         <p>Austria is in Central Europe. This country is close to Germany. The official language is German. The capital of this country is Vienna (Vina). The currency is the Euro. It is a landlocked country, so there is no harbor or seashore. Border countries are the Czech Republic, Germany, Hungary, Italy, Liechtenstein, Slovakia, Slovenia, and Switzerland. Lake Constance is the biggest lake of this country (shared with Switzerland and Germany). The Danube (Donau) is the river shared with Germany, Hungary, Croatia, Ukraine, and Romania. Landslides and earthquakes are common natural hazards of this country. The majority of people are Roman Catholic. Most people here speak English. Vienna, Innsbruck, Linz, and Graz are the popular cities.</p>
         <p>After breakfast, by 9:30 we left the hotel and proceeded to <b>Schonbrunn Palace</b>. The total number of rooms in that palace is 1,400. Only 45 rooms are kept open for visitors. In this palace, they won't allow bags or umbrellas. Only small bags of A4 size are allowed. While entering, they provide a microphone device, and when you press the room number, a recorded description of the things kept in that place is narrated. Schonbrunn is a royal family having a large number of family members. This palace belongs to the 16th century and was the summer palace of the Habsburg rulers of Austria. Beautiful wall paintings, royally decorated furniture, portraits of royal family members, silver vessels, etc., are seen in this palace. Now it is a UNESCO World Heritage site.</p>
-        <img src="\src\content\international\photos\ceurope8.jpg" class="travel-photo img-left" onclick="openLightbox(this.src)">
+        <img src="photos/ceurope8.jpg" class="travel-photo img-left" onclick="openLightbox(this.src)">
         <p>We spent about an hour here. Then we walked around this city and saw the <b>State Opera House</b>, the Parliament, City Hall, a beautiful rose garden, Burg German Theater, and churches. After the walking tour, we had our lunch at an Indian Restaurant. Some of our group members went shopping, but we preferred to return back to the hotel. The population of this country is only 80 lakhs. Roads are clean. In the city roads, separate lanes are provided for cyclists. Trams and buses are there. People use these public transports very much, so fewer car movements are seen. The government collects heavy taxes and provides free education, free healthcare, and substantial old-age pensions. We came across a few Indians and they said admission to schools and colleges is much easier, and after education, abundant job opportunities are there and a tension-free life. Evening around 6:45 we went by bus to an Indian restaurant. The food was good. We returned back to the hotel around 8 pm.</p>
     </section>
 
     <section class="date-section">
         <span class="date-header">18/07/2025</span>
         <p>Since we had to move from Vienna and reach Prague before night, we got up early and got ready to take breakfast around 7. From Vienna, Prague is 375 km. On our way, we wanted to visit 2 places: Bratislava, the capital of Slovakia, and then the <b>Bone Church</b> at <b>Kutna Hora</b>, a city in the Czech Republic. Prague is the capital of the Czech Republic. After the usual breakfast of bread and butter and coffee, we left the hotel by 8 am. The weather was a bit chilly. It took about 20 minutes to catch the highway. The highway was too good. Both sides of the highway were fertile lands. Mostly they cultivate wheat and some lands were completely covered with sunflower plants with beautiful bright yellow sunflowers.</p>
-        <img src="\src\content\international\photos\ceurope9.jpg" class="travel-photo img-right" onclick="openLightbox(this.src)">
+        <img src="photos/ceurope9.jpg" class="travel-photo img-right" onclick="openLightbox(this.src)">
         <p>In between the agricultural lands, there were lots of windmills to generate electricity. These European countries are claiming they are rich and giving free healthcare, free education, pensions, etc., but I don't understand why they collect 1 euro (about Rs 100/-) to use the washroom. On the highway, gas stations and supermarkets have washrooms, but we have to pay and use them. I took 50 euros by paying Rs 5,200/- from a local money exchanger before coming to Europe. A major part of this money was spent on washrooms only.</p>
         
         <div class="country-highlight">Slovakia</div>
@@ -172,9 +350,9 @@
     <section class="date-section">
         <span class="date-header">19/07/2025</span>
         <div class="country-highlight">Czech Republic</div>
-        <img src="\src\content\international\photos\ceurope10.jpg" class="travel-photo img-left" onclick="openLightbox(this.src)">
+        <img src="photos/ceurope10.jpg" class="travel-photo img-left" onclick="openLightbox(this.src)">
         <p>The Czech Republic is a landlocked country in Central Europe. The capital is Prague. The official language is Czech. The currency is the Czech Koruna. The majority of people don't follow any religion. It is a developed rich country. The country offers free education and free healthcare to its citizens. We left the NH Hotel after our breakfast around 9 am. Terezin Camp is a 30 km travel from the city. Terezin Concentration Camp. During the Second World War, these European countries were in alliance with Germany. In 1780, this fortress was constructed by <b>Habsburg Emperor Joseph II</b> in the name of his mother Maria Theresa. During the Second World War, this fortress was converted to a concentration camp by the Nazis to imprison <b>Jews</b> from countries like Yugoslavia. A total of 140,000 Jews were kept in this prison, including children.</p>
-        <img src="\src\content\international\photos\ceurope11.jpg" class="travel-photo img-right" onclick="openLightbox(this.src)">
+        <img src="photos/ceurope11.jpg" class="travel-photo img-right" onclick="openLightbox(this.src)">
         <p>From this camp, Jews were taken to extermination camps for mass killing. In this prison, about 40,000 Jews died because of malnourishment and various diseases. After the suicide of Hitler and the defeat of Germany, Russia invaded and released the leftover prisoners. Then we proceeded to Prague Castle. This is a one-thousand-year-old castle. Beautiful paintings are also there. Then we took our lunch at an Indian hotel. We started walking around this city. We walked about 6 km. We went through the city, crossing over bridges of the famous Vltava River (Vitava). Also, we saw <b>St. Nicholas Church</b>, a beautiful and very big church with lots of beautiful paintings and colorful glass windows. Then we walked to the Town Hall and reached the famous Astronomical Clock tower about 5 minutes before 6 o'clock. At 6 o'clock a window opened and a group of figures in different costumes started playing different musical instruments. And another figure appeared with a bell in his hand and swung it 6 times. The tower clock functions were amazing. Then we stopped at the Palladium Mall. Some people did some shopping. Then we proceeded to the bus parking place and by bus reached an Indian restaurant and had our delicious dinner and returned back to the hotel around 9 pm.</p>
     </section>
 
@@ -223,7 +401,7 @@
         </div>
 
         <div class="tips-section">
-            <h3>Father's Travel Tips</h3>
+            <h3>Nanaji's Travel Tips</h3>
             <ul class="tips-list">
                 <li><b>The "One Euro" Rule:</b> Carry plenty of small Euro coins. Most public washrooms and gas stations charge 1 Euro (approx. ₹100), and a significant portion of cash can be spent here!</li>
                 <li><b>Embrace Public Transit:</b> Trams and buses are very efficient and well-used. Even with fewer cars, the rules are followed religiously, making the cities very walkable.</li>
@@ -241,6 +419,21 @@
 </div>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     function openLightbox(src) {
         document.getElementById('lightbox-img').src = src;
         document.getElementById('lightbox').style.display = 'block';

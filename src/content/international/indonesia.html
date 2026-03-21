@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Indonesia & Bali Travelogue | 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,6 +13,118 @@
             background-color: #f4f7f2;
             margin: 0;
             padding: 0;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
         header {
             background-color: #2d5a27;
@@ -126,6 +239,72 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="bestofeurope.html">Best of Europe</a>
+                <a href="bhutan.html">Bhutan</a>
+                <a href="central_europe.html">Central Europe</a>
+                <a href="china.html">China</a>
+                <a href="dubai.html">Dubai</a>
+                <a href="egypt.html">Egypt</a>
+                <a href="indonesia.html">Indonesia</a>
+                <a href="muscat.html">Muscat</a>
+                <a href="nepal.html">Nepal</a>
+                <a href="scandinavian.html">Scandinavian Countries</a>
+                <a href="singapore.html">Singapore</a>
+                <a href="srilanka.html">Srilanka</a>
+                <a href="vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="../india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="../india/karnataka.html">Karnataka</a>
+                <a href="../india/kerala.html">Kerala</a>
+                <a href="../india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="../india/northeast.html">Northeast India</a>
+                <a href="../india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="../india/rajasthan.html">Rajasthan</a>
+                <a href="../india/uttarakhand.html">Uttarakhand</a>
+                <a href="../india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
+
 <header>
     <h1>INDONESIA & BALI</h1>
     <p>(Jakarta, Bandung, Yogyakarta & Bali)</p>
@@ -144,11 +323,11 @@
     <div class="date-section">
         <span class="date-header">24/05/2025</span>
         <span class="location-tag">Jakarta</span>
-        <img src="\src\content\international\photos\indonesia1.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
+        <img src="photos/indonesia1.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
         <p>The MH 195 flight was on time. We reached Kuala Lumpur at 7:30 am. After we landed at Kuala Lumpur, we completed the security check and got ready to take the onward flight to Jakarta. From here to Jakarta, the flight duration is about 2 hours.</p>
         <p>The Malaysian Airlines flight to Jakarta from Kuala Lumpur departed on time. During travel, they served a vegetarian breakfast: vermicelli upma with dal sambar, sliced fruits, and juice.</p>
         <p>The flight landed in Jakarta, the capital city of Indonesia, on time. For Indians, they provide a visa on arrival. Without any tedious procedures, we got the visa. We didn't even stand in the queue; the Kesari rep collected all our passports and got the visa for everyone.</p>
-        <img src="\src\content\international\photos\indonesia2.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
+        <img src="photos/indonesia2.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
         <p>After baggage collection and security checks were over, we proceeded to an Indian Restaurant called <span class="highlight">Ganesha</span> for lunch. Food was good. Then we went to see the National Monument of Indonesia. Indonesia got freedom from the Dutch, and this monument was constructed to pay respect to the freedom fighters.</p>
         <p>A few old buildings which were constructed by the Dutch and used as their offices before Indonesia got freedom are still maintained. That place is called Merdeka Square. After the visit, we reached Hotel Mercure where our accommodation was arranged. The hotel was okay. For dinner, we went to Queens of Tandoori. Food was good.</p>
         <p>Eighty percent of the people in this country are Muslims. But in some provinces, the majority of people are Hindus. In Bali, one among the 38 provinces, 80% are Hindus. Even though it is a Muslim-dominated country, the Hindus of this country are respected. In every nook and corner of the city, we can see statues of Hindu Gods.</p>
@@ -158,22 +337,22 @@
 <div class="date-section">
         <span class="date-header">25/05/2025</span>
         <span class="location-tag">Bandung</span>
-        <img src="\src\content\international\photos\indonesia3.jpg" class="img-placeholder float-right fixed-rotation" onclick="openZoom(this)">
+        <img src="photos/indonesia3.jpg" class="img-placeholder float-right fixed-rotation" onclick="openZoom(this)">
         <p>After breakfast, we left from Hotel Mercure and proceeded to Bandung by bus. Bandung is about 150 km away from Jakarta. We left the hotel at 7 am. After we traveled 100 km, we had a break for coffee. After some 15 minutes, we continued our travel.</p>
         <p>The climate was too good. It was pretty cool, around 20°C. The bus in which we were traveling had air suspension and the road was good, so bus travel was very comfortable. The highway was excellent; there was no heavy traffic. Both sides of the road have excellent natural scenery. We crossed a few tea estates also. Banana trees and pineapple bushes are abundantly grown. Also, we saw pineapples being sold on the roadsides.</p>
         
-        <img src="\src\content\international\photos\indonesia4.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
+        <img src="photos/indonesia4.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
         
         <p>We reached Bandung around 11 am. Our bus was parked in an allocated place and from there we took a minibus to watch <span class="highlight">Hot Springs</span>. In this place, there are a few active volcanoes and a few springs. This spring water is quite hot. Spring water is collected in pools and people are allowed to swim or stroll in the water. This water is sulfur-contaminated, so pregnant ladies and asthma patients are advised to stay away.</p>
         <p>After watching the hot springs, we had our lunch in a local restaurant where Indonesian food was served: garlic bread, plain rice mixed with butter, tomato sauce, fruits, and noodles.</p>
-        <img src="\src\content\international\photos\indonesia5.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
+        <img src="photos/indonesia5.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
         <p>After lunch, we proceeded to <span class="highlight">Tangkuban</span> to watch the erupted volcano. This place is at an elevated altitude, about 5000 ft above sea level. The weather was very cloudy and most of the time drizzling. We can climb hills around this erupted volcano and take photos. After an hour, we reached Bandung city. Our accommodation was arranged in the Best Western hotel. We had our dinner at an Indonesian hotel called Warung Dulukala. For vegetarians, only sticky rice and boiled vegetables were there.</p>
     </div>
 
     <div class="date-section">
         <span class="date-header">26/05/2025</span>
         <span class="location-tag">Bandung to Yogyakarta</span>
-        <img src="\src\content\international\photos\indonesia6.jpg" class="img-placeholder float-left fixed-rotation" onclick="openZoom(this)">
+        <img src="photos/indonesia6.jpg" class="img-placeholder float-left fixed-rotation" onclick="openZoom(this)">
         <p>Morning we got up at 4 o'clock. We got ready by 4:45 am and left the Best Western, Bandung and proceeded to the railway station. Our next destination is Yogyakarta. The distance between these two cities is about 500 km. Travel time is about 6 hours. The train route is similar to Kerala, full of paddy fields and banana plants. The train reached Yogyakarta station right on time at 1:15 pm.</p>
         <p>Our tour bus was waiting outside. Our accommodation was booked in Hotel Santika. In the evening, we proceeded to Hotel Ganesha, an Indian luxury hotel. The hotel was posh and the food was good.</p>
     </div>
@@ -181,22 +360,22 @@
     <div class="date-section">
         <span class="date-header">27/05/2025</span>
         <span class="location-tag">Yogyakarta</span>
-        <img src="\src\content\international\photos\indonesia7.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
+        <img src="photos/indonesia7.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
         <p>We proceeded to visit <span class="highlight">Borobudur Temple</span>. It is a Buddhist temple. During the first century, kings of this place adored Hinduism, but during the third century, Buddhism spread from Sri Lanka. Actually, Buddha never came to this country. This temple complex is very vast and beautifully maintained; it is also a UNESCO heritage site.</p>
         <p>The original temple was damaged by an earthquake and renovated without altering the original structure. The temple has ten stages and a total of 140 steep steps. Currently, people are only allowed to see up to three stages, requiring us to climb around seventy steps. Along with the entry ticket, they provide new chappals which we must wear to go inside.</p>
-        <img src="\src\content\international\photos\indonesia8.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
+        <img src="photos/indonesia8.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
         <p>The irony is, such big Buddhist temples are seen in China, Malaysia, Nepal, and Cambodia, but not in India where the religion originated. People believe the strong philosophy of the Geetha and the vocabulary of Hindu saints like Adi Shankaracharya, who preached from Kanyakumari to Srinagar, kept the followers of Hinduism strong in India.</p>
         <p>After the Buddhist temple, we had lunch at Ganesha, a posh Indian restaurant, where they served brinjal bharta, chapati, black chana dal, paneer subji, and jeera rice, ending with kulfi. From there, we proceeded to the <span class="highlight">Prambanan Hindu Temple Complex</span>.</p>
-        <img src="\src\content\international\photos\indonesia9.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
+        <img src="photos/indonesia9.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
         <p>It is a big Hindu temple complex featuring three major temples. The first is dedicated to <span class="highlight">Lord Brahma</span>, with a small temple for the <span class="highlight">Swan</span> opposite it. In the middle is a large temple for <span class="highlight">Lord Shiva</span>, with a small temple for <span class="highlight">Nandi</span> opposite. On the right extreme is a temple for <span class="highlight">Lord Vishnu</span>, with a small temple for <span class="highlight">Garuda</span> opposite.</p>
-        <img src="\src\content\international\photos\indonesia10.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
+        <img src="photos/indonesia10.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
         <p>The architecture is quite different, and these temples look marvelous against the greenery and the sky background. We purchased a few fridge magnets of the Prambanan temples. Here, the conversion to Indonesian Rupiah is very funny. 1 US Dollar is equal to 15,800 IDR. The price of one simple roadside T-shirt is 1 lakh IDR, and a cup of coffee is 50,000 IDR!</p>
     </div>
 
     <div class="date-section">
         <span class="date-header">28/05/2025</span>
         <span class="location-tag">Travel to Bali</span>
-        <img src="\src\content\international\photos\indonesia11.jpg" class="img-placeholder float-right fixed-rotation" onclick="openZoom(this)">
+        <img src="photos/indonesia11.jpg" class="img-placeholder float-right fixed-rotation" onclick="openZoom(this)">
         <p>Morning leisurely we got up, since only we had to move to Bali and there was no other schedule. We took breakfast and left for the airport. It was about an hour and 30 minutes travel. Our flight was supposed to depart from Yogyakarta Domestic airport at 2 pm. But it was late by 2 hrs.</p>
         <p>The plane landed at <span class="highlight">Ngurah Rai International Airport</span>, Bali at 8 pm (Bali time). Bali Airport is very beautiful. We had our dinner at <span class="highlight">Royal Kitchen</span> on the way to our hotel. Our accommodation was arranged at Hotel Harper. Hotel room was ok.</p>
     </div>
@@ -204,26 +383,26 @@
     <div class="date-section">
         <span class="date-header">29/05/2025</span>
         <span class="location-tag">Bali</span>
-        <img src="\src\content\international\photos\indonesia12.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
+        <img src="photos/indonesia12.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
         <p>Bali is an island and one among the 38 provinces of Indonesia. Weather is very humid and hot. Roads are very narrow so most of the roads in the city are one way. Bali got only one airport, Ngurah Rai International Airport. We didn't see any multi-storied buildings. Maximum they allow to construct only 4 story buildings. Local Govt is particular that no building should be taller than the temple.</p>
-        <img src="\src\content\international\photos\indonesia13.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
+        <img src="photos/indonesia13.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
         <p><span class="highlight">Tirta Empul Temple:</span> This one is one of the famous temples in Bali. Main deity is Brahma. In this temple a pond is there and through springs water is continuously flowing. It is believed that God Indra created this spring and that water cures all sort of illness. Basically people believe and come here who suffer from some kind of illness to have a dip in this sacred pond for getting cured.</p>
-        <img src="\src\content\international\photos\indonesia14.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
+        <img src="photos/indonesia14.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
         <p>Also main deity is kept in a secluded place, and people are allowed to do pooja and offering sacred food items. All visitors are not allowed to these premises.</p>
-        <img src="\src\content\international\photos\indonesia15.jpg" class="img-placeholder float-right fixed-rotation" onclick="openZoom(this)">
+        <img src="photos/indonesia15.jpg" class="img-placeholder float-right fixed-rotation" onclick="openZoom(this)">
         <p><span class="highlight">Abuan Desa Rice Terrace, Tegallalang Pakudui:</span> Then we visited here. The main attraction is giant swings (Julias) and zip liner. Big valleys are there. Across the valley this zip liner is arranged.</p>
-        <img src="\src\content\international\photos\indonesia16.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
+        <img src="photos/indonesia16.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
         <p><span class="highlight">Taman Ayun Temple:</span> It is about 2 hours journey from the main city. This temple was built in 16th century by the king Mengwi to pay respect to his ancestors. It is a kind of family temple. In Bali, every family got a temple called a family temple and every village has a temple called a village temple.</p>
-        <img src="\src\content\international\photos\indonesia17.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
+        <img src="photos/indonesia17.jpg" class="img-placeholder float-right" onclick="openZoom(this)">
         <p>Bali is a small island of length about 150 km and width of 90 km. Within this island thousands of temples are there. Taman Ayun temple got a beautiful lotus pond around the temple. This is not a very big temple, but the natural beauty is superb. This temple faced many times natural calamity and subsequent renovations.</p>
-        <img src="\src\content\international\photos\indonesia18.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
+        <img src="photos/indonesia18.jpg" class="img-placeholder float-left" onclick="openZoom(this)">
         <p><span class="highlight">Tanah Lot Temple:</span> This is a temple situated on the sea shore. Only part of the temple is there. This shore is a black soil sea shore. Here also water springs are there and the water is considered as a holy one. A pandit was sprinkling this holy water over the devotees. Also from here we can see the beautiful sunset.</p>
     </div>
 
     <div class="date-section">
         <span class="date-header">30/05/2025</span>
         <span class="location-tag">Bali</span>
-        <img src="\src\content\international\photos\indonesia19.jpg" class="img-placeholder float-right fixed-rotation" onclick="openZoom(this)">
+        <img src="photos/indonesia19.jpg" class="img-placeholder float-right fixed-rotation" onclick="openZoom(this)">
         <p>After breakfast we went to <span class="highlight">Tanjung Benoa Beach</span>. It is a white sand beach. Beach activities like parasailing, banana boat ride, jet ski are available. In our tour package these three rides were included. But we preferred to do only the banana boat ride. That we did and remaining time we were roaming around the beach.</p>
         <p>Kesari arranged lunch from Royal Kitchen. They came to the beach and served pani puri, pav bhaji, masala dosa, vegetable biryani and raitha. Also before the lunch they served tender coconut water. This tender coconut was quite big. Around 2 pm we left the beach and after an hour travel, we reached Krishna Mall. It is a big mall mostly selling dresses and souvenirs. Last we went to Royal Orchid massage center. It was an hour session. Whole body massage they do. They are trained professionals. For couples in a room they do. They apply oil on the body and do. After the massage we can take bath. After completion we went to an Indian restaurant and had our dinner.</p>
     </div>
@@ -268,6 +447,21 @@
 </div>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     function openZoom(imgElement) {
         const lightbox = document.getElementById('lightbox');
         const zoomImg = document.getElementById('zoom-img');

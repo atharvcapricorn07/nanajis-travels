@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Egypt Tour Travelogue | 2020</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --egypt-blue: #004d80;
@@ -21,7 +21,119 @@
             color: var(--text-dark);
             margin: 0;
             padding: 0;
+            padding-top: 72px;
             line-height: 1.8;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
 
         .journal-container {
@@ -151,6 +263,71 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="bestofeurope.html">Best of Europe</a>
+                <a href="bhutan.html">Bhutan</a>
+                <a href="central_europe.html">Central Europe</a>
+                <a href="china.html">China</a>
+                <a href="dubai.html">Dubai</a>
+                <a href="egypt.html">Egypt</a>
+                <a href="indonesia.html">Indonesia</a>
+                <a href="muscat.html">Muscat</a>
+                <a href="nepal.html">Nepal</a>
+                <a href="scandinavian.html">Scandinavian Countries</a>
+                <a href="singapore.html">Singapore</a>
+                <a href="srilanka.html">Srilanka</a>
+                <a href="vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="../india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="../india/karnataka.html">Karnataka</a>
+                <a href="../india/kerala.html">Kerala</a>
+                <a href="../india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="../india/northeast.html">Northeast India</a>
+                <a href="../india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="../india/rajasthan.html">Rajasthan</a>
+                <a href="../india/uttarakhand.html">Uttarakhand</a>
+                <a href="../india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
 <div id="lightbox" class="lightbox" onclick="this.style.display='none'">
     <img class="lightbox-content" id="lightbox-img">
 </div>
@@ -168,65 +345,65 @@
     <p><strong>05/02/20</strong> — <span class="city-name">Alexandria</span></p>
     <p>After a smooth Egyptair flight, we headed for Alexandria. The roads are broad and modern, yet the city carries a dusty, ancient charm. We explored the Catacombs, multi-floored tombs designed for mummies and the afterlife.</p>
     
-    <img src="\src\content\international\photos\egypt1.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Roman Amphitheater">
+    <img src="photos/egypt1.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Roman Amphitheater">
     <p>The <strong>Roman Amphitheater</strong>, dating to the 4th century, remains a remarkable ruin despite centuries of invasion. Nearby, we visited the <strong>Library of Alexandria</strong>.</p>
     
-    <img src="\src\content\international\photos\egypt2.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Library of Alexandria">
+    <img src="photos/egypt2.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Library of Alexandria">
     <p>The library, once the greatest in the world, has been renovated and continues to serve as a beacon of knowledge. We rested at Hotel Cherry Maryski, feeling the weight of the history around us.</p>
 
     <div class="section-divider">The Giza Plateau</div>
 
     <p><strong>06/02/20</strong> — <span class="city-name">Cairo</span></p>
-    <img src="\src\content\international\photos\egypt3.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Giza Pyramids">
+    <img src="photos/egypt3.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Giza Pyramids">
     <p>The <strong>Giza Pyramids</strong> are a site to behold. At 4,600 years old, they represent the peak of ancient engineering. The Great Sphinx stands watch over the royal tombs of kings, sons, and grandsons.</p>
     
-    <img src="\src\content\international\photos\egypt4.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Papyrus Institute">
+    <img src="photos/egypt4.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Papyrus Institute">
     <p>At the <strong>Papyrus Institute</strong>, we witnessed the fascinating process of creating paper from river reeds. The resulting artwork is as durable as it is beautiful.</p>
 
     <div class="section-divider">Upper Egypt & The Nile</div>
 
     <p><strong>07/02/20 – 08/02/20</strong> — <span class="city-name">Abu Simbel & Aswan</span></p>
-    <img src="\src\content\international\photos\egypt5.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Abu Simbel">
+    <img src="photos/egypt5.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Abu Simbel">
     <p>The <strong>Temples of Abu Simbel</strong> are carved directly into the mountainside. King Ramses II built these with four gargantuan statues at the entrance. Following this, we saw the <strong>High Dam</strong> in Aswan.</p>
     
-    <img src="\src\content\international\photos\egypt6.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="High Dam">
+    <img src="photos/egypt6.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="High Dam">
     <p>This Russian-assisted project controls the Nile's floods. We then boarded our Nile Cruise, enjoying the view from our cabin as we sailed toward the <strong>Kom Ombo Temple</strong>.</p>
     
-    <img src="\src\content\international\photos\egypt7.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Kom Ombo">
+    <img src="photos/egypt7.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Kom Ombo">
     <p>Kom Ombo is unique, dedicated to the crocodile god. The nearby museum hosts ancient crocodile mummies, preserved with incredible care.</p>
 
     <div class="section-divider">Temples of the Nile</div>
 
     <p><strong>09/02/20 – 10/02/20</strong> — <span class="city-name">Edfu & Luxor</span></p>
-    <img src="\src\content\international\photos\egypt8.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Edfu">
+    <img src="photos/egypt8.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Edfu">
     <p>We took a horse carriage to <strong>Edfu Temple</strong>, the best-preserved temple in Egypt. Later, we reached the <strong>Luxor Temple</strong>, which glows spectacularly at night.</p>
     
-    <img src="\src\content\international\photos\egypt9.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Luxor Temple">
+    <img src="photos/egypt9.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Luxor Temple">
     <p>The journey continued to the <strong>Valley of the Kings</strong>, a silent canyon hiding 69 royal tombs. The paintings inside look as if they were finished yesterday.</p>
     
-    <img src="\src\content\international\photos\egypt10.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Valley of Kings">
+    <img src="photos/egypt10.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Valley of Kings">
     <p>Finally, we visited the <strong>Karnak Temple</strong>, the largest religious building ever constructed. We celebrated the day with a rare and delicious Indian meal at AraCan Hotel.</p>
     
-    <img src="\src\content\international\photos\egypt11.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Karnak">
+    <img src="photos/egypt11.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Karnak">
 
     <div class="section-divider">Red Sea Relaxation</div>
 
     <p><strong>11/02/20 – 13/02/20</strong> — <span class="city-name">Hurghada</span></p>
-    <img src="\src\content\international\photos\egypt12.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Swiss Inn">
+    <img src="photos/egypt12.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Swiss Inn">
     <p>We drove through the Sahara to reach the <strong>Swiss Inn Resort</strong> in Hurghada. The Red Sea air was a refreshing change from the desert dust.</p>
     
-    <img src="\src\content\international\photos\egypt13.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Mini Egypt">
+    <img src="photos/egypt13.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Mini Egypt">
     <p>We spent time at <strong>Mini Egypt Park</strong>, viewing replicas of the landmarks we had just visited, and enjoyed a <strong>Dolphin Show</strong> at the aquarium.</p>
     
-    <img src="\src\content\international\photos\egypt14.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Dolphin Show">
+    <img src="photos/egypt14.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Dolphin Show">
 
     <div class="section-divider">The Final Bazaar</div>
 
     <p><strong>14/02/20</strong> — <span class="city-name">Cairo</span></p>
-    <img src="\src\content\international\photos\egypt15.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Khan Market">
+    <img src="photos/egypt15.jpg" class="journal-photo float-right" onclick="zoom(this.src)" alt="Khan Market">
     <p>Back in Cairo, we braved the <strong>Khan el-Khalili</strong> market. The bargaining is fierce but friendly. We ended our trip with the <strong>Sound and Light Show</strong> at the Pyramids.</p>
     
-    <img src="\src\content\international\photos\egypt16.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Sound and Light Show">
+    <img src="photos/egypt16.jpg" class="journal-photo float-left" onclick="zoom(this.src)" alt="Sound and Light Show">
     <p>The pyramids were bathed in colorful lights as we heard the story of 4,000 years of civilization—a fitting end to our journey.</p>
 
     <div class="summary-box">
@@ -238,6 +415,21 @@
 </div>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     function zoom(src) {
         document.getElementById('lightbox').style.display = 'flex';
         document.getElementById('lightbox-img').src = src;

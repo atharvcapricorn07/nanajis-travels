@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>North India Travelogue: Dalhousie, Dharamshala, and Amritsar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --himachal-blue: #2A5A9F; /* Deep Sky Blue */
@@ -20,6 +21,118 @@
             background-color: var(--mountain-mist);
             margin: 0;
             padding: 0;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
 
         .container {
@@ -154,6 +267,71 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../international/bestofeurope.html">Best of Europe</a>
+                <a href="../international/bhutan.html">Bhutan</a>
+                <a href="../international/central_europe.html">Central Europe</a>
+                <a href="../international/china.html">China</a>
+                <a href="../international/dubai.html">Dubai</a>
+                <a href="../international/egypt.html">Egypt</a>
+                <a href="../international/indonesia.html">Indonesia</a>
+                <a href="../international/muscat.html">Muscat</a>
+                <a href="../international/nepal.html">Nepal</a>
+                <a href="../international/scandinavian.html">Scandinavian Countries</a>
+                <a href="../international/singapore.html">Singapore</a>
+                <a href="../international/srilanka.html">Srilanka</a>
+                <a href="../international/vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="karnataka.html">Karnataka</a>
+                <a href="kerala.html">Kerala</a>
+                <a href="madhyapradesh.html">Madhya Pradesh</a>
+                <a href="northeast.html">Northeast India</a>
+                <a href="punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="rajasthan.html">Rajasthan</a>
+                <a href="uttarakhand.html">Uttarakhand</a>
+                <a href="uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
 <div id="lightbox-overlay">
     <button id="close-btn"><span class="cross-icon">&times;</span></button>
     <img id="lightbox-img" src="" alt="Zoomed Photo">
@@ -179,7 +357,7 @@
         <div class="day-entry">
             <span class="date-header">08/03/2022: The Mini Switzerland</span>
             <p>In Himachal Pradesh, roads are narrow. I find the drivers here to be very skilled; despite the narrow roads, hairpin bends, and the lack of parapet walls over the edges, they still manage to drive even big trucks and buses. Kesari arranged cabs for visiting places instead of the bus. After a heavy breakfast, we left the hotel and proceeded to <span class="location-highlight">Chamba Valley</span>, which is around a 2-hour travel. We visited the <span class="location-highlight">Lakshmi Narayan Temple</span>. 
-            <img src="\src\content\india\photos\punjab1.jpg" class="travel-photo photo-right" alt="Lakshmi Narayan Temple">
+            <img src="photos/punjab1.jpg" class="travel-photo photo-right" alt="Lakshmi Narayan Temple">
             </p>
             <p>Then we proceeded to <span class="location-highlight">Khajjiar</span>. On the way, we had our lunch. Khajjiar is a place surrounded by mountains with a small lake. In winter, the mountains are covered by ice and it looks like Switzerland, so this place is called "Mini Switzerland." There is also a Naga temple. We spent an hour here. Lakshmi may never forget this place; as we wanted to walk around the lake, the lawn was pretty wet and slippery. She slipped and suffered minor internal damage to her wrist, and the pain troubled her throughout the trip. After returning to Pune, she had to see a physician for treatment. After that, we headed back to the hotel, taking a 15-minute coffee break on the way.</p>
         </div>
@@ -192,41 +370,41 @@
         <div class="day-entry">
             <span class="date-header">10/03/2022: Mountains and Monasteries</span>
             <p>Our stay in Dharamshala was at the Angel Inn, which was quite good and the food was pleasant. After breakfast around 9 am, we left the hotel and proceeded to the <span class="location-highlight">Dharamshala Stadium</span>. 
-            <img src="\src\content\india\photos\punjab2.jpg" class="travel-photo photo-left" alt="Dharamshala Stadium">
+            <img src="photos/punjab2.jpg" class="travel-photo photo-left" alt="Dharamshala Stadium">
             It is about 30 minutes away. The stadium, with the background of Himalayan mountains covered in ice, looks beautiful.</p>
             <p>Next, we went to the <span class="location-highlight">Aghanjar Mahadev Mandir</span>. 
-            <img src="\src\content\india\photos\punjab3.jpg" class="travel-photo photo-right" alt="Ajankar Mahadev Mandir">
+            <img src="photos/punjab3.jpg" class="travel-photo photo-right" alt="Ajankar Mahadev Mandir">
             It is a beautiful temple surrounded by waterfalls, rocks, and trees. We spent quite some time enjoying the natural surroundings. We then returned to the hotel for a lavish dinner; a special item was the cashew nut and bitter gourd (karela) sabji. Afterward, we visited the Bhagsunag Temple and the Dalai Lama Monastery. We were later dropped at the McLeod Ganj market before returning to the hotel.</p>
         </div>
 
         <div class="day-entry">
             <span class="date-header">11/03/2022: The Holy City of Amritsar</span>
-            <img src="\src\content\india\photos\punjab4.jpg" class="travel-photo photo-left" alt="Amritsar Arrival">
+            <img src="photos/punjab4.jpg" class="travel-photo photo-left" alt="Amritsar Arrival">
             <p>At 7 am, we had our breakfast and proceeded to Amritsar. It is some 200 km away, taking about 6 hours with two breaks for tea. Around 2 pm, we reached Amritsar and were accommodated in a humble hotel 5 km away from the railway station. After lunch, we left the hotel by auto-rickshaw to see <span class="location-highlight">Jallianwala Bagh</span>. 
-            <img src="\src\content\india\photos\punjab5.jpg" class="travel-photo photo-right" alt="Jillianwalla Bagh">
+            <img src="photos/punjab5.jpg" class="travel-photo photo-right" alt="Jillianwalla Bagh">
             We spent an hour visiting the galleries and the well where people jumped in to save themselves from gunshots, but died.</p>
             <p>After this infamous place, we went to the <span class="location-highlight">Golden Temple</span>. 
-            <img src="\src\content\india\photos\punjab6.jpg" class="travel-photo photo-left" alt="Golden Temple">
+            <img src="photos/punjab6.jpg" class="travel-photo photo-left" alt="Golden Temple">
             There was a big crowd. Masks were strictly prohibited. Without masks, we stood for an hour in that crowd. To add to the tension, a neighboring Sardarji was sneezing constantly. At last, we entered the sacred place where prayer was going on continuously. Then we came out of the dome and spent an hour sitting on the premises taking pictures. On the way to the auto stand, we had a very delicious Lassi from a shop. Then we visited the Gobindgarh Fort, where a light show depicted the history of Punjab before independence. After the show, we returned to the hotel for dinner.</p>
         </div>
 
         <div class="day-entry">
             <span class="date-header">12/03/2022: The Border and Village Culture</span>
-            <img src="\src\content\india\photos\punjab7.jpg" class="travel-photo photo-right" alt="Attari Border/Sadda Pind">
+            <img src="photos/punjab7.jpg" class="travel-photo photo-right" alt="Attari Border/Sadda Pind">
             <p>Since morning there was no program we got up late. After the breakfast we roam around hotel. After lunch we left hotel and proceeded to see India Pakistan border. Atari is the village of India which is on the Border. Wagah is a village of Pakistan. Every evening both armies participate in their territories parades, and lowering their flags at sunset time. We witnessed this famous program some 20 years back through southern travels.</p>
             <p>After this event we went to Sadda Pind, where Punjabi village culture is exhibited. They also serve food in typical village style. This was the last program of the tour. The food and exhibits were okay, but we felt the entrance fee of Rs 700 per head was too costly.</p>
         </div>
 
         <div class="day-entry">
             <span class="date-header">13/03/2022: A Precious Reunion</span>
-            <img src="\src\content\india\photos\punjab8.jpg" class="travel-photo photo-left" alt="Khanna Family Reunion">
+            <img src="photos/punjab8.jpg" class="travel-photo photo-left" alt="Khanna Family Reunion">
             <p>We got up leisurely around 7 am, went for a morning stroll, and had breakfast. Around 11 am, Shri RP Khanna came to the hotel. He was so happy to receive us, and we went to his home. Mrs. Khanna was equally happy to greet us. He is nearing 80, and because of a spinal problem, he finds it difficult to walk. Despite his health ailments, he came all the way to the hotel to receive us. We talked continuously about old memories and ate until 2 pm. Then we had lunch which he ordered from a hotel. After tea, he dropped us at the station around 5 pm. In the whole tour, the time we spent with them is most precious to me. He was my boss, and his affinity towards us is great.</p>
             <p>We took the Golden Temple Express to Nizamuddin from Amritsar. The train was on time. Because of the heavy late lunch, we skipped dinner.</p>
         </div>
 
         <div class="day-entry">
             <span class="date-header">14/03/2022: The Journey Home</span>
-            <img src="\src\content\india\photos\punjab9.jpg" class="travel-photo photo-right" alt="Duronto Express Journey">
+            <img src="photos/punjab9.jpg" class="travel-photo photo-right" alt="Duronto Express Journey">
             <p>Reached Nizamuddin around 4 am. With the help of a porter, we reached the right platform to board the Duronto to Pune. The train was on time and departed at 6:15 am. This train was so cool—no crowd and no stoppages in between. We were constantly given things to eat and drink. Next day early morning around 3 am, we reached Pune. Overall, the trip was quite enjoyable.</p>
         </div>
 
@@ -240,6 +418,21 @@
 </div>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     const overlay = document.getElementById('lightbox-overlay');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.getElementById('close-btn');

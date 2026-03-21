@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scandinavian Adventure | Travelogue</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Playfair+Display:wght@700&family=Cormorant+Garamond:wght@700&display=swap" rel="stylesheet">
     <style>
         /* --- NORDIC PALETTE --- */
         :root {
@@ -23,6 +23,118 @@
             line-height: 1.8;
             margin: 0;
             padding: 0;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
 
         .container {
@@ -237,6 +349,72 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="bestofeurope.html">Best of Europe</a>
+                <a href="bhutan.html">Bhutan</a>
+                <a href="central_europe.html">Central Europe</a>
+                <a href="china.html">China</a>
+                <a href="dubai.html">Dubai</a>
+                <a href="egypt.html">Egypt</a>
+                <a href="indonesia.html">Indonesia</a>
+                <a href="muscat.html">Muscat</a>
+                <a href="nepal.html">Nepal</a>
+                <a href="scandinavian.html">Scandinavian Countries</a>
+                <a href="singapore.html">Singapore</a>
+                <a href="srilanka.html">Srilanka</a>
+                <a href="vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="../india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="../india/karnataka.html">Karnataka</a>
+                <a href="../india/kerala.html">Kerala</a>
+                <a href="../india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="../india/northeast.html">Northeast India</a>
+                <a href="../india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="../india/rajasthan.html">Rajasthan</a>
+                <a href="../india/uttarakhand.html">Uttarakhand</a>
+                <a href="../india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
+
 <div id="lightbox-modal" class="lightbox">
     <span class="close">&times;</span>
     <img class="lightbox-content" id="lightbox-img" src="">
@@ -272,7 +450,7 @@
 
         <h3>Accommodation & First Impressions</h3>
         
-        <img src="\src\content\international\photos\scandinavian1.jpg" alt="Holiday Inn Helsinki" class="journal-photo float-right">
+        <img src="photos/scandinavian1.jpg" alt="Holiday Inn Helsinki" class="journal-photo float-right">
 
         <p>Accommodation was arranged in Holiday Inn. The hotel was good. The room was more spacious. Normally in all these international hotels, we used to find combs, shaving razors, soap, toothpaste, etc. But this time we didn’t see such things in any hotel. Even a water kettle was not kept. Fortunately, Kesari gave this, and it was very handy to prepare tea and coffee every day in the room itself.</p>
         <p>From the airport, the hotel was about a 40-minute drive by bus. The bus was so good, absolutely no noise. The city was clean like any other normal European city. Roads are good. North European countries are thinly populated. So we did not see much traffic on the road.</p>
@@ -284,19 +462,19 @@
 
         <h3>Sibelius Monument</h3>
         
-        <img src="\src\content\international\photos\scandinavian2.jpg" alt="Sibelius Monument" class="journal-photo float-left">
+        <img src="photos/scandinavian2.jpg" alt="Sibelius Monument" class="journal-photo float-left">
 
         <p>First, we visited the Sibelius great composer monument. The Sibelius Monument is dedicated to the Finnish composer Jean Sibelius (1865–1957). The monument is located in Sibelius Park. Adjacent to this park, there is a lake with plenty of trees surrounding the lake, adding to the beauty of the park.</p>
 
         <h3>Rock Church (Temppeliaukio Church)</h3>
         
-        <img src="\src\content\international\photos\scandinavian3.jpg" alt="Rock Church" class="journal-photo float-right">
+        <img src="photos/scandinavian3.jpg" alt="Rock Church" class="journal-photo float-right">
 
         <p>Next, we visited the Rock Church. Temppeliaukio Church, called Rock Church, was designed by architects and brothers Timo and Tuomo in 1969. This church is built directly into solid rock. The roof of this church is made of copper rods. Every church will have a huge Bell. But in this church, no Bell is erected. The ringing sound of the Bell is played through a music system as and when the prayer is conducted.</p>
 
         <h3>The City Library & The Washroom Saga</h3>
         
-        <img src="\src\content\international\photos\scandinavian4.jpg" alt="City Library" class="journal-photo float-left">
+        <img src="photos/scandinavian4.jpg" alt="City Library" class="journal-photo float-left">
 
         <p>Then we visited the city library. Actually, the purpose of visiting the Library was not just to look at the heaps of books. A big hidden agenda was kept behind this visit by Kesari. That was to avail the free facility of washrooms.</p>
         <p>In Europe, finding free washrooms is big torture. Ten years back when we visited we were surprised to see the doors of the washroom would open only if a Euro coin is inserted. Now that is upgraded with a new gadget, all we have to do is insert a debit card, after deducting the money the door will open.</p>
@@ -307,15 +485,15 @@
 
         <p>Finland is a less populated country. So nowhere we saw a big crowd. Even in common places like bus stops, stations, airports all having a deserted look. We were dropped at Market Square. We roamed around an hour and took photos at the Cathedral of Helsinki.</p>
 
-        <img src="\src\content\international\photos\scandinavian5.jpg" alt="Cathedral of Helsinki" class="journal-photo float-right">
+        <img src="photos/scandinavian5.jpg" alt="Cathedral of Helsinki" class="journal-photo float-right">
 
         <p>After the market visit, we went by bus to Maharaja Restaurant of Helsinki. Lunch was good. After the lunch, we came to the port to board the cruise. The name of the cruise is <strong>Silja Symphony</strong>. The cabin allocated to us was on the 9th deck. It was a small cabin with two lower beds and two upper beds. Wi-Fi facility was provided without any additional payment. At 5 pm the cruise started to sail.</p>
         
-        <img src="\src\content\international\photos\scandinavian6.jpg" alt="Silja Symphony Cruise" class="journal-photo float-left">
+        <img src="photos/scandinavian6.jpg" alt="Silja Symphony Cruise" class="journal-photo float-left">
 
         <p>From the upper deck, took some photos. The name of the Sea is the Baltic Sea. It is an overnight journey to Stockholm, Sweden.</p>
 
-        <img src="\src\content\international\photos\scandinavian7.jpg" alt="Cruise Deck View" class="journal-photo float-right">
+        <img src="photos/scandinavian7.jpg" alt="Cruise Deck View" class="journal-photo float-right">
 
         <p>Night dinner in the cruise was a disaster. We made several rounds of the buffet table to find a vegetarian dish. Almost we found all non-vegetarian dishes. At last, we could locate some boiled potatoes, bread, butter, some fruits, and coffee. With that, our cruise dinner was over.</p>
 
@@ -330,14 +508,14 @@
 
         <h3>City Hall</h3>
         
-        <img src="\src\content\international\photos\scandinavian8.jpg" alt="Stockholm City Hall" class="journal-photo float-left">
+        <img src="photos/scandinavian8.jpg" alt="Stockholm City Hall" class="journal-photo float-left">
 
         <p>Next, we visited City Hall. The Stockholm City Hall is one of Sweden's most famous buildings, and one of the capital's most visited tourist attractions. It houses offices for 200 people including the Municipal Council, and is also famous for its grand ceremonial halls and unique art pieces. The Stockholm City Hall is the venue of the Nobel Prize banquet held on 10 December each year. Between May and September, the City Hall Tower offers a breathtaking view of Stockholm.</p>
 
         <h3>Water Front & Royal Palace</h3>
         <p>After the city hall, we walked around a marketplace called water front. This is the most beautiful spot in Stockholm. A big lake and the surrounding place is covered by beautiful buildings. We had our lunch at Krishna Restaurant: Lunch was so-so only.</p>
         
-        <img src="\src\content\international\photos\scandinavian15.jpg" alt="Royal Palace" class="journal-photo float-right">
+        <img src="photos/scandinavian15.jpg" alt="Royal Palace" class="journal-photo float-right">
 
         <p>The Royal Palace of Stockholm is one of Europe's largest palaces, with over 600 rooms, and serves as the official residence of the King of Sweden. Here we saw at the entrance of the palace the changing of guards.</p>
 
@@ -350,17 +528,17 @@
         <p>After the breakfast at Hotel Scandic Tower, we proceeded to Arlanda airport. It was an hour travel. Around 9:45 we reached the airport. The flight was late by an hour. So we finished our packed lunch also.</p>
         <p>In the airport check-in process was self-operations. Fed the ticket details and got the luggage tag and boarding pass. Also, we had to drop the baggage in the appropriate counter. The journey to Bergen was about an hour.</p>
         
-        <img src="\src\content\international\photos\scandinavian9.jpg" alt="Bergen City" class="journal-photo float-left">
+        <img src="photos/scandinavian9.jpg" alt="Bergen City" class="journal-photo float-left">
 
         <p>Bergen city of Norway is surrounded by seven peaks. This city is called the <strong>rain city</strong>. In a year more than 200 days, they have rain. While traveling by bus we saw many long tunnels. This city looks beautiful, full of greenery and waterfalls.</p>
 
         <h3>Fisherman Wharf & Mount Floyen</h3>
         
-        <img src="\src\content\international\photos\scandinavian10.jpg" alt="Fisherman Wharf" class="journal-photo float-right">
+        <img src="photos/scandinavian10.jpg" alt="Fisherman Wharf" class="journal-photo float-right">
 
         <p>Our first sightseeing spot in this was Fisherman Wharf. Hundreds of years ago, this place in Norway was considered the most important fish trade center in Europe. This place is protected as heritage and all old things which were used by fishermen are protected.</p>
         
-        <img src="\src\content\international\photos\scandinavian11.jpg" alt="Funicular Tram" class="journal-photo float-left">
+        <img src="photos/scandinavian11.jpg" alt="Funicular Tram" class="journal-photo float-left">
 
         <p>Then we visited Mount Floyen. This is the mountain peak about 400 meters above sea level. We went to the peak by Funicular Tram. It is a kind of winch that moves over the rail track over the mountain slope. It was told that from the mountain peak we can have a beautiful view of Bergen city. But being a cloudy day we could not see anything from the peak. In that cloudy weather with raincoats, we roamed around for some time and returned back to the point by the same Funicular Tram using the return ticket.</p>
 
@@ -370,7 +548,7 @@
         <p>That day's plan was to move from Bergen to Gudvangen by bus (about 3 hrs journey), then to move from there to Flam by ferry and from Flam to Myrdal by the famous scenic train which was the highlight of the tour.</p>
         <p>As planned after breakfast we got into the bus and started moving towards Gudvangen. Entire Norway is blessed by Nature. Everywhere we saw full of greenery and waterfalls and lakes. The journey was very pleasant. After an hour travel, because of some landslide we were unable to proceed and had to change our original plan. We came up to Voss and from there we went by train directly to Myrdal.</p>
 
-        <img src="\src\content\international\photos\scandinavian12.jpg" alt="Myrdal Scenic Train" class="journal-photo float-right">
+        <img src="photos/scandinavian12.jpg" alt="Myrdal Scenic Train" class="journal-photo float-right">
 
         <p>But we did not want to miss the scenic train journey. So we went to Flam from Myrdal by the famous scenic train and again returned back to Myrdal after spending an hour at Flam. We reached Flam around 1:30 pm and spent till 3:30 pm there. In Flam Railway station there was a railway museum also. The journey from Myrdal to Flam is 45 minutes.</p>
         <p>We were lucky that the climate was good. There was no rain or clouds. So the 45 minutes journey was memorable. In between on the way there was a wonderful waterfall. The train was stopped there for a few minutes for taking photographs. Onward and return journeys were most memorable in this trip.</p>
@@ -382,7 +560,7 @@
 
         <h3>Opera House & Ski Jump</h3>
         
-        <img src="\src\content\international\photos\scandinavian13.jpg" alt="Opera House" class="journal-photo float-left">
+        <img src="photos/scandinavian13.jpg" alt="Opera House" class="journal-photo float-left">
 
         <p>An amazing opera house designed by the Norwegian Snohetta architects was finished in 2008. It has really added a new dimension to Oslo, and has become one of the most popular tourist attractions in Norway.</p>
 
@@ -391,7 +569,7 @@
         <h3>Sculpture Park</h3>
         <p>The sculpture park is Gustav Vigeland's life work, comprising over 200 sculptures in granite, bronze, and wrought iron. It was installed mainly in the period 1940-1949.</p> 
         
-        <img src="\src\content\international\photos\scandinavian14.jpg" alt="Angry Child Sculpture" class="journal-photo float-right rotate-90">
+        <img src="photos/scandinavian14.jpg" alt="Angry Child Sculpture" class="journal-photo float-right rotate-90">
 
         <p>Here the angry child sculpture is very popular. In this garden, I was surprised to see a statue of 12 rasi.</p>
 
@@ -414,27 +592,27 @@
         <p>Actually, on the 14th midnight, we roamed around the upper deck to see the midnight sun. But we didn't see any sun. Only our sleep got disrupted.</p>
         <p>Morning we got up around 6 and got ready around 8 am. We went to Seven Seas restaurant to take our breakfast. We had Cornflakes, milk, roasted bread, and coffee. Got ready around 9:30 to leave the cruise. We happened to see a Korean wearing a very similar shirt to what I wore. He wanted to take a photo with me.</p>
 
-        <img src="\src\content\international\photos\scandinavian16.jpg" alt="With Korean Tourist" class="journal-photo float-left">
+        <img src="photos/scandinavian16.jpg" alt="With Korean Tourist" class="journal-photo float-left">
 
         <p>After we got down from the cruise, in the same bus we boarded again and a local guide was also with us.</p>
         
-        <img src="\src\content\international\photos\scandinavian17.jpg" alt="Copenhagen City" class="journal-photo float-right">
+        <img src="photos/scandinavian17.jpg" alt="Copenhagen City" class="journal-photo float-right">
 
         <p>Copenhagen, the capital city of Denmark looks good. The weather was quite chill and we had to wear some woolen clothes.</p>
 
         <h3>The Little Mermaid & Gefion Fountain</h3>
         
-        <img src="\src\content\international\photos\scandinavian18.jpg" alt="The Little Mermaid" class="journal-photo float-left">
+        <img src="photos/scandinavian18.jpg" alt="The Little Mermaid" class="journal-photo float-left">
 
         <p><strong>The Little Mermaid Statue:</strong> The Little Mermaid is one of H.C. Andersen's most beautiful and touching fairy tales. Sculptor Edvard Eriksen depicted this bronze sculpture on a rock by the waterside at Langelinie promenade. This statue is one of the most popular tourist attractions in Copenhagen.</p>
 
-        <img src="\src\content\international\photos\scandinavian19.jpg" alt="Gefion Fountain / Norse Goddess" class="journal-photo float-right">
+        <img src="photos/scandinavian19.jpg" alt="Gefion Fountain / Norse Goddess" class="journal-photo float-right">
 
         <p><strong>Gefion Fountain:</strong> It is a large fountain on the harbor front in Copenhagen. It features a group of oxen pulling a plow and being driven by the Norse Goddess.</p>
 
         <h3>Christiansborg Palace</h3>
         
-        <img src="\src\content\international\photos\scandinavian20.jpg" alt="Christiansborg Palace" class="journal-photo float-left">
+        <img src="photos/scandinavian20.jpg" alt="Christiansborg Palace" class="journal-photo float-left">
 
         <p>This palace has an 800-year-long history as Denmark’s center of power. This palace was reconstructed after a major fire accident. Still, some of the old paintings which were recovered after the fire are decorating this palace. At present, this palace is used by the queen of Denmark for official functions and she stays in a different place. A major portion of this palace is open for the public to see.</p>
 
@@ -460,6 +638,21 @@
 </div>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     // Lightbox Logic
     const modal = document.getElementById("lightbox-modal");
     const modalImg = document.getElementById("lightbox-img");

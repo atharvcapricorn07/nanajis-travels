@@ -4,14 +4,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>An Alaskan Odyssey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #2c3e50;
-            background-color: #f0f8ff; 
+            background-color: #f0f8ff;
             margin: 0;
             padding: 0;
+            padding-top: 72px;
+        }
+
+        /* ── SHARED NAV BAR ─────────────────────── */
+        .site-header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+            height: 72px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 56px;
+            background: rgba(253,252,250,.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(201,186,165,.4);
+            box-shadow: 0 2px 16px rgba(46,64,87,.07);
+            font-family: 'Lato', Arial, sans-serif;
+        }
+        .site-logo {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.2rem; font-weight: 700;
+            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none;
+            display: flex; align-items: center; gap: 10px;
+            color: #2E4057;
+        }
+        .site-logo-mark {
+            width: 28px; height: 28px;
+            border: 1.5px solid #C9883A; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #C9883A; font-size: .6rem; flex-shrink: 0;
+        }
+        .site-nav { display: flex; gap: 2px; }
+        .site-dropdown { position: relative; display: inline-block; }
+        .site-dropbtn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-dropbtn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        .site-dropdown-content {
+            display: none; position: absolute;
+            top: 100%; right: 0; min-width: 230px; z-index: 300;
+        }
+        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown-inner {
+            margin-top: 8px;
+            background: #FDFCFA;
+            border: 1px solid rgba(201,186,165,.4);
+            border-radius: 4px;
+            box-shadow: 0 12px 40px rgba(46,64,87,.14);
+            overflow: hidden;
+        }
+        .site-dropdown-inner a {
+            display: block; padding: 10px 20px;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .85rem; letter-spacing: .3px;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(201,186,165,.2);
+            transition: all .2s;
+        }
+        .site-dropdown-inner a:last-child { border-bottom: none; }
+        .site-dropdown-inner a:hover { background: #F7F0E3; color: #C0664A; padding-left: 28px; }
+        .site-home-btn {
+            background: none; border: none;
+            color: #4E4A44;
+            font-family: 'Lato', Arial, sans-serif;
+            font-size: .78rem; font-weight: 500;
+            letter-spacing: 2.2px; text-transform: uppercase;
+            padding: 10px 16px; cursor: pointer;
+            transition: color .25s; position: relative;
+        }
+        .site-home-btn::after {
+            content: ''; position: absolute; bottom: 4px; left: 16px; right: 16px;
+            height: 1px; background: #C9883A;
+            transform: scaleX(0); transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .site-home-btn:hover { color: #C9883A; }
+        .site-home-btn:hover::after { transform: scaleX(1); }
+
+        /* ── MOBILE TWO-ROW NAV ─────────────────── */
+        @media (max-width: 768px) {
+            body { padding-top: 96px; }
+            .site-header {
+                height: auto; flex-direction: column;
+                align-items: center; padding: 12px 16px 0;
+            }
+            .site-logo { padding-bottom: 10px; font-size: 1rem; }
+            .site-nav {
+                display: flex; width: calc(100% + 32px);
+                margin: 0 -16px; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                border-top: 1px solid rgba(201,186,165,.3);
+                gap: 0; padding: 0 8px;
+            }
+            .site-nav::-webkit-scrollbar { display: none; }
+            .site-dropdown { flex-shrink: 0; }
+            .site-dropbtn { font-size: .62rem; letter-spacing: 1.5px; padding: 10px 12px; white-space: nowrap; }
+            .site-dropdown-content { position: fixed; top: auto; left: 0; right: 0; min-width: 100%; }
+            .site-dropdown-inner { margin-top: 0; border-radius: 0; border-left: none; border-right: none; max-height: 60vh; overflow-y: auto; }
+            .site-dropdown-content { display: none; }
+            .site-dropdown.active .site-dropdown-content { display: block; }
         }
         .container {
             max-width: 900px;
@@ -134,6 +247,72 @@
 </head>
 <body>
 
+<!-- ══════ SHARED NAV BAR ══════ -->
+<header class="site-header">
+    <a class="site-logo" href="../../../index.html">
+        <div class="site-logo-mark">✦</div>
+        Nanaji's Travelogue
+    </a>
+    <nav class="site-nav">
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Abroad</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../international/bestofeurope.html">Best of Europe</a>
+                <a href="../international/bhutan.html">Bhutan</a>
+                <a href="../international/central_europe.html">Central Europe</a>
+                <a href="../international/china.html">China</a>
+                <a href="../international/dubai.html">Dubai</a>
+                <a href="../international/egypt.html">Egypt</a>
+                <a href="../international/indonesia.html">Indonesia</a>
+                <a href="../international/muscat.html">Muscat</a>
+                <a href="../international/nepal.html">Nepal</a>
+                <a href="../international/scandinavian.html">Scandinavian Countries</a>
+                <a href="../international/singapore.html">Singapore</a>
+                <a href="../international/srilanka.html">Srilanka</a>
+                <a href="../international/vietnam_combodia.html">Vietnam &amp; Cambodia</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">India</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../india/gujarat_rann.html">Gujarat Rann Festival</a>
+                <a href="../india/jaipur_agra.html">Jaipur &amp; Agra</a>
+                <a href="../india/karnataka.html">Karnataka</a>
+                <a href="../india/kerala.html">Kerala</a>
+                <a href="../india/madhyapradesh.html">Madhya Pradesh</a>
+                <a href="../india/northeast.html">Northeast India</a>
+                <a href="../india/punjab_himachal.html">Punjab &amp; Himachal</a>
+                <a href="../india/rajasthan.html">Rajasthan</a>
+                <a href="../india/uttarakhand.html">Uttarakhand</a>
+                <a href="../india/uttarpradesh.html">Uttar Pradesh</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">USA</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../usa/bayarea.html">Bay Area California</a>
+                <a href="../usa/california.html">Southern California</a>
+                <a href="../usa/newyork.html">New York &amp; Washington DC</a>
+                <a href="../usa/seattle.html">Seattle</a>
+                <a href="../usa/alaska.html">Alaska</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-dropbtn">Temples</button>
+            <div class="site-dropdown-content"><div class="site-dropdown-inner">
+                <a href="../temples/andhrapradesh.html">Andhra Odyssey</a>
+                <a href="../temples/ashtavinayak.html">Ashtavinayak</a>
+                <a href="../temples/shegaon.html">Shegaon Diary</a>
+                <a href="../temples/tamilnadu.html">Tamilnadu Temple Trail</a>
+            </div></div>
+        </div>
+        <div class="site-dropdown">
+            <button class="site-home-btn" onclick="window.location.href='../../../index.html'">Home</button>
+        </div>
+    </nav>
+</header>
+
+
 <div id="lightbox">
     <span id="close-btn" onclick="closeLightbox()">&times;</span>
     <img id="lightbox-img" src="">
@@ -142,18 +321,18 @@
 <div class="container">
     <header>
         <h1>Alaska Cruise : The Last Frontier</h1>
-        <div class="header-date">(23/08/22 to 30/08/22)</div>
+        <div class="header-date">Voyage through the Great Land | Aug 2022</div>
     </header>
 
     <h2>About the Cruise</h2>
     <p>Most cruises exploring the wonders of the Last Frontier begin their journey from the busy docks of Seattle. It was from here that we boarded our ship to begin our voyage.</p>
     
-    <img src="\src\content\usa\photos\alaska1.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Cruise Image 1">
+    <img src="photos/alaska1.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Cruise Image 1">
     <p>The cruise name: Carnival Splendor. It had 14 decks. On each deck, one row of rooms was on the left side, two rows of rooms were in the middle, and one was on the right side. In each deck, about 100 rooms were there. And about 4,000 people were traveling.</p>
     
     <p>Rooms had an attached bath, every day bed sheets and towels were changed and toilets were cleaned.</p>
     
-    <img src="\src\content\usa\photos\alaska2.jpg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Cruise Image 2">
+    <img src="photos/alaska2.jpg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Cruise Image 2">
     <p>Apart from the staircases, many elevators were also there to move from deck to other decks. It was a huge cruise. Apart from rooms, huge dining halls, swimming pools, table tennis, and a gym with many treadmills, static cycles, and many more pieces of equipment for doing exercises were all found.</p>
 
     <p>Different food counters were there to serve a variety of food. Tiger Masala was providing Indian food. Apart from a few Indians, this counter was crowded with lots of Americans. In this counter, normally butter naan, rice, dal, a few Indian vegetarian subjis, non-vegetarian items, kachori or samosa, dahi vada, papad, salads, etc. were served.</p>
@@ -173,7 +352,7 @@
     <h2>The Journey Day-by-Day</h2>
 
     <div class="date-heading">23/08/22</div>
-    <img src="\src\content\usa\photos\alaska3.jpeg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="23/08 Photo">
+    <img src="photos/alaska3.jpeg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="23/08 Photo">
     <p>We (myself, Lakshmi, Shashi, Uma, Tanvi, Athu, and Shashi’s mom) left home around 12 PM in our car to Seattle Port. The drive was about an hour. After reaching the port, from the car parking place of the cruise, we boarded a minibus with our suitcases and reached the boarding point.</p>
     
     <p>Just like an airport, our luggage was scanned, then we stood in the queue for boarding passes. Since this cruise was passing through Canadian territory to travel to Alaska by cruise, one needs a Canadian visa. Shashi arranged to get a Canada visa, and we got visas for 2 years.</p>
@@ -183,15 +362,15 @@
     <p>All the time, the stalls were open. Pizza, ice cream, french fries, and potato chips were seen in most of the stalls. Around 9 PM we had our dinner: dal, rice, two subjis, salad, and then ice cream. We returned back to our room and slept.</p>
 
     <div class="date-heading">24/08/22</div>
-    <img src="\src\content\usa\photos\alaska4.jpeg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="24/08 Photo">
+    <img src="photos/alaska4.jpeg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="24/08 Photo">
     <p>The whole day was only on travel. After I got up, I went to the 9th floor and had coffee. From the coffee machine in a cup, we took hot coffee; milk and sugar we can add as per the requirement. I had this coffee several times a day. All the 7 days in the morning, I used to spend some time walking. After the bath, from the buffet table, I preferred toasted bread, butter, some fruits, and yogurt. For lunch, we used to take from the Masala Tiger buffet counter. Normally we used to take butter naan, dal, some rice, vegetables, and dahi vada. Except for an hour's nap in the room, I spent the whole day roaming around the ship. In between, I was taking coffee with finger chips or plain potato chips.</p>
 
     <div class="date-heading">25/08/22</div>
-    <img src="\src\content\usa\photos\alaska5.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="25/08 Photo">
+    <img src="photos/alaska5.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="25/08 Photo">
     <p>The cruise was going in the narrow path between two mountains. Some mountains were mostly covered by ice. In these small islands, I understand, no human beings are staying. It was cloudy and at times raining. The cruise was moving at dead slow speed. The cruise had to take lots of turns and go through the narrow passage between the tall mountains. At times the ship was stationary and took turns to enter the narrow bottlenecks. We saw waterfalls from the mountains. Also, huge ice slabs were floating on the sea. Through binoculars, people search for wild animals and birds.</p>
 
     <div class="date-heading">26/08/22</div>
-    <img src="\src\content\usa\photos\alaska6.jpg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="26/08 Photo">
+    <img src="photos/alaska6.jpg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="26/08 Photo">
     <p>We reached around 11 AM a city called Icy Strait Point which belongs to Alaska State. After the breakfast, we got out of the cruise. The weather was quite chill. After getting down from the cruise, we reached the tourist point. There are two elevated points here. We can reach these points through a Gondola. For the first point, they don’t charge. For going to the second point, they charge $50 per head. We can go up and down more times also for a single ticket.</p>
     
     <p>From the tourist point, we took the first Gondola and reached the first peak. Uma and Shashi stood in the queue for buying tickets for the second peak. (Taking money and giving a ticket is just a minute's job. But here, invariably the counter person would have a big smile and greet, then start enquiring like how do you do, weather conditions etc., and give tickets while conveying wishes and regards. For every person, he will take much more time than the actual requirement. Even in the buffet system, the first person in the queue will stand before a tray of food and think quite a lot whether to take or not; the remaining persons in the queue will never get irritated. This is the culture of America.)</p>
@@ -199,7 +378,7 @@
     <p>So Shashi and Uma took some time to get tickets. Until that time, we all sat before a fireplace and warmed up ourselves. After they bought the ticket, we went by the second Gondola and reached the second peak point. The travel was about 7 minutes. The travel was quite scary; the valley was so deep. The second peak is called Juneau Icefield View Point.</p>
 
     <h3>Zip Rider</h3>
-    <img src="\src\content\usa\photos\alaska7.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Zip Rider Photo 1">
+    <img src="photos/alaska7.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Zip Rider Photo 1">
     <p>We three stayed at this peak, and Shashi, Uma, Tanvi, and Atharv went for the Zip Rider. This is definitely an adventurous ride and not recommended for senior citizens. The details are:</p>
     <ul>
         <li>Mountain name: Hoonah</li>
@@ -209,25 +388,25 @@
         <li>Travel time: Around a minute</li>
     </ul>
 
-    <img src="\src\content\usa\photos\alaska8.jpeg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Zip Rider Photo 2">
+    <img src="photos/alaska8.jpeg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Zip Rider Photo 2">
     <p>After the zip rider, Uma, Shashi, Tanvi, and Atharv came back to the same point, Juneau Icefield View Point. We all together came back to the tourist point by Gondola. While returning back to the ship, we saw a bald eagle, a huge bird with a white neck. These birds can be seen here only. We took lunch in the cruise and again we came out to this place and did walking. These places are totally pollution-free since there are no big roads or motor vehicles. Also, smoking is strictly prohibited in this city. We returned back to the cruise, which started to sail around 7 PM.</p>
 
     <div class="date-heading">27/08/22</div>
-    <img src="\src\content\usa\photos\alaska9.jpeg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="27/08 Photo">
+    <img src="photos/alaska9.jpeg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="27/08 Photo">
     <p>Early morning the cruise reached the city of Juneau. This is the capital of Alaska. We had our early breakfast and left the ship. Shashi booked for visiting Mendenhall Glacier. After getting down, we located our tourist point and boarded the bus. The bus travel was 25 minutes. In this place, 300 days in a year it would be raining. When we were in the city, that day was also raining. We reached Mendenhall Glacier tourist point. They screened a documentary movie about the Mendenhall glacier. After the movie, we went to view the glaciers. The weather was bad; it was cloudy and raining. We took some photos also. From the photo point, we saw the Nugget waterfalls. Since the rain continued, we three returned back to the tourist point; Uma, Shashi, Tanvi, and Athu walked towards Nugget waterfalls to have a closer look.</p>
     
     <p>After they returned, we took the same bus and came back to the boarding point of the cruise and boarded the ship. Being that day was Tanvi’s birthday, we celebrated on the cruise.</p>
 
     <div class="date-heading">28/08/22</div>
-    <img src="\src\content\usa\photos\alaska10.jpg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="28/08 Photo">
+    <img src="photos/alaska10.jpg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="28/08 Photo">
     <p>The Cruise reached Ketchikan city. This is another city of Alaska. After finishing our breakfast, we left the cruise and went into the city. Here also it was raining. In this city, Salmon fish is famous. We took a free bus and went to the Heritage Center. It is a small museum. We spent an hour and returned back to the city. We did some shopping in a mall and went back to the cruise. After that we had our lunch. The ship started to sail around 7 PM. Being that day was Shashi’s birthday, we celebrated during dinner.</p>
 
     <div class="date-heading">29/08/22</div>
-    <img src="\src\content\usa\photos\alaska11.jpeg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="29/08 Photo">
+    <img src="photos/alaska11.jpeg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="29/08 Photo">
     <p>The whole day was gone only on travelling. Around 4 PM we reached close to Canada. In this region, whale movements are common. In the public address system, the crew of the ship were also announcing and telling the whales' location, like the left side of the ship etc. We could see a few whales also. They used to jump and invariably a few whales move together. Around 8 PM the cruise reached Victoria, a city belonging to Canada. This city is called the ‘city of parks.’ The halt was only 2 hours, so we didn’t get down from the cruise. Around 10 PM the ship started to move again towards Seattle.</p>
 
     <div class="date-heading">30/08/22</div>
-    <img src="\src\content\usa\photos\alaska12.jpeg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="30/08 Photo">
+    <img src="photos/alaska12.jpeg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="30/08 Photo">
     <p>The cruise must have reached Seattle in the early morning. When I woke up early morning the ship was at Seattle Port. We quickly finished our breakfast. Previous night itself we packed our suitcases and kept them ready. We came out of the ship and again our passport and visa were checked by the US Customs and Border Protection. Again we took the cruise minibus and reached the parking spot, took our car, and reached home around 10 AM. This was my first long trip in the luxurious cruise and quite enjoyable.</p>
 
     <div class="summary-box">
@@ -236,6 +415,21 @@
 </div>
 
 <script>
+    // Mobile tap dropdowns
+    if (window.matchMedia('(max-width: 768px)').matches) {
+        document.querySelectorAll('.site-dropdown').forEach(dd => {
+            dd.addEventListener('click', e => {
+                const isActive = dd.classList.contains('active');
+                document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+                if (!isActive) dd.classList.add('active');
+                e.stopPropagation();
+            });
+        });
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.site-dropdown').forEach(d => d.classList.remove('active'));
+        });
+    }
+
     function zoomImg(img) {
         document.getElementById("lightbox-img").src = img.src;
         document.getElementById("lightbox").style.display = "block";
