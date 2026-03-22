@@ -530,6 +530,7 @@
 
 <script>
 /* ── DROPDOWNS ── */
+var _navTouchHandled = false;
 function toggleNav(el) {
     var dd = el.parentElement;
     var isActive = dd.classList.contains('active');
@@ -544,6 +545,8 @@ function toggleNav(el) {
             }
         }
     }
+    _navTouchHandled = true;
+    setTimeout(function() { _navTouchHandled = false; }, 400);
 }
 document.addEventListener('touchstart', function(e) {
     if (!e.target.closest('.site-dropdown')) {
@@ -551,8 +554,11 @@ document.addEventListener('touchstart', function(e) {
     }
 }, { passive: true });
 document.addEventListener('click', function(e) {
+    if (_navTouchHandled) return;
     if (!e.target.closest('.site-dropdown')) {
         document.querySelectorAll('.site-dropdown').forEach(function(d) { d.classList.remove('active'); });
+    }
+});
     }
 });
 </script>
