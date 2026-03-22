@@ -88,14 +88,20 @@
             transform: scaleX(0); transform-origin: left;
             transition: transform .3s ease;
         }
-        .dropdown:hover .dropbtn { color: var(--amber); }
-        .dropdown:hover .dropbtn::after { transform: scaleX(1); }
+        /* hover styles now live inside the (hover: hover) media query above */
 
         .dropdown-content {
             display: none; position: absolute;
             top: 100%; right: 0; min-width: 240px; z-index: 300;
         }
-        .dropdown:hover .dropdown-content,
+        /* Only use CSS hover on devices that have a true pointer (mouse).
+           On real touchscreens (no hover capability) we rely solely on
+           the JS .active class, avoiding the double-tap bug. */
+        @media (hover: hover) and (pointer: fine) {
+            .dropdown:hover .dropdown-content { display: block; }
+            .dropdown:hover .dropbtn { color: var(--amber); }
+            .dropdown:hover .dropbtn::after { transform: scaleX(1); }
+        }
         .dropdown.active .dropdown-content { display: block; }
 
         .dropdown-inner {
