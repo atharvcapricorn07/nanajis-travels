@@ -187,7 +187,7 @@
           <a href="${i}muscat.html">Muscat</a>
           <a href="${i}nepal.html">Nepal</a>
           <a href="${i}scandinavian.html">Scandinavian Countries</a>
-          <a href="${i}singapore.html">Singapore</a>
+          <a href="${i}singapore.html">South East Asia</a>
           <a href="${i}srilanka.html">Srilanka &amp; Maldives</a>
           <a href="${i}vietnam_combodia.html">Vietnam &amp; Cambodia</a>
         </div></div>
