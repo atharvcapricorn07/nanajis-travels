@@ -67,13 +67,18 @@
             transform: scaleX(0); transform-origin: left;
             transition: transform .3s ease;
         }
-        .site-dropdown:hover .site-dropbtn { color: #C9883A; }
-        .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+        /* Only use CSS hover on true pointer devices (mouse).
+           Touch devices rely solely on the JS .active class — prevents double-tap bug. */
+        @media (hover: hover) and (pointer: fine) {
+            .site-dropdown:hover .site-dropbtn { color: #C9883A; }
+            .site-dropdown:hover .site-dropbtn::after { transform: scaleX(1); }
+            .site-dropdown:hover .site-dropdown-content { display: block; }
+        }
         .site-dropdown-content {
             display: none; position: absolute;
             top: 100%; right: 0; min-width: 230px; z-index: 300;
         }
-        .site-dropdown:hover .site-dropdown-content { display: block; }
+        .site-dropdown.active .site-dropdown-content { display: block; }
         .site-dropdown-inner {
             margin-top: 8px;
             background: #FDFCFA;
