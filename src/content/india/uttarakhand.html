@@ -16,10 +16,19 @@
             padding-top: 72px;
         }
 
+        .main-container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            border-left: 10px solid #2d5a27;
+            border-right: 10px solid #85b09a;
+        }
+
         /* --- Header Styling --- */
         header {
-            border-bottom: 2px solid #e27d60; 
-            padding-bottom: 15px;
+            border-bottom: 2px solid #e27d60;
+            padding: 40px 20px 15px;
             margin-bottom: 25px;
             text-align: center;
         }
@@ -48,6 +57,9 @@
         }
 
         /* --- Content Styling --- */
+        .content {
+            padding: 10px 50px 40px;
+        }
         .day-block {
             margin-bottom: 30px;
             border-left: 4px solid #85b09a;
@@ -178,6 +190,11 @@
             margin: 30px 0;
             font-weight: bold;
         }
+        @media (max-width: 768px) {
+            .main-container { margin: 0; border-left: none; border-right: none; }
+            .content { padding: 10px 20px 30px; }
+            .travel-photo { width: 100%; height: auto; float: none; margin: 10px 0; }
+        }
     </style>
 </head>
 <body>
@@ -197,6 +214,7 @@
         <div class="dates">(18th November 2025 to 29th November 2025)</div>
     </header>
 
+    <div class="content">
     <div class="day-block">
         <span class="date-label">18/11/25</span>
         <p>We left home after our dinner around 9. We booked a cab for the airport. The cab driver continuously was jumping the red signals of Nagras Road, Parihar Chowk, Bremen Chowk, etc. Also, he drove in the lane meant exclusively for buses on Alandi Road. Nowadays engaging a cab through Uber and traveling seems to be risky. Fortunately, we safely reached the airport. Security check was more vigilant than the usual one. Air India flight AI2608 was at the right time. Departed at 12:40. At 1 am, they served dinner also. Roti, potato sabji, and a cake were served with coffee.</p>
