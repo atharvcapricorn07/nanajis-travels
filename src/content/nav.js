@@ -224,6 +224,7 @@
           <a href="${tem}ashtavinayak.html">Ashtavinayak</a>
           <a href="${tem}shegaon.html">Shegaon Diary</a>
           <a href="${tem}tamilnadu.html">Tamilnadu Temple Trail</a>
+          <a href="${tem}tirupathi.html">Tirupati &amp; Beyond</a>
         </div></div>
       </div>
       <div class="site-dropdown">
