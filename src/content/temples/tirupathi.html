@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travelogue | Tirupati &amp; Beyond</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --tirupati-saffron: #D4450C;
+            --temple-gold: #C8960C;
+            --deep-crimson: #8B0000;
+            --lotus-pink: #E8A87C;
+            --parchment: #FDF6EC;
+            --ink: #2D3436;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: var(--parchment);
+            color: var(--ink);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            padding-top: 72px;
+        }
+
+        .header-banner {
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+                url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Tirumala_temple_2016.jpg/1280px-Tirumala_temple_2016.jpg');
+            background-size: cover;
+            background-position: center top;
+            padding: 50px 20px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            border-bottom: 5px solid var(--temple-gold);
+        }
+
+        .header-banner .om-symbol {
+            font-size: 2rem;
+            color: var(--temple-gold);
+            margin-bottom: 6px;
+            letter-spacing: 4px;
+        }
+
+        .header-banner h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.6rem;
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .header-banner .sub-destinations {
+            font-size: 0.95rem;
+            color: var(--temple-gold);
+            margin: 8px 0 4px 0;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .header-banner p.header-dates {
+            font-size: 1.05rem;
+            font-weight: 400;
+            margin: 6px 0 0 0;
+            color: #f0e0c0;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 28px auto 50px;
+            background: white;
+            padding: 40px 60px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .section-intro {
+            background: linear-gradient(135deg, #FFF3E0, #FDE8CC);
+            border-left: 5px solid var(--tirupati-saffron);
+            border-radius: 0 6px 6px 0;
+            padding: 18px 22px;
+            margin-bottom: 30px;
+        }
+
+        .section-intro h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--deep-crimson);
+            margin: 0 0 8px 0;
+            font-size: 1.5rem;
+        }
+
+        .section-intro p {
+            margin: 0;
+            font-size: 1rem;
+            color: #555;
+            text-align: left;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: var(--tirupati-saffron);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            clear: both;
+        }
+
+        .place-heading {
+            font-family: 'Playfair Display', serif;
+            color: var(--deep-crimson);
+            font-size: 1.35rem;
+            margin: 18px 0 8px 0;
+            border-bottom: 2px solid var(--temple-gold);
+            padding-bottom: 4px;
+            clear: both;
+        }
+
+        section {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #F1EBE0;
+            padding-bottom: 20px;
+            overflow: hidden;
+        }
+
+        section:last-of-type { border-bottom: none; }
+
+        p {
+            line-height: 1.7;
+            font-size: 1.04rem;
+            color: #444;
+            margin-bottom: 13px;
+            text-align: justify;
+        }
+
+        /* PHOTO STYLING */
+        .travel-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 4px solid white;
+        }
+
+        .travel-photo:hover {
+            transform: scale(1.02);
+        }
+
+        .photo-left {
+            float: left;
+            margin: 10px 22px 10px 0;
+        }
+
+        .photo-right {
+            float: right;
+            margin: 10px 0 10px 22px;
+        }
+
+        /* LIGHTBOX STYLING */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.92);
+            align-items: center;
+            justify-content: center;
+        }
+
+        #lightbox-img {
+            max-width: 88%;
+            max-height: 82%;
+            border: 5px solid white;
+            border-radius: 4px;
+            box-shadow: 0 0 60px rgba(0,0,0,0.8);
+        }
+
+        #close-btn {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            transition: background 0.2s, transform 0.2s;
+            padding: 0;
+        }
+
+        #close-btn:hover {
+            background: #f0f0f0;
+            transform: scale(1.1);
+        }
+
+        #close-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: #333;
+            stroke-width: 2.5;
+        }
+
+        .highlight-box {
+            background-color: #FFF8EE;
+            border-left: 5px solid var(--temple-gold);
+            padding: 13px 18px;
+            margin: 16px 0;
+            font-style: italic;
+            font-size: 1rem;
+            color: #5a3e10;
+            clear: both;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .info-block {
+            background: #FDF0E8;
+            border: 1px solid #F0C090;
+            border-radius: 6px;
+            padding: 14px 18px;
+            margin: 16px 0;
+            font-size: 0.97rem;
+            color: #4a3010;
+            clear: both;
+        }
+
+        .info-block strong {
+            color: var(--deep-crimson);
+        }
+
+        .summary-container {
+            background: linear-gradient(135deg, var(--deep-crimson), #B5451B, var(--tirupati-saffron));
+            color: white;
+            padding: 30px 35px;
+            border-radius: 8px;
+            margin-top: 40px;
+            clear: both;
+            border-top: 4px solid var(--temple-gold);
+        }
+
+        .summary-container h3 {
+            font-family: 'Playfair Display', serif;
+            margin: 0 0 14px 0;
+            font-size: 1.6rem;
+            color: var(--temple-gold);
+        }
+
+        .summary-container p {
+            color: rgba(255,255,255,0.93);
+            font-size: 1.05rem;
+            text-align: left;
+            line-height: 1.75;
+            margin-bottom: 10px;
+        }
+
+        .summary-container p:last-child { margin-bottom: 0; }
+
+        @media (max-width: 768px) {
+            .container { padding: 25px; width: 92%; }
+            .header-banner h1 { font-size: 2rem; }
+            .travel-photo {
+                width: 100%;
+                height: auto;
+                float: none;
+                margin: 15px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-banner">
+        <div class="om-symbol">🕉 ॐ 🕉</div>
+        <h1>Tirupati &amp; Beyond</h1>
+        <p class="sub-destinations">Sri Kalahasti · Thiruchanur · Tirutani · Thiruvannamalai · Mantralayam</p>
+        <p class="header-dates">4th March 2017 – 11th March 2017</p>
+    </div>
+
+    <div class="container">
+
+        <!-- ── SECTION 1: BOOKING GUIDE ── -->
+        <section>
+            <div class="section-intro">
+                <h2>Thirumalai — Booking the Kalyanostavam</h2>
+                <p>A practical guide for pilgrims planning the sacred Balaji darshan and seva booking.</p>
+            </div>
+
+            <p>At the Balaji temple of Thirumala, various sevas such as Special Darshan, Suprabhatam, Archana, and Kalyanostavam are conducted. All these sevas can only be booked online.</p>
+
+            <p>For booking, one must visit <strong><a href="http://www.ttdsevaonline.net" target="_blank">www.ttdsevaonline.net</a></strong>. The first step is to register. Name, address, Aadhaar number, email id, and mobile number need to be correctly enrolled. A photo also has to be uploaded, and the photo size must not exceed 10 KB. Reducing a photo to this size is genuinely tricky — various methods are described on Google. So, before registering, keep your passport-size photograph of 10 KB ready on the desktop.</p>
+
+            <p>After registration, they provide a password through your registered mobile number. The user ID will be your email id. Whenever you want to book, you can visit the site, log in using your user ID and password, choose the seva, find a suitable date, and complete the booking. Payment can be made by net banking, debit card, or credit card. Accommodation can also be booked.</p>
+
+            <div class="info-block">
+                <strong>Important — Kalyanostavam Booking Rules:</strong><br>
+                Booking opens only two months in advance. Once booked, the next booking can only be made after at least six months. Only one Kalyanostavam can be booked at a time. The booking fee is ₹1,000. Apart from the person who booked, one accompanying member is allowed — their ID proof details must be entered at the time of booking.
+            </div>
+
+            <p>After booking, two copies of the booked ticket — one for entry and one for collection of prasadam — must be printed and carried. Original ID proof for both the primary devotee and the accompanying person (the same as mentioned during booking) must also be carried.</p>
+
+            <p>For Kalyanostavam, traditional dress is mandatory. Gentlemen must wear a dhoti and an upper vastra to cover the body — banians and shirts are not allowed. Ladies must wear a saree or salwar kameez with dupatta.</p>
+
+            <div class="highlight-box">
+                After Kalyanostavam and darshan, the prasadam given per ticket holder includes 2 giant laddus, 3 big laddus, 2 large vadas (dosa-size), a blouse piece, and one Angavastra.
+            </div>
+
+            <p>The reporting time is specified on the ticket. Once booked, there is no provision to cancel.</p>
+        </section>
+
+        <!-- ── SECTION 2: DEPARTURE ── -->
+        <section>
+            <div class="date-badge">4th March 2017</div>
+            <p>I had booked the Kalyanostavam for 6th March 2017. Subsequently, I booked a reservation on the Chennai Express for 4th March on the Senior Citizen quota, departing from Pune at 18:00 hrs. The train was right on time. The 3rd AC coach was quite crowded. The train reached Renigunta the following noon, around 12:30.</p>
+        </section>
+
+        <!-- ── SECTION 3: TIRUPATI & SRI KALAHASTI ── -->
+        <section>
+            <div class="date-badge">5th March 2017</div>
+            <p>We got down at Renigunta. The bus stand is conveniently close to the station. We took a bus to Tirupati — Tirupati is the base of the mountain and Thirumala is the peak. The journey from Renigunta to Tirupati is about 30 minutes.</p>
+
+            <p>Close to the main bus stand of Tirupati, we took a room at a hotel called Vikram. The weather was quite hot, so we opted for an AC room.</p>
+
+            <p>After freshening up, we decided to visit Sri Kalahasti. It is about 50 km from Tirupati, roughly an hour away by bus.</p>
+
+            <img src="photos/tirupati1.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Sri Kalahasti Temple">
+
+            <p>The temple was not very crowded that day, so we stood in the queue for about 30 minutes and had a peaceful darshan. The presiding deity is Srikalahasteeswara (Shiva), also called the Vayu Lingam, and the Goddess is Gnana Prasunambika Devi (Parvati).</p>
+
+            <p>We finished dinner at one of the hotels in Sri Kalahasti and took a bus back to Tirupati. We returned to our room around 9 pm.</p>
+        </section>
+
+        <!-- ── SECTION 4: KALYANOSTAVAM DAY ── -->
+        <section>
+            <div class="date-badge">6th March 2017</div>
+            <h3 class="place-heading">Tirumala — The Sacred Kalyanostavam</h3>
+
+            <p>We left the room around 6 am. We did not take our mobile phones with us — just the purse, tickets, IDs, and a polythene bag for collecting laddus. Having left so early, we could only manage a coffee before heading out.</p>
+
+            <p>Tirupati to Tirumala is an hour's travel. Frequent bus services are provided. Just before the entrance to Tirumala, there is a security check where passengers' luggage is X-rayed. After the check, we board the bus again.</p>
+
+            <img src="photos/tirupati2.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Tirumala Temple View">
+
+            <p>We reached the Tirumala bus stop at around 8 am. A place called Subhadam is the entrance point, about a kilometre from the bus stop. We reached there, showed our ticket and IDs, and were allowed to stand in the queue. Our ticket and ID were checked at several points, and we underwent a security check before being allowed into a waiting hall. We could sit there and were provided breakfast and milk. Washroom facilities were also available.</p>
+
+            <div class="highlight-box">
+                In spite of all these facilities, people are not always kind enough to follow their turn in the queue. When moving from the hall for darshan, people rush ahead, and there is every possibility of a stampede — especially difficult for aged persons to manage.
+            </div>
+
+            <p>After about an hour, we were allowed to move to the hall where the Kalyanostavam takes place. This hall is quite large and thousands of people assemble there. They are asked to sit on the floor. For those who cannot sit cross-legged, elevated platforms are provided along both sides of the hall.</p>
+
+            <p>The Kalyanostavam function lasts about an hour. It begins with the Sankalpa. Subsequent events — Kanya Danam, Panigraham, and Thirumangalyam — take place one by one, concluding with Mangalaarti.</p>
+
+            <p>Then the thousands of attendees form a queue in batches and join the regular darshan queue at the nearest point. At this junction, there is a very large crowd and the queues are not orderly — there is a great deal of pushing and jostling. For aged persons, it is difficult to pass through this bottleneck and have darshan. After darshan, to exit the sacred sanctum, one must leave through the same entrance used to enter, which again creates the possibility of a stampede.</p>
+
+            <p>This single-entrance policy for both entry and exit has been followed for many years, and it is believed that creating separate entry and exit points would adversely affect the sanctity of the temple.</p>
+
+            <p>The entry and exit to the sanctum is managed at a fixed frequency — devotees are allowed in for 2 minutes, then the incoming queue is stopped and the outgoing crowd is guided out for 3 minutes, after which the cycle repeats.</p>
+
+            <div class="highlight-box">
+                Even after crossing this bottleneck, one is not entirely safe. There is yet another disorderly queue for the famous Hundi, where devotees deposit currency, gold, and precious stones such as diamonds. Standing in the queue with a ten-rupee note, I felt a moment of embarrassment watching someone deposit bundles of ₹2,000 notes.
+            </div>
+
+            <p>Then comes another somewhat haphazard queue for obtaining prasadam — each person receives one laddu free of charge. A separate counter is there for Kalyanostavam participants, where they give two big laddus, three medium-sized laddus, and two pepper vadas of about ten inches in diameter.</p>
+
+            <p>After collecting the prasadam, we safely exited the temple, collected our chappals from the stand, and walked to the bus stop. Fortunately, plenty of buses were available. We reached Tirupati and had lunch around 3 pm, then returned to our room for some rest.</p>
+
+            <h3 class="place-heading">Thiruchanur — Padmavati Devi Temple</h3>
+
+            <p>This place is also called Alamelumangapuram. A beautiful temple here is dedicated to Goddess Padmavati. Normally, those who visit Tirupati also visit this temple.</p>
+
+            <p>Thiruchanur is about 4 km from the main bus stand of Tirupati, and frequent bus services are available.</p>
+
+            <img src="photos/tirupati3.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Padmavati Ammavari Temple">
+
+            <p>At this temple, there can sometimes be a long queue, but there is no mad rush — it is manageable. Laddu prasadam is sold here as well. Each laddu costs ₹10. Coupons are issued at one counter and laddus are collected at separate counters. They do not provide polythene bags, so one should carry bags along.</p>
+
+            <p>When we visited, there was no big crowd. We had a peaceful darshan and returned to our room.</p>
+        </section>
+
+        <!-- ── SECTION 5: TIRUTANI ── -->
+        <section>
+            <div class="date-badge">7th March 2017</div>
+            <h3 class="place-heading">Tirutani — Murugan Temple</h3>
+
+            <p>We left early morning around 6 am. We took an auto from Tirupati to Renigunta and boarded the Tirupati–Chennai Express, which leaves Renigunta at 7:30 am. We arrived at Tirutani around 9 am. We deposited our bags in the railway station cloak room and went to the bus stand for breakfast.</p>
+
+            <img src="photos/tirupati4.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Tirutani Murugan Temple">
+
+            <p>This temple is situated on a hill, with 365 steps leading to the top. It is one among the Arupadaiveedu — the six holiest temples dedicated to Lord Murugan. It is believed that this temple has existed since the Sangam period, some 2,000 years ago. The presiding Goddess here is Valli.</p>
+
+            <p>The temple is kept open throughout the day from 6 am to 9 pm. There is no dress code — one can enter with normal clothing such as pants and shirts.</p>
+
+            <p>We reached the temple around 11 am and had a wonderful darshan. After spending about an hour there, we came down, had lunch, and rested in a hotel for some five hours. We reached Tirutani station around 6 pm.</p>
+
+            <p>We had reserved seats on the train to Chennai. We boarded at 7:30 pm and reached Chennai Central around 9 pm. Our plan was to proceed to Thiruvannamalai, with a connecting train from Chennai Egmore departing at 9:45 pm. We had to run from Chennai Central to Egmore to catch it.</p>
+
+            <div class="highlight-box">
+                We just barely made it onto the train as it began moving. We were nearly about to miss it.
+            </div>
+
+            <p>As Dindivanam is closer to Thiruvannamalai but Vilupuram is a larger town, we decided to stay the night at Vilupuram. We arrived there at midnight and, being unable to search for a good hotel at that hour, found one close to the station and took an AC room for the night.</p>
+        </section>
+
+        <!-- ── SECTION 6: THIRUVANNAMALAI ── -->
+        <section>
+            <div class="date-badge">8th March 2017</div>
+            <h3 class="place-heading">Thiruvannamalai — Arunachaleswarar Temple</h3>
+
+            <p>We left around 7 am in the morning. Thiruvannamalai is about 50 km from Vilupuram. Buses are available from the Vilupuram main bus stand and the travel time is around 2 hours.</p>
+
+            <img src="photos/tirupati5.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Arunachaleswarar Temple, Thiruvannamalai">
+
+            <p>We reached Thiruvannamalai around 11 am. It is a fairly large and magnificent temple. After darshan, we had lunch at a hotel and stayed in the temple praakaram until 3 pm.</p>
+
+            <p>This temple is dedicated to Lord Shiva, who is worshipped here as Annamalayar. Goddess Parvati is called Unnamalai. It is one of the larger temples of South India — its gopuram is the 3rd tallest among South Indian temples. A giant Nandi is erected at the entrance. The revered saint Sri Ramana Rishi was closely associated with this temple. There is a Padala Lingam (below ground level) — a separate sacred chamber within the temple complex where Sri Ramana Rishi used to meditate.</p>
+
+            <p>Around 3 pm, we hired an auto for the Girivalam — the sacred circumambulation of the hill. Around the Tiruvanamalai temple, there are eight lingas and three ashrams, which we visited. The auto fare for the Girivalam was ₹350.</p>
+
+            <p>During the Girivalam, we had darshan of the eight Ashta Lingams: Yama, Varuna, Kubera, Indra, Agni, Niruthi, Vayu, and Isanya.</p>
+
+            <p>We also visited the Ramana Rishi Ashram during the Girivalam. In this ashram, the sage lived and gathered many followers. Even during his lifetime, people came from different countries for meditation and to seek his blessings. Even now, foreigners visit this place — some stay for months at a time to meditate.</p>
+
+            <p>After the visit, we returned to the Tiruvanamalai main bus stop and took a bus back to Vilupuram. We reached the hotel around 10 pm.</p>
+        </section>
+
+        <!-- ── SECTION 7: MANTRALAYAM ── -->
+        <section>
+            <div class="date-badge">9th March 2017</div>
+            <p>By 5:30 am, we left the hotel and came to Vilupuram station. We had booked seats on the Pondicherry–Chennai Express, departing Vilupuram at 6:30 am. We reached Chennai Egmore around 8:30 am, then took a suburban train to Park Station and proceeded to Chennai Central. We had breakfast at the Central station.</p>
+
+            <p>We boarded the Chennai–Mumbai Express at 11:45 am. We reached Mantralayam Road almost at midnight. Luckily, a share auto was available to take us to Mantralayam — about an hour's ride. We took a room at Mantralayam for the night.</p>
+        </section>
+
+        <section>
+            <div class="date-badge">10th March 2017</div>
+            <h3 class="place-heading">Mantralayam — Sri Raghavendra Swami Brindavana</h3>
+
+            <p>In the morning around 7 am, after breakfast, we went to the Mantralayam temple. After darshan at the Brindavana,</p>
+
+            <img src="photos/tirupati6.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Raghavendra Swami Temple, Mantralayam">
+
+            <p>we decided to visit the Pancha Mukha Anjaneyar temple. We visited this temple and the Appanna Ashram by share auto.</p>
+
+            <p>After lunch, we returned to the hotel and took rest. Around 6 pm, we went to the temple again and witnessed the evening Aarti. Every evening around 7:30, a beautifully decorated rath procession circles the temple — we watched this procession with great joy. We then had food at the temple devasthanam and returned to our room.</p>
+        </section>
+
+        <section>
+            <div class="date-badge">11th March 2017</div>
+            <p>Around 6 am, we left the devasthanam room and took an auto to Mantralayam Road railway station. That morning, we also went to the temple one final time, offered our prayers, had breakfast, and then made our way to the station.</p>
+
+            <p>We boarded the train around 11:30 am at Mantralayam Road station and reached Pune at midnight. We took an auto home and arrived safely.</p>
+        </section>
+
+        <!-- ── CLOSING SUMMARY ── -->
+        <div class="summary-container">
+            <h3>🕉 Reflections on a Sacred Journey</h3>
+            <p>This eight-day pilgrimage through the sacred heartlands of South India was a spiritually enriching and logistically rewarding adventure. From the awe-inspiring queues and rituals of Tirumala — where thousands of devotees gather in collective faith — to the serene circumambulation of Thiruvannamalai's ancient hill, each destination offered its own distinct spiritual essence.</p>
+            <p>Sri Kalahasti's Vayu Lingam, Thiruchanur's gentle Padmavati Devi, Tirutani's hilltop Murugan atop 365 steps, the Ramana Rishi Ashram's meditative stillness, and Mantralayam's evening rath procession — together they wove a tapestry of devotion that transcended mere sightseeing. The journey required careful planning, especially the early online booking for the Kalyanostavam, and a readiness to navigate crowded temple corridors and overnight train connections with patience and grace.</p>
+            <p>For senior pilgrims, the path demands extra vigilance at bottlenecks — yet the prasadam, the darshan, and the deep sense of divine presence make every step profoundly worthwhile.</p>
+        </div>
+
+    </div>
+
+    <div id="lightbox">
+        <button id="close-btn" onclick="closeLightbox()" title="Close">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+        <img id="lightbox-img" src="" alt="Zoomed Photo">
+    </div>
+
+    <script>
+        gsap.from(".container", { opacity: 0, y: 30, duration: 1, delay: 0.3 });
+
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+    </script>
+    <script src="../nav.js"></script>
+</body>
+</html>
