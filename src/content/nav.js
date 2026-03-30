@@ -222,6 +222,7 @@
         <div class="site-dropdown-content"><div class="site-dropdown-inner">
           <a href="${tem}andhrapradesh.html">Andhra Odyssey</a>
           <a href="${tem}ashtavinayak.html">Ashtavinayak</a>
+          <a href="${tem}kaveridelta.html">Kaveri Delta Trail</a>
           <a href="${tem}shegaon.html">Shegaon Diary</a>
           <a href="${tem}tamilnadu.html">Tamilnadu Temple Trail</a>
           <a href="${tem}tirupathi.html">Tirupati &amp; Beyond</a>
