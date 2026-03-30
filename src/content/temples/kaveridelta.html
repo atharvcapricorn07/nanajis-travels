@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Travelogue | Temples Tour — Tamil Nadu</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --temple-red: #B5200D;
+            --temple-gold: #C8900A;
+            --deep-maroon: #7A0C0C;
+            --saffron-light: #FDF3E3;
+            --parchment: #FBF5EC;
+            --ink: #2D2D2D;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: var(--parchment);
+            color: var(--ink);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            padding-top: 72px;
+        }
+
+        .header-banner {
+            background: linear-gradient(rgba(0,0,0,0.60), rgba(0,0,0,0.60)),
+                url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/thirty/Thanjavur_Brihadeeshvara_Temple_Gopuram.jpg/1280px-Thanjavur_Brihadeeshvara_Temple_Gopuram.jpg'),
+                linear-gradient(135deg, #7A0C0C, #B5200D);
+            background-size: cover;
+            background-position: center;
+            padding: 50px 20px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            border-bottom: 5px solid var(--temple-gold);
+        }
+
+        .header-banner .om-symbol {
+            font-size: 1.8rem;
+            color: var(--temple-gold);
+            margin-bottom: 8px;
+            letter-spacing: 6px;
+        }
+
+        .header-banner h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.7rem;
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .header-banner .sub-title {
+            font-size: 1rem;
+            color: var(--temple-gold);
+            margin: 8px 0 4px 0;
+            letter-spacing: 2px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .header-banner p.header-dates {
+            font-size: 1rem;
+            font-weight: 400;
+            margin: 6px 0 0 0;
+            color: #f0ddc0;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 28px auto 50px;
+            background: white;
+            padding: 40px 60px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: var(--temple-red);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 14px;
+            clear: both;
+        }
+
+        .temple-heading {
+            font-family: 'Playfair Display', serif;
+            color: var(--deep-maroon);
+            font-size: 1.2rem;
+            margin: 20px 0 6px 0;
+            border-bottom: 1.5px solid #E8C47A;
+            padding-bottom: 4px;
+            clear: both;
+        }
+
+        .temple-heading.major {
+            font-size: 1.35rem;
+            border-bottom: 2px solid var(--temple-gold);
+        }
+
+        section {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #EFE5D0;
+            padding-bottom: 22px;
+            overflow: hidden;
+        }
+
+        section:last-of-type { border-bottom: none; }
+
+        p {
+            line-height: 1.72;
+            font-size: 1.02rem;
+            color: #444;
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        /* PHOTO STYLING */
+        .travel-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            transition: transform 0.3s ease;
+            border: 4px solid white;
+        }
+
+        .travel-photo:hover {
+            transform: scale(1.02);
+        }
+
+        .photo-left {
+            float: left;
+            margin: 10px 22px 10px 0;
+        }
+
+        .photo-right {
+            float: right;
+            margin: 10px 0 10px 22px;
+        }
+
+        /* LIGHTBOX */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.92);
+            align-items: center;
+            justify-content: center;
+        }
+
+        #lightbox-img {
+            max-width: 88%;
+            max-height: 82%;
+            border: 5px solid white;
+            border-radius: 4px;
+            box-shadow: 0 0 60px rgba(0,0,0,0.8);
+        }
+
+        #close-btn {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+            transition: background 0.2s, transform 0.2s;
+            padding: 0;
+        }
+
+        #close-btn:hover {
+            background: #f0f0f0;
+            transform: scale(1.1);
+        }
+
+        #close-btn svg {
+            width: 20px;
+            height: 20px;
+            stroke: #333;
+            stroke-width: 2.5;
+        }
+
+        .highlight-box {
+            background-color: #FFF8EE;
+            border-left: 5px solid var(--temple-gold);
+            padding: 13px 18px;
+            margin: 14px 0;
+            font-style: italic;
+            font-size: 1rem;
+            color: #5a3a10;
+            clear: both;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .deity-info {
+            background: #FDF0E0;
+            border: 1px solid #E8C47A;
+            border-radius: 5px;
+            padding: 10px 15px;
+            margin: 10px 0;
+            font-size: 0.93rem;
+            color: #4a3010;
+            clear: both;
+        }
+
+        .deity-info strong {
+            color: var(--deep-maroon);
+        }
+
+        .summary-container {
+            background: linear-gradient(135deg, var(--deep-maroon), #9B1A1A, var(--temple-red));
+            color: white;
+            padding: 30px 35px;
+            border-radius: 8px;
+            margin-top: 40px;
+            clear: both;
+            border-top: 4px solid var(--temple-gold);
+        }
+
+        .summary-container h3 {
+            font-family: 'Playfair Display', serif;
+            margin: 0 0 14px 0;
+            font-size: 1.6rem;
+            color: var(--temple-gold);
+        }
+
+        .summary-container p {
+            color: rgba(255,255,255,0.93);
+            font-size: 1.05rem;
+            text-align: left;
+            line-height: 1.78;
+            margin-bottom: 10px;
+        }
+
+        .summary-container p:last-child { margin-bottom: 0; }
+
+        @media (max-width: 768px) {
+            .container { padding: 25px; width: 92%; }
+            .header-banner h1 { font-size: 2rem; }
+            .travel-photo {
+                width: 100%;
+                height: auto;
+                float: none;
+                margin: 15px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="lightbox">
+        <button id="close-btn" onclick="closeLightbox()" title="Close">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+        <img id="lightbox-img" src="" alt="Zoomed Photo">
+    </div>
+
+    <div class="header-banner">
+        <div class="om-symbol">🕉 ॐ 🕉</div>
+        <h1>Kaveri Delta Temple Trail</h1>
+        <p class="sub-title">Tamil Nadu &amp; Puducherry — 58 Temples</p>
+        <p class="header-dates">10th February 2017 – 17th February 2017</p>
+    </div>
+
+    <div class="container">
+
+        <!-- ── DAY 0: DEPARTURE ── -->
+        <section>
+            <div class="date-badge">9th February 2017 — Departure</div>
+            <p>There is a direct train from Mumbai to Madurai, which runs only once a week — it departs from Pune every Friday. We booked our reservation on this train from Pune to Tiruchirappalli. An IRCTC room was booked online and we reached Tiruchirappalli on 11th February 2017 around 6 am. After freshening up, we set off to see the temples.</p>
+        </section>
+
+        <!-- ── DAY 1: TIRUCHIRAPPALLI ── -->
+        <section>
+            <div class="date-badge">11th February 2017 — Tiruchirappalli</div>
+
+            <h2 class="temple-heading major">Srirangam</h2>
+            <img src="photos/temples1.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Srirangam Temple">
+            <p>From Tiruchirappalli Junction, many buses run to Srirangam. We took a bus and reached the temple within an hour. There was a big queue and we stood in it after purchasing a ₹50 ticket. Three queues are available: one for free darshan, one for ₹200, and another for ₹50.</p>
+            <p>After having darshan of Mulavar, Urzavar, Narasimmer, Dhanvanthri, Thayar, and Garudzavar, we left for Samayapuram.</p>
+
+            <h2 class="temple-heading major">Samayapuram</h2>
+            <p>Buses are available from the Chattheram bus stand. We went by bus to this temple. The queue was very long and it appeared we would need to stand for three to four hours. So we decided to skip the darshan, viewed the temple from outside, and returned to our room.</p>
+
+            <h2 class="temple-heading major">Thiruvanikoil</h2>
+            <img src="photos/temples2.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Thiruvanikoil Temple">
+            <p>In the evening, we visited Thiruvanikoil. We had darshan of the main deity Jambukeshwarar and Goddess Akilandeswari. This temple is one among the five Panchabootha Sthalams — temples representing the five elements of nature.</p>
+
+            <h2 class="temple-heading major">Rock Fort Temple</h2>
+            <p>After Thiruvanikoil, we went to the Rock Fort Temple and prayed to Lord Ganesh. After going around the Main Guard Gate, we took a bus to Tiruchy Junction and returned to our room.</p>
+        </section>
+
+        <!-- ── DAY 2: MYILADUTURAI & SURROUNDING TEMPLES ── -->
+        <section>
+            <div class="date-badge">12th February 2017 — Myiladuturai Region</div>
+            <p>From Tiruchirappalli, we boarded the Mysore–Myiladuturai Express at 4 am and reached Myiladuturai around 7 am. We had booked a cab driven by Mr. Venu — quite young and very polite.</p>
+
+            <div class="highlight-box">
+                Because of Mr. Venu, we could visit a large number of temples over the span of seven days. He drove very nicely and we never had the slightest problem throughout our journey.
+            </div>
+
+            <h2 class="temple-heading major">Vaitheeswaran Koil</h2>
+            <p>From Myiladuturai, this place is about an hour's travel by road. This is one of the important Shiva temples of India. Shiva is worshipped here as the Lord of Healing, and the Goddess is called Thyal Nayaki.</p>
+
+            <h2 class="temple-heading">Annan Perumal Koil, Thiruvallakulam</h2>
+            <p>This temple is on the way to Mathur from Vaitheeswaran Koil. The Lord here is considered the elder brother of Lord Balaji of Tirupati. Those who have taken a vow for Tirupati Balaji may complete their vow at this temple, as this deity is regarded as His elder brother. This is one among the 108 Divya Desams. The Goddess here is called Alar Mozi Amman.</p>
+
+            <h2 class="temple-heading">Mathur Muthu Veeran Koil</h2>
+            <p>We reached the temple directly. The temple priest Utharapathy was waiting for us. He had arranged all the pooja materials and garlands. He performed abhishekam to the Ashta Kanika Devis and a pooja to the Muthuveeran deity. After the pooja, we were given prasadam of curd rice. The priest had also planted banana trees in the temple premises and gave us a full bunch of bananas.</p>
+            <p>From the Muthuveeran temple, we went to the Mariamman temple. After worship there, we visited Mr. Sivakumar, who insisted that we stay for lunch. We spent about an hour with him and then proceeded to Thiruvenkadu.</p>
+
+            <h2 class="temple-heading">Thiruvenkadu — Budhan Sthalam</h2>
+            <p>The Swetaranyeswarar Temple, popularly known as the Budhan Sthalam, is one of the Navagraha temples of Tamil Nadu and is located at Thiruvenkadu near Mayavaram. Thiruvenkadu is about 10 km from Vaitheeswaran Koil and Sirkazhi. The presiding deity is Lord Shiva, known as Venkaatunadar and Sri Swetaranyeswarar. His consort is called Brahma Vidya Nayaki. Budhan (Mercury) is said to have worshipped Lord Shiva at this very temple. The shrine for Budhan is placed outside the shrine of the Goddess.</p>
+
+            <h2 class="temple-heading">Thalaichangadu — Nanmadiya Perumal Temple</h2>
+            <p>The Naanmadiya Perumal Temple is situated in the village of Thalaichangadu, near Akkur in Nagapattinam district. The presiding deity is Lord Vishnu. It is one of the Divya Desams — the 108 temples of Vishnu revered by the 12 poet saints, or Alwars.</p>
+
+            <h2 class="temple-heading">Thirukkadaiyur — Markandeyar Temple</h2>
+            <p>The Amritaghateswarar Abhirami Temple is dedicated to Shiva in his manifestation as the "Destroyer of Death," and his consort Parvati is worshipped here as Abhirami. It is located in Thirukkadaiyur, 21 km east of Mayiladuthurai. This temple is associated with the legend of Shiva saving his young devotee Markandeya from death, and the tale of the saint Abirami Pattar, a devotee of the presiding goddess.</p>
+
+            <h2 class="temple-heading">Thiruvidaikkazhi — Murugan Temple</h2>
+            <p>Sri Pavavimochana Perumal and Sri Bala Subramaniya Swamy Temple is located in Thiruvidaikkazhi near Thillaiyadi, in Nagapattinam district. Both Lord Shiva and Lord Muruga are present in the same Garbhagriha — the sanctum sanctorum. Goddess Deivanai Amman resides separately within the temple.</p>
+        </section>
+
+        <!-- ── DAY 3: KARAIKAL & KOOTHANUR ── -->
+        <section>
+            <div class="date-badge">13th February 2017 — Nagapattinam &amp; Karaikal Region</div>
+
+            <h2 class="temple-heading major">Ananthamangalam — Rajagopalaswamy Temple</h2>
+            <img src="photos/temples3.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Sri Rajagopalan Temple, Ananthamangalam">
+            <p>Located just under 30 km south-east of Sirkazhi on the Thirukadaiyur–Tharangambadi NH 45A is the Rajagopalaswamy temple in Ananthamangalam, whose legend dates back to the Ramayana.</p>
+            <div class="deity-info">
+                <strong>Moolavar:</strong> Sri Vasudeva Perumal — East Facing, Standing Posture<br>
+                <strong>Thayar:</strong> Sri Shengamala Valli Thayar<br>
+                <strong>Utsavar:</strong> Sri Rajagopalan with Rukmini and Satyabhama
+            </div>
+
+            <h2 class="temple-heading">Ananthamangalam — Veera Anjaneyar Temple</h2>
+            <img src="photos/temples4.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Veera Anjaneyar Temple, Ananthamangalam">
+            <p>Lord Anjaneya in this temple has three eyes and ten arms holding various armaments. The temple is located adjacent to the Sri Rajagopala Perumal temple and is said to have been built during the period of the Vijayanagara kings. Anjaneya Swami is seen with four arms holding a shankha, chakra, navaneetha, and pasham. The shrine faces north, while Sri Rajagopala Perumal temple faces east. The temple tank in front is known as Hanumar Theertham, and its holy water is believed to cure many illnesses.</p>
+
+            <h2 class="temple-heading major">Tharangambadi — Masilamani Nathar Temple</h2>
+            <img src="photos/temples5.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Masilamani Nathar Temple, Tharangambadi">
+            <p>This is the Masilamani Nathar Temple, a 13th-century structure that dates back to the Pandian era. Today, only its ruins stand, ravaged by the vagaries of time and the increasing sea levels. Moreover, this place is dominated by Christians and hardly any Hindus reside here. The temple is totally in ruins and we could not even enter.</p>
+
+            <h2 class="temple-heading major">Karaikal — Ammaiyar Temple</h2>
+            <p>The Karaikal Ammaiyar Temple is a Hindu Tamil temple dedicated to Goddess Punithavathi. It is located on Bharathiar Street in the centre of Karaikal. Ammaiyar, or Goddess Punithavathi, is one of the most revered goddesses in Karaikal.</p>
+
+            <h2 class="temple-heading">Karaikal — Somanathar Shiva Temple</h2>
+            <p>Close to the Karaikal Ammaiyar temple, the Somanathar Shiva temple stands. We visited this temple as well.</p>
+
+            <h2 class="temple-heading">Karaikal — Nithyakalyana Perumal Temple</h2>
+            <img src="photos/temples6.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Nithyakalyana Perumal Temple, Karaikal">
+            <p>The Nithyakalyana Perumal Temple is one of the three famous temples in the port city of Karaikal, Puducherry. It is close to the Karaikal Ammaiyar Temple, with the Chandra Theertham temple tank separating the two — a tank shared by both temples. Perumal is in the posture of Anantha Sayanam.</p>
+
+            <h2 class="temple-heading">Karaikal — Kailasanathar Koil</h2>
+            <img src="photos/temples7.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Kailasanathar Temple, Karaikal">
+            <p>Sri Kailasanathar Temple is a famous Hindu temple situated in Karaikal, opposite to Sri Karaikal Ammaiyar Temple. It is dedicated to Lord Shiva and is believed to be around 2,000 years old. In the 8th century, this temple was reconstructed by the Pallava rulers. During the period of French rule, a part of the temple was again reconstructed. This temple is dedicated to Lord Shiva and Goddess Sri Soundrambal, and has four elaborate doorways as its biggest attraction. The entrance to the Subramaniar shrine faces west.</p>
+
+            <h2 class="temple-heading major">Thirunallar — Saneswaran Temple</h2>
+            <img src="photos/temples8.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Thirunallar Saneswaran Temple">
+            <p>Thirunallar is a small town in Karaikal, within the Union Territory of Puducherry. It is most noted for the shrine of Lord Sani (Saturn), the Tirunallar Saniswaran Temple, which lies within the temple dedicated to Lord Darbharanyeswaran, a form of Lord Shiva. There is also a "Thristy Ganapathi" opposite this temple — people generally break a coconut here before proceeding to the Saneswaran temple.</p>
+
+            <h2 class="temple-heading major">Koothanur — Saraswathi Temple</h2>
+            <img src="photos/temples9.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Koothanur Sri Saraswathi Temple">
+            <p>Sri Saraswathi Temple, located in Koothanur in Thiruvarur District, is a famous Hindu temple dedicated to Goddess Sri Saraswathi. It is said that this place was known as "Ambalpuri" about a thousand years ago, even before the poet Ottakoothan was born.</p>
+
+            <h2 class="temple-heading">Thirukannapuram — Neela Megha Perumal Temple</h2>
+            <img src="photos/temples10.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Neela Megha Perumal Temple, Thirukannapuram">
+            <p>The Neela Megha Perumal Temple, also known as Sowriraja Perumal Temple, is located in Thirukannapuram, a village in the outskirts of Nagapattinam. Constructed in the Dravidian style of architecture, the temple is glorified in the Divya Prabandha. It is one of the 108 Divyadesams dedicated to Vishnu, who is worshipped as Neelamegha Perumal. As per legend, the presiding deity is believed to have appeared wearing a wig (called sowri locally) to save a devotee — hence the name Sowrirajan.</p>
+
+            <h2 class="temple-heading">Thirupugalur — Agneeswara Swamy Temple</h2>
+            <img src="photos/temples11.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Agneeswara Swamy Temple, Thirupugalur">
+            <p>The main deities of this temple are Agneeswarar, Saranyapureeswarar, and Konapiran. The Goddess is Soolikambal, also known as Karuthazhkuzhali. This temple is very famous for Vasthu Pooja — people come here to perform the puja before constructing a new home.</p>
+
+            <h2 class="temple-heading major">Thiruvarur — Thyagaraja Temple</h2>
+            <img src="photos/temples12.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Thyagaraja Temple, Thiruvarur">
+            <p>The Thyagaraja Temple is a Shaiva temple dedicated to the deity Shiva, located in the town of Thiruvarur in Tamil Nadu. Shiva is worshipped here as Moolanathar, represented by a lingam. Daily poojas are offered to his idol referred to as the Maragatha Lingam. His consort Parvati is depicted as Kondi. The presiding deity is revered in the 7th-century Tamil Shaiva canonical work, the Tevaram, written by the saint poets known as the Nayanmars, and is classified as a Paadal Petra Sthalam.</p>
+        </section>
+
+        <!-- ── DAY 4: THIRUVARUR DISTRICT ── -->
+        <section>
+            <div class="date-badge">14th February 2017 — Thiruvarur &amp; Mannargudi Region</div>
+
+            <h2 class="temple-heading major">Thirukollikadu — Arulmigu Ponguseeswarar Temple</h2>
+            <img src="photos/temples14.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Ponguseeswarar Temple, Thirukollikadu">
+            <p>The Saniswaran here is called "Pongu Sani." Legend says that Saniswaran took a holy dip in the Agni Theertham and prayed to Agneeswarar — the name of Lord Shiva at Thirukollikaadu — to grant him the wish that everyone would worship him too. Lord Shiva gave him darshan and asked him to reside in the temple as Pongu Sani. It is believed that whoever worships here is relieved of their difficult periods of Sani dosha and is blessed. King Nala Maharaja, who was relieved of his Sani dosha after worshipping at Tirunallar, is said to have regained his wife, children, kingdom, and all his wealth after worshipping at this place. King Harichandra too is said to have been relieved of his dosha by the grace of Kollikadu Sani Bhagavan.</p>
+
+            <h2 class="temple-heading major">Thiruthuraipoondi — Sri Piravi Marundeeswarar Temple</h2>
+            <img src="photos/temples15.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Sri Piravi Marundeeswarar Temple, Thiruthuraipoondi">
+            <p>Sri Piravi Marundeeswarar Temple is in Thiruthuraipoondi near Thiruvarur district. The presiding deity here is Lord Shiva in the form of Gajasamhara Murthy — killing a demon — which is an allegory of Lord Shiva annihilating arrogance, pride, and jealousy from the hearts of devotees. It is believed that if people offer prayers on full moon and new moon days, they will have a prosperous life free of sorrows.</p>
+
+            <h2 class="temple-heading">Thiruthuraipoondi — Sri Abishta Varadaraja Perumal Temple</h2>
+            <img src="photos/temples16.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Sri Abishta Varadaraja Perumal Temple, Thiruthuraipoondi">
+            <div class="deity-info">
+                <strong>Moolavar:</strong> Abishta Varadarajar &nbsp;|&nbsp;
+                <strong>Urchavar:</strong> Srinivasan, Padmavadi &nbsp;|&nbsp;
+                <strong>Thayar:</strong> Boodevi, Neela Devi
+            </div>
+            <p>The notable feature of this temple is the impressive 16-foot-tall Sri Anjaneya gracing the premises.</p>
+
+            <h2 class="temple-heading">Thillivilagam — Ramar Temple</h2>
+            <img src="photos/temples17.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Thillivilagam Ramar Temple">
+            <p>This is the Sri Kodhandaramaswamy Temple located in Thillivilagam, Thiruvarur district — a wonderful kshetram where Lord Rama has made his abode. About 150 years ago, when a pond was being excavated, five-foot-tall Panchaloha idols of Sri Rama along with Sri Seetha Devi emerged from the ground as Swayambhuvas — self-manifested deities. This is the rare kshetram where the Moolavar himself is a Panchaloha vigraha.</p>
+
+            <h2 class="temple-heading">Vaduvur — Sri Kodhandaramaswamy Temple</h2>
+            <img src="photos/temples18.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Vaduvur Sri Kodhandaramaswamy Temple">
+            <p>Located 14 km west of Mannargudi is the Sri Kothandaramar temple at Vaduvur. This is one of the Abhimana Kshetrams of Lord Vishnu, also called the Vakulaaranya Kshetram. The main deity, Sri Kodhandaramar, along with Sri Seetha Piratti, Lakshmanan, and Hanuman, appears in the Thirukalyana kolam posture. The original deity here is Sri Gopalan with Goddesses Rukmini and Satyabhama. The sacred tree of this place is the Vagula maram (maghizham tree).</p>
+
+            <h2 class="temple-heading major">Mannargudi — Rajagopalaswamy Temple</h2>
+            <img src="photos/temples19.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Rajagopalaswamy Temple, Mannargudi">
+            <p>The Rajagopalaswamy temple is a major Vaishnavite shrine located in the town of Mannargudi. The presiding deity is Rajagopalaswamy, a form of Lord Krishna. The temple is spread over an area of 23 acres and is one of the most important Vaishnavite shrines in India. It is called Dakshina Dwarka — the Southern Dwarka — along with Guruvayoor, by Hindus.</p>
+
+            <h2 class="temple-heading">Kudavasal — Koneswarar Temple</h2>
+            <img src="photos/temples20.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Koneswarar Temple, Kudavasal">
+            <p>Lord Shiva here is a Swayambumurthy in this Mada temple. The rays of the sun fall on the Lord for three days during the Panguni month (March–April) — a very special and rare feature of this temple.</p>
+        </section>
+
+        <!-- ── DAY 5: KUMBAKONAM & THIRUVARUR ── -->
+        <section>
+            <div class="date-badge">15th February 2017 — Alangudi &amp; Thiruvarur Region</div>
+
+            <h2 class="temple-heading major">Alangudi — Guru Bhagavan Temple</h2>
+            <img src="photos/temples21.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Guru Bhagavan Temple, Alangudi">
+            <p>The presiding deity here is Abathasahayeswarar and the Goddess is Umayami. The Shivalingam is a Swayambhu. Dakshinamurthy is in the prakaram. Shiva's shrine is worshipped here as Guru Bhagavan.</p>
+
+            <h2 class="temple-heading">Alangudi — Periya Anjaneyar Temple</h2>
+            <p>Similar to the famous Nanganallur Anjaneyar in Chennai, a 32-foot Anjaneyar temple is under construction here, with the idol of God Hanuman carved from a single rock. The 32-foot idol of Sri Anjaneya is believed to have special healing powers. The Viswaroopa Anjaneyar, along with Sri Rama and Sri Narasimha Temple, is also in the same premises. This Anjaneyar is called "Sangatakara Mangala Maruthu" and is said to have a Muligai (medicinal herb) in his body to cure diseases. It is told by one of the persons there that this temple was constructed by Kingfisher Airlines promoter Vijay Mallya.</p>
+
+            <h2 class="temple-heading">Valangaiman — Mariamman Temple</h2>
+            <img src="photos/temples22.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Mariamman Temple, Valangaiman">
+            <p>This is the famous Mariamman temple in Valangaiman, close to Thiruvarur.</p>
+
+            <h2 class="temple-heading">Kudavasal — Koneswarar Temple</h2>
+             <img src="photos/temples23.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Koneswarar Temple">
+            <p>The Koneswarar Temple is a Hindu temple in the town of Kudavasal in Tiruvarur district. The presiding deity is Lord Shiva.</p>
+
+            <h2 class="temple-heading">Engan — Murugan Temple</h2>
+            <img src="photos/temples24.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Engan Murugan Temple">
+            <p>The Engan Murugan Temple is a temple dedicated to the Hindu god Murugan, situated in the village of Engan in the Thiruvarur District. It is a popular destination, located 13 kilometres from Thiruvarur.</p>
+
+            <h2 class="temple-heading">Mannakal, Ayyampet — Abhi Mukteeswarar Temple</h2>
+            <img src="photos/temples25.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Abhi Mukteeswarar Temple, Mannakal">
+            <p>The Abhi Mukteeswarar temple at Manakkal was praised by Appar in his Devaram verses. As per a 12th-century AD inscription at the temple, this place once flourished with vibrant Mada streets, great wealth, prosperous temple lands, and a happy community living here in Shaivite-Vaishnavite harmony.</p>
+
+            <h2 class="temple-heading">Kariveeram — Sri Karavera Nathar Temple</h2>
+            <img src="photos/temples26.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Sri Karavera Nathar Temple, Kariveeram">
+            <div class="deity-info">
+                <strong>Mulavar:</strong> Karavera Nathar &nbsp;|&nbsp;
+                <strong>Amman:</strong> Pratyakasha Minnammai
+            </div>
+            <p>This temple is about 1,000 years old.</p>
+
+            <h2 class="temple-heading">Thirukkananmangai — Bhaktavatsala Perumal Temple</h2>
+            <img src="photos/temples27.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Bhaktavatsala Perumal Temple, Thirukkananmangai">
+            <p>The Bhaktavatsala Perumal Temple is dedicated to Lord Vishnu and is located in Thirukannamangai, a village in Tiruvarur district. Constructed in the Dravidian style of architecture, it is glorified in the Divya Prabandha and is counted among the 108 Divya Desams. Vishnu is worshipped here as Bhaktavatsala Perumal, and his consort Lakshmi as Kannamangai Nayagi.</p>
+
+            <h2 class="temple-heading">Sri Vanchiam — Perumal Koil</h2>
+            <img src="photos/temples28.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Sri Vanchiam Perumal Koil">
+            <div class="deity-info">
+                <strong>Mulavar:</strong> Vanchinadeswarar &nbsp;|&nbsp;
+                <strong>Amman:</strong> Mangala Nayaki, Vazha Vandha Nayaki
+            </div>
+            <p>This temple is about 1,000 years old.</p>
+
+            <h2 class="temple-heading">Srivanchiam — Saibaba Temple</h2>
+            <p>Close to the Perumal temple, there is also a Sai Baba mandir. We visited this temple as well.</p>
+
+            <h2 class="temple-heading">Thiruvalanchuzhi — Sri Thiruvalanchuzhi Nathar Temple</h2>
+            <img src="photos/temples29.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Sri Thiruvalanchuzhi Nathar Temple">
+            <div class="deity-info">
+                <strong>Mulavar:</strong> Thiruvalanchuzhi Nathar &nbsp;|&nbsp;
+                <strong>Thayar:</strong> Peria Nayaki
+            </div>
+            <p>Lord Valanchuzhi Nathar is a Swayambumurthy. The Vinayaka idol here is made of the foam of the Milk Ocean (Tiru Parkadal), and is hence praised as Swetha Vinayaka — Vellai Vinayaka. Vellai in Tamil means white.</p>
+
+            <h2 class="temple-heading">Kottaiyur — Kodeeswarar Temple</h2>
+            <img src="photos/temples30.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Kottaiyur Kodeeswarar Temple">
+            <p>The Kottaiyur Kodeeswarar Temple is a Hindu temple dedicated to Shiva, located in Kottaiyur, a village in the outskirts of Kumbakonam in Thanjavur district. Shiva is worshipped as Koteeswarar and his consort Parvati as Pandhadu Nayaki. Koteeswarar is revered in the 7th-century Tamil Shaiva canonical work, the Tevaram, and is classified as a Paadal Petra Sthalam — one of the 275 temples revered in the canon.</p>
+        </section>
+
+        <!-- ── DAY 6: THANJAVUR & CHIDAMBARAM ── -->
+        <section>
+            <div class="date-badge">16th February 2017 — Thanjavur &amp; Chidambaram</div>
+
+            <h2 class="temple-heading major">Thenkudithittai — Vasishteswarar Temple</h2>
+            <img src="photos/temples31.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Vasishteswarar Temple, Thenkudithittai">
+            <p>The Vasishteswarar Temple is situated in the village "Thittai" near Thanjavur. As the village is situated south of the Cauvery river, it is also called Thenkudi Thittai. The presiding deity is Swayambootheswarar and the Goddess is Ulaganayaki. The main deity is also called Vasishteswarar as he was worshipped here by Saint Vasishtar.</p>
+
+            <h2 class="temple-heading">Thanjavur — Bangaru Kamakshi Temple</h2>
+            <p>The Bangaru Kamakshi temple is located in the West Main Street, called Mela Masi Veethi. As the idol of Kamakshi is made of gold, this temple is named Bangaru Kamakshi temple.</p>
+
+            <h2 class="temple-heading major">Thanjavur — Brihadeeswarar Temple</h2>
+            <img src="photos/temples32.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Brihadeeswarar Temple, Thanjavur">
+            <p>The Brihadeeswarar Temple, locally known as the "Big Temple," is a Hindu temple dedicated to Lord Shiva, located in Thanjavur. It is also known as the RajaRajeswara Temple and Peruvudayar Temple. It is one of the largest temples in India and is a supreme example of Dravidian architecture during the Chola period. Built by Raja Raja Chola I and completed in 1010 CE, the temple turned 1,000 years old at the time of our visit. The temple is part of the UNESCO World Heritage Site known as the "Great Living Chola Temples."</p>
+
+            <h2 class="temple-heading">Thanjavur — Punnainallur Mariamman Temple</h2>
+            <img src="photos/temples33.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Punnainallur Mariamman Temple, Thanjavur">
+            <p>The Punnai Nallur Mariamman Temple is a Hindu temple located in the outskirts of Thanjavur. The temple of Goddess Mariamman is one of the most famous temples in the Thanjavur district.</p>
+
+            <h2 class="temple-heading">Vadakurangaduthurai — Jakath Rakshaka Perumal Temple</h2>
+            <img src="photos/temples34.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Jakath Rakshaka Perumal Temple, Vadakurangaduthurai">
+            <p>The Jakath Rakshaka Perumal Temple, also known as Thirukoodalur or locally as Aduthurai Perumal Temple, is in Vadakurangaduthurai, a village near Kumbakonam. It is dedicated to Lord Vishnu, constructed in the Dravidian style, and is one of the 108 Divyadesams. Vishnu is worshipped here as Jakath Rakshaka and his consort Lakshmi as Padmasanavalli.</p>
+
+            <h2 class="temple-heading">Vadakurangaduthurai — Dayanidheeswarar Temple</h2>
+            <img src="photos/temples35.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Dayanidheeswarar Temple, Vadakurangaduthurai">
+            <p>The Dayanidheeswarar temple is located at Vadakurangaduthurai. The Lord of this temple is a Swayambhu Lingam. He is also known by different names: Dayanidheeswarar, Kulaivanangunathar, and Vaaleeswarar.</p>
+
+            <h2 class="temple-heading">Tiruvelliyangudi — Kola Valvill Ramar Temple</h2>
+            <img src="photos/temples36.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Kola Valvill Ramar Temple, Tiruvelliyangudi">
+            <p>The Kolavalvil Ramar Temple is a Hindu temple dedicated to Lord Vishnu, located 19 km from Kumbakonam on the Kumbakonam–Chennai highway. It is one of the 108 Divyadesams dedicated to Vishnu, who is worshipped here as Kola Valvill Ramar, and his consort Lakshmi as Maragathavalli.</p>
+
+            <h2 class="temple-heading">Thiruindalur — Parimala Ranganatha Perumal Temple</h2>
+            <img src="photos/temples37.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Parimala Ranganathar Perumal Temple, Thiruindalur">
+            <p>The Parimala Ranganathar Perumal Temple, or Tiruindaloor, is a Hindu temple dedicated to Vishnu, located in Thiruvilandur of Mayiladuthurai. It is one of the Divya Desams and is also one of the Pancharanga Kshetrams, situated along the river Kaveri.</p>
+
+            <h2 class="temple-heading">Mayiladuthurai — Vadaranyeswarar Temple (Vallalar Koil)</h2>
+            <img src="photos/temples38.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Vallalar Koil, Mayiladuthurai">
+            <p>The main deity is called Lord Vada Aaranyeswarar in Sanskrit and popularly known as Vallalar — He faces west, with Goddess Gnanambika. This temple is situated on the bank of the river Cauvery, with the beautiful Rishaba Mandapam in the middle of the majestic river. Since the Lord grants knowledge, wealth, and health, he is known as Vallalar.</p>
+
+            <h2 class="temple-heading major">Chidambaram — Thillai Kali Amman Temple</h2>
+            <img src="photos/temples39.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Thillai Kali Amman Temple, Chidambaram">
+            <p>This temple is on the outskirts of the city of Chidambaram. Legend says that Goddess Kaali Devi moved here after losing to Lord Shiva in the celestial dance contest.</p>
+
+            <h2 class="temple-heading major">Chidambaram — Thillai Nataraja Temple</h2>
+            <img src="photos/temples40.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Thillai Nataraja Temple, Chidambaram">
+            <p>The Thillai Natarajar Temple in Chidambaram is a Hindu temple dedicated to Lord Shiva. It is known as one of the foremost of all temples (Kovil) in Shaivism and has influenced worship, architecture, sculpture, and performance art for over two millennia. It is also famous for the annual Natyanjali dance festival held on Maha Shivaratri.</p>
+
+            <h2 class="temple-heading">Sirkazhi — Sri Thiruvikrama Perumal Temple</h2>
+            <img src="photos/temples41.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Sri Thiruvikrama Perumal Temple, Sirkazhi">
+            <p>Sri Thiruvikrama Perumal Temple, also known as Thadalan Kovil, is situated in Sirkazhi, Nagapattinam district. It is one of the 108 Divya Desam Temples dedicated to Lord Vishnu, also known as Thiru Kazhee Seerama Vinnagaram.</p>
+
+            <h2 class="temple-heading">Sirkazhi — Sattainathar Temple</h2>
+            <img src="photos/temples42.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Sattainathar Temple, Sirkazhi">
+            <p>The Sattainathar Temple in Sirkazhi, also called Brahmapureeswarar Temple or Thoniappar Temple, is a Hindu temple dedicated to Shiva. After visiting this temple, we proceeded to Mayiladuthurai and from there returned to Tiruchy, where we stayed at the IRCTC room booked in advance.</p>
+        </section>
+
+        <!-- ── DAY 7: NAMAKKAL & RETURN ── -->
+        <section>
+            <div class="date-badge">17th February 2017 — Namakkal &amp; Return</div>
+
+            <p>On the morning of the 17th, we took a bus from Tiruchy to Namakkal.</p>
+
+            <h2 class="temple-heading major">Namakkal — Anjaneyar Temple</h2>
+            <img src="photos/temples43.jpg" class="travel-photo photo-left" onclick="openLightbox(this.src)" alt="Namakkal Anjaneyar Temple">
+            <p>The Namakkal Anjaneyar Temple is located in Namakkal town and is dedicated to the Hindu god Hanuman. It is constructed in the Dravidian style of architecture. The legend of the temple is associated with Narasimha, an avatar of Lord Vishnu, appearing for Hanuman and Lakshmi. The image of Anjaneyar is 18 feet tall, making it one of the tallest images of Hanuman in India.</p>
+
+            <h2 class="temple-heading major">Namakkal — Narasimhaswamy Temple</h2>
+            <img src="photos/temples44.jpg" class="travel-photo photo-right" onclick="openLightbox(this.src)" alt="Narasimhaswamy Temple, Namakkal">
+            <p>The Narasimhaswamy Temple in Namakkal is dedicated to the Hindu god Narasimha, an avatar of Vishnu. Constructed in the Dravidian style of architecture and in rock-cut architecture, the temple is located on the Salem–Namakkal–Trichy Road. The legend of the temple is associated with Narasimha appearing for Lakshmi, his consort, and for Hanuman. Based on architectural features, historians believe the temple was built during the 8th century.</p>
+
+            <div class="highlight-box">
+                After visiting the Namakkal temples, we returned to Tiruchy and boarded the train back to Pune — concluding a deeply fulfilling seven-day pilgrimage to 58 sacred temples across Tamil Nadu and Puducherry.
+            </div>
+        </section>
+
+        <!-- ── CLOSING SUMMARY ── -->
+        <div class="summary-container">
+            <h3>🕉 Reflections on 58 Sacred Shrines</h3>
+            <p>This seven-day pilgrimage through the temple heartland of Tamil Nadu and Puducherry was nothing short of extraordinary. Spanning the districts of Tiruchirappalli, Nagapattinam, Karaikal, Thiruvarur, Thanjavur, Cuddalore, and Namakkal, the journey touched 58 temples — from ancient Swayambhu lingams and UNESCO World Heritage sites to modest village shrines and ruined Pandian-era structures standing quietly against the sea.</p>
+            <p>Whether it was the spiritual calm of Vaitheeswaran Koil, the grandeur of Brihadeeswarar, the devotion-laden crowds of Thirunallar Saneswaran, or the personal warmth of temple priests like Utharapathy at Mathur — each stop carried its own grace. The tireless driving of Mr. Venu made it possible to cover this vast spiritual geography with patience, safety, and cheer.</p>
+            <p>For the devoted pilgrim, Tamil Nadu's temple trails offer an unmatched richness: towering gopurams, sacred river banks, Divya Desams, Navagraha shrines, and centuries of living tradition — all within a single journey.</p>
+        </div>
+
+    </div>
+
+    <script>
+        gsap.from(".container", { opacity: 0, y: 30, duration: 1, delay: 0.3 });
+
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+    </script>
+    <script src="../nav.js"></script>
+</body>
+</html>
