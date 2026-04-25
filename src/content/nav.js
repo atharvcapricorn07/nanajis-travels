@@ -215,6 +215,7 @@
           <a href="${usa}newyork.html">New York &amp; Washington DC</a>
           <a href="${usa}seattle.html">Seattle</a>
           <a href="${usa}alaska.html">Alaska</a>
+          <a href="${usa}victoria.html">Victoria BC</a>
         </div></div>
       </div>
       <div class="site-dropdown">

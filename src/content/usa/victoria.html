@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victoria – The Jewel of British Columbia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Lato:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background-color: #f5f0f8;
+            margin: 0;
+            padding: 0;
+            padding-top: 72px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-top: 10px solid #7b4f9e;
+            position: relative;
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #9b6bbf;
+            margin-bottom: 30px;
+        }
+
+        .header-date {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #5a3d7a;
+            margin-top: 10px;
+        }
+
+        h1 {
+            color: #4a2570;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            color: #7b4f9e;
+            border-left: 5px solid #7b4f9e;
+            padding-left: 15px;
+            margin-top: 30px;
+            clear: both;
+        }
+
+        h3 {
+            color: #c0734f;
+            margin-top: 25px;
+            clear: both;
+        }
+
+        .date-heading {
+            background-color: #f0e8f8;
+            padding: 8px 15px;
+            border-radius: 5px;
+            color: #4a2570;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+            clear: both;
+        }
+
+        p {
+            margin-bottom: 14px;
+            text-align: justify;
+        }
+
+        ul {
+            margin-bottom: 16px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+
+        /* Real photo styles */
+        .travel-photo {
+            width: 3in;
+            height: 3in;
+            object-fit: cover;
+            cursor: pointer;
+            border: 5px solid #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+            margin: 15px;
+        }
+
+        .photo-left  { float: left;  margin-left: 0; }
+        .photo-right { float: right; margin-right: 0; }
+
+        /* Lightbox */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            text-align: center;
+            position: fixed;
+        }
+
+        #lightbox img {
+            max-width: 90%;
+            max-height: 80%;
+            margin-top: 5%;
+            border: 10px solid white;
+        }
+
+        #close-btn {
+            position: fixed;
+            top: 18px;
+            right: 28px;
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            border-radius: 50%;
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 40px;
+            text-align: center;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        #close-btn:hover {
+            background: rgba(255,255,255,0.4);
+        }
+
+        /* Summary box */
+        .summary-box {
+            background: linear-gradient(135deg, #7b4f9e 0%, #5a3d7a 100%);
+            color: #ffffff;
+            padding: 28px;
+            border-radius: 10px;
+            margin-top: 40px;
+            border: 2px solid #4a2570;
+            clear: both;
+        }
+
+        .summary-box h2 {
+            color: #f0e8f8;
+            border-left: none;
+            padding-left: 0;
+            margin-top: 0;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .summary-box p {
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        .summary-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Info callout */
+        .info-callout {
+            background-color: #f9f2ff;
+            border-left: 4px solid #9b6bbf;
+            padding: 12px 18px;
+            border-radius: 0 6px 6px 0;
+            margin: 16px 0;
+            font-style: italic;
+            color: #4a2570;
+        }
+    </style>
+</head>
+<body>
+
+<div id="lightbox" onclick="closeLightbox()">
+    <div id="close-btn">&#10005;</div>
+    <img id="lightbox-img" src="" onclick="event.stopPropagation()">
+</div>
+
+<div class="container">
+    <header>
+        <h1>Victoria – The Jewel of British Columbia</h1>
+        <div class="header-date">Our First Trip to Canada &nbsp;|&nbsp; April 16–19, 2026</div>
+    </header>
+
+    <!-- ═══════════════ DAY 1 ═══════════════ -->
+    <div class="date-heading">16/04/26 &nbsp;·&nbsp; The Journey Begins</div>
+
+    <h2>Getting There – Tulip Fields &amp; the Border</h2>
+
+    <img src="\src\content\usa\photos\vic1.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Tulip Garden 1">
+
+    <p>This is our first trip to Canada. The last time we came to Seattle, Uma and Shashi arranged a trip to Alaska. We went by cruise, and to get there we had to cross Canadian territory, so we applied for a visa. At that time, the Canadian visa was granted for 5 years, so we did not have to apply for a fresh one for Canada.</p>
+
+    <p>We left home by 8 AM. Since the popular Tulip flower garden called Roozengarde was on the way, we headed there first. This garden is about 1 hour and 15 minutes' drive from our house, and we reached there around 9:15 AM.</p>
+
+    <img src="\src\content\usa\photos\vic2.jpeg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Tulip Garden 2">
+
+    <p>It is a huge garden filled with Tulip flowers of different colors. We roamed around for an hour and took lots of photos. This was the first time we had seen such a vast Tulip flower garden. These flowers blossom only in April and May, and we were lucky to visit at exactly the right season. The weather was not bad either — chilly but, fortunately, no rain.</p>
+
+    <img src="\src\content\usa\photos\vic3.jpeg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Tulip Garden 3">
+
+    <p>After the garden visit, we proceeded to the Canada border. There was not much of a rush at the checkpoint, and after completing the formalities we entered Canadian territory.</p>
+
+    <img src="\src\content\usa\photos\vic4.jpeg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Tulip Garden 4">
+
+    <div class="info-callout">Here the metric system is followed. All road signs express speed in km/hr, and mass and volume are expressed in kilograms and litres.</div>
+
+    <h2>Surrey – A Punjabi Welcome</h2>
+
+    <p>Just past the checkpoint, the area is called Surrey. Within a few kilometres, on both sides of the road, we could see many Indian restaurants, mostly managed by Punjabis. We stopped at one called Happy Singh and enjoyed a delicious lunch before proceeding.</p>
+
+    <h2>The Ferry to Victoria</h2>
+
+    <img src="\src\content\usa\photos\vic5.jpeg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Ferry to Victoria">
+
+    <p>After lunch, we proceeded to Tsawwassen, the ferry terminal for the cruise to Victoria. We just missed the 2 o'clock ferry and waited for the next one. By 3 PM we were allowed to drive our car onto the ship — it was so large that around 300 cars were parked on board. The crossing took about 1 hour and 30 minutes.</p>
+
+    <h2>Fisherman's Wharf</h2>
+
+    <img src="\src\content\usa\photos\vic6.jpeg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Fisherman's Wharf">
+
+    <p>After taking the car off the ferry, we proceeded straight to Fisherman's Wharf. Here we saw colourful houses floating over the backwaters of the Pacific Ocean. We strolled along a wooden platform that was itself floating on the water — quite a unique experience.</p>
+
+    <img src="\src\content\usa\photos\vic18.jpeg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Fisherman's Wharf Homes">
+    
+    <p>We then walked to the nearby Inner Harbour, which is a very beautiful place. The harbour is surrounded by grand buildings, and the view of the water with boats and seagulls flying around was very pleasant. We spent some time there before heading to our next destination.</p>
+    
+    <h2>Parliament Building</h2>
+
+    <img src="\src\content\usa\photos\vic7.jpeg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Parliament Building">
+
+    <p>We then walked to the Parliament Building. Constructed around 1900, when this country was under British rule, it is a magnificent structure. A beautiful fountain stands in front, and a large green lawn lined with cherry blossom trees makes the entire setting breathtaking.</p>
+
+    <p>After dinner at a nearby Indian restaurant, we finally reached our booked Airbnb — a big house with three bedrooms on the second floor and a kitchen and hall on the first floor. It came fully equipped with a fridge, cooking vessels, and a microwave.</p>
+
+    <h2>First Impressions of Victoria</h2>
+
+    <div class="info-callout">Upon entering Victoria, we were struck by its profound British character; while it is a Canadian city, the architecture and atmosphere are so steeped in English heritage that one could easily feel they had stepped into the United Kingdom.</div>
+
+    <p>Victoria is a beautiful, very clean city with lots of greenery. Cherry blossom trees lining the roadsides make the city even more beautiful. Victoria is the capital city of British Columbia, one of the ten provinces of Canada. But it still carries a strong British influence — many buildings here are of British architecture, and the high tea culture is still followed in some of the city's grand hotels.</p>
+
+    <!-- ═══════════════ DAY 2 ═══════════════ -->
+    <div class="date-heading" style="clear:both;">17/04/26 &nbsp;·&nbsp; Parliament &amp; the Park</div>
+
+    <h2>Inside the Parliament Building</h2>
+
+    <img src="\src\content\usa\photos\vic8.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Parliament Interior">
+
+    <p>We left the Airbnb at 11 AM. Our first stop was the Parliament Building, which is open to visitors every day from 9 AM to 4 PM. Inside, the British era is very much alive — portraits of royals, princes, and queens adorn the walls. The grand statue of Queen Victoria stands proudly in front of the building.</p>
+
+    <img src="\src\content\usa\photos\vic9.jpeg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Parliament Chandeliers">
+
+    <p>Colourful stained glass windows, ornate chandeliers, polished wooden furniture, and a few paintings all look remarkably beautiful inside. It was a truly enriching visit.</p>
+
+    <p>We then headed to a South Indian restaurant and had masala dosa and coffee for lunch — a welcome taste of home in a very British city.</p>
+
+    <h2>Beacon Hill Park</h2>
+
+    <img src="\src\content\usa\photos\vic10.jpeg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Beacon Hill Park Peacocks">
+
+    <img src="\src\content\usa\photos\vic11.jpeg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Beacon Hill Blossoms">
+
+    <p>In the afternoon we proceeded to Beacon Hill Park. Magnolia trees and cherry blossom trees are abundant here. Apart from a wonderful variety of flower plants, we were delighted to see lots of peacocks in the park. We were lucky to see them display their beautiful feathers — colourful long plumes fully stretched and open. A few ponds, fountains, and beautiful grassy lawns completed the picture. We did a good long walk and thoroughly enjoyed the pleasant, sunny weather. Overall, the park was amazing.</p>
+
+    <!-- ═══════════════ DAY 3 ═══════════════ -->
+    <div class="date-heading" style="clear:both;">18/04/26 &nbsp;·&nbsp; Butchart Gardens</div>
+
+    <h2>Lunch at Masala Roots</h2>
+
+    <p>We left our apartment around 11:30 AM. Before heading to Butchart Garden, we wanted to finish lunch. We stopped at an Indian restaurant called Masala Roots on the way and ate potato kulcha — the kulcha with chenna masala was absolutely delicious.</p>
+
+    <h2>Butchart Garden</h2>
+
+    <img src="\src\content\usa\photos\vic12.jpeg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Butchart Garden 1">
+
+    <img src="\src\content\usa\photos\vic13.jpeg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Butchart Garden 2">
+
+    <p>This garden was created in 1900 by Jennie Butchart. She collected various plants from different countries and continuously expanded the grounds. Even today it is maintained by the Butchart family, and the garden is designated as a National Historic Site of Canada.</p>
+
+    <img src="\src\content\usa\photos\vic14.jpeg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Butchart Garden 3">
+
+    <p>Spread over 55 acres, it is a magnificent landscape blending rare and exotic shrubs, trees, and flower plants. Within this grand estate are several distinct themed gardens: the Sunken Garden, the Rose Garden, the Japanese Garden, the Italian Garden, and the Mediterranean Garden — along with large lawns, ponds, and fountains throughout.</p>
+
+    <img src="\src\content\usa\photos\vic15.jpg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Butchart Garden 4">
+
+    <p>There is an entrance fee, and they provide a map of the garden to help you navigate. One needs at least 4 to 5 hours to see it properly. We roamed from 1 PM to 5 PM. Fortunately, the day was sunny with no rain or cold breeze, and April is indeed the right time to visit. From certain elevated sections, looking down at the full spread of colourful flower beds was absolutely spectacular.</p>
+
+    <img src="\src\content\usa\photos\vic16.jpg" class="travel-photo photo-right" onclick="zoomImg(this)" alt="Butchart Garden 5">
+
+    <p>Athu drove the car throughout the day, and we returned to our place around 5:30 PM. We were too tired to go out for dinner, so Uma ordered online instead.</p>
+
+    <!-- ═══════════════ DAY 4 ═══════════════ -->
+    <div class="date-heading" style="clear:both;">19/04/26 &nbsp;·&nbsp; Homeward Bound</div>
+
+    <h2>The Return Journey</h2>
+
+    <img src="\src\content\usa\photos\vic17.jpg" class="travel-photo photo-left" onclick="zoomImg(this)" alt="Return Ferry Journey">
+
+    <p>We loved the food at Masala Roots so much that we decided to stop there for lunch before making our way back to Seattle. Just like on the outward journey, we drove to Swartz Bay, took the ferry to Tsawwassen, and then drove back to Seattle from there — bringing a wonderful trip to a close.</p>
+
+    <!-- ═══════════════ SUMMARY BOX ═══════════════ -->
+    <div class="summary-box">
+        <h2>✦ &nbsp; Journey in Reflection &nbsp; ✦</h2>
+        <p>Victoria, our first stop in Canada, turned out to be a truly enchanting city — clean, green, and steeped in British charm. From the riot of colour at the Roozengarde Tulip Gardens on the way in, to the grandeur of the Parliament Building, the peacocks of Beacon Hill Park, and the breathtaking expanse of Butchart Garden, every day offered something beautiful and memorable.</p>
+        <p>It is a city that effortlessly blends old-world elegance with natural splendour, and one that left us with a deep sense of warmth and wonder.</p>
+    </div>
+</div>
+
+<script>
+    function zoomImg(img) {
+        document.getElementById("lightbox-img").src = img.src;
+        document.getElementById("lightbox").style.display = "block";
+    }
+
+    function closeLightbox() {
+        document.getElementById("lightbox").style.display = "none";
+    }
+</script>
+
+<script src="../nav.js"></script>
+</body>
+</html>
